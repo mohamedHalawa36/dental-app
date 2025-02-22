@@ -17,12 +17,16 @@ export default function PageLayout({
   const pageTitle = links.find((link) => link.href === pathname)?.label;
 
   return (
-    <div className="flex flex-col gap-5 sm:gap-9 py-5 sm:py-8 px-3 sm:px-5 w-full h-full">
-      <div className="flex sm:items-center max-lg:gap-5 justify-between max-lg:flex-col">
-        <h4 className="font-semibold text-3xl sm:text-4xl text-foreground">
+    <div className="flex flex-col gap-3 sm:gap-9 py-2 sm:py-8 px-2 sm:px-5 w-full h-full">
+      <div className="flex sm:items-center max-lg:gap-3 justify-between max-lg:flex-col">
+        <h4 className="font-semibold text-xl sm:text-4xl text-foreground">
           {pageTitle}
         </h4>
-        <Input icon={<Search />} className="sm:w-80 w-full" placeholder="بحث" />
+        <Input
+          icon={<Search />}
+          className="sm:w-80 w-full text-sm max-sm:[&>div>input]:placeholder:text-sm max-sm:[&>div>input]:text-sm"
+          placeholder="بحث"
+        />
       </div>
       <div className=" overflow-auto flex-1 pe-1">
         {isFetching ? <PageLoader /> : children}
