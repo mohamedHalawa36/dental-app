@@ -1,10 +1,10 @@
-import Tooth from "../icons/Tooth";
-
 export default function PageLoader() {
   return (
-    <div className="w-full flex flex-col gap-2 items-center  mt-10">
-      <Tooth className="size-20 animate-wiggle" />
-      <p className="font-semibold text-foreground">جاري التحميل</p>
+    <div className="flex space-x-5 justify-center h-full items-center">
+      <span className="sr-only">Loading...</span>
+      <div className="size-6 bg-primary rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+      <div className="size-6 bg-primary rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+      <div className="size-6 bg-primary rounded-full animate-bounce"></div>
     </div>
   );
 }
