@@ -9,31 +9,16 @@ import ArrowLeft from "../icons/ArrowLeft";
 import { links } from "./links";
 import SideLink from "./SideLink";
 
-// export default function Sidebar() {
-//   return (
-//     <aside className="flex flex-col px-4 h-full justify-between py-3">
-//       <div className="flex flex-col gap-6 h-full">
-//         {links.map((link) => (
-//           <SideLink key={link.href} {...link} />
-//         ))}
-//       </div>
-//       <div className=" content-end self-end justify-end">
-//         <SideLink Icon={Logout} label="" href="" />
-//       </div>
-//     </aside>
-//   );
-// }
-
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
   const { dayName, dayDate, month, year } = getTodayInfo();
   return (
     <aside
       className={cn(
-        " drop-shadow-xl shadow-stone-300 bg-white py-2 flex flex-col transition h-full max-sm:w-[4.5rem] w-72"
+        " drop-shadow-xl shadow-stone-300 bg-white py-2 flex flex-col transition h-full max-md:w-[4.5rem] w-72"
       )}
     >
-      <div className="flex flex-col sm:px-3 gap-3">
+      <div className="flex flex-col sm:px-3 gap-3 max-md:gap-0">
         <div className="flex flex-col gap-2.5 items-center border-gray-200 ">
           <img
             src="/images/full-logo.png"
@@ -57,10 +42,12 @@ export default function Sidebar() {
           <ArrowLeft className="max-sm:hidden" />
         </button>
       </div>
-      <div className="flex flex-col gap-3 py-5">
-        {links.map((link) => (
-          <SideLink key={link.href} {...link} isSidebarOpen={isOpen} />
-        ))}
+      <div style={{ direction: "ltr" }} className="overflow-auto">
+        <div className="flex flex-col gap-3 py-5 " style={{ direction: "rtl" }}>
+          {links.map((link) => (
+            <SideLink key={link.href} {...link} isSidebarOpen={isOpen} />
+          ))}
+        </div>
       </div>
     </aside>
   );
