@@ -1,3 +1,11 @@
+import AddPatientForm from "~/Components/Forms/AddPatientForm";
+
 export default function doctors() {
-  return <div>Doctors</div>;
+  return (
+    <div>
+      Doctors
+      <AddPatientForm />
+      {/* <BookAppointmentForm /> */}
+    </div>
+  );
 }
