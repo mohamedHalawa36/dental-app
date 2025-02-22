@@ -67,7 +67,7 @@ export default function SideLink({
         })}
       />
       <span
-        className={cn("text-sm font-bold text-foreground max-sm:hidden", {
+        className={cn("text-sm font-bold text-foreground max-md:hidden", {
           "text-primary": isActiveLink,
           "group-hover:text-secondary": !isActiveLink,
           // hidden: !isSidebarOpen,
