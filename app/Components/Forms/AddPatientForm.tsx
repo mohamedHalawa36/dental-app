@@ -42,7 +42,7 @@ export default function AddPatientForm() {
         onSubmit={(values) => mutate(values)}
       >
         <Form>
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1">
             <InputField label="الاسم" name="name" />
             <InputField onKeyDown={numberOnly} label="العمر" name="age" />
             <PatientPhone
@@ -84,9 +84,9 @@ export function PatientPhone({
         className="flex-1 w-full"
       />
       <div className="flex gap-1.5 items-center mt-2">
-        <WhatsApp />
+        <WhatsApp className="max-sm:size-5" />
         {/* <Field as={Checkbox} name={`phone1_has_whatsapp`} /> */}
-        <CheckboxField name={`${name}_has_whatsapp`} />
+        <CheckboxField className="size-4" name={`${name}_has_whatsapp`} />
       </div>
     </div>
   );
