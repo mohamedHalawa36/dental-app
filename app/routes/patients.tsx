@@ -21,7 +21,7 @@ export default function patients() {
         <div>
           <Modal
             title="إضافة مريض"
-            className="max-w-none lg:w-3/4 xl:w-1/2 w-10/12 max-h-[90%] overflow-hidden rounded-lg"
+            className="max-w-none lg:w-3/4 xl:w-1/2 w-10/12 max-sm:max-h-[90%] max-h-fit h-fit overflow-hidden rounded-lg"
             isOpen={isOpen}
             toggle={(isOpen) => setIsOpen(isOpen ?? false)}
             trigger={

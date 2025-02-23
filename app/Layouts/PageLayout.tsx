@@ -18,7 +18,7 @@ export default function PageLayout({
   const pageTitle = links.find((link) => link.href === pathname)?.label;
 
   return (
-    <div className="flex flex-col gap-3 sm:gap-9 py-2 sm:py-8 px-2 sm:px-5 w-full h-full">
+    <div className="flex flex-col gap-3 sm:gap-7 py-2 sm:py-8 px-2 sm:px-5 w-full h-full">
       <div className="flex sm:items-center max-lg:gap-3 justify-between max-lg:flex-col">
         <h4 className="font-semibold text-2xl sm:text-4xl text-foreground">
           {pageTitle}
