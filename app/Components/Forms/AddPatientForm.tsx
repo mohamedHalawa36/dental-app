@@ -1,13 +1,20 @@
-import { Field, Form, Formik, useFormikContext } from "formik";
+import { useMutation } from "@tanstack/react-query";
+import { Form, Formik, useFormikContext } from "formik";
 import * as Yup from "yup";
+import { addPatient } from "~/API/patient";
+import { numberOnly } from "~/lib/utils";
+import SubmitBtn from "../common/SubmitBtn";
 import WhatsApp from "../icons/WhatsApp";
-import { Checkbox } from "../ui/checkbox";
+import CheckboxField from "./Fields/CheckboxField";
 import InputField from "./Fields/InputField";
 
 const addPatientSchema = Yup.object({
   name: Yup.string().required("مطلوب"),
-  age: Yup.string().required("مطلوب"),
-  address: Yup.string(),
+  age: Yup.number()
+    .required("مطلوب")
+    .min(4, "العمر غير صحيح")
+    .max(100, "العمر غير صحيح"),
+  address: Yup.string().required("مطلوب"),
   phone1: Yup.string().required("مطلوب"),
   phone1_has_whatsapp: Yup.boolean().required("مطلوب"),
   phone2: Yup.string().required("مطلوب"),
@@ -15,24 +22,29 @@ const addPatientSchema = Yup.object({
 });
 
 export default function AddPatientForm() {
+  const { mutate, isPending } = useMutation({
+    mutationFn: addPatient,
+  });
+
   return (
-    <div className="bg-gray-500 p-4 m-5">
+    <div className="h-full overflow-auto px-2">
       <Formik
         initialValues={{
           name: "",
           age: "",
+          address: "",
           phone1: "",
-          phone1_has_whatsapp: "",
+          phone1_has_whatsapp: false,
           phone2: "",
-          phone2_has_whatsapp: "",
+          phone2_has_whatsapp: false,
         }}
         validationSchema={addPatientSchema}
-        onSubmit={(val) => console.log(val)}
+        onSubmit={(values) => mutate(values)}
       >
         <Form>
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1 max-md:gap-8 overflow-auto ">
             <InputField label="الاسم" name="name" />
-            <InputField label="العمر" name="age" />
+            <InputField onKeyDown={numberOnly} label="العمر" name="age" />
             <PatientPhone
               label="رقم الهاتف"
               name="phone1"
@@ -43,8 +55,9 @@ export default function AddPatientForm() {
               name="phone2"
               onChange={() => {}}
             />
+            <InputField label="العنوان" name="address" />
           </div>
-          <button type="submit">submit</button>
+          <SubmitBtn disabled={isPending} />
         </Form>
       </Formik>
     </div>
@@ -60,15 +73,20 @@ export function PatientPhone({
   name: string;
   onChange: () => void;
 }) {
-  const { values } = useFormikContext();
-  console.log(values);
+  const { errors } = useFormikContext();
 
   return (
     <div className="flex gap-2">
-      <InputField label={label} name={name} className="flex-1 w-full" />
-      <div className="flex gap-1.5 items-center mt-6">
-        <WhatsApp />
-        <Field as={Checkbox} name={`${name}_has_whatsapp`} />
+      <InputField
+        onKeyDown={numberOnly}
+        label={label}
+        name={name}
+        className="flex-1 w-full"
+      />
+      <div className="flex gap-1.5 items-center mt-2">
+        <WhatsApp className="max-sm:size-5" />
+        {/* <Field as={Checkbox} name={`phone1_has_whatsapp`} /> */}
+        <CheckboxField className="size-4" name={`${name}_has_whatsapp`} />
       </div>
     </div>
   );

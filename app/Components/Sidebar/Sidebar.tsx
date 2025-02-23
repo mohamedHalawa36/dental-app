@@ -15,7 +15,7 @@ export default function Sidebar() {
   return (
     <aside
       className={cn(
-        " drop-shadow-xl shadow-stone-300 bg-white py-2 flex flex-col transition h-full max-md:w-[4.5rem] w-72"
+        " drop-shadow-xl shadow-stone-300 bg-white py-2 flex flex-col transition h-full max-lg:w-[4.5rem] w-72"
       )}
     >
       <div className="flex flex-col sm:px-3 gap-3 max-md:gap-0">
@@ -23,9 +23,9 @@ export default function Sidebar() {
           <img
             src="/images/full-logo.png"
             alt="Logo"
-            className="w-4/5 max-sm:hidden"
+            className="w-4/5 max-lg:hidden"
           />
-          <img src="/images/logo.png" alt="Logo" className="w-3/5 sm:hidden" />
+          <img src="/images/logo.png" alt="Logo" className="w-3/5 lg:hidden" />
           {/* <h2 className="font-bold text-xl text-primary">د. محمد أحمد</h2> */}
         </div>
         <button

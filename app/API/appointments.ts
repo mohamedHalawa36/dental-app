@@ -2,18 +2,18 @@ import { toast } from "sonner";
 import type { Database } from "~/types/database.types";
 import supabase from "./supabase";
 
-export const getAllPatients = async () =>
-  await supabase.from("Patients").select("*");
+export const getAllAppointments = async () =>
+  await supabase.from("Appointments").select("*, patient:Patients(*)");
 
-export const addPatient = async (
-  values: Database["public"]["Tables"]["Patients"]["Insert"]
+export const addAppointment = async (
+  values: Database["public"]["Tables"]["Appointments"]["Insert"]
 ) => {
   const { data, status, error } = await supabase
-    .from("Patients")
+    .from("Appointments")
     .insert([values])
     .select("*");
   console.log(error);
 
-  if (!error) toast.success("تم إضافة المريض بنجاح");
+  if (!error) toast.success("تم حجز الموعد");
   else toast.error("حدث خطأ ما، برجاء المحاولة مجددا");
 };

@@ -1,15 +1,14 @@
 import { Field } from "formik";
-import Input from "~/Components/common/Input";
-import type { IInputProps } from "~/types/components";
+import Select, { type SelectProps } from "~/Components/common/Select";
 
-export default function InputField(props: IInputProps) {
+export default function SelectField(props: SelectProps) {
   return (
     <Field name={props.name}>
       {({
         field, // { name, value, onChange, onBlur }
         form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
         meta,
-      }) => <Input error={meta.touched && meta.error} {...props} {...field} />}
+      }) => <Select error={meta.touched && meta.error} {...props} {...field} />}
     </Field>
   );
 }

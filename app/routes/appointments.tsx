@@ -1,23 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllPatients } from "~/API/patient";
+import { getAllAppointments } from "~/API/appointments";
 import PatientCard from "~/Components/Patient/PatientCard";
 import PageLayout from "~/Layouts/PageLayout";
+import { formatTime } from "~/lib/utils";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
 export default function appointments() {
   const { isFetching, data } = useQuery({
-    queryKey: ["patients"],
-    queryFn: getAllPatients,
+    queryKey: ["appointments"],
+    queryFn: getAllAppointments,
   });
 
-  const patients = data?.data;
+  const appointments = data?.data;
+
   return (
     <PageLayout isFetching={isFetching}>
       <div className="flex items-center max-sm:justify-center p-2 gap-y-5 gap-x-8 flex-wrap ">
-        {patients?.map((patient) => (
+        {appointments?.map(({ patient, time }) => (
           <PatientCard
             variant={PATIENT_CARD_TYPES.APPOINTMENT}
-            time="9.30"
+            time={formatTime(time)}
             patient={patient}
           />
         ))}
