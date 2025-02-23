@@ -57,7 +57,7 @@ export default function AddPatientForm() {
             />
             <InputField label="العنوان" name="address" />
           </div>
-          <SubmitBtn />
+          <SubmitBtn disabled={isPending} />
         </Form>
       </Formik>
     </div>

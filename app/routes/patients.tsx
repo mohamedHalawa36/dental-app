@@ -25,9 +25,9 @@ export default function patients() {
             isOpen={isOpen}
             toggle={(isOpen) => setIsOpen(isOpen ?? false)}
             trigger={
-              <button className="py-2 px-4 hover:text-white transition border-foreground border hover:bg-foreground w-fit rounded-xl">
+              <span className="py-2 px-4 hover:text-white transition border-foreground border hover:bg-foreground w-fit rounded-xl">
                 إضافة
-              </button>
+              </span>
             }
           >
             <AddPatientForm />
@@ -37,6 +37,7 @@ export default function patients() {
         <div className="flex items-center max-sm:justify-center p-2 gap-y-5 gap-x-8 flex-wrap ">
           {patients?.map((patient) => (
             <PatientCard
+              key={patient.id}
               variant={PATIENT_CARD_TYPES.PATIENT}
               patient={patient}
             />
