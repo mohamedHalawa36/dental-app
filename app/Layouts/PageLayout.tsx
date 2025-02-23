@@ -4,6 +4,7 @@ import Input from "~/Components/common/Input";
 import PageLoader from "~/Components/common/PageLoader";
 import Search from "~/Components/icons/Search";
 import { links } from "~/Components/Sidebar/links";
+import { Toaster } from "~/Components/ui/sonner";
 
 export default function PageLayout({
   children,
@@ -29,6 +30,8 @@ export default function PageLayout({
         />
       </div>
       <div className=" overflow-auto flex-1 pe-1">
+        <Toaster />
+
         {isFetching ? <PageLoader /> : children}
       </div>
     </div>

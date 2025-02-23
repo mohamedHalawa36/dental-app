@@ -3,6 +3,7 @@ import { Form, Formik, useFormikContext } from "formik";
 import * as Yup from "yup";
 import { addPatient } from "~/API/patient";
 import { numberOnly } from "~/lib/utils";
+import SubmitBtn from "../common/SubmitBtn";
 import WhatsApp from "../icons/WhatsApp";
 import CheckboxField from "./Fields/CheckboxField";
 import InputField from "./Fields/InputField";
@@ -12,8 +13,8 @@ const addPatientSchema = Yup.object({
   age: Yup.number()
     .required("مطلوب")
     .min(4, "العمر غير صحيح")
-    .max(10, "العمر غير صحيح"),
-  address: Yup.number().required("مطلوب"),
+    .max(100, "العمر غير صحيح"),
+  address: Yup.string().required("مطلوب"),
   phone1: Yup.string().required("مطلوب"),
   phone1_has_whatsapp: Yup.boolean().required("مطلوب"),
   phone2: Yup.string().required("مطلوب"),
@@ -22,12 +23,11 @@ const addPatientSchema = Yup.object({
 
 export default function AddPatientForm() {
   const { mutate, isPending } = useMutation({
-    mutationFn: (values) => addPatient(values),
-    onSuccess(data, variables, context) {},
+    mutationFn: addPatient,
   });
 
   return (
-    <div className="bg-gray-500 p-4 m-5">
+    <div className="h-full overflow-auto px-2">
       <Formik
         initialValues={{
           name: "",
@@ -42,7 +42,7 @@ export default function AddPatientForm() {
         onSubmit={(values) => mutate(values)}
       >
         <Form>
-          <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1">
+          <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1 max-md:gap-8 overflow-auto ">
             <InputField label="الاسم" name="name" />
             <InputField onKeyDown={numberOnly} label="العمر" name="age" />
             <PatientPhone
@@ -57,7 +57,7 @@ export default function AddPatientForm() {
             />
             <InputField label="العنوان" name="address" />
           </div>
-          <button type="submit">submit</button>
+          <SubmitBtn />
         </Form>
       </Formik>
     </div>

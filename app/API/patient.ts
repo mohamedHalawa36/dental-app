@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import type { Database } from "~/types/database.types";
 import supabase from "./supabase";
 
@@ -7,5 +8,12 @@ export const getAllPatients = async () =>
 export const addPatient = async (
   values: Database["public"]["Tables"]["Patients"]["Insert"]
 ) => {
-  await supabase.from("Patients").insert([values]).select("*");
+  const { data, status, error } = await supabase
+    .from("Patients")
+    .insert([values])
+    .select("*");
+  console.log(error);
+
+  if (!error) toast.success("تم إضافة المريض بنجاح");
+  else toast.error("حدث خطأ ما، برجاء المحاولة مجددا");
 };
