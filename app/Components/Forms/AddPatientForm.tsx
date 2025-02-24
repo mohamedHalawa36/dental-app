@@ -18,10 +18,12 @@ const addPatientSchema = Yup.object({
     .max(120, "العمر غير صحيح"),
   address: Yup.string().required("مطلوب"),
   phone1: Yup.string()
+    .typeError("أرقام فقط")
     .required("مطلوب")
     .matches(/^01[0-25]\d{8}$/, "رقم غير صحيح"),
   phone1_has_whatsapp: Yup.boolean().required("مطلوب"),
   phone2: Yup.string()
+    .typeError("أرقام فقط")
     .required("مطلوب")
     .matches(/^01[0-25]\d{8}$/, "رقم غير صحيح"),
   phone2_has_whatsapp: Yup.boolean().required("مطلوب"),
@@ -91,7 +93,7 @@ export function PatientPhone({
   return (
     <div className="flex gap-2">
       <InputField
-        type="number"
+        // type="number"
         onKeyDown={numberOnly}
         label={label}
         name={name}
