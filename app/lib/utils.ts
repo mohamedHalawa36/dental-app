@@ -13,7 +13,8 @@ export const numberOnly = (e: KeyboardEvent<HTMLInputElement>) => {
   if (isNaN(Number(key)) || code === "Space") e.preventDefault();
 };
 
-export function formatTime(timeString: string) {
+export function formatTime(timeString: string | null) {
+  if (!timeString) return timeString;
   const [hours, minutes] = timeString.split(":").map(Number);
 
   const period = hours >= 12 ? "PM" : "AM";

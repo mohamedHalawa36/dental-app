@@ -5,17 +5,20 @@ export default function CheckboxField(props: {
   name: string;
   className?: string;
 }) {
-  const field = useField(props);
-  const value = field[0].checked;
+  const field = useField({
+    ...props,
+  });
+  const checked = field[0].checked;
   const setValue = field[2].setValue;
 
   return (
     <Checkbox
-      checked={value || false}
+      checked={checked}
       onCheckedChange={(checked) => {
         setValue(checked);
       }}
       {...props}
+      {...field}
     />
   );
 }

@@ -102,7 +102,7 @@ const Select: FC<SelectProps> = ({
         </SelectContent>
       </SelectComponent>
       {error && error?.length > 0 && (
-        <div className="font-medium text-feedback-error px-1 text-[12px]">
+        <div className="font-medium text-feedback-error px-1 text-xs text-red-700">
           {error}
         </div>
       )}
