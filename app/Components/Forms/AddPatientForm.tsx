@@ -42,7 +42,7 @@ export default function AddPatientForm() {
         onSubmit={(values) => mutate(values)}
       >
         <Form>
-          <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1 max-md:gap-8 overflow-auto ">
+          <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1 max-md:gap-8 overflow-auto">
             <InputField label="الاسم" name="name" />
             <InputField onKeyDown={numberOnly} label="العمر" name="age" />
             <PatientPhone
