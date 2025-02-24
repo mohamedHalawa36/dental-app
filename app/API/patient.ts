@@ -12,7 +12,6 @@ export const addPatient = async (
     .from("Patients")
     .insert([values])
     .select("*");
-  console.log(error);
 
   if (!error) toast.success("تم إضافة المريض بنجاح");
   else toast.error("حدث خطأ ما، برجاء المحاولة مجددا");

@@ -1,8 +1,11 @@
+import { useState } from "react";
 import {
   PATIENT_CARD_TYPES,
   type PatientCardProps,
   type PhoneOptionsProps,
 } from "~/types/patientCard";
+import { Modal } from "../common/Modal";
+import BookAppointmentForm from "../Forms/BookAppointmentForm";
 import Clock from "../icons/Clock";
 import Phone from "../icons/Phone";
 import WhatsApp from "../icons/WhatsApp";
@@ -11,6 +14,7 @@ import CancelAppointmentBtn from "./buttons/CancelAppointmentBtn";
 import ShowMoreBtn from "./buttons/ShowMoreBtn";
 
 export default function PatientCard(props: PatientCardProps) {
+  const [isBookingAppointment, setIsBookingAppointment] = useState(false);
   const { patient, variant, ...restProps } = props;
   const { name, phone1, phone1_has_whatsapp, phone2, phone2_has_whatsapp } =
     patient;
@@ -36,7 +40,27 @@ export default function PatientCard(props: PatientCardProps) {
             <Clock className="stroke-foreground group-hover:stroke-primary" />
           </div>
         )}
-        {isPatientVariant && <BookAppointmentBtn />}
+
+        {isPatientVariant && (
+          <Modal
+            title="حجز موعد"
+            className="max-w-none lg:w-3/4 xl:w-1/2 w-10/12 max-md:max-h-[90%] md:h-fit overflow-hidden rounded-lg"
+            isOpen={isBookingAppointment}
+            toggle={(isOpen) => setIsBookingAppointment(isOpen ?? false)}
+            trigger={
+              <div>
+                <BookAppointmentBtn />
+              </div>
+            }
+          >
+            <BookAppointmentForm
+              {...{
+                setIsOpen: setIsBookingAppointment,
+                patientId: `${patient.id}`,
+              }}
+            />
+          </Modal>
+        )}
       </div>
       <div className="flex lg:items-end max-lg:gap-4 max-lg:flex-col justify-between">
         <div className="flex flex-col gap-5">

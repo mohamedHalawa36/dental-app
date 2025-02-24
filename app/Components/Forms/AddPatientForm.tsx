@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { Form, Formik, useFormikContext } from "formik";
+import { Form, Formik } from "formik";
+import type { Dispatch, SetStateAction } from "react";
 import * as Yup from "yup";
 import { addPatient } from "~/API/patient";
 import { numberOnly } from "~/lib/utils";
@@ -12,18 +13,32 @@ const addPatientSchema = Yup.object({
   name: Yup.string().required("مطلوب"),
   age: Yup.number()
     .required("مطلوب")
-    .min(4, "العمر غير صحيح")
-    .max(100, "العمر غير صحيح"),
+    .min(3, "العمر غير صحيح")
+    .max(120, "العمر غير صحيح"),
   address: Yup.string().required("مطلوب"),
-  phone1: Yup.string().required("مطلوب"),
+  phone1: Yup.string()
+    .required("مطلوب")
+    .matches(/^01[0-25]\d{8}$/, "رقم غير صحيح"),
   phone1_has_whatsapp: Yup.boolean().required("مطلوب"),
-  phone2: Yup.string().required("مطلوب"),
+  phone2: Yup.string()
+    .required("مطلوب")
+    .matches(/^01[0-25]\d{8}$/, "رقم غير صحيح"),
   phone2_has_whatsapp: Yup.boolean().required("مطلوب"),
 });
 
-export default function AddPatientForm() {
+export default function AddPatientForm({
+  setIsOpen,
+  refetch,
+}: {
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  refetch: () => void;
+}) {
   const { mutate, isPending } = useMutation({
     mutationFn: addPatient,
+    onSuccess: () => {
+      setIsOpen(false);
+      refetch();
+    },
   });
 
   return (
@@ -67,14 +82,11 @@ export default function AddPatientForm() {
 export function PatientPhone({
   label,
   name,
-  onChange,
 }: {
   label: string;
   name: string;
   onChange: () => void;
 }) {
-  const { values } = useFormikContext();
-
   return (
     <div className="flex gap-2">
       <InputField

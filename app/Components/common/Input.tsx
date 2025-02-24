@@ -22,7 +22,7 @@ export default function Input(props: IInputProps) {
           )}
         />
       </div>
-      <span className="text-red-700 text-xs h-4">{error}</span>
+      <span className="text-red-600 text-xs h-4">{error}</span>
     </div>
   );
 }

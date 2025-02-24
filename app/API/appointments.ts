@@ -12,7 +12,6 @@ export const addAppointment = async (
     .from("Appointments")
     .insert([values])
     .select("*");
-  console.log(error);
 
   if (!error) toast.success("تم حجز الموعد");
   else toast.error("حدث خطأ ما، برجاء المحاولة مجددا");

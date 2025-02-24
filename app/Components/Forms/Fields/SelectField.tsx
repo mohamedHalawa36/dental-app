@@ -1,14 +1,27 @@
-import { Field } from "formik";
+import { useField } from "formik";
+import { useEffect } from "react";
 import Select, { type SelectProps } from "~/Components/common/Select";
 
 export default function SelectField(props: SelectProps) {
+  const [field, meta, actions] = useField({
+    ...props,
+  });
+
+  const setValue = actions.setValue;
+  useEffect(() => {
+    const defaultVal = props.defaultValue;
+    if (defaultVal) setValue(defaultVal);
+  }, []);
+
   return (
-    <Field name={props.name}>
-      {({
-        field, // { name, value, onChange, onBlur }
-        form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-        meta,
-      }) => <Select error={meta.touched && meta.error} {...props} {...field} />}
-    </Field>
+    <Select
+      error={meta.touched ? (meta.error ? meta.error : undefined) : undefined}
+      {...props}
+      {...field}
+      onValueChange={(value) => {
+        props.onValueChange(value);
+        setValue(value);
+      }}
+    />
   );
 }
