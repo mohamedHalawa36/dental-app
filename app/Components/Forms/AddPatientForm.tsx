@@ -12,6 +12,7 @@ import InputField from "./Fields/InputField";
 const addPatientSchema = Yup.object({
   name: Yup.string().required("مطلوب"),
   age: Yup.number()
+    .typeError("أرقام فقط")
     .required("مطلوب")
     .min(3, "العمر غير صحيح")
     .max(120, "العمر غير صحيح"),
@@ -90,6 +91,7 @@ export function PatientPhone({
   return (
     <div className="flex gap-2">
       <InputField
+        type="number"
         onKeyDown={numberOnly}
         label={label}
         name={name}
