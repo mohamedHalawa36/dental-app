@@ -73,7 +73,7 @@ export function PatientPhone({
   name: string;
   onChange: () => void;
 }) {
-  const { errors } = useFormikContext();
+  const { values } = useFormikContext();
 
   return (
     <div className="flex gap-2">
@@ -86,7 +86,10 @@ export function PatientPhone({
       <div className="flex gap-1.5 items-center mt-2">
         <WhatsApp className="max-sm:size-5" />
         {/* <Field as={Checkbox} name={`phone1_has_whatsapp`} /> */}
-        <CheckboxField className="size-4" name={`${name}_has_whatsapp`} />
+        <CheckboxField
+          className="max-sm:size-4"
+          name={`${name}_has_whatsapp`}
+        />
       </div>
     </div>
   );
