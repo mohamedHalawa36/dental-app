@@ -69,7 +69,10 @@ export default function PatientCard(props: PatientCardProps) {
         </div>
 
         {!isPatientVariant && (
-          <CancelAppointmentBtn appointmentId={props.appointmentId} />
+          <CancelAppointmentBtn
+            appointmentId={props.appointmentId}
+            patientName={patient.name}
+          />
         )}
         {isPatientVariant && <ShowMoreBtn />}
       </div>
