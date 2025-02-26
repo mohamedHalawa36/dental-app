@@ -11,7 +11,7 @@ export default function PageLayout({
 }: {
   children: ReactNode;
   isFetching?: boolean;
-  addBtn: ReactNode;
+  addBtn?: ReactNode;
 }) {
   const { pathname } = useLocation();
 
@@ -24,7 +24,8 @@ export default function PageLayout({
           <h4 className="font-semibold text-2xl sm:text-4xl text-foreground">
             {pageTitle}
           </h4>
-          {addBtn}
+
+          {!!addBtn && addBtn}
         </div>
         {/* <Input
           icon={<Search />}
