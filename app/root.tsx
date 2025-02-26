@@ -7,6 +7,7 @@ import {
   ScrollRestoration,
 } from "react-router";
 
+import { useEffect } from "react";
 import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
 import AppLayout from "./Layouts/AppLayout";
@@ -44,6 +45,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  useEffect(() => {
+    const hideSplashLoader = () => {
+      if (
+        window.Capacitor &&
+        window.Capacitor.Plugins &&
+        window.Capacitor.Plugins.SplashScreen
+      ) {
+        window.Capacitor.Plugins.SplashScreen.hide();
+      }
+    };
+    hideSplashLoader();
+    document.addEventListener("DOMContentLoaded", hideSplashLoader);
+    return () =>
+      document.removeEventListener("DOMContentLoaded", hideSplashLoader);
+  }, []);
   return (
     <AppLayout>
       <Outlet />
