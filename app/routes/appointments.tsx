@@ -12,12 +12,13 @@ import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 export default function appointments() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { isFetching, data, refetch } = useQuery({
+  const { isFetching, data } = useQuery({
     queryKey: ["appointments"],
     queryFn: getAllAppointments,
   });
 
   const appointments = data?.data;
+  console.log(appointments);
 
   return (
     <PageLayout
@@ -30,12 +31,9 @@ export default function appointments() {
           toggle={(isOpen) => setIsOpen(isOpen ?? false)}
           trigger={
             <AddNew className="fill-foreground hover:fill-primary transition size-12 max-sm:size-8" />
-            // <div className="py-2 px-4 hover:text-white transition border-foreground border hover:bg-foreground w-fit rounded-xl">
-            //   إضافة
-            // </div>
           }
         >
-          <BookAppointmentForm {...{ setIsOpen, refetch }} />
+          <BookAppointmentForm {...{ setIsOpen }} />
         </Modal>
       }
     >
@@ -48,6 +46,7 @@ export default function appointments() {
                 variant={PATIENT_CARD_TYPES.APPOINTMENT}
                 time={formatTime(time)}
                 patient={patient}
+                appointmentId={id}
               />
             ))
           ) : (

@@ -12,6 +12,7 @@ interface BasePatientCardProps {
 interface AppointmentPatientCardProps extends BasePatientCardProps {
   variant: PATIENT_CARD_TYPES.APPOINTMENT;
   time: string | null;
+  appointmentId: string;
 }
 
 interface PatientTypeCardProps extends BasePatientCardProps {
