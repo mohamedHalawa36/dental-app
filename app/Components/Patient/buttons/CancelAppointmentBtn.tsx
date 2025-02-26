@@ -26,7 +26,7 @@ export default function CancelAppointmentBtn({
   return (
     <Modal
       title="إلغاء موعد"
-      className="max-w-none lg:w-3/4 xl:w-1/2 w-10/12 h-fit overflow-hidden rounded-lg"
+      className=" md:w-2/5 lg:w-[25.5rem] w-11/12 h-fit overflow-hidden rounded-lg"
       isOpen={isOpen}
       toggle={(isOpen) => setIsOpen(isOpen ?? false)}
       trigger={

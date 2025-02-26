@@ -24,7 +24,10 @@ export const addAppointment = async (
     .select("*");
 
   if (!error) toast.success("تم حجز الموعد");
-  else toast.error("حدث خطأ ما، برجاء المحاولة مجددا");
+  else {
+    if (status === 409) toast.error("تم حجز موعد للمريض في نفس اليوم مسبقا");
+    else toast.error("حدث خطأ ما، برجاء المحاولة مجددا");
+  }
 };
 export const deleteAppointment = async (id: string) => {
   const { data, status, error } = await supabase
