@@ -45,21 +45,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  // useEffect(() => {
-  //   const hideSplashLoader = () => {
-  //     if (
-  //       window.Capacitor &&
-  //       window.Capacitor.Plugins &&
-  //       window.Capacitor.Plugins.SplashScreen
-  //     ) {
-  //       window.Capacitor.Plugins.SplashScreen.hide();
-  //     }
-  //   };
-  //   hideSplashLoader();
-  //   document.addEventListener("DOMContentLoaded", hideSplashLoader);
-  //   return () =>
-  //     document.removeEventListener("DOMContentLoaded", hideSplashLoader);
-  // }, []);
+  useEffect(() => {
+    const hideSplashLoader = () => {
+      if (
+        window.Capacitor &&
+        window.Capacitor.Plugins &&
+        window.Capacitor.Plugins.SplashScreen
+      ) {
+        window.Capacitor.Plugins.SplashScreen.hide();
+      }
+    };
+    hideSplashLoader();
+    document.addEventListener("DOMContentLoaded", hideSplashLoader);
+    return () =>
+      document.removeEventListener("DOMContentLoaded", hideSplashLoader);
+  }, []);
   return (
     <AppLayout>
       <Outlet />
