@@ -1,21 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { getAllPatients } from "~/API/patient";
 import { Modal } from "~/Components/common/Modal";
 import AddPatientForm from "~/Components/Forms/AddPatientForm";
 import AddNew from "~/Components/icons/AddNew";
 import PatientCard from "~/Components/Patient/PatientCard";
+import { SearchContext } from "~/Contexts/SearchContext";
 import PageLayout from "~/Layouts/PageLayout";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
 export default function patients() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isFetching, data, refetch } = useQuery({
-    queryKey: ["patients"],
-    queryFn: getAllPatients,
-  });
+  const { search } = useContext(SearchContext);
 
+  const { isFetching, data, refetch } = useQuery({
+    queryKey: ["patients", search],
+    queryFn: ({ signal }) => getAllPatients(search, signal),
+  });
   const patients = data?.data;
+
   return (
     <PageLayout
       isFetching={isFetching}

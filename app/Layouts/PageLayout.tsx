@@ -1,8 +1,11 @@
-import type { ReactNode } from "react";
+import { useContext, type ReactNode } from "react";
 import { useLocation } from "react-router";
+import Input from "~/Components/common/Input";
 import PageLoader from "~/Components/common/PageLoader";
+import Search from "~/Components/icons/Search";
 import { links } from "~/Components/Sidebar/links";
 import { Toaster } from "~/Components/ui/sonner";
+import { SearchContext } from "~/Contexts/SearchContext";
 
 export default function PageLayout({
   children,
@@ -14,6 +17,7 @@ export default function PageLayout({
   addBtn?: ReactNode;
 }) {
   const { pathname } = useLocation();
+  const { search, setSearch } = useContext(SearchContext);
 
   const pageTitle = links.find((link) => link.href === pathname)?.label;
 
@@ -27,11 +31,16 @@ export default function PageLayout({
 
           {!!addBtn && addBtn}
         </div>
-        {/* <Input
+        <Input
           icon={<Search />}
           className="sm:w-80 w-full text-sm max-sm:[&>div>input]:placeholder:text-sm max-sm:[&>div>input]:text-sm"
           placeholder="بحث"
-        /> */}
+          value={search}
+          onChange={(e) => {
+            const value = e.target.value;
+            setSearch(value);
+          }}
+        />
       </div>
       <div className=" overflow-auto flex-1 pe-1">
         <Toaster richColors={true} position="top-left" theme="light" />

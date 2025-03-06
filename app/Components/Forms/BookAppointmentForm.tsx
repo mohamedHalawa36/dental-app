@@ -26,7 +26,7 @@ export default function BookAppointmentForm({
 }) {
   const { isFetching, data } = useQuery({
     queryKey: ["patients-select"],
-    queryFn: getAllPatients,
+    queryFn: () => getAllPatients(),
   });
 
   const patients = data?.data;
