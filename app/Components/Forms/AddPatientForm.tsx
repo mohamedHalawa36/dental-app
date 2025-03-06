@@ -62,7 +62,12 @@ export default function AddPatientForm({
         <Form>
           <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1 max-md:gap-8 overflow-auto">
             <InputField label="الاسم" name="name" />
-            <InputField onKeyDown={numberOnly} label="العمر" name="age" />
+            <InputField
+              onKeyDown={numberOnly}
+              label="العمر"
+              name="age"
+              inputMode="numeric"
+            />
             <PatientPhone
               label="رقم الهاتف"
               name="phone1"
@@ -93,8 +98,8 @@ export function PatientPhone({
   return (
     <div className="flex gap-2">
       <InputField
-        // type="number"
-        onKeyDown={numberOnly}
+        inputMode="numeric" // Opens numeric keyboard on mobile
+        pattern="[0-9]*"
         label={label}
         name={name}
         className="flex-1 w-full"

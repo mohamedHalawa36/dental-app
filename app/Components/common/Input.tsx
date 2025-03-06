@@ -13,12 +13,12 @@ export default function Input(props: IInputProps) {
         </label>
       )}
 
-      <div className="flex items-center gap-2 bg-white rounded-xl px-3 py-0.5 ring-offset-background data-[placeholder]:!text-grey-grey1 text-text-black focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+      <div className="flex items-center gap-2 h-10 bg-white rounded-xl px-2 ring-offset-background data-[placeholder]:!text-grey-grey1 text-text-black focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
         {icon && icon}
         <UiInput
           {...restProps}
           className={cn(
-            "rounded-xl bg-transparent focus-visible:outline-none focus-visible:ring-0 border-none focus-visible:border-none focus-visible:ring-offset-transparent focus-visible:ring-transparent p-0 w-full flex-1 "
+            "rounded-xl bg-transparent focus-visible:outline-none focus-visible:ring-0 border-none focus-visible:border-none focus-visible:ring-offset-transparent focus-visible:ring-transparent px-1 w-full flex-1 "
           )}
         />
       </div>
