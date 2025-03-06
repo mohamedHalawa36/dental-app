@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import {
   PATIENT_CARD_TYPES,
   type PatientCardProps,
@@ -87,18 +88,18 @@ function PhoneOptions({ phone, hasWhatsapp }: PhoneOptionsProps) {
         <>
           <span>{phone}</span>
 
-          <a href={`tel:+2${phone}`}>
+          <Link to={`tel:+2${phone}`}>
             <Phone className="size-6 -scale-x-[1] max-sm:size-5 hover:stroke-secondary transition max-sm:animate-wiggle" />
-          </a>
+          </Link>
 
           {hasWhatsapp && (
-            <a
-              href={`https://wa.me/2${phone}`}
+            <Link
+              to={`https://wa.me/2${phone}`}
               target="_blank"
               rel="noopener noreferrer"
             >
               <WhatsApp className="size-6 max-sm:size-5 animate-scaleUpDown" />
-            </a>
+            </Link>
           )}
         </>
       ) : (
