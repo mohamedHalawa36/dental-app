@@ -4,6 +4,7 @@ import type { Dispatch, SetStateAction } from "react";
 import * as Yup from "yup";
 import { addAppointment } from "~/API/appointments";
 import { getAllPatients } from "~/API/patient";
+import { cn } from "~/lib/utils";
 import type { Option } from "../common/Select";
 import SubmitBtn from "../common/SubmitBtn";
 import InputField from "./Fields/InputField";
@@ -63,7 +64,12 @@ export default function BookAppointmentForm({
         <Form className="flex flex-col justify-between h-full">
           <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1 max-md:gap-8 overflow-auto ">
             <SelectField
-              className="disabled:text-primary disabled:opacity-70 disabled:[&>svg]:hidden"
+              className={cn(
+                "disabled:text-primary disabled:opacity-70 disabled:[&>svg]:hidden",
+                {
+                  "[&>svg]:hidden": !!patientId,
+                }
+              )}
               isDisabled={!!patientId || isFetching}
               label="المريض"
               name="patient_id"
