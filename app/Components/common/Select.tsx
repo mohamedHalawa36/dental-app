@@ -71,7 +71,8 @@ const Select: FC<SelectProps> = ({
             {
               "border-red-600": error,
               "border-gray-200": !error,
-            }
+            },
+            className
           )}
         >
           <SelectValue placeholder={placeholder} />

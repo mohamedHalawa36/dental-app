@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
 import type { Dispatch, SetStateAction } from "react";
 import * as Yup from "yup";
@@ -17,7 +17,6 @@ const bookApointmentSchema = Yup.object({
 
 export default function BookAppointmentForm({
   setIsOpen,
-  refetch,
   patientId,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -38,11 +37,15 @@ export default function BookAppointmentForm({
       value: `${patient.id}`,
     })) ?? tempOptions;
 
+  const queryClient = useQueryClient();
+
   const { mutate, isPending } = useMutation({
     mutationFn: addAppointment,
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["appointments"],
+      });
       setIsOpen(false);
-      refetch?.();
     },
   });
 
@@ -60,7 +63,8 @@ export default function BookAppointmentForm({
         <Form className="flex flex-col justify-between h-full">
           <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1 max-md:gap-8 overflow-auto ">
             <SelectField
-              isDisabled={isFetching}
+              className="disabled:text-primary disabled:opacity-70 disabled:[&>svg]:hidden"
+              isDisabled={!!patientId || isFetching}
               label="المريض"
               name="patient_id"
               options={patientsOptions}
