@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { getAllAppointments } from "~/API/appointments";
 import { Modal } from "~/Components/common/Modal";
+import NoResultsFound from "~/Components/common/NoResultsFound";
 import BookAppointmentForm from "~/Components/Forms/BookAppointmentForm";
 import AddNew from "~/Components/icons/AddNew";
 import PatientCard from "~/Components/Patient/PatientCard";
@@ -18,7 +19,6 @@ export default function appointments() {
   });
 
   const appointments = data?.data;
-  console.log(appointments);
 
   return (
     <PageLayout
@@ -50,9 +50,7 @@ export default function appointments() {
               />
             ))
           ) : (
-            <p className="text-2xl max-sm:text-base text-center text-slate-500 flex-1">
-              لا توجد مواعيد
-            </p>
+            <NoResultsFound />
           )}
         </div>
       </div>

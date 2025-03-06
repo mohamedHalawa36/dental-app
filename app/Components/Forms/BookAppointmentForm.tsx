@@ -71,7 +71,7 @@ export default function BookAppointmentForm({
             <InputField label="التاريخ" name="date" type="date" />
             <InputField label="الوقت" name="time" type="time" />
           </div>
-          <SubmitBtn disabled={isPending} />
+          <SubmitBtn label="حجز" disabled={isPending} />
         </Form>
       </Formik>
     </div>

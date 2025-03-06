@@ -21,10 +21,9 @@ const addPatientSchema = Yup.object({
     .typeError("أرقام فقط")
     .required("مطلوب")
     .matches(/^01[0-25]\d{8}$/, "رقم غير صحيح"),
-  phone1_has_whatsapp: Yup.boolean().required("مطلوب"),
+  phone1_has_whatsapp: Yup.boolean(),
   phone2: Yup.string()
     .typeError("أرقام فقط")
-    .required("مطلوب")
     .matches(/^01[0-25]\d{8}$/, "رقم غير صحيح"),
   phone2_has_whatsapp: Yup.boolean().required("مطلوب"),
 });
@@ -80,7 +79,7 @@ export default function AddPatientForm({
             />
             <InputField label="العنوان" name="address" />
           </div>
-          <SubmitBtn disabled={isPending} />
+          <SubmitBtn label="إضافة" disabled={isPending} />
         </Form>
       </Formik>
     </div>

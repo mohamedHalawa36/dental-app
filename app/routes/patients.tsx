@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { getAllPatients } from "~/API/patient";
 import { Modal } from "~/Components/common/Modal";
+import NoResultsFound from "~/Components/common/NoResultsFound";
 import AddPatientForm from "~/Components/Forms/AddPatientForm";
 import AddNew from "~/Components/icons/AddNew";
 import PatientCard from "~/Components/Patient/PatientCard";
@@ -38,13 +39,17 @@ export default function patients() {
     >
       <div className="flex flex-col gap-5">
         <div className="flex items-center max-sm:justify-center p-2 gap-y-5 gap-x-8 flex-wrap ">
-          {patients?.map((patient) => (
-            <PatientCard
-              key={patient.id}
-              variant={PATIENT_CARD_TYPES.PATIENT}
-              patient={patient}
-            />
-          ))}
+          {patients && patients?.length > 0 ? (
+            patients?.map((patient) => (
+              <PatientCard
+                key={patient.id}
+                variant={PATIENT_CARD_TYPES.PATIENT}
+                patient={patient}
+              />
+            ))
+          ) : (
+            <NoResultsFound />
+          )}
         </div>
       </div>
     </PageLayout>
