@@ -1,20 +1,18 @@
-import { useState } from "react";
 import { cn } from "~/lib/utils";
 import { getTodayInfo } from "~/utils/time";
 import ArrowLeft from "../icons/ArrowLeft";
-import DoubleArrow from "../icons/DoubleArrow";
 import { links } from "./links";
 import SideLink from "./SideLink";
 
 export default function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  // const [isCollapsed, setIsCollapsed] = useState(false);
   const { dayName, dayDate, month, year } = getTodayInfo();
   return (
     <div className="flex items-center gap-1 relative">
       <aside
         className={cn(
-          " drop-shadow-xl shadow-stone-300 bg-white py-2 flex flex-col transition-all duration-200 lg:duration-500 h-full max-lg:w-[4.5rem] w-72 overflow-hidden",
-          { "max-lg:w-0 w-0": isCollapsed }
+          " drop-shadow-xl shadow-stone-300 bg-white py-2 flex flex-col transition-all duration-200 lg:duration-500 h-full max-lg:w-[4.5rem] w-72 overflow-hidden"
+          // { "max-lg:w-0 w-0": isCollapsed }
         )}
       >
         <div className="flex flex-col sm:px-3 gap-3 max-md:gap-0">
@@ -31,7 +29,7 @@ export default function Sidebar() {
             />
           </div>
           <button
-            onClick={() => setIsCollapsed(true)}
+            // onClick={() => setIsCollapsed(true)}
             className="flex hover:bg-slate-50 rounded-sm items-center sm:px-2 justify-between transition border-b border-gray-200 "
           >
             <div className="flex flex-col w-full px-1 items-center py-5 text-foreground text-sm">
@@ -55,7 +53,7 @@ export default function Sidebar() {
           </div>
         </div>
       </aside>
-      <button
+      {/* <button
         className={cn(
           "bg-white transition-all opacity-70 group h-32 rounded absolute top-1/2 -translate-y-1/2 left-0 -translate-x-full -me-2 px-0.5 drop-shadow-md z-50",
           {
@@ -78,7 +76,7 @@ export default function Sidebar() {
             )}
           />
         </span>
-      </button>
+      </button> */}
     </div>
   );
 }
