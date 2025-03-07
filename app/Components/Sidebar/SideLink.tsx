@@ -40,12 +40,10 @@ export default function SideLink({
   Icon,
   label,
   href,
-  isSidebarOpen,
 }: {
   Icon: FC<IconProps>;
   label: string;
   href: string;
-  isSidebarOpen: boolean;
 }) {
   const { pathname } = useLocation();
   const isActiveLink = pathname === href;

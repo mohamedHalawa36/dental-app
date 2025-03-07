@@ -38,7 +38,7 @@ export default function appointments() {
       }
     >
       <div className="flex flex-col gap-5">
-        <div className="flex items-center max-sm:justify-center p-2 gap-y-5 gap-x-8 flex-wrap ">
+        <div className="flex items-center max-sm:px-1 p-2 gap-y-5 max-sm:justify-evenly gap-x-8 flex-wrap ">
           {appointments?.length && appointments?.length > 0 ? (
             appointments?.map(({ patient, time, id }) => (
               <PatientCard

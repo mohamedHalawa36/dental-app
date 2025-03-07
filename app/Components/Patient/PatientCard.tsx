@@ -23,7 +23,7 @@ export default function PatientCard(props: PatientCardProps) {
   const isPatientVariant = variant === PATIENT_CARD_TYPES.PATIENT;
 
   return (
-    <div className="bg-white group max-lg:w-[12.85rem] w-[19rem] max-sm:w-48 shadow py-4 px-3 max-sm:px-3 rounded-xl flex flex-col gap-6 max-sm:gap-5 hover:shadow-md transition duration-300 hover:scale-[1.015]">
+    <div className="bg-white group max-lg:w-[12.85rem] w-[19rem] max-sm:w-[167px] shadow py-4 px-3 max-sm:px-2 rounded-xl flex flex-col gap-6 max-sm:gap-5 hover:shadow-md transition duration-300 hover:scale-[1.015]">
       <div className="flex gap-2 items-center max-lg:gap-2 lg:items-start justify-between max-lg:flex-col max-lg:justify-center">
         <div className="flex flex-1 flex-col gap-1 max-lg:items-center text-foreground group-hover:text-primary">
           <h4 className="font-bold text-sm lg:text-lg max-lg:text-center h-10 lg:h-14">
@@ -79,7 +79,7 @@ export default function PatientCard(props: PatientCardProps) {
 
 function PhoneOptions({ phone, hasWhatsapp }: PhoneOptionsProps) {
   return (
-    <div className="flex items-center gap-2.5 max-sm:text-sm ">
+    <div className="flex items-center gap-2 max-sm:text-sm ">
       {phone ? (
         <>
           <span>{phone}</span>
