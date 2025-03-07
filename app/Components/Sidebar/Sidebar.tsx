@@ -1,7 +1,3 @@
-// import Logout from "../icons/Logout";
-// import { links } from "./links";
-// import SideLink from "./SideLink";
-
 import { useState } from "react";
 import { cn } from "~/lib/utils";
 import { getTodayInfo } from "~/utils/time";
@@ -18,7 +14,7 @@ export default function Sidebar() {
     <div className="flex items-center gap-1 relative">
       <aside
         className={cn(
-          " drop-shadow-xl shadow-stone-300 bg-white py-2 flex flex-col transition-all duration-500 h-full max-lg:w-[4.5rem] w-72 overflow-hidden",
+          " drop-shadow-xl shadow-stone-300 bg-white py-2 flex flex-col transition-all duration-200 lg:duration-500 h-full max-lg:w-[4.5rem] w-72 overflow-hidden",
           { "max-lg:w-0 w-0": isCollapsed }
         )}
       >
@@ -62,21 +58,24 @@ export default function Sidebar() {
       </aside>
       <button
         className={cn(
-          "bg-white transition-all group h-32 rounded absolute top-1/2 -translate-y-1/2 left-0 -translate-x-full -me-2 px-0.5 drop-shadow-md z-50",
+          "bg-white transition-all opacity-70 group h-32 rounded absolute top-1/2 -translate-y-1/2 left-0 -translate-x-full -me-2 px-0.5 drop-shadow-md z-50",
           {
             "sm:hidden": !isCollapsed,
+            "rotate-180 [&>path]:stroke-primary": isCollapsed,
           }
         )}
         onClick={() => setIsCollapsed((flag) => !flag)}
       >
-        <DoubleArrow
-          className={cn(
-            "lg:group-hover:[&>path]:stroke-primary transition-all duration-500 animate-fade-left animate-infinite",
-            {
-              "rotate-180 [&>path]:stroke-primary": isCollapsed,
-            }
-          )}
-        />
+        <span className={cn("", {})}>
+          <DoubleArrow
+            className={cn(
+              "lg:group-hover:[&>path]:stroke-primary transition-all duration-1000 animate-fade-left repeat-infinite",
+              {
+                "[&>path]:stroke-primary": isCollapsed,
+              }
+            )}
+          />
+        </span>
       </button>
     </div>
   );

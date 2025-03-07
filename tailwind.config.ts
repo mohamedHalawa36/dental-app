@@ -64,10 +64,32 @@ export default {
           "0%, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(1.1)" },
         },
+        "fade-left": {
+          "0%": {
+            opacity: "0",
+            transform: "translate3d(-20%, 0, 0)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translate3d(0, 0, 0)",
+          },
+        },
+        "fade-right": {
+          "0%": {
+            opacity: "0",
+            transform: "translate3d(100%, 0, 0)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translate3d(0, 0, 0)",
+          },
+        },
       },
       animation: {
         wiggle: "wiggle 2s ease-in-out infinite",
         scaleUpDown: "scaleUpDown 3s ease-in-out infinite",
+        "fade-left": "fade-left 5s",
+        "fade-right": "fade-right 5s",
       },
     },
   },
