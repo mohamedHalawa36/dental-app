@@ -13,7 +13,7 @@ export default function Sidebar() {
     <div className="flex items-center gap-1 relative">
       <aside
         className={cn(
-          " drop-shadow-xl shadow-stone-300 bg-white py-2 flex flex-col transition-all duration-200 lg:duration-300 h-full max-lg:w-[4.5rem] w-[17rem] overflow-hidden",
+          " drop-shadow-xl shadow-stone-300 bg-white py-2 flex flex-col transition-all duration-300 h-full max-lg:w-[4.5rem] w-[17rem] overflow-hidden",
           { "max-lg:w-0 w-0": isCollapsed }
         )}
       >
@@ -52,7 +52,10 @@ export default function Sidebar() {
           </div>
         </div>
       </aside>
-      <button onClick={() => setIsCollapsed((flag) => !flag)}>
+      <button
+        className=" absolute top-1/2 -translate-y-1/2 -left-1 -translate-x-full z-50"
+        onClick={() => setIsCollapsed((flag) => !flag)}
+      >
         <span
           className={cn(" inline-block", {
             "rotate-180": isCollapsed,
