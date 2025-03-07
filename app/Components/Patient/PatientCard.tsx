@@ -48,11 +48,7 @@ export default function PatientCard(props: PatientCardProps) {
             className="max-w-none lg:w-3/4 xl:w-1/2 w-10/12 max-md:max-h-[90%] md:h-fit overflow-hidden rounded-lg"
             isOpen={isBookingAppointment}
             toggle={(isOpen) => setIsBookingAppointment(isOpen ?? false)}
-            trigger={
-              <div>
-                <BookAppointmentBtn />
-              </div>
-            }
+            trigger={<BookAppointmentBtn />}
           >
             <BookAppointmentForm
               {...{

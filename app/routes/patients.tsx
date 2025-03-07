@@ -24,17 +24,19 @@ export default function patients() {
     <PageLayout
       isFetching={isFetching}
       addBtn={
-        <Modal
-          title="إضافة مريض"
-          className="max-w-none lg:w-3/4 xl:w-1/2 w-10/12 max-md:max-h-[90%] md:h-fit overflow-hidden rounded-lg"
-          isOpen={isOpen}
-          toggle={(isOpen) => setIsOpen(isOpen ?? false)}
-          trigger={
-            <AddNew className="fill-foreground hover:fill-primary transition size-10 max-sm:size-8" />
-          }
-        >
-          <AddPatientForm {...{ setIsOpen, refetch }} />
-        </Modal>
+        <div>
+          <Modal
+            title="إضافة مريض"
+            className="max-w-none lg:w-3/4 xl:w-1/2 w-10/12 max-md:max-h-[90%] md:h-fit overflow-hidden rounded-lg"
+            isOpen={isOpen}
+            toggle={(isOpen) => setIsOpen(isOpen ?? false)}
+            trigger={
+              <AddNew className="fill-foreground hover:fill-primary transition size-10 max-sm:size-8" />
+            }
+          >
+            <AddPatientForm {...{ setIsOpen, refetch }} />
+          </Modal>
+        </div>
       }
     >
       <div className="flex flex-col gap-5">
