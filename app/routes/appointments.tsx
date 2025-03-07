@@ -40,11 +40,12 @@ export default function appointments() {
       <div className="flex flex-col gap-5">
         <div className="flex items-center max-sm:px-1 p-2 gap-y-5 max-sm:justify-evenly gap-x-8 flex-wrap ">
           {appointments?.length && appointments?.length > 0 ? (
-            appointments?.map(({ patient, time, id }) => (
+            appointments?.map(({ patient, time, id, date }) => (
               <PatientCard
                 key={id}
                 variant={PATIENT_CARD_TYPES.APPOINTMENT}
                 time={formatTime(time)}
+                date={date}
                 patient={patient}
                 appointmentId={id}
               />

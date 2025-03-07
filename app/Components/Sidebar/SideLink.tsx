@@ -3,39 +3,6 @@ import { Link, useLocation } from "react-router";
 import { cn } from "~/lib/utils";
 import type { IconProps } from "~/types/icons";
 
-// export default function SideLink({
-//   Icon,
-//   label,
-//   href,
-// }: {
-//   Icon: FC<IconProps>;
-//   label: string;
-//   href: string;
-// }) {
-//   const { pathname } = useLocation();
-//   const isActiveLink = pathname === href;
-//   return (
-//     <Link
-//       to={href}
-//       className={cn(
-//         "transition-all text-text-gray group duration-300 hover:shadow hover:bg-white hover:text-text-active rounded-2xl w-[75px] h-[75px] flex flex-col gap-px items-center justify-center",
-//         {
-//           "bg-white": isActiveLink,
-//           "text-text-active": isActiveLink,
-//           shadow: isActiveLink,
-//         }
-//       )}
-//     >
-//       <Icon
-//         className={cn("", {
-//           "fill-text-active": isActiveLink,
-//         })}
-//       />
-//       <span className="text-sm font-bold">{label}</span>
-//     </Link>
-//   );
-// }
-
 export default function SideLink({
   Icon,
   label,
@@ -68,7 +35,6 @@ export default function SideLink({
         className={cn("text-sm font-bold text-foreground max-lg:hidden", {
           "text-primary": isActiveLink,
           "group-hover:text-secondary": !isActiveLink,
-          // hidden: !isSidebarOpen,
         })}
       >
         {label}

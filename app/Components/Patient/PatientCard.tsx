@@ -7,6 +7,7 @@ import {
 } from "~/types/patientCard";
 import { Modal } from "../common/Modal";
 import BookAppointmentForm from "../Forms/BookAppointmentForm";
+import Appointment from "../icons/Appointment";
 import Clock from "../icons/Clock";
 import Phone from "../icons/Phone";
 import WhatsApp from "../icons/WhatsApp";
@@ -23,22 +24,33 @@ export default function PatientCard(props: PatientCardProps) {
   const isPatientVariant = variant === PATIENT_CARD_TYPES.PATIENT;
 
   return (
-    <div className="bg-white group max-lg:w-[12.85rem] w-[19rem] max-sm:w-44 shadow py-4 px-3 max-sm:px-2 rounded-xl flex flex-col gap-6 max-sm:gap-5 hover:shadow-md transition duration-300 hover:scale-[1.015]">
+    <div className="bg-white group max-lg:w-[12.85rem] w-[19rem] max-sm:w-44 shadow py-4 px-3 max-sm:px-2 rounded-xl flex flex-col gap-5 max-sm:gap-5 hover:shadow-md transition duration-300 hover:scale-[1.015]">
       <div className="flex gap-2 items-center max-lg:gap-2 lg:items-start justify-between max-lg:flex-col max-lg:justify-center">
         <div className="flex flex-1 flex-col gap-1 max-lg:items-center text-foreground group-hover:text-primary">
-          <h4 className="font-bold text-sm lg:text-lg max-lg:text-center h-10 lg:h-14">
+          <h4 className="font-bold text-sm lg:text-base max-lg:text-center h-10 lg:h-12">
             {name}
           </h4>
         </div>
         {!isPatientVariant && (
-          <div className="flex items-center gap-1">
-            <span
-              style={{ direction: "ltr" }}
-              className="font-semibold text-sm text-foreground group-hover:text-primary"
-            >
-              {props.time ? restProps.time : "غير محدد"}
-            </span>
-            <Clock className="stroke-foreground group-hover:stroke-primary" />
+          <div className="flex flex-col gap-2 items-end">
+            <div className="flex items-center gap-1">
+              <span
+                style={{ direction: "ltr" }}
+                className="font-semibold text-sm text-foreground"
+              >
+                {props.time ? restProps.time : "غير محدد"}
+              </span>
+              <Clock className="size-6 -me-0.5" />
+            </div>
+            <div className="flex items-center gap-1">
+              <span
+                style={{ direction: "ltr" }}
+                className="font-semibold text-sm text-foreground"
+              >
+                {props.time ? restProps.date : "غير محدد"}
+              </span>
+              <Appointment className="size-6" />
+            </div>
           </div>
         )}
 
@@ -60,7 +72,7 @@ export default function PatientCard(props: PatientCardProps) {
         )}
       </div>
       <div className="flex lg:items-end max-lg:gap-4 max-lg:flex-col justify-between">
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-4">
           <PhoneOptions phone={phone1} hasWhatsapp={phone1_has_whatsapp} />
           <PhoneOptions phone={phone2} hasWhatsapp={!!phone2_has_whatsapp} />
         </div>

@@ -25,7 +25,7 @@ export default function PageLayout({
     <div className="flex flex-col sm:gap-3 py-2 sm:py-6 px-2 sm:px-5 w-full h-full">
       <div className="flex sm:items-center max-lg:gap-3 justify-between max-lg:flex-col">
         <div className="flex gap-3">
-          <h4 className="font-semibold text-2xl sm:text-4xl text-foreground">
+          <h4 className="font-semibold text-2xl sm:text-3xl text-foreground">
             {pageTitle}
           </h4>
 
