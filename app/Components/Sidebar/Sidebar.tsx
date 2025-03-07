@@ -7,7 +7,6 @@ import { links } from "./links";
 import SideLink from "./SideLink";
 
 export default function Sidebar() {
-  // const [isOpen, setIsOpen] = useState(true);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { dayName, dayDate, month, year } = getTodayInfo();
   return (
@@ -61,12 +60,15 @@ export default function Sidebar() {
           "bg-white transition-all opacity-70 group h-32 rounded absolute top-1/2 -translate-y-1/2 left-0 -translate-x-full -me-2 px-0.5 drop-shadow-md z-50",
           {
             "sm:hidden": !isCollapsed,
-            "rotate-180 [&>path]:stroke-primary": isCollapsed,
           }
         )}
         onClick={() => setIsCollapsed((flag) => !flag)}
       >
-        <span className={cn("", {})}>
+        <span
+          className={cn(" inline-block", {
+            "rotate-180": isCollapsed,
+          })}
+        >
           <DoubleArrow
             className={cn(
               "lg:group-hover:[&>path]:stroke-primary transition-all duration-1000 animate-fade-left repeat-infinite",
