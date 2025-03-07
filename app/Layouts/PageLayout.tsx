@@ -43,7 +43,12 @@ export default function PageLayout({
         />
       </div>
       <div className=" overflow-auto flex-1 pe-1">
-        <Toaster richColors={true} position="top-left" theme="light" />
+        <Toaster
+          richColors={true}
+          position="top-left"
+          theme="light"
+          closeButton
+        />
 
         {isFetching ? <PageLoader /> : children}
       </div>
