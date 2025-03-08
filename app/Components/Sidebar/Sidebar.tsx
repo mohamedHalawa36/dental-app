@@ -13,8 +13,8 @@ export default function Sidebar() {
     <div className="flex items-center gap-1 relative">
       <aside
         className={cn(
-          " drop-shadow-xl shadow-stone-300 bg-white py-2 flex flex-col transition-all lg:duration-300 h-full max-lg:w-[4.5rem] w-[17rem] overflow-hidden",
-          { "max-lg:w-0 w-0": isCollapsed }
+          " drop-shadow-xl shadow-stone-300 bg-white py-2 flex flex-col transition-all ease-in-out lg:duration-300 h-full max-lg:w-[4.5rem] w-[17rem] overflow-hidden",
+          { "max-lg:w-0 w-0 transition-all ease-in-out": isCollapsed }
         )}
       >
         <div className="flex flex-col sm:px-3 gap-3 max-md:gap-0">
