@@ -7,7 +7,6 @@ import {
 } from "~/types/patientCard";
 import { Modal } from "../common/Modal";
 import BookAppointmentForm from "../Forms/BookAppointmentForm";
-import Appointment from "../icons/Appointment";
 import Clock from "../icons/Clock";
 import Phone from "../icons/Phone";
 import WhatsApp from "../icons/WhatsApp";
@@ -32,25 +31,14 @@ export default function PatientCard(props: PatientCardProps) {
           </h4>
         </div>
         {!isPatientVariant && (
-          <div className="flex flex-col gap-2 items-end">
-            <div className="flex items-center gap-1">
-              <span
-                style={{ direction: "ltr" }}
-                className="font-semibold text-sm text-foreground"
-              >
-                {props.time ? restProps.time : "غير محدد"}
-              </span>
-              <Clock className="size-6 -me-0.5" />
-            </div>
-            <div className="flex items-center gap-1">
-              <span
-                style={{ direction: "ltr" }}
-                className="font-semibold text-sm text-foreground"
-              >
-                {props.time ? restProps.date : "غير محدد"}
-              </span>
-              <Appointment className="size-6" />
-            </div>
+          <div className="flex items-center gap-1">
+            <span
+              style={{ direction: "ltr" }}
+              className="font-semibold text-sm text-foreground"
+            >
+              {props.time ? restProps.time : "غير محدد"}
+            </span>
+            <Clock className="size-6 -me-0.5" />
           </div>
         )}
 
@@ -72,7 +60,7 @@ export default function PatientCard(props: PatientCardProps) {
         )}
       </div>
       <div className="flex lg:items-end max-lg:gap-4 max-lg:flex-col justify-between">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 max-sm:items-center">
           <PhoneOptions phone={phone1} hasWhatsapp={phone1_has_whatsapp} />
           <PhoneOptions phone={phone2} hasWhatsapp={!!phone2_has_whatsapp} />
         </div>
