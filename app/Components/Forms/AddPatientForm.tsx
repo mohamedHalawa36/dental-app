@@ -16,7 +16,7 @@ const addPatientSchema = Yup.object({
     .required("مطلوب")
     .min(3, "العمر غير صحيح")
     .max(120, "العمر غير صحيح"),
-  address: Yup.string().required("مطلوب"),
+  address: Yup.string(),
   phone1: Yup.string()
     .typeError("أرقام فقط")
     .required("مطلوب")
@@ -73,11 +73,11 @@ export default function AddPatientForm({
               onChange={() => {}}
             />
             <PatientPhone
-              label="رقم الهاتف"
+              label="رقم هاتف آخر (اختياري)"
               name="phone2"
               onChange={() => {}}
             />
-            <InputField label="العنوان" name="address" />
+            <InputField label="العنوان (اختياري)" name="address" />
           </div>
           <SubmitBtn label="إضافة" disabled={isPending} />
         </Form>
