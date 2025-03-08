@@ -20,7 +20,7 @@ export default function DateGroup({
       trigger={
         <div className="flex items-center gap-1">
           <Appointment className="size-8 group-data-[state=open]:fill-primary" />
-          <h2 className="font-semibold text-xl">{date}</h2>
+          <h2 className=" text-xl">{date}</h2>
         </div>
       }
     >
