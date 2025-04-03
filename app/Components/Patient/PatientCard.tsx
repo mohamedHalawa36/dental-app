@@ -23,10 +23,10 @@ export default function PatientCard(props: PatientCardProps) {
   const isPatientVariant = variant === PATIENT_CARD_TYPES.PATIENT;
 
   return (
-    <div className="bg-white group max-lg:w-[12.85rem] w-[19rem] max-sm:w-44 shadow py-4 px-3 max-sm:px-2 rounded-xl flex flex-col gap-5 max-sm:gap-5 hover:shadow-md transition duration-300 hover:scale-[1.015]">
-      <div className="flex gap-2 items-center max-lg:gap-2 lg:items-start justify-between max-lg:flex-col max-lg:justify-center">
-        <div className="flex flex-1 flex-col gap-1 max-lg:items-center text-foreground group-hover:text-primary">
-          <h4 className="font-bold text-sm lg:text-base max-lg:text-center h-10 lg:h-12">
+    <div className="bg-white group max-sm:w-full w-[19rem] shadow py-4 px-3 rounded-xl flex flex-col gap-5 max-sm:gap-5 hover:shadow-md transition duration-300 hover:scale-[1.015]">
+      <div className="flex gap-2 items-center max-lg:gap-2 lg:items-start justify-between max-lg:justify-center">
+        <div className="flex flex-1 flex-col gap-1 text-foreground group-hover:text-primary">
+          <h4 className="font-bold text-sm lg:text-base  h-10 lg:h-12">
             {name}
           </h4>
         </div>
@@ -59,8 +59,8 @@ export default function PatientCard(props: PatientCardProps) {
           </Modal>
         )}
       </div>
-      <div className="flex lg:items-end max-lg:gap-4 max-lg:flex-col justify-between">
-        <div className="flex flex-col gap-4 max-sm:items-center">
+      <div className="flex items-end max-lg:gap-2 justify-between">
+        <div className="flex flex-col gap-4 ">
           <PhoneOptions phone={phone1} hasWhatsapp={phone1_has_whatsapp} />
           <PhoneOptions phone={phone2} hasWhatsapp={!!phone2_has_whatsapp} />
         </div>

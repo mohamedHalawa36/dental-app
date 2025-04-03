@@ -40,7 +40,7 @@ export default function patients() {
       }
     >
       <div className="flex flex-col gap-5">
-        <div className="flex items-center max-sm:px-1 p-2 gap-y-5 max-sm:justify-evenly gap-x-8 flex-wrap ">
+        <div className="flex md:items-center max-sm:px-4 p-2 gap-y-5 max-sm:justify-evenly gap-x-8 flex-wrap ">
           {patients && patients?.length > 0 ? (
             patients?.map((patient) => (
               <PatientCard
