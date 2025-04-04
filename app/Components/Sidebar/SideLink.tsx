@@ -18,7 +18,7 @@ export default function SideLink({
     <Link
       to={href}
       className={cn(
-        "flex items-center max-sm:justify-center p-4 gap-2 transition hover:bg-slate-50 group hover:shadow-slate-200 hover:shadow-md duration-200 ",
+        "flex items-center p-4 gap-2 transition hover:bg-slate-50 group hover:shadow-slate-200 hover:shadow-md duration-200 ",
         {
           "text-primary border-e-4 border-primary shadow bg-slate-50 ":
             isActiveLink,
@@ -32,7 +32,7 @@ export default function SideLink({
         })}
       />
       <span
-        className={cn("text-sm font-bold text-foreground max-lg:hidden", {
+        className={cn("text-sm font-bold text-foreground ", {
           "text-primary": isActiveLink,
           "group-hover:text-secondary": !isActiveLink,
         })}

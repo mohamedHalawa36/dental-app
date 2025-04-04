@@ -16,7 +16,9 @@ export default function AppLayout({ children }: { children: ReactNode }) {
       <div className="w-screen h-screen overflow-hidden">
         <div className="h-full w-full flex  flex-col ">
           <div className=" flex h-full">
-            <Sidebar />
+            <div className="max-lg:hidden">
+              <Sidebar />
+            </div>
             <main className="bg-background flex-1 max-h-full">{children}</main>
           </div>
         </div>
