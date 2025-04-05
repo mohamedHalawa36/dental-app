@@ -22,7 +22,9 @@ export default function PageLayout({
   const { pathname } = useLocation();
   const { search, setSearch } = useContext(SearchContext);
 
-  const pageTitle = links.find((link) => link.href === pathname)?.label;
+  const activeLink = links.find((link) => link.href === pathname);
+  const pageTitle =
+    activeLink?.id === "home" ? "مواعيد اليوم" : activeLink?.label;
 
   return (
     <div className="flex flex-col sm:gap-3 py-2 sm:py-6 px-2 sm:px-5 w-full h-full">

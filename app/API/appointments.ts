@@ -13,12 +13,8 @@ export const getAllAppointments = async (
   signal: AbortSignal
 ) => {
   let query = supabase.from("Appointments").select("*, patient:Patients(*)");
-  // if (search.trim().length > 0)
-  //   query = query.ilike("patient.name", `%${search}%`);
 
   if (date) query = query.eq("date", date);
-
-  // console.log(date);
 
   if (signal) return await query.abortSignal(signal);
 
