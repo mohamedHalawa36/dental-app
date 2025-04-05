@@ -45,7 +45,7 @@ export default function PageLayout({
         </div>
         <Input
           icon={<Search />}
-          className="sm:w-80 w-full text-sm max-sm:[&>div>input]:placeholder:text-sm max-sm:[&>div>input]:text-sm"
+          className="sm:w-80 text-sm max-sm:[&>div>input]:placeholder:text-sm max-sm:[&>div>input]:text-sm max-sm:h-12 max-sm:w-10/12 max-sm:mx-auto"
           placeholder="بحث"
           value={search}
           onChange={(e) => {
