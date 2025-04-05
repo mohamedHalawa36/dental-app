@@ -2,8 +2,28 @@ import { toast } from "sonner";
 import type { Database } from "~/types/database.types";
 import supabase from "./supabase";
 
-export const getAllAppointments = async () =>
-  await supabase.from("Appointments").select("*, patient:Patients(*)");
+export const getAllAppointments = async (
+  {
+    search,
+    date,
+  }: {
+    search: string;
+    date: string;
+  },
+  signal: AbortSignal
+) => {
+  let query = supabase.from("Appointments").select("*, patient:Patients(*)");
+  // if (search.trim().length > 0)
+  //   query = query.ilike("patient.name", `%${search}%`);
+
+  if (date) query = query.eq("date", date);
+
+  // console.log(date);
+
+  if (signal) return await query.abortSignal(signal);
+
+  return await query;
+};
 
 export const getTodayAppointments = async () => {
   const today = new Date();

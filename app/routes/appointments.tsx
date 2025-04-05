@@ -1,31 +1,34 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useContext, useState, type ChangeEvent } from "react";
 import { getAllAppointments } from "~/API/appointments";
-import DateGroup from "~/Components/Appointments/DateGroup";
+import Input from "~/Components/common/Input";
 import { Modal } from "~/Components/common/Modal";
 import BookAppointmentForm from "~/Components/Forms/BookAppointmentForm";
 import AddNew from "~/Components/icons/AddNew";
-import { Accordion } from "~/Components/ui/accordion";
+import PatientCard from "~/Components/Patient/PatientCard";
+import { SearchContext } from "~/Contexts/SearchContext";
 import PageLayout from "~/Layouts/PageLayout";
-import type { AppointmentApiData } from "~/types/apiData";
+import { formatTime } from "~/lib/utils";
+import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
 export default function appointments() {
   const [isOpen, setIsOpen] = useState(false);
+  const [date, setDate] = useState(new Date().toLocaleDateString("en-CA"));
+  const { search } = useContext(SearchContext);
 
   const { isFetching, data } = useQuery({
-    queryKey: ["appointments"],
-    queryFn: getAllAppointments,
+    queryKey: ["appointments", search, date],
+    queryFn: ({ signal }) => getAllAppointments({ search, date }, signal),
   });
 
   const appointments = data?.data;
-  const dateGroups: { [key in string]: AppointmentApiData[] } = {};
-  appointments?.forEach((appointment) => {
-    const { date } = appointment;
-    if (!dateGroups[date]) dateGroups[date] = [];
-    dateGroups[date].push(appointment);
-  });
 
-  const dates = Object.keys(dateGroups);
+  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setDate(value);
+  };
+
+  console.log(appointments);
 
   return (
     <PageLayout
@@ -44,15 +47,29 @@ export default function appointments() {
         </Modal>
       }
     >
-      <div className="flex flex-col gap-5">
-        <div className="flex flex-col divide-y divide-border ">
-          <Accordion type="single" collapsible>
-            {dates.length > 0 &&
-              dates.map((date) => {
-                const appointments = dateGroups[date];
-                return <DateGroup {...{ date, appointments }} />;
-              })}
-          </Accordion>
+      <div className="h-full flex flex-col gap-3">
+        <Input
+          label="التاريخ"
+          type="date"
+          className="w-56"
+          value={date}
+          onChange={handleDateChange}
+        />
+        <div className="flex max-sm:px-4 p-2 gap-5 flex-wrap overflow-auto ">
+          {appointments?.length ? (
+            appointments?.map(({ id, patient, time, date }) => (
+              <PatientCard
+                key={id}
+                patient={patient}
+                variant={PATIENT_CARD_TYPES.APPOINTMENT}
+                {...{ time: formatTime(time), date, appointmentId: id }}
+              />
+            ))
+          ) : (
+            <p className="w-full text-center font-medium text-slate-500 max-sm:text-lg text-2xl">
+              لا توجد مواعيد
+            </p>
+          )}
         </div>
       </div>
     </PageLayout>
