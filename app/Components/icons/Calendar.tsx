@@ -13,7 +13,7 @@ export default function Calendar({ className }: IconProps) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={cn("lucide lucide-calendar-icon lucide-calendar", className)}
+      className={cn("", className)}
     >
       <path d="M8 2v4" />
       <path d="M16 2v4" />

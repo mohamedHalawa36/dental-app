@@ -13,7 +13,7 @@ import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 export default function patients() {
   const [isOpen, setIsOpen] = useState(false);
   const { search } = useContext(SearchContext);
-
+  console.log("test");
   const { isFetching, data, refetch } = useQuery({
     queryKey: ["patients", search],
     queryFn: ({ signal }) => getAllPatients(search, signal),
@@ -40,14 +40,16 @@ export default function patients() {
       }
     >
       <div className="flex flex-col gap-5">
-        <div className="flex md:items-center max-sm:px-4 p-2 gap-y-5 max-sm:justify-evenly gap-x-8 flex-wrap ">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] max-sm:px-4 p-2 gap-5 ">
           {patients && patients?.length > 0 ? (
             patients?.map((patient) => (
-              <PatientCard
-                key={patient.id}
-                variant={PATIENT_CARD_TYPES.PATIENT}
-                patient={patient}
-              />
+              <div className="snap-start">
+                <PatientCard
+                  key={patient.id}
+                  variant={PATIENT_CARD_TYPES.PATIENT}
+                  patient={patient}
+                />
+              </div>
             ))
           ) : (
             <NoResultsFound />
