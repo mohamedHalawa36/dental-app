@@ -15,6 +15,8 @@ export const getAllAppointments = async (
   let query = supabase.from("Appointments").select("*, patient:Patients(*)");
 
   if (date) query = query.eq("date", date);
+  if (search.trim().length > 0)
+    query = query.ilike("Patients.name", `%${search}%`);
 
   if (signal) return await query.abortSignal(signal);
 

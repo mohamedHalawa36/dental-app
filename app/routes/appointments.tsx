@@ -24,8 +24,6 @@ export default function appointments() {
 
   const appointments = data?.data;
 
-  console.log(date);
-
   return (
     <PageLayout
       addBtn={
@@ -49,14 +47,17 @@ export default function appointments() {
         ) : (
           <div className="flex max-sm:px-2 p-2 gap-5 flex-wrap overflow-y-auto ">
             {appointments?.length ? (
-              appointments?.map(({ id, patient, time, date }) => (
-                <PatientCard
-                  key={id}
-                  patient={patient}
-                  variant={PATIENT_CARD_TYPES.APPOINTMENT}
-                  {...{ time: formatTime(time), date, appointmentId: id }}
-                />
-              ))
+              appointments?.map(
+                ({ id, patient, time, date }) =>
+                  patient && (
+                    <PatientCard
+                      key={id}
+                      patient={patient}
+                      variant={PATIENT_CARD_TYPES.APPOINTMENT}
+                      {...{ time: formatTime(time), date, appointmentId: id }}
+                    />
+                  )
+              )
             ) : (
               <p className="w-full text-center font-medium text-slate-500 max-sm:text-lg text-2xl">
                 لا توجد مواعيد
