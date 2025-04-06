@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <PageLayout isFetching={isFetching}>
-      <div className="flex items-center max-sm:justify-center p-2 gap-y-5 gap-x-8 flex-wrap ">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] max-sm:px-4 p-2 gap-5 ">
         {appointments?.length && appointments?.length > 0 ? (
           appointments?.map(({ patient, time, id }) => (
             <PatientCard
