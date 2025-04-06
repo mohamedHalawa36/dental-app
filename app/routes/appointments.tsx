@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { useContext, useRef, useState, type ChangeEvent } from "react";
+import { useContext, useState } from "react";
 import { getAllAppointments } from "~/API/appointments";
+import { DateTimePicker } from "~/Components/common/DatePicker";
 import { Modal } from "~/Components/common/Modal";
 import PageLoader from "~/Components/common/PageLoader";
 import BookAppointmentForm from "~/Components/Forms/BookAppointmentForm";
@@ -13,22 +14,16 @@ import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
 export default function appointments() {
   const [isOpen, setIsOpen] = useState(false);
-  const [date, setDate] = useState(new Date().toLocaleDateString("en-CA"));
+  const [date, setDate] = useState<Date | undefined>(new Date());
   const { search } = useContext(SearchContext);
 
   const { isFetching, data } = useQuery({
     queryKey: ["appointments", search, date],
-    queryFn: ({ signal }) => getAllAppointments({ search, date }, signal),
+    queryFn: ({ signal }) =>
+      getAllAppointments({ search, date: date.toLocaleDateString() }, signal),
   });
 
   const appointments = data?.data;
-
-  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setDate(value);
-  };
-
-  const datePickerRef = useRef<HTMLInputElement | null>(null);
 
   return (
     <PageLayout
@@ -46,8 +41,16 @@ export default function appointments() {
         </Modal>
       }
     >
-      <div className="h-full flex flex-col gap-2">
-        <button
+      <div className="h-full flex flex-col">
+        <div className="w-fit">
+          <DateTimePicker
+            granularity="day"
+            value={date}
+            onChange={setDate}
+            className=" border-none p-0 text-base"
+          />
+        </div>
+        {/* <button
           onClick={() => {
             const datepicker = datePickerRef.current;
             datepicker?.showPicker();
@@ -63,7 +66,7 @@ export default function appointments() {
             className=" bg-transparent px-1 w-[8.25rem]"
             onKeyDown={(e) => e.preventDefault()}
           />
-        </button>
+        </button> */}
 
         {isFetching ? (
           <PageLoader />
