@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState, type ChangeEvent } from "react";
 import { getAllAppointments } from "~/API/appointments";
-import { DatePicker } from "~/Components/common/DatePicker";
 import { Modal } from "~/Components/common/Modal";
 import PageLoader from "~/Components/common/PageLoader";
 import BookAppointmentForm from "~/Components/Forms/BookAppointmentForm";
@@ -24,6 +23,13 @@ export default function appointments() {
 
   const appointments = data?.data;
 
+  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setDate(value);
+  };
+
+  const datePickerRef = useRef<HTMLInputElement | null>(null);
+
   return (
     <PageLayout
       addBtn={
@@ -40,8 +46,25 @@ export default function appointments() {
         </Modal>
       }
     >
-      <div className="h-full flex flex-col ">
-        <DatePicker {...{ date, setDate }} className="p-0 border-none" />
+      <div className="h-full flex flex-col gap-2">
+        <button
+          onClick={() => {
+            const datepicker = datePickerRef.current;
+            datepicker?.showPicker();
+          }}
+          className="focus:outline-none focus:border-none w-fit flex gap-2"
+        >
+          <input
+            type="date"
+            value={date}
+            ref={datePickerRef}
+            onChange={handleDateChange}
+            onClick={(e) => e.target.showPicker()}
+            className=" bg-transparent px-1 w-[8.25rem]"
+            onKeyDown={(e) => e.preventDefault()}
+          />
+        </button>
+
         {isFetching ? (
           <PageLoader />
         ) : (
