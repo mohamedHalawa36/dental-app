@@ -41,13 +41,13 @@ export default function appointments() {
         </Modal>
       }
     >
-      <div className="h-full flex flex-col">
+      <div className="h-full flex flex-col gap-2">
         <div className="w-fit">
           <DateTimePicker
             granularity="day"
             value={date}
             onChange={setDate}
-            className=" border-none p-0 text-base"
+            className=" border-none p-0 text-lg font-medium ms-4"
           />
         </div>
         {/* <button
@@ -71,7 +71,7 @@ export default function appointments() {
         {isFetching ? (
           <PageLoader />
         ) : (
-          <div className="flex max-sm:px-2 p-2 gap-5 flex-wrap overflow-y-auto ">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] max-sm:px-4 gap-5 ">
             {appointments?.length ? (
               appointments?.map(
                 ({ id, patient, time, date }) =>

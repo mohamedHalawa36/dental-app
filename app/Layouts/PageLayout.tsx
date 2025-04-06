@@ -28,19 +28,19 @@ export default function PageLayout({
 
   return (
     <div className="flex flex-col sm:gap-3 py-2 sm:py-6 px-2 sm:px-5 w-full h-full">
-      <div className="flex sm:items-center max-sm:gap-3 justify-between max-sm:flex-col">
-        <div className="flex justify-between items-center p-1 max-lg:w-full">
+      <div className="flex sm:items-start max-sm:gap-3 justify-between max-sm:flex-col">
+        <div className="flex gap-2 ">
+          <div className="lg:hidden">
+            <Sheet trigger={<BurgerMenu className=" size-7" />} title="">
+              <Sidebar className="w-full h-full" />
+            </Sheet>
+          </div>
           <div className="flex gap-3">
             <h4 className="font-semibold text-2xl sm:text-3xl text-foreground">
               {pageTitle}
             </h4>
 
             {!!addBtn && addBtn}
-          </div>
-          <div className="sm:hidden">
-            <Sheet trigger={<BurgerMenu className=" size-7" />} title="">
-              <Sidebar className="w-full h-full" />
-            </Sheet>
           </div>
         </div>
         <Input

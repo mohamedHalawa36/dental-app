@@ -707,7 +707,7 @@ const DateTimePicker = React.forwardRef<
             )}
             ref={buttonRef}
           >
-            <CalendarIcon className="mr-2 h-4 w-4" />
+            <CalendarIcon className="!size-6" />
             {displayDate ? (
               displayDate.toLocaleDateString("en-GB")
             ) : (
