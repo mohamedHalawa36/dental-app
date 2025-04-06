@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { useContext, useState, type ChangeEvent } from "react";
+import { useContext, useState } from "react";
 import { getAllAppointments } from "~/API/appointments";
-import Input from "~/Components/common/Input";
+import { DatePicker } from "~/Components/common/DatePicker";
 import { Modal } from "~/Components/common/Modal";
+import PageLoader from "~/Components/common/PageLoader";
 import BookAppointmentForm from "~/Components/Forms/BookAppointmentForm";
 import AddNew from "~/Components/icons/AddNew";
 import PatientCard from "~/Components/Patient/PatientCard";
@@ -23,16 +24,10 @@ export default function appointments() {
 
   const appointments = data?.data;
 
-  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setDate(value);
-  };
-
-  console.log(appointments);
+  console.log(date);
 
   return (
     <PageLayout
-      isFetching={isFetching}
       addBtn={
         <Modal
           title="حجز موعد"
@@ -47,30 +42,28 @@ export default function appointments() {
         </Modal>
       }
     >
-      <div className="h-full flex flex-col gap-3">
-        <Input
-          label="التاريخ"
-          type="date"
-          className="w-56"
-          value={date}
-          onChange={handleDateChange}
-        />
-        <div className="flex max-sm:px-4 p-2 gap-5 flex-wrap overflow-auto ">
-          {appointments?.length ? (
-            appointments?.map(({ id, patient, time, date }) => (
-              <PatientCard
-                key={id}
-                patient={patient}
-                variant={PATIENT_CARD_TYPES.APPOINTMENT}
-                {...{ time: formatTime(time), date, appointmentId: id }}
-              />
-            ))
-          ) : (
-            <p className="w-full text-center font-medium text-slate-500 max-sm:text-lg text-2xl">
-              لا توجد مواعيد
-            </p>
-          )}
-        </div>
+      <div className="h-full flex flex-col ">
+        <DatePicker {...{ date, setDate }} className="p-0 border-none" />
+        {isFetching ? (
+          <PageLoader />
+        ) : (
+          <div className="flex max-sm:px-2 p-2 gap-5 flex-wrap overflow-y-auto ">
+            {appointments?.length ? (
+              appointments?.map(({ id, patient, time, date }) => (
+                <PatientCard
+                  key={id}
+                  patient={patient}
+                  variant={PATIENT_CARD_TYPES.APPOINTMENT}
+                  {...{ time: formatTime(time), date, appointmentId: id }}
+                />
+              ))
+            ) : (
+              <p className="w-full text-center font-medium text-slate-500 max-sm:text-lg text-2xl">
+                لا توجد مواعيد
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </PageLayout>
   );

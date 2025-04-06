@@ -26,9 +26,9 @@ export default function Sheet({
       <SheetContent className="p-0 !max-w-[17rem]">
         <SheetHeader>
           <SheetTitle>{title}</SheetTitle>
-          <SheetDescription className={cn("h-screen w-full !mt-0", className)}>
+          <div className={cn("h-screen w-full !mt-0", className)}>
             {children}
-          </SheetDescription>
+          </div>
         </SheetHeader>
       </SheetContent>
     </UISheet>

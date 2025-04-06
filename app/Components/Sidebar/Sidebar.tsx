@@ -17,7 +17,6 @@ export default function Sidebar({ className }: { className?: string }) {
       <div className="flex flex-col sm:px-3 gap-3 max-md:gap-0">
         <div className="flex flex-col gap-2.5 items-center border-gray-200 ">
           <img src="/images/full-logo.png" alt="Logo" className="w-4/5" />
-          {/* <img src="/images/logo.png" alt="Logo" className="w-3/5 lg:hidden" /> */}
         </div>
         <button className="flex hover:bg-slate-50 rounded-sm items-center sm:px-2 justify-between transition border-b border-gray-200 ">
           <div className="flex flex-col w-full px-1 items-center py-5 text-foreground text-sm">
