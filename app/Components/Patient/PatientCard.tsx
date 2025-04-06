@@ -85,7 +85,7 @@ function PhoneOptions({ phone, hasWhatsapp }: PhoneOptionsProps) {
           <span>{phone}</span>
 
           <Link to={`tel:+2${phone}`}>
-            <Phone className="size-6 -scale-x-[1] max-sm:size-5 hover:stroke-secondary transition max-sm:animate-wiggle" />
+            <Phone className="size-6 -scale-x-[1] max-sm:size-5 hover:stroke-secondary transition" />
           </Link>
 
           {hasWhatsapp && (
@@ -94,7 +94,7 @@ function PhoneOptions({ phone, hasWhatsapp }: PhoneOptionsProps) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <WhatsApp className="size-6 max-sm:size-5 animate-scaleUpDown" />
+              <WhatsApp className="size-6 max-sm:size-5" />
             </Link>
           )}
         </>
