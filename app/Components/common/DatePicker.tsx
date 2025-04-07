@@ -6,7 +6,7 @@ import {
   PopoverTrigger,
 } from "~/Components/ui/popover";
 import { cn } from "~/lib/utils";
-import { add } from "date-fns";
+import { add, isToday, isTomorrow, isYesterday } from "date-fns";
 import { enUS } from "date-fns/locale";
 import * as React from "react";
 import { useImperativeHandle, useRef } from "react";
@@ -245,7 +245,7 @@ function Calendar({
         weekdays: cn("flex", props.showWeekNumber && "justify-end"),
         weekday:
           "text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]",
-        week: "flex w-full mt-2",
+        week: "flex gap-1 w-full mt-2",
         day: "h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20 rounded-1",
         day_button: cn(
           buttonVariants({ variant: "ghost" }),
@@ -254,7 +254,7 @@ function Calendar({
         range_end: "day-range-end ",
         selected:
           "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground rounded-l-md rounded-r-md",
-        today: "bg-accent text-accent-foreground",
+        today: "bg-accent text-accent-foreground rounded-md",
         outside:
           "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
         disabled: "text-muted-foreground opacity-50",
@@ -695,6 +695,20 @@ const DateTimePicker = React.forwardRef<
       [displayDate]
     );
 
+    const dateLabel = displayDate ? (
+      isToday(displayDate) ? (
+        "اليوم"
+      ) : isTomorrow(displayDate) ? (
+        "غدا"
+      ) : isYesterday(displayDate) ? (
+        "الأمس"
+      ) : (
+        displayDate.toLocaleDateString("en-GB")
+      )
+    ) : (
+      <span>{placeholder}</span>
+    );
+
     return (
       <Popover open={isOpen} onOpenChange={setIsOpen}>
         <PopoverTrigger asChild disabled={disabled}>
@@ -708,11 +722,7 @@ const DateTimePicker = React.forwardRef<
             ref={buttonRef}
           >
             <CalendarIcon className="!size-6" />
-            {displayDate ? (
-              displayDate.toLocaleDateString("en-GB")
-            ) : (
-              <span>{placeholder}</span>
-            )}
+            {dateLabel}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
