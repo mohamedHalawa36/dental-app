@@ -26,6 +26,10 @@ export default function appointments() {
 
   const appointments = data?.data;
 
+  const filteredAppointments = search
+    ? appointments?.filter((appointment) => !!appointment.patient)
+    : appointments;
+
   return (
     <PageLayout
       addBtn={
@@ -56,19 +60,16 @@ export default function appointments() {
           <PageLoader />
         ) : (
           <>
-            {appointments?.length ? (
+            {filteredAppointments?.length ? (
               <div className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] max-sm:py-0 p-2 gap-5 overflow-auto">
-                {appointments?.map(
-                  ({ id, patient, time, date }) =>
-                    patient && (
-                      <PatientCard
-                        key={id}
-                        patient={patient}
-                        variant={PATIENT_CARD_TYPES.APPOINTMENT}
-                        {...{ time: formatTime(time), date, appointmentId: id }}
-                      />
-                    )
-                )}
+                {filteredAppointments?.map(({ id, patient, time, date }) => (
+                  <PatientCard
+                    key={id}
+                    patient={patient}
+                    variant={PATIENT_CARD_TYPES.APPOINTMENT}
+                    {...{ time: formatTime(time), date, appointmentId: id }}
+                  />
+                ))}
               </div>
             ) : (
               <NoResultsFound />
