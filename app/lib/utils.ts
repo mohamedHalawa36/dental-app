@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import { isBefore } from "date-fns";
 import type { KeyboardEvent } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -24,3 +25,8 @@ export function formatTime(timeString: string | null) {
   ).padStart(2, "0")}`;
   return `${time} ${period}`;
 }
+
+export const isBeforeToday = (date: Date) => {
+  const today = new Date();
+  return isBefore(date, today);
+};

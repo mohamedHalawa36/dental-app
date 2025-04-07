@@ -7,6 +7,7 @@ import BookAppointmentBtn from "./buttons/BookAppointmentBtn";
 import CancelAppointmentBtn from "./buttons/CancelAppointmentBtn";
 import ShowMoreBtn from "./buttons/ShowMoreBtn";
 import PhoneOptions from "./PhoneOptions";
+import { isBeforeToday } from "~/lib/utils";
 
 export default function PatientCard(props: PatientCardProps) {
   const [isBookingAppointment, setIsBookingAppointment] = useState(false);
@@ -60,10 +61,14 @@ export default function PatientCard(props: PatientCardProps) {
         </div>
 
         {!isPatientVariant && (
-          <CancelAppointmentBtn
-            appointmentId={props.appointmentId}
-            patientName={patient.name}
-          />
+          <>
+            {!isBeforeToday(restProps.date) && (
+              <CancelAppointmentBtn
+                appointmentId={props.appointmentId}
+                patientName={patient.name}
+              />
+            )}
+          </>
         )}
         {/* {isPatientVariant && <ShowMoreBtn />} */}
       </div>
