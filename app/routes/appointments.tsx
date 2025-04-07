@@ -32,19 +32,19 @@ export default function appointments() {
 
   return (
     <PageLayout
-      addBtn={
-        <Modal
-          title="حجز موعد"
-          className="max-w-none lg:w-3/4 xl:w-1/2 w-10/12 max-md:max-h-[90%] md:h-fit overflow-hidden rounded-lg"
-          isOpen={isOpen}
-          toggle={(isOpen) => setIsOpen(isOpen ?? false)}
-          trigger={
-            <AddNew className="fill-foreground hover:fill-primary transition size-12 max-sm:size-8" />
-          }
-        >
-          <BookAppointmentForm {...{ setIsOpen }} />
-        </Modal>
-      }
+    // addBtn={
+    //   <Modal
+    //     title="حجز موعد"
+    //     className="max-w-none lg:w-3/4 xl:w-1/2 w-10/12 max-md:max-h-[90%] md:h-fit overflow-hidden rounded-lg"
+    //     isOpen={isOpen}
+    //     toggle={(isOpen) => setIsOpen(isOpen ?? false)}
+    //     trigger={
+    //       <AddNew className="fill-foreground hover:fill-primary transition size-12 max-sm:size-8" />
+    //     }
+    //   >
+    //     <BookAppointmentForm {...{ setIsOpen }} />
+    //   </Modal>
+    // }
     >
       <div className="h-full flex flex-col gap-1">
         <div className="w-fit">

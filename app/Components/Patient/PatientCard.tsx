@@ -65,7 +65,7 @@ export default function PatientCard(props: PatientCardProps) {
             patientName={patient.name}
           />
         )}
-        {isPatientVariant && <ShowMoreBtn />}
+        {/* {isPatientVariant && <ShowMoreBtn />} */}
       </div>
     </div>
   );
