@@ -40,7 +40,7 @@ export default function patients() {
       }
     >
       <div className="flex flex-col gap-5">
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] max-sm:px-4 p-2 gap-5 ">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] max-sm:py-0 p-2 gap-5 ">
           {patients && patients?.length > 0 ? (
             patients?.map((patient) => (
               <div className="snap-start">
