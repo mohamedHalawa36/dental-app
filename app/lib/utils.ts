@@ -1,5 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
-import { isBefore } from "date-fns";
+import { isBefore, startOfToday } from "date-fns";
 import type { KeyboardEvent } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -27,6 +27,6 @@ export function formatTime(timeString: string | null) {
 }
 
 export const isBeforeToday = (date: Date) => {
-  const today = new Date();
+  const today = startOfToday();
   return isBefore(date, today);
 };
