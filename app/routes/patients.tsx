@@ -40,19 +40,19 @@ export default function patients() {
       }
     >
       <div className="flex flex-col gap-5">
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] max-sm:py-0 p-2 gap-6">
-          {patients && patients?.length > 0 ? (
-            patients?.map((patient) => (
+        {patients?.length ? (
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] max-sm:py-0 p-2 gap-6">
+            {patients?.map((patient) => (
               <PatientCard
                 key={patient.id}
                 variant={PATIENT_CARD_TYPES.PATIENT}
                 patient={patient}
               />
-            ))
-          ) : (
-            <NoResultsFound />
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <NoResultsFound />
+        )}
       </div>
     </PageLayout>
   );
