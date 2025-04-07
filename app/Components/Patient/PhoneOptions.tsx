@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import Phone from "../icons/Phone";
 import WhatsApp from "../icons/WhatsApp";
 import type { PhoneOptionsProps } from "~/types/patientCard";

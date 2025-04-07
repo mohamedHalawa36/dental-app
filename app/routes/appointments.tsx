@@ -51,23 +51,6 @@ export default function appointments() {
             className=" border-none p-0 text-lg font-medium ms-3"
           />
         </div>
-        {/* <button
-          onClick={() => {
-            const datepicker = datePickerRef.current;
-            datepicker?.showPicker();
-          }}
-          className="focus:outline-none focus:border-none w-fit flex gap-2"
-        >
-          <input
-            type="date"
-            value={date}
-            ref={datePickerRef}
-            onChange={handleDateChange}
-            onClick={(e) => e.target.showPicker()}
-            className=" bg-transparent px-1 w-[8.25rem]"
-            onKeyDown={(e) => e.preventDefault()}
-          />
-        </button> */}
 
         {isFetching ? (
           <PageLoader />
@@ -90,25 +73,6 @@ export default function appointments() {
             ) : (
               <NoResultsFound />
             )}
-            {/* <div className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] max-sm:py-0 p-2 gap-5 overflow-auto">
-              {appointments?.length ? (
-                appointments?.map(
-                  ({ id, patient, time, date }) =>
-                    patient && (
-                      <PatientCard
-                        key={id}
-                        patient={patient}
-                        variant={PATIENT_CARD_TYPES.APPOINTMENT}
-                        {...{ time: formatTime(time), date, appointmentId: id }}
-                      />
-                    )
-                )
-              ) : (
-                <p className="w-full text-center font-medium text-slate-500 max-sm:text-lg text-2xl">
-                  لا توجد مواعيد
-                </p>
-              )}
-            </div> */}
           </>
         )}
       </div>
