@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { getAllAppointments } from "~/API/appointments";
 import { DateTimePicker } from "~/Components/common/DatePicker";
 import { Modal } from "~/Components/common/Modal";
+import NoResultsFound from "~/Components/common/NoResultsFound";
 import PageLoader from "~/Components/common/PageLoader";
 import BookAppointmentForm from "~/Components/Forms/BookAppointmentForm";
 import AddNew from "~/Components/icons/AddNew";
@@ -41,55 +42,38 @@ export default function appointments() {
         </Modal>
       }
     >
-      <div className="h-full flex flex-col gap-2">
+      <div className="h-full flex flex-col gap-1">
         <div className="w-fit">
           <DateTimePicker
             granularity="day"
             value={date}
             onChange={setDate}
-            className=" border-none p-0 text-lg font-medium ms-4"
+            className=" border-none p-0 text-lg font-medium ms-3"
           />
         </div>
-        {/* <button
-          onClick={() => {
-            const datepicker = datePickerRef.current;
-            datepicker?.showPicker();
-          }}
-          className="focus:outline-none focus:border-none w-fit flex gap-2"
-        >
-          <input
-            type="date"
-            value={date}
-            ref={datePickerRef}
-            onChange={handleDateChange}
-            onClick={(e) => e.target.showPicker()}
-            className=" bg-transparent px-1 w-[8.25rem]"
-            onKeyDown={(e) => e.preventDefault()}
-          />
-        </button> */}
 
         {isFetching ? (
           <PageLoader />
         ) : (
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] max-sm:px-4 gap-5 ">
+          <>
             {appointments?.length ? (
-              appointments?.map(
-                ({ id, patient, time, date }) =>
-                  patient && (
-                    <PatientCard
-                      key={id}
-                      patient={patient}
-                      variant={PATIENT_CARD_TYPES.APPOINTMENT}
-                      {...{ time: formatTime(time), date, appointmentId: id }}
-                    />
-                  )
-              )
+              <div className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] max-sm:py-0 p-2 gap-5 overflow-auto">
+                {appointments?.map(
+                  ({ id, patient, time, date }) =>
+                    patient && (
+                      <PatientCard
+                        key={id}
+                        patient={patient}
+                        variant={PATIENT_CARD_TYPES.APPOINTMENT}
+                        {...{ time: formatTime(time), date, appointmentId: id }}
+                      />
+                    )
+                )}
+              </div>
             ) : (
-              <p className="w-full text-center font-medium text-slate-500 max-sm:text-lg text-2xl">
-                لا توجد مواعيد
-              </p>
+              <NoResultsFound />
             )}
-          </div>
+          </>
         )}
       </div>
     </PageLayout>

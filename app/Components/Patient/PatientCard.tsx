@@ -1,18 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router";
-import {
-  PATIENT_CARD_TYPES,
-  type PatientCardProps,
-  type PhoneOptionsProps,
-} from "~/types/patientCard";
+import { PATIENT_CARD_TYPES, type PatientCardProps } from "~/types/patientCard";
 import { Modal } from "../common/Modal";
 import BookAppointmentForm from "../Forms/BookAppointmentForm";
 import Clock from "../icons/Clock";
-import Phone from "../icons/Phone";
-import WhatsApp from "../icons/WhatsApp";
 import BookAppointmentBtn from "./buttons/BookAppointmentBtn";
 import CancelAppointmentBtn from "./buttons/CancelAppointmentBtn";
 import ShowMoreBtn from "./buttons/ShowMoreBtn";
+import PhoneOptions from "./PhoneOptions";
 
 export default function PatientCard(props: PatientCardProps) {
   const [isBookingAppointment, setIsBookingAppointment] = useState(false);
@@ -23,7 +17,7 @@ export default function PatientCard(props: PatientCardProps) {
   const isPatientVariant = variant === PATIENT_CARD_TYPES.PATIENT;
 
   return (
-    <div className="bg-white h-fit group max-sm:w-full w-full shadow py-4 px-3 rounded-xl flex flex-col gap-5 max-sm:gap-5 hover:shadow-md transition duration-300 hover:scale-[1.015]">
+    <div className="bg-white h-fit group w-full py-4 px-3 rounded-xl flex flex-col gap-5 max-sm:gap-5 hover:shadow-md transition duration-200 hover:scale-[1.015]  ">
       <div className="flex gap-2 max-lg:gap-2 items-start justify-between max-lg:justify-center">
         <div className="flex flex-1 flex-col gap-1 text-foreground group-hover:text-primary">
           <h4 className="font-bold text-sm lg:text-base  h-10 lg:h-12">
@@ -73,34 +67,6 @@ export default function PatientCard(props: PatientCardProps) {
         )}
         {isPatientVariant && <ShowMoreBtn />}
       </div>
-    </div>
-  );
-}
-
-function PhoneOptions({ phone, hasWhatsapp }: PhoneOptionsProps) {
-  return (
-    <div className="flex items-center gap-2 max-sm:text-sm ">
-      {phone ? (
-        <>
-          <span>{phone}</span>
-
-          <Link to={`tel:+2${phone}`}>
-            <Phone className="size-6 -scale-x-[1] max-sm:size-5 hover:stroke-secondary transition" />
-          </Link>
-
-          {hasWhatsapp && (
-            <Link
-              to={`https://wa.me/2${phone}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <WhatsApp className="size-6 max-sm:size-5" />
-            </Link>
-          )}
-        </>
-      ) : (
-        <span className="text-secondary">لا يوجد رقم آخر</span>
-      )}
     </div>
   );
 }

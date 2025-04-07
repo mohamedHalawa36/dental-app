@@ -17,7 +17,7 @@ export const getAllPatients = async (
 export const addPatient = async (
   values: Database["public"]["Tables"]["Patients"]["Insert"]
 ) => {
-  const { data, status, error } = await supabase
+  const { error } = await supabase
     .from("Patients")
     .insert([values])
     .select("*");
