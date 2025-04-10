@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { getAllPatients } from "~/API/patient";
-import { Modal } from "~/Components/common/Modal";
+import CardsList from "~/Components/common/CardsList";
+import FormModal from "~/Components/common/Modals/FormModal";
 import NoResultsFound from "~/Components/common/NoResultsFound";
 import AddPatientForm from "~/Components/Forms/AddPatientForm";
 import AddNew from "~/Components/icons/AddNew";
@@ -11,9 +12,9 @@ import PageLayout from "~/Layouts/PageLayout";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
 export default function patients() {
-  const [isOpen, setIsOpen] = useState(false);
   const { search } = useContext(SearchContext);
-  console.log("test");
+  const [isOpen, setIsOpen] = useState(false);
+
   const { isFetching, data, refetch } = useQuery({
     queryKey: ["patients", search],
     queryFn: ({ signal }) => getAllPatients(search, signal),
@@ -25,23 +26,22 @@ export default function patients() {
       isFetching={isFetching}
       addBtn={
         <div>
-          <Modal
+          <FormModal
             title="إضافة مريض"
-            className="max-w-none lg:w-3/4 xl:w-1/2 w-10/12 max-md:max-h-[90%] md:h-fit overflow-hidden rounded-lg"
-            isOpen={isOpen}
-            toggle={(isOpen) => setIsOpen(isOpen ?? false)}
             trigger={
               <AddNew className="fill-foreground hover:fill-primary transition size-10 max-sm:size-8" />
             }
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
           >
             <AddPatientForm {...{ setIsOpen, refetch }} />
-          </Modal>
+          </FormModal>
         </div>
       }
     >
       <div className="flex flex-col gap-5">
         {patients?.length ? (
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] max-sm:py-0 p-2 gap-6">
+          <CardsList>
             {patients?.map((patient) => (
               <PatientCard
                 key={patient.id}
@@ -49,7 +49,7 @@ export default function patients() {
                 patient={patient}
               />
             ))}
-          </div>
+          </CardsList>
         ) : (
           <NoResultsFound />
         )}

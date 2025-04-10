@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { getAllAppointments } from "~/API/appointments";
+import CardsList from "~/Components/common/CardsList";
 import { DateTimePicker } from "~/Components/common/DatePicker";
-import { Modal } from "~/Components/common/Modal";
+import FormModal from "~/Components/common/Modals/FormModal";
 import NoResultsFound from "~/Components/common/NoResultsFound";
 import PageLoader from "~/Components/common/PageLoader";
 import BookAppointmentForm from "~/Components/Forms/BookAppointmentForm";
@@ -21,7 +22,7 @@ export default function appointments() {
   const { isFetching, data } = useQuery({
     queryKey: ["appointments", search, date],
     queryFn: ({ signal }) =>
-      getAllAppointments({ search, date: date.toLocaleDateString() }, signal),
+      getAllAppointments({ search, date: date?.toLocaleDateString() }, signal),
   });
 
   const appointments = data?.data;
@@ -32,19 +33,18 @@ export default function appointments() {
 
   return (
     <PageLayout
-    // addBtn={
-    //   <Modal
-    //     title="حجز موعد"
-    //     className="max-w-none lg:w-3/4 xl:w-1/2 w-10/12 max-md:max-h-[90%] md:h-fit overflow-hidden rounded-lg"
-    //     isOpen={isOpen}
-    //     toggle={(isOpen) => setIsOpen(isOpen ?? false)}
-    //     trigger={
-    //       <AddNew className="fill-foreground hover:fill-primary transition size-12 max-sm:size-8" />
-    //     }
-    //   >
-    //     <BookAppointmentForm {...{ setIsOpen }} />
-    //   </Modal>
-    // }
+      addBtn={
+        <FormModal
+          title="حجز موعد"
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          trigger={
+            <AddNew className="fill-foreground hover:fill-primary transition size-12 max-sm:size-8" />
+          }
+        >
+          <BookAppointmentForm {...{ setIsOpen }} />
+        </FormModal>
+      }
     >
       <div className="h-full flex flex-col gap-1">
         <div className="w-fit">
@@ -61,7 +61,7 @@ export default function appointments() {
         ) : (
           <>
             {filteredAppointments?.length ? (
-              <div className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] max-sm:py-0 p-2 gap-5 overflow-auto">
+              <CardsList>
                 {filteredAppointments?.map(({ id, patient, time, date }) => (
                   <PatientCard
                     key={id}
@@ -70,7 +70,7 @@ export default function appointments() {
                     {...{ time: formatTime(time), date, appointmentId: id }}
                   />
                 ))}
-              </div>
+              </CardsList>
             ) : (
               <NoResultsFound />
             )}
