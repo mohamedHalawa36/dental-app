@@ -1,3 +1,4 @@
+import { cn } from "~/lib/utils";
 import {
   Dialog,
   DialogContent,
@@ -6,19 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-
-type ModalProps = {
-  title?: string | React.ReactNode;
-  trigger?: React.ReactNode;
-  className?: string;
-  isOpen: boolean;
-  toggle: (val?: boolean) => void;
-  onClose?: () => void;
-  children: React.ReactNode;
-  actions?: React.ReactNode;
-  forceModal?: boolean;
-  container?: HTMLElement;
-};
+import type { ModalProps } from "~/types/components";
 
 export const Modal = ({
   onClose,
@@ -41,7 +30,7 @@ export const Modal = ({
   return (
     <Dialog open={isOpen} modal={forceModal} onOpenChange={handleOpenChange}>
       <DialogTrigger>{trigger ? trigger : "Open"}</DialogTrigger>
-      <DialogContent forceMount className={className}>
+      <DialogContent forceMount className={cn("max-md:max-h-[90%]", className)}>
         <div className="flex flex-col overflow-hidden">
           <DialogHeader className="mb-7">
             {title && <DialogTitle className="text-xl">{title}</DialogTitle>}
