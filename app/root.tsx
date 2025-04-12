@@ -55,6 +55,18 @@ export default function App() {
       ) {
         window.Capacitor.Plugins.SplashScreen.hide();
       }
+
+      if (window?.Capacitor?.Plugins?.LiveUpdate) {
+        window.Capacitor.Plugins.LiveUpdate.checkForUpdate().then((result) => {
+          if (result.available) {
+            window.Capacitor.Plugins.LiveUpdate.downloadUpdate().then(() => {
+              window.Capacitor.Plugins.LiveUpdate.extractUpdate().then(() => {
+                window.Capacitor.Plugins.LiveUpdate.reload();
+              });
+            });
+          }
+        });
+      }
     };
     hideSplashLoader();
     document.addEventListener("DOMContentLoaded", hideSplashLoader);
