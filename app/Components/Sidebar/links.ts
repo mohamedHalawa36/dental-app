@@ -22,10 +22,10 @@ export const links = [
     label: "المواعيد",
     href: "/appointments",
   },
-  // {
-  //   id: "doctors",
-  //   Icon: Doctor,
-  //   label: "الأطباء",
-  //   href: "/doctors",
-  // },
+  {
+    id: "doctors",
+    Icon: Doctor,
+    label: "الأطباء",
+    href: "/doctors",
+  },
 ];
