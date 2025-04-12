@@ -1,0 +1,36 @@
+name: Deploy Live Updates
+
+on:
+  push:
+    branches:
+      - main # or your default branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22.14"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build # Or your build command
+
+      - name: Copy manifest.json
+        run: cp manifest.json build/client/manifest.json
+
+      - name: Push to live update repo
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: main # Branch in the live-updates repo to deploy to
+          folder: build/client # The folder containing your build output
+          repository-name: mohamedHalawa36/dental-app-deploys
+          token: ${{ secrets.GH_PAT }}
