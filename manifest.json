@@ -1,0 +1,26 @@
+{
+  "version": "3.0.0",
+  "bundled": true,
+  "files": [
+    "assets/AddPatientForm-C8A9wjJI.js",
+    "assets/app-BsElkev3.css",
+    "assets/appointments-DCvcEJRx.js",
+    "assets/browser-D_wwIK8g.js",
+    "assets/chunk-SYFQ2XB5-Y8KprK8j.js",
+    "assets/doctors-DI2hXKWG.js",
+    "assets/entry.client-D0fGGm6e.js",
+    "assets/index-CRDjHsPC.js",
+    "assets/manifest-00fe430b.js",
+    "assets/PageLayout-YMyn1qp6.js",
+    "assets/patients-Dj2HTUxw.js",
+    "assets/root-CmHWtAw4.js",
+    "assets/Sidebar-CRYk6Dmp.js",
+    "assets/sonner-Dss5HlGm.js",
+    "assets/utils-DOddNwIy.js",
+    "assets/_index-BQaPUHca.js",
+    "favicon.ico",
+    "images/full-logo.png",
+    "images/logo.png",
+    "index.html"
+  ]
+}
