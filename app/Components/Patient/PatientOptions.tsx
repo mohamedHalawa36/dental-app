@@ -11,7 +11,6 @@ export default function PatientOptions() {
 
   useEffect(() => {
     const closeOptions = (e: MouseEvent) => {
-      console.log("click");
       if (e.target !== optionsRef.current) setisOpen(false);
     };
 
