@@ -620,7 +620,9 @@ const DateTimePicker = React.forwardRef<
     },
     ref
   ) => {
-    const [month, setMonth] = React.useState<Date>(value ?? defaultPopupValue);
+    const [month, setMonth] = React.useState<Date | undefined>(
+      value ?? defaultPopupValue
+    );
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [displayDate, setDisplayDate] = React.useState<Date | undefined>(
       value ?? undefined

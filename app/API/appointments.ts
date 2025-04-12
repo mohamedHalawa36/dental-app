@@ -8,7 +8,7 @@ export const getAllAppointments = async (
     date,
   }: {
     search: string;
-    date: string;
+    date: string | undefined;
   },
   signal: AbortSignal
 ) => {

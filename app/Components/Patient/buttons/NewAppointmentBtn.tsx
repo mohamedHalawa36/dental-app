@@ -1,6 +1,6 @@
 import { cn } from "~/lib/utils";
 
-export default function BookAppointmentBtn({
+export default function NewAppointmentBtn({
   onClick,
   className,
 }: {
