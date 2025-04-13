@@ -37,7 +37,7 @@ export default function PatientCard(props: PatientCardProps) {
           </div>
         )}
 
-        {isPatientVariant && <PatientOptions />}
+        {isPatientVariant && <PatientOptions patientId={patient.id} />}
       </div>
       <div className="flex items-end max-lg:gap-2 justify-between">
         <div className="flex flex-col gap-4 ">

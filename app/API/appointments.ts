@@ -1,5 +1,6 @@
 import { toast } from "sonner";
 import type { Database } from "~/types/database.types";
+import { somethingWentWrongMsg } from "./messages";
 import supabase from "./supabase";
 
 export const getAllAppointments = async (
@@ -44,7 +45,7 @@ export const addAppointment = async (
   if (!error) toast.success("تم حجز الموعد");
   else {
     if (status === 409) toast.error("تم حجز موعد للمريض في نفس اليوم مسبقا");
-    else toast.error("حدث خطأ ما، برجاء المحاولة مجددا");
+    else toast.error(somethingWentWrongMsg);
   }
 };
 export const deleteAppointment = async (id: string) => {
@@ -55,5 +56,5 @@ export const deleteAppointment = async (id: string) => {
     .select("*");
 
   if (!error) toast.success("تم إلغاء الموعد");
-  else toast.error("حدث خطأ ما، برجاء المحاولة مجددا");
+  else toast.error(somethingWentWrongMsg);
 };

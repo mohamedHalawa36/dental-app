@@ -1,6 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
-import { addPatient } from "~/API/patient";
+import { somethingWentWrongMsg } from "~/API/messages";
+import { addPatient, getPatient, updatePatient } from "~/API/patient";
+import SectionLoader from "~/Components/common/Loaders/SectionLoader";
+import MainFormLayout from "~/Layouts/MainFormLayout";
 import { numberOnly } from "~/lib/utils";
 import type { AddPatientFormProps } from "~/types/patients";
 import SubmitBtn from "../../common/SubmitBtn";
@@ -8,24 +11,40 @@ import WhatsApp from "../../icons/WhatsApp";
 import CheckboxField from "../Fields/CheckboxField";
 import InputField from "../Fields/InputField";
 import { addPatientSchema, initialPatientValue } from "./schemas";
-import MainFormLayout from "~/Layouts/MainFormLayout";
 
 export default function PatientForm({
   setIsOpen,
-  refetch,
+  patientId,
 }: AddPatientFormProps) {
+  const { isFetching, isError, data } = useQuery({
+    queryKey: ["patient", patientId],
+    queryFn: () => getPatient(patientId ?? ""),
+    enabled: !!patientId,
+  });
+
+  const queryClient = useQueryClient();
+
   const { mutate, isPending } = useMutation({
-    mutationFn: addPatient,
+    mutationFn: patientId ? updatePatient : addPatient,
     onSuccess: () => {
       setIsOpen(false);
-      refetch();
+      queryClient.invalidateQueries({ queryKey: ["patients"] });
     },
   });
+
+  if (isFetching) return <SectionLoader />;
+
+  if (isError)
+    return (
+      <p className="text-red-500 font-semibold">{somethingWentWrongMsg}</p>
+    );
+
+  const patient = data?.data?.[0];
 
   return (
     <div className="h-full overflow-auto px-2">
       <Formik
-        initialValues={initialPatientValue}
+        initialValues={patientId ? patient! : initialPatientValue}
         validationSchema={addPatientSchema}
         onSubmit={(values) => mutate(values)}
       >
@@ -50,7 +69,10 @@ export default function PatientForm({
             />
             <InputField label="العنوان (اختياري)" name="address" />
           </MainFormLayout>
-          <SubmitBtn label="إضافة" disabled={isPending} />
+          <SubmitBtn
+            label={patientId ? "تعديل" : "إضافة"}
+            disabled={isPending}
+          />
         </Form>
       </Formik>
     </div>
@@ -76,7 +98,6 @@ export function PatientPhone({
       />
       <div className="flex gap-1.5 items-center mt-2">
         <WhatsApp className="max-sm:size-5" />
-        {/* <Field as={Checkbox} name={`phone1_has_whatsapp`} /> */}
         <CheckboxField
           className="max-sm:size-4"
           name={`${name}_has_whatsapp`}
