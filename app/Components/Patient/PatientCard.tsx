@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { isBeforeToday } from "~/lib/utils";
 import { PATIENT_CARD_TYPES, type PatientCardProps } from "~/types/patientCard";
-import { Modal } from "../common/Modal";
+import FormModal from "../common/Modals/FormModal";
 import AppointmentForm from "../Forms/AppointmentForms/AppointmentForm";
 import Clock from "../icons/Clock";
 import BookAppointmentBtn from "./buttons/BookAppointmentBtn";
@@ -31,7 +31,7 @@ export default function PatientCard(props: PatientCardProps) {
               style={{ direction: "ltr" }}
               className="font-semibold text-sm text-foreground"
             >
-              {props.time ? props.time : "--:--"}
+              {!isPatientVariant ? props.time : "--:--"}
             </span>
             <Clock className="size-6 -me-0.5" />
           </div>
@@ -56,11 +56,10 @@ export default function PatientCard(props: PatientCardProps) {
           </>
         )}
         {isPatientVariant && (
-          <Modal
+          <FormModal
             title="حجز موعد"
-            className="max-w-none lg:w-3/4 xl:w-1/2 w-10/12 max-md:max-h-[90%] md:h-fit overflow-hidden rounded-lg"
             isOpen={isBookingAppointment}
-            toggle={(isOpen) => setIsBookingAppointment(isOpen ?? false)}
+            setIsOpen={setIsBookingAppointment}
             trigger={<BookAppointmentBtn onClick={() => {}} />}
           >
             <AppointmentForm
@@ -69,7 +68,7 @@ export default function PatientCard(props: PatientCardProps) {
                 patientId: `${patient.id}`,
               }}
             />
-          </Modal>
+          </FormModal>
         )}
       </div>
     </div>
