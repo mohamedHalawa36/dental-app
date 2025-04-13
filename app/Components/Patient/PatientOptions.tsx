@@ -11,9 +11,14 @@ export default function PatientOptions() {
 
   useEffect(() => {
     const closeOptions = (e: MouseEvent) => {
-      if (e.target !== optionsRef.current) setisOpen(false);
+      e.stopPropagation();
+      const target = e.target;
+      const trigger = optionsRef.current;
+      if (target === trigger || trigger?.contains(target)) return;
+      setisOpen(false);
     };
 
+    document.removeEventListener("click", closeOptions);
     document.addEventListener("click", closeOptions);
 
     return () => document.removeEventListener("click", closeOptions);
