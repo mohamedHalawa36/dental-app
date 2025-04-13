@@ -6,7 +6,7 @@ import { DateTimePicker } from "~/Components/common/DatePicker";
 import FormModal from "~/Components/common/Modals/FormModal";
 import NoResultsFound from "~/Components/common/NoResultsFound";
 import PageLoader from "~/Components/common/PageLoader";
-import BookAppointmentForm from "~/Components/Forms/BookAppointmentForm";
+import AppointmentForm from "~/Components/Forms/AppointmentForms/AppointmentForm";
 import AddNew from "~/Components/icons/AddNew";
 import PatientCard from "~/Components/Patient/PatientCard";
 import { SearchContext } from "~/Contexts/SearchContext";
@@ -42,7 +42,7 @@ export default function appointments() {
             <AddNew className="fill-foreground hover:fill-primary transition size-12 max-sm:size-8" />
           }
         >
-          <BookAppointmentForm {...{ setIsOpen }} />
+          <AppointmentForm {...{ setIsOpen }} />
         </FormModal>
       }
     >

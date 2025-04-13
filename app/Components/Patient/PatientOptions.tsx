@@ -35,14 +35,17 @@ export default function PatientOptions() {
       </button>
       {isOpen && (
         <div className=" absolute bottom-0 translate-y-full left-3 flex flex-col z-50 bg-white drop-shadow-lg w-40 rounded-lg overflow-hidden">
-          <OptionBtn label="تعديل" icon={<Pencil className="-ms-1 size-7" />} />
-          <OptionBtn
-            label="حذف"
-            icon={<Delete className=" fill-red-600 size-[22.5px]" />}
-          />
           <OptionBtn
             label="تفاصيل"
             icon={<Details className="size-[22.5px]" />}
+          />
+          <OptionBtn
+            label="تعديل"
+            icon={<Pencil className="-ms-1 h-7 w-8 -me-1" />}
+          />
+          <OptionBtn
+            label="حذف"
+            icon={<Delete className=" fill-red-600 size-[22.5px]" />}
           />
         </div>
       )}

@@ -4,7 +4,7 @@ import { getAllPatients } from "~/API/patient";
 import CardsList from "~/Components/common/CardsList";
 import FormModal from "~/Components/common/Modals/FormModal";
 import NoResultsFound from "~/Components/common/NoResultsFound";
-import AddPatientForm from "~/Components/Forms/AddPatientForm";
+import PatientForm from "~/Components/Forms/PatientForms/PatientForm";
 import AddNew from "~/Components/icons/AddNew";
 import PatientCard from "~/Components/Patient/PatientCard";
 import { SearchContext } from "~/Contexts/SearchContext";
@@ -34,7 +34,7 @@ export default function patients() {
             isOpen={isOpen}
             setIsOpen={setIsOpen}
           >
-            <AddPatientForm {...{ setIsOpen, refetch }} />
+            <PatientForm {...{ setIsOpen, refetch }} />
           </FormModal>
         </div>
       }

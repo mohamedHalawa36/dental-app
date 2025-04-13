@@ -1,40 +1,19 @@
 import { useMutation } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
-import type { Dispatch, SetStateAction } from "react";
-import * as Yup from "yup";
 import { addPatient } from "~/API/patient";
 import { numberOnly } from "~/lib/utils";
-import SubmitBtn from "../common/SubmitBtn";
-import WhatsApp from "../icons/WhatsApp";
-import CheckboxField from "./Fields/CheckboxField";
-import InputField from "./Fields/InputField";
+import type { AddPatientFormProps } from "~/types/patients";
+import SubmitBtn from "../../common/SubmitBtn";
+import WhatsApp from "../../icons/WhatsApp";
+import CheckboxField from "../Fields/CheckboxField";
+import InputField from "../Fields/InputField";
+import { addPatientSchema, initialPatientValue } from "./schemas";
+import MainFormLayout from "~/Layouts/MainFormLayout";
 
-const addPatientSchema = Yup.object({
-  name: Yup.string().required("مطلوب"),
-  age: Yup.number()
-    .typeError("أرقام فقط")
-    .required("مطلوب")
-    .min(3, "العمر غير صحيح")
-    .max(120, "العمر غير صحيح"),
-  address: Yup.string(),
-  phone1: Yup.string()
-    .typeError("أرقام فقط")
-    .required("مطلوب")
-    .matches(/^01[0-25]\d{8}$/, "رقم غير صحيح"),
-  phone1_has_whatsapp: Yup.boolean(),
-  phone2: Yup.string()
-    .typeError("أرقام فقط")
-    .matches(/^01[0-25]\d{8}$/, "رقم غير صحيح"),
-  phone2_has_whatsapp: Yup.boolean().required("مطلوب"),
-});
-
-export default function AddPatientForm({
+export default function PatientForm({
   setIsOpen,
   refetch,
-}: {
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-  refetch: () => void;
-}) {
+}: AddPatientFormProps) {
   const { mutate, isPending } = useMutation({
     mutationFn: addPatient,
     onSuccess: () => {
@@ -46,20 +25,12 @@ export default function AddPatientForm({
   return (
     <div className="h-full overflow-auto px-2">
       <Formik
-        initialValues={{
-          name: "",
-          age: "",
-          address: "",
-          phone1: "",
-          phone1_has_whatsapp: false,
-          phone2: "",
-          phone2_has_whatsapp: false,
-        }}
+        initialValues={initialPatientValue}
         validationSchema={addPatientSchema}
         onSubmit={(values) => mutate(values)}
       >
         <Form>
-          <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1 max-md:gap-8 overflow-auto">
+          <MainFormLayout>
             <InputField label="الاسم" name="name" />
             <InputField
               onKeyDown={numberOnly}
@@ -78,7 +49,7 @@ export default function AddPatientForm({
               onChange={() => {}}
             />
             <InputField label="العنوان (اختياري)" name="address" />
-          </div>
+          </MainFormLayout>
           <SubmitBtn label="إضافة" disabled={isPending} />
         </Form>
       </Formik>

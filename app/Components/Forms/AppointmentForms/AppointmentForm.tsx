@@ -1,22 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
 import type { Dispatch, SetStateAction } from "react";
-import * as Yup from "yup";
 import { addAppointment } from "~/API/appointments";
 import { getAllPatients } from "~/API/patient";
+import type { Option } from "~/Components/common/Select";
+import SubmitBtn from "~/Components/common/SubmitBtn";
+import MainFormLayout from "~/Layouts/MainFormLayout";
 import { cn } from "~/lib/utils";
-import type { Option } from "../common/Select";
-import SubmitBtn from "../common/SubmitBtn";
-import InputField from "./Fields/InputField";
-import SelectField from "./Fields/SelectField";
+import InputField from "../Fields/InputField";
+import SelectField from "../Fields/SelectField";
+import { bookApointmentSchema, initialAppointmentValues } from "./schemas";
 
-const bookApointmentSchema = Yup.object({
-  patient_id: Yup.string().required("مطلوب"),
-  date: Yup.date().required("مطلوب"),
-  time: Yup.string().nullable(),
-});
-
-export default function BookAppointmentForm({
+export default function AppointmentForm({
   setIsOpen,
   patientId,
 }: {
@@ -53,16 +48,12 @@ export default function BookAppointmentForm({
   return (
     <div className="h-full overflow-auto px-2">
       <Formik
-        initialValues={{
-          patient_id: "",
-          date: "",
-          time: null,
-        }}
+        initialValues={initialAppointmentValues}
         validationSchema={bookApointmentSchema}
         onSubmit={(values) => mutate(values)}
       >
         <Form className="flex flex-col justify-between h-full">
-          <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1 max-md:gap-8 overflow-auto ">
+          <MainFormLayout>
             <SelectField
               className={cn(
                 "disabled:text-primary disabled:opacity-70 disabled:[&>svg]:hidden",
@@ -80,7 +71,7 @@ export default function BookAppointmentForm({
             />
             <InputField label="التاريخ" name="date" type="date" />
             <InputField label="الوقت" name="time" type="time" />
-          </div>
+          </MainFormLayout>
           <SubmitBtn label="حجز" disabled={isPending} />
         </Form>
       </Formik>
