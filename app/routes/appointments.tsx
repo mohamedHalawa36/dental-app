@@ -61,7 +61,7 @@ export default function appointments() {
         ) : (
           <>
             {filteredAppointments?.length ? (
-              <CardsList>
+              <CardsList className="flex-1">
                 {filteredAppointments?.map(({ id, patient, time, date }) => (
                   <PatientCard
                     key={id}

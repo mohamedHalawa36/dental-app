@@ -39,21 +39,19 @@ export default function patients() {
         </div>
       }
     >
-      <div className="flex flex-col gap-5">
-        {patients?.length ? (
-          <CardsList>
-            {patients?.map((patient) => (
-              <PatientCard
-                key={patient.id}
-                variant={PATIENT_CARD_TYPES.PATIENT}
-                patient={patient}
-              />
-            ))}
-          </CardsList>
-        ) : (
-          <NoResultsFound />
-        )}
-      </div>
+      {patients?.length ? (
+        <CardsList className="h-full">
+          {patients?.map((patient) => (
+            <PatientCard
+              key={patient.id}
+              variant={PATIENT_CARD_TYPES.PATIENT}
+              patient={patient}
+            />
+          ))}
+        </CardsList>
+      ) : (
+        <NoResultsFound />
+      )}
     </PageLayout>
   );
 }

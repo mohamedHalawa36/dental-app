@@ -40,7 +40,7 @@ export default function PatientOptions({ patientId }: { patientId: string }) {
           <ThreeDots />
         </button>
         {isOpen && (
-          <div className=" absolute bottom-0 translate-y-full left-3 flex flex-col z-50 bg-white drop-shadow-lg w-40 rounded-lg overflow-hidden">
+          <div className=" absolute bottom-0 translate-y-full left-3 flex flex-col z-[999] bg-white drop-shadow-lg w-40 rounded-lg overflow-hidden">
             <OptionBtn
               label="تفاصيل"
               icon={<Details className="size-[22.5px]" />}
