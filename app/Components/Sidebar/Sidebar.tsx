@@ -1,6 +1,5 @@
 import { cn } from "~/lib/utils";
 import { getTodayInfo } from "~/utils/time";
-import ArrowLeft from "../icons/ArrowLeft";
 import { links } from "./links";
 import SideLink from "./SideLink";
 
@@ -18,7 +17,7 @@ export default function Sidebar({ className }: { className?: string }) {
         <div className="flex flex-col gap-2.5 items-center border-gray-200 ">
           <img src="/images/full-logo.png" alt="Logo" className="w-4/5" />
         </div>
-        <button className="flex hover:bg-slate-50 rounded-sm items-center sm:px-2 justify-between transition border-b border-gray-200 ">
+        <div className="flex hover:bg-slate-50 rounded-sm items-center sm:px-2 justify-between transition border-b border-gray-200 ">
           <div className="flex flex-col w-full px-1 items-center py-5 text-foreground text-sm">
             <span className="max-sm:text-[0.65rem]">{dayName}</span>
             <span className="lg:text-lg font-semibold">
@@ -26,8 +25,7 @@ export default function Sidebar({ className }: { className?: string }) {
             </span>
             <span className="max-sm:text-xs">{year}</span>
           </div>
-          <ArrowLeft className="max-sm:hidden rotate-180" />
-        </button>
+        </div>
       </div>
       <div style={{ direction: "ltr" }} className="overflow-auto">
         <div className="flex flex-col gap-3 py-5 " style={{ direction: "rtl" }}>
