@@ -1,4 +1,5 @@
 import { cn } from "~/lib/utils";
+import type { ModalProps } from "~/types/components";
 import {
   Dialog,
   DialogContent,
@@ -7,7 +8,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import type { ModalProps } from "~/types/components";
 
 export const Modal = ({
   onClose,
@@ -29,7 +29,7 @@ export const Modal = ({
 
   return (
     <Dialog open={isOpen} modal={forceModal} onOpenChange={handleOpenChange}>
-      <DialogTrigger>{trigger ? trigger : "Open"}</DialogTrigger>
+      {trigger && <DialogTrigger>{trigger}</DialogTrigger>}
       <DialogContent forceMount className={cn("max-md:max-h-[90%]", className)}>
         <div className="flex flex-col overflow-hidden">
           <DialogHeader className="mb-7">

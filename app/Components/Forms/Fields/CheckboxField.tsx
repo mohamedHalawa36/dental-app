@@ -8,7 +8,7 @@ export default function CheckboxField(props: {
   const field = useField({
     ...props,
   });
-  const checked = field[0].checked;
+  const checked = field[0].value;
   const setValue = field[2].setValue;
 
   return (
