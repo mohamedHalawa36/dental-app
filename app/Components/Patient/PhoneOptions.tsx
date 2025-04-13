@@ -1,6 +1,6 @@
+import type { PhoneOptionsProps } from "~/types/patientCard";
 import Phone from "../icons/Phone";
 import WhatsApp from "../icons/WhatsApp";
-import type { PhoneOptionsProps } from "~/types/patientCard";
 
 export default function PhoneOptions({
   phone,
@@ -12,7 +12,7 @@ export default function PhoneOptions({
         <>
           <span>{phone}</span>
 
-          <a href={`tel:+2${phone}`}>
+          <a href={`tel:${phone}`}>
             <Phone className="size-6 max-sm:size-5 hover:stroke-secondary transition" />
           </a>
 
