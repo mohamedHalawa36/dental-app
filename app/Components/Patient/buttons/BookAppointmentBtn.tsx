@@ -8,7 +8,7 @@ export default function BookAppointmentBtn({
   className?: string;
 }) {
   return (
-    <button
+    <span
       onClick={onClick}
       className={cn(
         "text-sm text-primary hover:text-secondary transition font-semibold hover:underline hover:underline-offset-4",
@@ -16,6 +16,6 @@ export default function BookAppointmentBtn({
       )}
     >
       موعد جديد
-    </button>
+    </span>
   );
 }

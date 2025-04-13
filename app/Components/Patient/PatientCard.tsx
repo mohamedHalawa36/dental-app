@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { isBeforeToday } from "~/lib/utils";
 import { PATIENT_CARD_TYPES, type PatientCardProps } from "~/types/patientCard";
 import { Modal } from "../common/Modal";
 import BookAppointmentForm from "../Forms/BookAppointmentForm";
 import Clock from "../icons/Clock";
 import BookAppointmentBtn from "./buttons/BookAppointmentBtn";
 import CancelAppointmentBtn from "./buttons/CancelAppointmentBtn";
-import PhoneOptions from "./PhoneOptions";
-import { isBeforeToday } from "~/lib/utils";
 import PatientOptions from "./PatientOptions";
+import PhoneOptions from "./PhoneOptions";
 
 export default function PatientCard(props: PatientCardProps) {
   const [isBookingAppointment, setIsBookingAppointment] = useState(false);
@@ -63,12 +63,14 @@ export default function PatientCard(props: PatientCardProps) {
             toggle={(isOpen) => setIsBookingAppointment(isOpen ?? false)}
             trigger={<BookAppointmentBtn onClick={() => {}} />}
           >
-            <BookAppointmentForm
-              {...{
-                setIsOpen: setIsBookingAppointment,
-                patientId: `${patient.id}`,
-              }}
-            />
+            <div>
+              <BookAppointmentForm
+                {...{
+                  setIsOpen: setIsBookingAppointment,
+                  patientId: `${patient.id}`,
+                }}
+              />
+            </div>
           </Modal>
         )}
       </div>
