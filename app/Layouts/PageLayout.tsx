@@ -1,7 +1,7 @@
 import { useContext, type ReactNode } from "react";
 import { useLocation } from "react-router";
 import Input from "~/Components/common/Input";
-import PageLoader from "~/Components/common/PageLoader";
+import PageLoader from "~/Components/common/Loaders/PageLoader";
 import Sheet from "~/Components/common/Sheet";
 import BurgerMenu from "~/Components/icons/BurgerMenu";
 import Search from "~/Components/icons/Search";
