@@ -21,7 +21,7 @@ export const Modal = ({
   actions,
 }: ModalProps) => {
   const handleOpenChange = (val: boolean) => {
-    toggle(val);
+    toggle?.(val);
     if (!val) {
       onClose?.();
     }

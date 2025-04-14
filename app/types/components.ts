@@ -22,8 +22,8 @@ export type ModalProps = {
   title?: string | React.ReactNode;
   trigger?: React.ReactNode;
   className?: string;
-  isOpen: boolean;
-  toggle: (val?: boolean) => void;
+  isOpen?: boolean;
+  toggle?: (val?: boolean) => void;
   onClose?: () => void;
   children: React.ReactNode;
   actions?: React.ReactNode;
