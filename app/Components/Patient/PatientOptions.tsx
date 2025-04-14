@@ -21,9 +21,7 @@ export default function PatientOptions({ patientId }: { patientId: string }) {
           ref={optionsRef}
           className=" rounded-full hover:bg-gray-50 transition-all size-8 flex justify-center items-center"
         >
-          <button>
-            <ThreeDots />
-          </button>
+          <ThreeDots />
         </PopoverTrigger>
         <PopoverContent
           align="end"
