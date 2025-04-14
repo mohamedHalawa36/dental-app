@@ -16,7 +16,7 @@ export const addPatientSchema = Yup.object({
   phone2: Yup.string()
     .typeError("أرقام فقط")
     .matches(/^01[0-25]\d{8}$/, "رقم غير صحيح"),
-  phone2_has_whatsapp: Yup.boolean().required("مطلوب"),
+  phone2_has_whatsapp: Yup.boolean().nullable(),
 });
 
 export const initialPatientValue = {

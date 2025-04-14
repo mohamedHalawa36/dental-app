@@ -47,33 +47,52 @@ export default function PatientForm({
         initialValues={patientId ? patient! : initialPatientValue}
         validationSchema={addPatientSchema}
         onSubmit={(values) => mutate(values)}
+        validateOnChange={true}
       >
-        <Form>
-          <MainFormLayout>
-            <InputField label="الاسم" name="name" />
-            <InputField
-              onKeyDown={numberOnly}
-              label="العمر"
-              name="age"
-              inputMode="numeric"
-            />
-            <PatientPhone
-              label="رقم الهاتف"
-              name="phone1"
-              onChange={() => {}}
-            />
-            <PatientPhone
-              label="رقم هاتف آخر (اختياري)"
-              name="phone2"
-              onChange={() => {}}
-            />
-            <InputField label="العنوان (اختياري)" name="address" />
-          </MainFormLayout>
-          <SubmitBtn
-            label={patientId ? "تعديل" : "إضافة"}
-            disabled={isPending}
-          />
-        </Form>
+        {({ values, errors }) => {
+          const isTypingPhone2 = !!values.phone2;
+          const phone2HasErr = errors.phone2 ?? false;
+          const phone2HasWhatsappDisabled = isTypingPhone2
+            ? !!phone2HasErr
+            : true;
+
+          const isTypingPhone1 = !!values.phone1;
+          const phone1HasErr = errors.phone1 ?? false;
+          const phone1HasWhatsappDisabled = isTypingPhone1
+            ? !!phone1HasErr
+            : true;
+
+          return (
+            <Form>
+              <MainFormLayout>
+                <InputField label="الاسم" name="name" />
+                <InputField
+                  onKeyDown={numberOnly}
+                  label="العمر"
+                  name="age"
+                  inputMode="numeric"
+                />
+                <PatientPhone
+                  label="رقم الهاتف"
+                  name="phone1"
+                  onChange={() => {}}
+                  hasWhatsappDisabled={phone1HasWhatsappDisabled}
+                />
+                <PatientPhone
+                  label="رقم هاتف آخر (اختياري)"
+                  name="phone2"
+                  onChange={() => {}}
+                  hasWhatsappDisabled={phone2HasWhatsappDisabled}
+                />
+                <InputField label="العنوان (اختياري)" name="address" />
+              </MainFormLayout>
+              <SubmitBtn
+                label={patientId ? "تعديل" : "إضافة"}
+                disabled={isPending}
+              />
+            </Form>
+          );
+        }}
       </Formik>
     </div>
   );
@@ -82,10 +101,12 @@ export default function PatientForm({
 export function PatientPhone({
   label,
   name,
+  hasWhatsappDisabled,
 }: {
   label: string;
   name: string;
   onChange: () => void;
+  hasWhatsappDisabled?: boolean;
 }) {
   return (
     <div className="flex gap-2">
@@ -101,6 +122,7 @@ export function PatientPhone({
         <CheckboxField
           className="max-sm:size-4"
           name={`${name}_has_whatsapp`}
+          disabled={hasWhatsappDisabled}
         />
       </div>
     </div>

@@ -4,6 +4,7 @@ import { Checkbox } from "~/Components/ui/checkbox";
 export default function CheckboxField(props: {
   name: string;
   className?: string;
+  disabled?: boolean;
 }) {
   const field = useField({
     ...props,
