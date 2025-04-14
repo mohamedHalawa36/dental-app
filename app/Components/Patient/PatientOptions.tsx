@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import FormModal from "../common/Modals/FormModal";
 import PatientForm from "../Forms/PatientForms/PatientForm";
 import Delete from "../icons/Delete";
 import Details from "../icons/Details";
 import Pencil from "../icons/Pencil";
 import ThreeDots from "../icons/ThreeDots";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 export default function PatientOptions({ patientId }: { patientId: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,51 +14,37 @@ export default function PatientOptions({ patientId }: { patientId: string }) {
 
   const optionsRef = useRef<HTMLButtonElement | null>(null);
 
-  useEffect(() => {
-    const closeOptions = (e: MouseEvent) => {
-      e.stopPropagation();
-      const target = e.target;
-      const trigger = optionsRef.current;
-      if (target === trigger || trigger?.contains(target as HTMLElement))
-        return;
-      setIsOpen(false);
-    };
-
-    document.removeEventListener("click", closeOptions);
-    document.addEventListener("click", closeOptions);
-
-    return () => document.removeEventListener("click", closeOptions);
-  }, [optionsRef.current]);
-
   return (
-    <>
+    <Popover>
       <div className="relative -m-1.5">
-        <button
+        <PopoverTrigger
           ref={optionsRef}
-          onClick={() => setIsOpen((open) => !open)}
-          className=" rounded-full hover:bg-gray-50 transition-all  size-8 flex justify-center items-center"
+          className=" rounded-full hover:bg-gray-50 transition-all size-8 flex justify-center items-center"
         >
-          <ThreeDots />
-        </button>
-        {isOpen && (
-          <div className=" absolute bottom-0 translate-y-full left-3 flex flex-col z-[999] bg-white drop-shadow-lg w-40 rounded-lg overflow-hidden">
+          <button>
+            <ThreeDots />
+          </button>
+        </PopoverTrigger>
+        <PopoverContent
+          align="end"
+          className="flex flex-col h-fit bg-white drop-shadow-md w-40 rounded-lg overflow-hidden p-0 -mt-1"
+        >
+          <OptionBtn
+            label="تفاصيل"
+            icon={<Details className="size-[22.5px]" />}
+          />
+          <button onClick={() => setIsUpdating(true)}>
             <OptionBtn
-              label="تفاصيل"
-              icon={<Details className="size-[22.5px]" />}
+              label="تعديل"
+              icon={<Pencil className="-ms-1 h-7 w-8 -me-1" />}
             />
-            <button onClick={() => setIsUpdating(true)}>
-              <OptionBtn
-                label="تعديل"
-                icon={<Pencil className="-ms-1 h-7 w-8 -me-1" />}
-              />
-            </button>
+          </button>
 
-            <OptionBtn
-              label="حذف"
-              icon={<Delete className=" fill-red-600 size-[22.5px]" />}
-            />
-          </div>
-        )}
+          <OptionBtn
+            label="حذف"
+            icon={<Delete className=" fill-red-600 size-[22.5px]" />}
+          />
+        </PopoverContent>
       </div>
       <FormModal
         title="تعديل مريض"
@@ -66,7 +53,7 @@ export default function PatientOptions({ patientId }: { patientId: string }) {
       >
         <PatientForm {...{ setIsOpen: setIsUpdating, patientId }} />
       </FormModal>
-    </>
+    </Popover>
   );
 }
 
