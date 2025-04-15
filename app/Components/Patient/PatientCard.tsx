@@ -50,7 +50,7 @@ export default function PatientCard(props: PatientCardProps) {
                 <AppointmentForm
                   {...{
                     setIsOpen: setIsBookingAppointment,
-                    patientData: patient,
+                    appointmentId: props.appointmentId,
                   }}
                 />
               </FormModal>

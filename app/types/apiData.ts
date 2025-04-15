@@ -11,3 +11,11 @@ export type AppointmentApiData =
   Database["public"]["Tables"]["Appointments"]["Row"] & {
     patient: PatientApiData;
   };
+
+export type BookApointmentApiData =
+  Database["public"]["Tables"]["Appointments"]["Insert"];
+
+export type UpdateApointmentApiData =
+  Database["public"]["Tables"]["Appointments"]["Update"] & {
+    patient: PatientApiData;
+  };

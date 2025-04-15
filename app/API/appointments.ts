@@ -2,6 +2,10 @@ import { toast } from "sonner";
 import type { Database } from "~/types/database.types";
 import { messages, somethingWentWrongMsg } from "./messages";
 import supabase from "./supabase";
+import type {
+  BookApointmentApiData,
+  UpdateApointmentApiData,
+} from "~/types/apiData";
 
 const {
   add: addSuccessMsg,
@@ -32,6 +36,13 @@ export const getAllAppointments = async (
   return await query;
 };
 
+export const getAppointment = async (appointmentIid: string) => {
+  return await supabase
+    .from("Appointments")
+    .select("*, patient:Patients(*)")
+    .eq("id", appointmentIid);
+};
+
 export const getTodayAppointments = async () => {
   const today = new Date();
   const date = today.toLocaleDateString("en-CA");
@@ -42,9 +53,7 @@ export const getTodayAppointments = async () => {
     .eq("date", date);
 };
 
-export const addAppointment = async (
-  values: Database["public"]["Tables"]["Appointments"]["Insert"]
-) => {
+export const addAppointment = async (values: BookApointmentApiData) => {
   const { status, error } = await supabase
     .from("Appointments")
     .insert([values])
@@ -56,6 +65,21 @@ export const addAppointment = async (
     else toast.error(somethingWentWrongMsg);
   }
 };
+
+export const updateAppointment = async (
+  appointment: UpdateApointmentApiData
+) => {
+  const { patient, ...restAppointmentData } = appointment;
+  const { error } = await supabase
+    .from("Appointments")
+    .update(restAppointmentData)
+    .eq("id", appointment.id)
+    .select("*");
+
+  if (!error) toast.success(addSuccessMsg);
+  else toast.error(somethingWentWrongMsg);
+};
+
 export const deleteAppointment = async (id: string) => {
   const { error } = await supabase
     .from("Appointments")

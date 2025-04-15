@@ -1,7 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
 import type { Dispatch, SetStateAction } from "react";
-import { addAppointment } from "~/API/appointments";
+import {
+  addAppointment,
+  getAppointment,
+  updateAppointment,
+} from "~/API/appointments";
 import { getAllPatients } from "~/API/patient";
 import type { Option } from "~/Components/common/Select";
 import SubmitBtn from "~/Components/common/SubmitBtn";
@@ -9,6 +13,7 @@ import MainFormLayout from "~/Layouts/MainFormLayout";
 import InputField from "../Fields/InputField";
 import { bookApointmentSchema, initialAppointmentValues } from "./schemas";
 import type { PatientApiData } from "~/types/apiData";
+import SectionLoader from "~/Components/common/Loaders/SectionLoader";
 
 type AppointmentFormProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -21,14 +26,22 @@ export default function AppointmentForm({
   patientData,
   appointmentId,
 }: AppointmentFormProps) {
-  const { isFetching, data } = useQuery({
+  const { isFetching: isPatientsFetching, data: patients } = useQuery({
     queryKey: ["patients-select"],
     queryFn: () => getAllPatients(),
     enabled: !appointmentId && !patientData,
+    select: (data) => data.data,
   });
 
-  const { name: patientName, id: patientId } = patientData!;
-  const patients = data?.data;
+  const { isFetching: isAppointmentFetching, data: appointment } = useQuery({
+    queryKey: ["patients-select"],
+    queryFn: () => getAppointment(appointmentId ?? ""),
+    enabled: !!appointmentId,
+    select: (data) => data.data?.[0],
+  });
+
+  const appointmentPatient = appointmentId ? appointment?.patient : patientData;
+
   const tempOptions = [{ value: "test", label: "test" }];
 
   const patientsOptions: Option[] =
@@ -40,7 +53,7 @@ export default function AppointmentForm({
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: addAppointment,
+    mutationFn: appointmentId ? updateAppointment : addAppointment,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["appointments"],
@@ -49,10 +62,17 @@ export default function AppointmentForm({
     },
   });
 
+  if (isAppointmentFetching) return <SectionLoader />;
+
+  const { name: patientName, id: patientId } = appointmentPatient!;
+  const initialValues = appointmentId
+    ? appointment!
+    : { ...initialAppointmentValues, patient_id: patientId };
+
   return (
     <div className="h-full overflow-auto px-2">
       <Formik
-        initialValues={{ ...initialAppointmentValues, patient_id: patientId }}
+        initialValues={initialValues}
         validationSchema={bookApointmentSchema}
         onSubmit={(values) => mutate(values)}
       >
@@ -69,7 +89,10 @@ export default function AppointmentForm({
             <InputField label="التاريخ" name="date" type="date" />
             <InputField label="الوقت" name="time" type="time" />
           </MainFormLayout>
-          <SubmitBtn label="حجز" disabled={isPending} />
+          <SubmitBtn
+            label={appointmentId ? "تعديل" : "حجز"}
+            disabled={isPending}
+          />
         </Form>
       </Formik>
     </div>
