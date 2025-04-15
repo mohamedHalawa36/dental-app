@@ -31,7 +31,7 @@ export default function PatientCard(props: PatientCardProps) {
               style={{ direction: "ltr" }}
               className="font-semibold text-sm text-foreground"
             >
-              {!isPatientVariant ? props.time : "--:--"}
+              {!isPatientVariant && props.time ? props.time : "--:--"}
             </span>
             <Clock className="size-6 -me-0.5" />
           </div>

@@ -1,5 +1,4 @@
 import { toast } from "sonner";
-import type { Database } from "~/types/database.types";
 import { messages, somethingWentWrongMsg } from "./messages";
 import supabase from "./supabase";
 import type { AddPatientApiData, UpdatePatientApiData } from "~/types/apiData";
