@@ -6,15 +6,18 @@ export const messages = {
       delete: "تم حذف المريض",
     },
     appointment: {
-      add: "",
-      update: "",
-      delete: "",
+      add: "تم حجز الموعد",
+      update: "تم تعديل الموعد بنجاح",
+      delete: "تم إلغاء الموعد",
     },
   },
   error: {
     somethingWentWrong: "حدث خطأ ما، برجاء المحاولة مجددا",
     patient: {
-      conflict: "",
+      conflict: "لا يمكن حذف المريض لأن لديه حجوزات أو سجلات مرتبطة.",
+    },
+    appointment: {
+      conflict: "تم حجز موعد للمريض في نفس اليوم مسبقا",
     },
   },
 };

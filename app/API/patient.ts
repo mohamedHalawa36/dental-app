@@ -10,6 +10,8 @@ const {
   delete: deleteSuccessMsg,
 } = messages.success.patient;
 
+const { conflict: conflictMsg } = messages.error.patient;
+
 export const getAllPatients = async (
   search: string = "",
   signal?: AbortSignal
@@ -48,12 +50,18 @@ export const updatePatient = async (patient: UpdatePatientApiData) => {
 };
 
 export const deletePatient = async (id: string) => {
-  const { error } = await supabase
+  const { error, status } = await supabase
     .from("Patients")
     .delete()
     .eq("id", id)
     .select("*");
 
   if (!error) toast.success(deleteSuccessMsg);
-  else toast.error(somethingWentWrongMsg);
+  else {
+    if (status === 409)
+      toast.error(conflictMsg, {
+        duration: Infinity,
+      });
+    else toast.error(somethingWentWrongMsg);
+  }
 };

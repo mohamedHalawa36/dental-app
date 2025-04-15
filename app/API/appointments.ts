@@ -1,7 +1,15 @@
 import { toast } from "sonner";
 import type { Database } from "~/types/database.types";
-import { somethingWentWrongMsg } from "./messages";
+import { messages, somethingWentWrongMsg } from "./messages";
 import supabase from "./supabase";
+
+const {
+  add: addSuccessMsg,
+  update: updateSuccessMsg,
+  delete: deleteSuccessMsg,
+} = messages.success.patient;
+
+const { conflict: conflictMsg } = messages.error.appointment;
 
 export const getAllAppointments = async (
   {
@@ -37,24 +45,24 @@ export const getTodayAppointments = async () => {
 export const addAppointment = async (
   values: Database["public"]["Tables"]["Appointments"]["Insert"]
 ) => {
-  const { data, status, error } = await supabase
+  const { status, error } = await supabase
     .from("Appointments")
     .insert([values])
     .select("*");
 
-  if (!error) toast.success("تم حجز الموعد");
+  if (!error) toast.success(addSuccessMsg);
   else {
-    if (status === 409) toast.error("تم حجز موعد للمريض في نفس اليوم مسبقا");
+    if (status === 409) toast.error(conflictMsg);
     else toast.error(somethingWentWrongMsg);
   }
 };
 export const deleteAppointment = async (id: string) => {
-  const { data, status, error } = await supabase
+  const { error } = await supabase
     .from("Appointments")
     .delete()
     .eq("id", id)
     .select("*");
 
-  if (!error) toast.success("تم إلغاء الموعد");
+  if (!error) toast.success(deleteSuccessMsg);
   else toast.error(somethingWentWrongMsg);
 };
