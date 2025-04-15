@@ -33,6 +33,7 @@ export default function PatientOptions({
   >({
     mutationFn: deletePatientFunction,
     onSuccess: () => {
+      setIsDeleting(false);
       queryClient.invalidateQueries({
         queryKey: ["patients"],
       });
