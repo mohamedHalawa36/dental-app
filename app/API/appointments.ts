@@ -7,7 +7,7 @@ const {
   add: addSuccessMsg,
   update: updateSuccessMsg,
   delete: deleteSuccessMsg,
-} = messages.success.patient;
+} = messages.success.appointment;
 
 const { conflict: conflictMsg } = messages.error.appointment;
 
