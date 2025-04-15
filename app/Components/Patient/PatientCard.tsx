@@ -26,14 +26,35 @@ export default function PatientCard(props: PatientCardProps) {
           </h4>
         </div>
         {!isPatientVariant && (
-          <div className="flex items-center gap-1">
-            <span
-              style={{ direction: "ltr" }}
-              className="font-semibold text-sm text-foreground"
-            >
-              {!isPatientVariant && props.time ? props.time : "--:--"}
-            </span>
-            <Clock className="size-6 -me-0.5" />
+          <div className="flex flex-col">
+            <div className="flex items-center gap-1">
+              <span
+                style={{ direction: "ltr" }}
+                className="font-semibold text-sm text-foreground"
+              >
+                {!isPatientVariant && props.time ? props.time : "--:--"}
+              </span>
+              <Clock className="size-6 -me-0.5" />
+            </div>
+            {
+              <FormModal
+                title="تعديل موعد"
+                isOpen={isBookingAppointment}
+                setIsOpen={setIsBookingAppointment}
+                trigger={
+                  <span className="w-full inline-flex text-primary hover:text-secondary transition-all text-sm self-start font-semibold">
+                    تغيير
+                  </span>
+                }
+              >
+                <AppointmentForm
+                  {...{
+                    setIsOpen: setIsBookingAppointment,
+                    patientData: patient,
+                  }}
+                />
+              </FormModal>
+            }
           </div>
         )}
 
@@ -65,7 +86,7 @@ export default function PatientCard(props: PatientCardProps) {
             <AppointmentForm
               {...{
                 setIsOpen: setIsBookingAppointment,
-                patientId: `${patient.id}`,
+                patientData: patient,
               }}
             />
           </FormModal>

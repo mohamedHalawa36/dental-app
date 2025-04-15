@@ -6,24 +6,28 @@ import { getAllPatients } from "~/API/patient";
 import type { Option } from "~/Components/common/Select";
 import SubmitBtn from "~/Components/common/SubmitBtn";
 import MainFormLayout from "~/Layouts/MainFormLayout";
-import { cn } from "~/lib/utils";
 import InputField from "../Fields/InputField";
-import SelectField from "../Fields/SelectField";
 import { bookApointmentSchema, initialAppointmentValues } from "./schemas";
+import type { PatientApiData } from "~/types/apiData";
+
+type AppointmentFormProps = {
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  patientData?: PatientApiData;
+  appointmentId?: string;
+};
 
 export default function AppointmentForm({
   setIsOpen,
-  patientId,
-}: {
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-  refetch?: () => void;
-  patientId?: string;
-}) {
+  patientData,
+  appointmentId,
+}: AppointmentFormProps) {
   const { isFetching, data } = useQuery({
     queryKey: ["patients-select"],
     queryFn: () => getAllPatients(),
+    enabled: !appointmentId && !patientData,
   });
 
+  const { name: patientName, id: patientId } = patientData!;
   const patients = data?.data;
   const tempOptions = [{ value: "test", label: "test" }];
 
@@ -48,26 +52,19 @@ export default function AppointmentForm({
   return (
     <div className="h-full overflow-auto px-2">
       <Formik
-        initialValues={initialAppointmentValues}
+        initialValues={{ ...initialAppointmentValues, patient_id: patientId }}
         validationSchema={bookApointmentSchema}
         onSubmit={(values) => mutate(values)}
       >
         <Form className="flex flex-col justify-between h-full">
           <MainFormLayout>
-            <SelectField
-              className={cn(
-                "disabled:text-primary disabled:opacity-70 disabled:[&>svg]:hidden",
-                {
-                  "[&>svg]:hidden": !!patientId,
-                }
-              )}
-              isDisabled={!!patientId || isFetching}
-              label="المريض"
-              name="patient_id"
-              options={patientsOptions}
-              placeholder="اختر مريض"
-              onValueChange={() => {}}
-              defaultValue={patientId}
+            <InputField
+              label="اسم المريض"
+              name="patientId"
+              value={patientName}
+              defaultValue={patientName}
+              disabled={true}
+              className="[&>div>input]:!opacity-100"
             />
             <InputField label="التاريخ" name="date" type="date" />
             <InputField label="الوقت" name="time" type="time" />
