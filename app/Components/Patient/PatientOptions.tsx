@@ -45,7 +45,11 @@ export default function PatientOptions({
       setIsOpen(false);
     };
     document.addEventListener("wheel", closeOptions);
-    return () => document.removeEventListener("wheel", closeOptions);
+    document.addEventListener("touchstart", closeOptions);
+    return () => {
+      document.removeEventListener("wheel", closeOptions);
+      document.removeEventListener("touchstart", closeOptions);
+    };
   }, [triggerRef.current]);
 
   return (
