@@ -27,7 +27,7 @@ export default function PatientCard(props: PatientCardProps) {
         </div>
         {!isPatientVariant && (
           <div className="flex flex-col">
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 -mb-1">
               <span
                 style={{ direction: "ltr" }}
                 className="font-semibold text-sm text-foreground"
@@ -36,13 +36,13 @@ export default function PatientCard(props: PatientCardProps) {
               </span>
               <Clock className="size-6 -me-0.5" />
             </div>
-            {
+            {!isBeforeToday(new Date(props.date)) && (
               <FormModal
                 title="تعديل موعد"
                 isOpen={isBookingAppointment}
                 setIsOpen={setIsBookingAppointment}
                 trigger={
-                  <span className="w-full inline-flex text-primary hover:text-secondary transition-all text-sm self-start font-semibold">
+                  <span className="w-full inline-flex text-primary hover:text-secondary transition-all hover:underline text-sm self-start font-semibold max-sm:text-xs">
                     تغيير
                   </span>
                 }
@@ -54,7 +54,7 @@ export default function PatientCard(props: PatientCardProps) {
                   }}
                 />
               </FormModal>
-            }
+            )}
           </div>
         )}
 

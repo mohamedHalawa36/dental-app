@@ -7,7 +7,6 @@ import {
   updateAppointment,
 } from "~/API/appointments";
 import { getAllPatients } from "~/API/patient";
-import type { Option } from "~/Components/common/Select";
 import SubmitBtn from "~/Components/common/SubmitBtn";
 import MainFormLayout from "~/Layouts/MainFormLayout";
 import InputField from "../Fields/InputField";
@@ -29,12 +28,12 @@ export default function AppointmentForm({
   const { isFetching: isPatientsFetching, data: patients } = useQuery({
     queryKey: ["patients-select"],
     queryFn: () => getAllPatients(),
-    enabled: !appointmentId && !patientData,
+    enabled: !appointmentId,
     select: (data) => data.data,
   });
 
   const { isFetching: isAppointmentFetching, data: appointment } = useQuery({
-    queryKey: ["patients-select"],
+    queryKey: ["appointment", appointmentId],
     queryFn: () => getAppointment(appointmentId ?? ""),
     enabled: !!appointmentId,
     select: (data) => data.data?.[0],
@@ -44,7 +43,7 @@ export default function AppointmentForm({
 
   const tempOptions = [{ value: "test", label: "test" }];
 
-  const patientsOptions: Option[] =
+  const patientsOptions =
     patients?.map((patient) => ({
       label: patient.name,
       value: `${patient.id}`,
@@ -64,7 +63,8 @@ export default function AppointmentForm({
 
   if (isAppointmentFetching) return <SectionLoader />;
 
-  const { name: patientName, id: patientId } = appointmentPatient!;
+  const patientName = appointmentPatient?.name;
+  const patientId = appointmentPatient?.id;
   const initialValues = appointmentId
     ? appointment!
     : { ...initialAppointmentValues, patient_id: patientId };
@@ -86,6 +86,7 @@ export default function AppointmentForm({
               disabled={true}
               className="[&>div>input]:!opacity-100"
             />
+
             <InputField label="التاريخ" name="date" type="date" />
             <InputField label="الوقت" name="time" type="time" />
           </MainFormLayout>

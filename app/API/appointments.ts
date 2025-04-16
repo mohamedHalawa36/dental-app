@@ -76,7 +76,7 @@ export const updateAppointment = async (
     .eq("id", appointment.id)
     .select("*");
 
-  if (!error) toast.success(addSuccessMsg);
+  if (!error) toast.success(updateSuccessMsg);
   else toast.error(somethingWentWrongMsg);
 };
 
