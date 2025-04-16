@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getTodayAppointments } from "~/API/appointments";
+import CardsList from "~/Components/common/CardsList";
 import NoResultsFound from "~/Components/common/NoResultsFound";
 import PatientCard from "~/Components/Patient/PatientCard";
 import PageLayout from "~/Layouts/PageLayout";
@@ -17,7 +18,7 @@ export default function Home() {
   return (
     <PageLayout isFetching={isFetching}>
       {appointments?.length ? (
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] max-sm:py-0 p-2 gap-5 overflow-auto">
+        <CardsList>
           {appointments?.map(
             ({ id, patient, time, date }) =>
               patient && (
@@ -29,7 +30,7 @@ export default function Home() {
                 />
               )
           )}
-        </div>
+        </CardsList>
       ) : (
         <NoResultsFound />
       )}
