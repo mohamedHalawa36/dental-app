@@ -42,6 +42,10 @@ export default function PatientOptions({
 
   useEffect(() => {
     const closeOptions = () => {
+      triggerRef.current?.focus({
+        preventScroll: true,
+      });
+
       setIsOpen(false);
     };
     document.addEventListener("wheel", closeOptions);
@@ -55,7 +59,10 @@ export default function PatientOptions({
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <div className="relative -m-1.5">
-        <PopoverTrigger className=" rounded-full hover:bg-gray-50 transition-all size-8 flex justify-center items-center">
+        <PopoverTrigger
+          ref={triggerRef}
+          className=" rounded-full hover:bg-gray-50 transition-all size-8 flex justify-center items-center"
+        >
           <ThreeDots />
         </PopoverTrigger>
         <PopoverContent
@@ -66,7 +73,7 @@ export default function PatientOptions({
             label="تفاصيل"
             icon={<Details className="size-[22.5px]" />}
           />
-          <button ref={triggerRef} onClick={() => setIsUpdating(true)}>
+          <button onClick={() => setIsUpdating(true)}>
             <OptionBtn
               label="تعديل"
               icon={<Pencil className="-ms-1 h-7 w-8 -me-1" />}
