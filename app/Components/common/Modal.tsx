@@ -30,7 +30,11 @@ export const Modal = ({
   return (
     <Dialog open={isOpen} modal={forceModal} onOpenChange={handleOpenChange}>
       {trigger && <DialogTrigger>{trigger}</DialogTrigger>}
-      <DialogContent forceMount className={cn("max-md:max-h-[90%]", className)}>
+      <DialogContent
+        forceMount
+        className={cn("max-md:max-h-[90%]", className)}
+        onInteractOutside={(e) => e.preventDefault()}
+      >
         <div className="flex flex-col overflow-hidden">
           <DialogHeader className="mb-7">
             {title && <DialogTitle className="text-xl">{title}</DialogTitle>}

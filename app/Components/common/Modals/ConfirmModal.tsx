@@ -19,6 +19,7 @@ export default function ConfirmModal({
   isActionsDisabled?: boolean;
   children: ReactNode;
 }) {
+  console.log(isOpen);
   return (
     <Modal
       isOpen={isOpen}
