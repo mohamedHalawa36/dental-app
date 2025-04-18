@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import Sidebar from "~/Components/Sidebar/Sidebar";
+import { handleConnectionStatus } from "~/utils/connectivity";
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient({
@@ -10,6 +11,15 @@ export default function AppLayout({ children }: { children: ReactNode }) {
       },
     },
   });
+
+  useEffect(() => {
+    window.addEventListener("online", handleConnectionStatus);
+    window.addEventListener("offline", handleConnectionStatus);
+    return () => {
+      window.removeEventListener("online", handleConnectionStatus);
+      window.removeEventListener("offline", handleConnectionStatus);
+    };
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
