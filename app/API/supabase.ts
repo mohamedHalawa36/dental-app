@@ -17,7 +17,7 @@ const interceptor = async (
 };
 
 const supabase = createClient<Database>(supabaseUrl, supabaseKey, {
-  global: { fetch: interceptor },
+  // global: { fetch: interceptor },
 });
 
 export default supabase;
