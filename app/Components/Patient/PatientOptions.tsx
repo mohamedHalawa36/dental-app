@@ -61,13 +61,13 @@ export default function PatientOptions({
       <div className="relative -m-1.5">
         <PopoverTrigger
           ref={triggerRef}
-          className=" rounded-full hover:bg-gray-50 transition-all size-8 flex justify-center items-center"
+          className=" rounded-full hover:bg-gray-50 transition-all size-8 flex justify-center items-center "
         >
           <ThreeDots />
         </PopoverTrigger>
         <PopoverContent
           align="end"
-          className="flex flex-col h-fit bg-white drop-shadow-md w-40 rounded-lg overflow-hidden p-0 -mt-1"
+          className="flex flex-col h-fit bg-white drop-shadow-md w-40 rounded-lg overflow-hidden p-0 -mt-1 !animate-none !duration-0"
         >
           <OptionBtn
             label="تفاصيل"
