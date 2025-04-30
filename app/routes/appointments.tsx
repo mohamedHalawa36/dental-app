@@ -38,9 +38,7 @@ export default function appointments() {
           title="حجز موعد"
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          trigger={
-            <AddNew className="fill-foreground hover:fill-primary transition size-12 max-sm:size-8" />
-          }
+          trigger={<AddNew className=" size-12 max-sm:size-8" />}
         >
           <AppointmentForm {...{ setIsOpen }} />
         </FormModal>

@@ -3,7 +3,6 @@ import { useLocation } from "react-router";
 import Input from "~/Components/common/Input";
 import PageLoader from "~/Components/common/Loaders/PageLoader";
 import Sheet from "~/Components/common/Sheet";
-import BurgerMenu from "~/Components/icons/BurgerMenu";
 import Search from "~/Components/icons/Search";
 import { links } from "~/Components/Sidebar/links";
 import Sidebar from "~/Components/Sidebar/Sidebar";
@@ -27,16 +26,25 @@ export default function PageLayout({
     activeLink?.id === "home" ? "مواعيد اليوم" : activeLink?.label;
 
   return (
-    <div className="flex flex-col sm:gap-3 py-3 sm:py-6 px-2 sm:px-5 w-full h-full">
-      <div className="flex sm:items-start max-sm:gap-3 justify-between max-sm:flex-col">
+    <div className="flex flex-col sm:gap-3 sm:py-6 sm:px-5 w-full h-full">
+      <div className="flex sm:items-start max-sm:gap-3 justify-between max-sm:flex-col max-sm:bg-gradient-to-l from-primary from-20% to-secondary max-sm:py-3 max-sm:px-2 max-sm:rounded-b-[2rem]">
         <div className="flex gap-2 ">
           <div className="lg:hidden">
-            <Sheet trigger={<BurgerMenu className=" size-7" />} title="">
+            <Sheet
+              trigger={
+                <img
+                  src="/images/logo.png"
+                  alt="logo"
+                  className=" h-9 drop-shadow-2xl"
+                />
+              }
+              title=""
+            >
               <Sidebar className="w-full h-full" />
             </Sheet>
           </div>
-          <div className="flex gap-3">
-            <h4 className="font-semibold text-2xl sm:text-3xl text-foreground">
+          <div className="flex gap-3 max-sm:flex-1 relative">
+            <h4 className="font-semibold text-2xl sm:text-3xl max-sm:text-zinc-100">
               {pageTitle}
             </h4>
 
@@ -54,7 +62,7 @@ export default function PageLayout({
           }}
         />
       </div>
-      <div className=" overflow-auto flex-1 pe-1">
+      <div className=" overflow-auto flex-1 pe-1 py-1">
         <Toaster
           richColors={true}
           position="top-left"
