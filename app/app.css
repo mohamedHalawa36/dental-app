@@ -10,9 +10,9 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: #2596be;
+    --primary: 37 150 190;
     --primary-foreground: 210 40% 98%;
-    --secondary: #fb7b99;
+    --secondary: 251 123 153;
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
     --muted-foreground: theme("colors.slate.300");
@@ -81,15 +81,13 @@
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: var(--primary);
+    background-color: rgb(var(--primary));
     border-radius: 100px;
   }
   *::-webkit-scrollbar-thumb:hover {
-    background-color: var(--secondary);
+    background-color: rgb(var(--secondary));
   }
 }
-
-
 
 @layer base {
   * {

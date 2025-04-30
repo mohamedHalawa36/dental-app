@@ -7,7 +7,7 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "var(--primary)",
+          DEFAULT: "rgb(var(--primary)/<alpha-value>)",
           foreground: "hsl(var(--primary-foreground))",
         },
         background: "var(--background)",
@@ -21,7 +21,7 @@ export default {
           foreground: "hsl(var(--popover-foreground))",
         },
         secondary: {
-          DEFAULT: "var(--secondary)",
+          DEFAULT: "rgb(var(--secondary)/<alpha-value>)",
           foreground: "hsl(var(--secondary-foreground))",
         },
         muted: {
