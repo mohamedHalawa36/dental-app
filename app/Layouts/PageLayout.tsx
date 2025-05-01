@@ -34,7 +34,7 @@ export default function PageLayout({
           </div>
           <main className=" bg-gradient-to-b to-fuchsia-200/30 from-cyan-200/30 to-70% flex-1 max-h-full rounded-e-2xl shadow-xl">
             <div className="flex flex-col sm:py-6 sm:px-5 w-full h-full">
-              <div className="flex sm:items-start max-sm:gap-2 justify-between max-sm:flex-col max-sm:bg-gradient-to-l from-primary from-20% to-secondary max-sm:pt-3 max-sm:pb-1 max-sm:px-2 max-sm:rounded-b-[2rem]">
+              <div className="flex sm:items-start max-sm:gap-2.5 justify-between max-sm:flex-col max-sm:bg-gradient-to-l from-primary from-20% to-secondary max-sm:pt-3 max-sm:pb-1 max-sm:px-2 max-sm:rounded-b-[2rem]">
                 <div className="flex gap-2 ">
                   <div className="lg:hidden">
                     <Sheet
@@ -69,7 +69,7 @@ export default function PageLayout({
                   }}
                 />
               </div>
-              <div className=" overflow-auto flex-1 pe-1 py-1">
+              <div className=" overflow-auto flex-1 pe-1 py-1 pt-2">
                 <Toaster
                   richColors={true}
                   position="top-left"
