@@ -23,13 +23,15 @@ export default function AppLayout({ children }: { children: ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="w-screen h-screen overflow-hidden">
+      <div className="w-screen h-screen overflow-hidden lg:p-4">
         <div className="h-full w-full flex  flex-col ">
           <div className=" flex h-full">
             <div className="max-lg:hidden">
               <Sidebar />
             </div>
-            <main className="bg-background flex-1 max-h-full">{children}</main>
+            <main className=" bg-gradient-to-b to-fuchsia-200/30 from-cyan-200/30 to-70% flex-1 max-h-full rounded-e-2xl">
+              {children}
+            </main>
           </div>
         </div>
       </div>

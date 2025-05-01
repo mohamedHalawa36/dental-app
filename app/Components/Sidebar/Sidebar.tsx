@@ -9,7 +9,7 @@ export default function Sidebar({ className }: { className?: string }) {
   return (
     <aside
       className={cn(
-        " drop-shadow-xl shadow-stone-300 bg-white py-2 flex flex-col transition-all ease-in-out duration-700 lg:duration-300 h-full w-[17rem] overflow-hidden",
+        " drop-shadow-xl shadow-stone-300 bg-white py-2 flex flex-col transition-all ease-in-out duration-700 lg:duration-300 h-full w-[17rem] overflow-hidden rounded-s-3xl",
         className
       )}
     >
