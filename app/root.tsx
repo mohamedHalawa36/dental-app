@@ -7,10 +7,9 @@ import {
   ScrollRestoration,
 } from "react-router";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
-import SearchProvider from "./Contexts/SearchContext";
 import AppLayout from "./Layouts/AppLayout";
 
 export const links: Route.LinksFunction = () => [
@@ -61,13 +60,10 @@ export default function App() {
     return () =>
       document.removeEventListener("DOMContentLoaded", hideSplashLoader);
   }, []);
-  const [search, setSearch] = useState("");
 
   return (
     <AppLayout>
-      <SearchProvider value={{ search, setSearch }}>
-        <Outlet />
-      </SearchProvider>
+      <Outlet />
     </AppLayout>
   );
 }
