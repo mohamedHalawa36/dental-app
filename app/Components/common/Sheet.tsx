@@ -23,7 +23,7 @@ export default function Sheet({
   return (
     <UISheet>
       <SheetTrigger>{trigger}</SheetTrigger>
-      <SheetContent className="p-0 !max-w-[17rem]">
+      <SheetContent className="p-0 !max-w-[17rem] bg-transparent border-transparent">
         <SheetHeader>
           <SheetTitle>{title}</SheetTitle>
           <div className={cn("h-screen w-full !mt-0", className)}>

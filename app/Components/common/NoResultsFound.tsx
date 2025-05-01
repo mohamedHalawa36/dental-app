@@ -4,7 +4,7 @@ export default function NoResultsFound({
   label?: string;
 }) {
   return (
-    <p className="text-2xl max-sm:text-base text-center text-slate-500 flex-1">
+    <p className="text-2xl mt-5 max-sm:text-base text-center text-slate-500 flex-1">
       {label}
     </p>
   );
