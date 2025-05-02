@@ -18,7 +18,7 @@ export default function Button({
       disabled={disabled}
       type="submit"
       className={cn(
-        "p-3  max-sm:w-full w-24 hover:opacity-80 transition font-semibold disabled:bg-gray-400 border border-transparent",
+        "p-3 max-sm:w-full hover:opacity-80 transition font-semibold disabled:bg-gray-400 border border-transparent",
         {
           "bg-primary rounded-xl text-muted": variant === "primary",
           "border-foreground text-foreground bg-transparent":

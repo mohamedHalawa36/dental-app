@@ -12,7 +12,7 @@ export default function signup() {
             alt="logo"
             className="object-contain w-48 mx-auto max-sm:w-40"
           />
-          <div className="px-7">
+          <div className="px-7 flex-1 overflow-auto">
             <InputField
               className=" [&>div]:border-primary/50 [&>div]:focus-within:shadow [&>div]:focus-within:border-transparent [&>div]:focus-within:shadow-primary/50 [&>div]:transition"
               name="name"
@@ -24,9 +24,9 @@ export default function signup() {
               label="كلمة السر"
             />
             <Button
-              variant="secondary"
+              variant="primary"
               label="تسجيل الدخول"
-              className="w-full rounded-[1.25rem] max-sm:rounded-xl mt-5 border-primary text-primary hover:bg-primary hover:text-white"
+              className="w-full mt-5"
             />
           </div>
         </div>
