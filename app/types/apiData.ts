@@ -19,3 +19,8 @@ export type UpdateApointmentApiData =
   Database["public"]["Tables"]["Appointments"]["Update"] & {
     patient: PatientApiData;
   };
+
+export type SignInUserData = {
+  email: string;
+  password: string;
+};

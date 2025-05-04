@@ -19,6 +19,9 @@ export const messages = {
     appointment: {
       conflict: "تم حجز موعد للمريض في نفس اليوم مسبقا",
     },
+    auth: {
+      invalidCredentials: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+    },
   },
 };
 

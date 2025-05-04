@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { AuthError, createClient } from "@supabase/supabase-js";
 import type { Database } from "~/types/database.types";
 import { handleConnectionStatus } from "~/utils/connectivity";
 
@@ -21,3 +21,19 @@ const supabase = createClient<Database>(supabaseUrl, supabaseKey, {
 });
 
 export default supabase;
+
+export class ApiError {
+  message: AuthError["message"];
+  statusCode: AuthError["status"];
+  code: AuthError["code"];
+
+  constructor(
+    message: AuthError["message"],
+    statusCode: AuthError["status"],
+    code: AuthError["code"]
+  ) {
+    this.message = message;
+    this.statusCode = statusCode;
+    this.code = code;
+  }
+}
