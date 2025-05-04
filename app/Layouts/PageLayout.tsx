@@ -6,7 +6,6 @@ import Sheet from "~/Components/common/Sheet";
 import Search from "~/Components/icons/Search";
 import { links } from "~/Components/Sidebar/links";
 import Sidebar from "~/Components/Sidebar/Sidebar";
-import { Toaster } from "~/Components/ui/sonner";
 import SearchProvider from "~/Contexts/SearchContext";
 import AuthGuard from "~/Guards/AuthGuard";
 
@@ -72,13 +71,6 @@ export default function PageLayout({
                   />
                 </div>
                 <div className=" overflow-auto flex-1 pe-1 py-1 pt-2">
-                  <Toaster
-                    richColors={true}
-                    position="top-left"
-                    theme="light"
-                    closeButton
-                  />
-
                   {isFetching ? <PageLoader /> : children}
                 </div>
               </div>

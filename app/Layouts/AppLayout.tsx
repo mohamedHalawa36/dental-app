@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, type ReactNode } from "react";
+import { Toaster } from "sonner";
 import { handleConnectionStatus } from "~/utils/connectivity";
 
 export default function AppLayout({ children }: { children: ReactNode }) {
@@ -21,8 +22,16 @@ export default function AppLayout({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className="w-screen h-screen overflow-hidden">{children}</div>
-    </QueryClientProvider>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <div className="w-screen h-screen overflow-hidden">{children}</div>
+        <Toaster
+          richColors={true}
+          position="top-left"
+          theme="light"
+          closeButton
+        />
+      </QueryClientProvider>
+    </>
   );
 }
