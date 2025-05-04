@@ -39,39 +39,30 @@ export default function LoginForm() {
       validationSchema={loginSchema}
       onSubmit={(userData) => mutate(userData)}
     >
-      <div className=" bg-[linear-gradient(45deg,rgb(var(--secondary)),rgb(var(--primary)))] h-full w-full flex justify-center items-center">
-        <div className="flex flex-col gap-5 w-[25rem] bg-white max-sm:max-w-[90%] max-h-[90%] max-sm:rounded-3xl rounded-[50px] pb-8 pt-3  ">
-          <img
-            src="/images/full-logo.png"
-            alt="logo"
-            className="object-contain w-48 mx-auto max-sm:w-40"
+      <Form>
+        <div className="px-7 flex-1 overflow-auto flex flex-col gap-3">
+          <InputField
+            className=" [&>div]:border-primary/50 [&>div]:transition"
+            name="email"
+            label="البريد الإلكتروني"
+            disabled={isPending}
           />
-          <Form>
-            <div className="px-7 flex-1 overflow-auto flex flex-col gap-3">
-              <InputField
-                className=" [&>div]:border-primary/50 [&>div]:transition"
-                name="email"
-                label="البريد الإلكتروني"
-                disabled={isPending}
-              />
-              <InputField
-                className=" [&>div]:border-primary/50 [&>div]:transition"
-                name="password"
-                label="كلمة السر"
-                disabled={isPending}
-              />
-              {serverErr && <ServerErr>{serverErr}</ServerErr>}
-              <Button
-                variant="primary"
-                label="تسجيل الدخول"
-                className="w-full"
-                disabled={isPending}
-                type="submit"
-              />
-            </div>
-          </Form>
+          <InputField
+            className=" [&>div]:border-primary/50 [&>div]:transition"
+            name="password"
+            label="كلمة السر"
+            disabled={isPending}
+          />
+          {serverErr && <ServerErr>{serverErr}</ServerErr>}
+          <Button
+            variant="primary"
+            label="تسجيل الدخول"
+            className="w-full"
+            disabled={isPending}
+            type="submit"
+          />
         </div>
-      </div>
+      </Form>
     </Formik>
   );
 }
