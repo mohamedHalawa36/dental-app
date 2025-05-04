@@ -40,7 +40,7 @@ export default function LoginForm() {
       validationSchema={loginSchema}
       onSubmit={(userData) => mutate(userData)}
     >
-      <Form>
+      <Form className="flex-1">
         <div className="px-7 flex-1 overflow-auto flex flex-col gap-3">
           <InputField
             className=" [&>div]:border-primary/50 [&>div]:transition"
