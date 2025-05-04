@@ -9,7 +9,7 @@ export default function login() {
           alt="logo"
           className="object-contain w-48 mx-auto max-sm:w-40"
         />
-        <LoginForm />;
+        <LoginForm />
       </div>
     </div>
   );

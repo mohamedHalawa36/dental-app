@@ -1,6 +1,7 @@
 import { cn } from "~/lib/utils";
 import { getTodayInfo } from "~/utils/time";
 import { links } from "./links";
+import LogoutBtn from "./LogoutBtn";
 import SideLink from "./SideLink";
 
 export default function Sidebar({ className }: { className?: string }) {
@@ -27,13 +28,14 @@ export default function Sidebar({ className }: { className?: string }) {
           </div>
         </div>
       </div>
-      <div style={{ direction: "ltr" }} className="overflow-auto">
+      <div style={{ direction: "ltr" }} className="overflow-auto flex-1">
         <div className="flex flex-col gap-3 py-5 " style={{ direction: "rtl" }}>
           {links.map((link) => (
             <SideLink key={link.href} {...link} />
           ))}
         </div>
       </div>
+      <LogoutBtn />
     </aside>
   );
 }
