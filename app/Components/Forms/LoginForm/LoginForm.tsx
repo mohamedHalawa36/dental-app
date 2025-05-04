@@ -3,19 +3,13 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
-import * as Yup from "yup";
 import { signInUser } from "~/API/auth";
 import { messages, somethingWentWrongMsg } from "~/API/messages";
 import type { ApiError } from "~/API/supabase";
 import Button from "~/Components/common/Button";
 import ServerErr from "~/Components/common/serverErr";
 import InputField from "~/Components/Forms/Fields/InputField";
-
-const loginSchema = Yup.object({
-  email: Yup.string().email("بريد إلكتروني غير صحيح").required("مطلوب"),
-  password: Yup.string().required("مطلوب"),
-});
-
+import { loginSchema } from "./schema";
 export default function LoginForm() {
   const [serverErr, setserverErr] = useState<string | null>(null);
 

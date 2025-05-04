@@ -21,8 +21,10 @@ export const messages = {
     },
     auth: {
       invalidCredentials: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+      invalidEmail: "بريد إلكتروني غير صحيح",
     },
   },
 };
 
 export const somethingWentWrongMsg = messages.error.somethingWentWrong;
+export const requiredMsg = "مطلوب";
