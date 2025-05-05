@@ -1,10 +1,10 @@
 export default function PageLoader() {
   return (
-    <div className="flex space-x-5 justify-center h-full items-center">
+    <div className="flex h-full items-center justify-center space-x-5">
       <span className="sr-only">Loading...</span>
-      <div className="size-6 bg-primary rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-      <div className="size-6 bg-primary rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-      <div className="size-6 bg-primary rounded-full animate-bounce"></div>
+      <div className="size-6 animate-bounce rounded-full bg-primary [animation-delay:-0.3s]"></div>
+      <div className="size-6 animate-bounce rounded-full bg-primary [animation-delay:-0.15s]"></div>
+      <div className="size-6 animate-bounce rounded-full bg-primary"></div>
     </div>
   );
 }

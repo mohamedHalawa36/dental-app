@@ -61,13 +61,13 @@ export default function PatientOptions({
       <div className="relative -m-1.5">
         <PopoverTrigger
           ref={triggerRef}
-          className=" rounded-full hover:bg-gray-50 transition-all size-8 flex justify-center items-center "
+          className="flex size-8 items-center justify-center rounded-full transition-all hover:bg-gray-50"
         >
           <ThreeDots />
         </PopoverTrigger>
         <PopoverContent
           align="end"
-          className="flex flex-col h-fit bg-white drop-shadow-md w-40 rounded-lg overflow-hidden p-0 -mt-1 !animate-none !duration-0"
+          className="-mt-1 flex h-fit w-40 !animate-none flex-col overflow-hidden rounded-lg bg-white p-0 drop-shadow-md !duration-0"
         >
           <OptionBtn
             label="تفاصيل"
@@ -76,7 +76,7 @@ export default function PatientOptions({
           <button onClick={() => setIsUpdating(true)}>
             <OptionBtn
               label="تعديل"
-              icon={<Pencil className="-ms-1 h-7 w-8 -me-1" />}
+              icon={<Pencil className="-me-1 -ms-1 h-7 w-8" />}
             />
           </button>
 
@@ -87,16 +87,16 @@ export default function PatientOptions({
             trigger={
               <OptionBtn
                 label="حذف"
-                icon={<Delete className=" fill-red-600 size-[22.5px]" />}
+                icon={<Delete className="size-[22.5px] fill-red-600" />}
               />
             }
             confirmCallBack={() => deletePatient(patientId)}
             cancelCallBack={() => setIsDeleting(false)}
             isActionsDisabled={isDeletingPatient}
           >
-            <p className="font-semibold text-lg">
+            <p className="text-lg font-semibold">
               هل تريد حذف ملف &nbsp;
-              <span className=" text-primary">{patientName}</span>
+              <span className="text-primary">{patientName}</span>
               &nbsp; ؟
             </p>
           </ConfirmModal>
@@ -115,7 +115,7 @@ export default function PatientOptions({
 
 const OptionBtn = ({ label, icon }: { label: string; icon: ReactNode }) => {
   return (
-    <span className="px-2.5 py-2 flex items-center gap-2 hover:bg-gray-50 transition-all text-sm">
+    <span className="flex items-center gap-2 px-2.5 py-2 text-sm transition-all hover:bg-gray-50">
       {icon}
       {label}
     </span>

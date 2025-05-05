@@ -7,13 +7,13 @@ export default function PhoneOptions({
   hasWhatsapp,
 }: PhoneOptionsProps) {
   return (
-    <div className="flex items-center gap-2 max-sm:text-sm ">
+    <div className="flex items-center gap-2 max-sm:text-sm">
       {phone ? (
         <>
           <span>{phone}</span>
 
           <a href={`tel:${phone}`}>
-            <Phone className="size-6 max-sm:size-5 hover:stroke-secondary transition" />
+            <Phone className="size-6 transition hover:stroke-secondary max-sm:size-5" />
           </a>
 
           {hasWhatsapp && (

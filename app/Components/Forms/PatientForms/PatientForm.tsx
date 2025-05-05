@@ -36,7 +36,7 @@ export default function PatientForm({
 
   if (isError)
     return (
-      <p className="text-red-500 font-semibold">{somethingWentWrongMsg}</p>
+      <p className="font-semibold text-red-500">{somethingWentWrongMsg}</p>
     );
 
   const patient = data?.data?.[0];
@@ -115,9 +115,9 @@ export function PatientPhone({
         pattern="[0-9]*"
         label={label}
         name={name}
-        className="flex-1 w-full"
+        className="w-full flex-1"
       />
-      <div className="flex gap-1.5 items-center mt-2">
+      <div className="mt-2 flex items-center gap-1.5">
         <WhatsApp className="max-sm:size-5" />
         <CheckboxField
           className="max-sm:size-4"

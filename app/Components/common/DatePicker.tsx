@@ -47,7 +47,7 @@ type GetValidNumberConfig = { max: number; min?: number; loop?: boolean };
 
 function getValidNumber(
   value: string,
-  { max, min = 0, loop = false }: GetValidNumberConfig
+  { max, min = 0, loop = false }: GetValidNumberConfig,
 ) {
   let numericValue = parseInt(value, 10);
 
@@ -88,7 +88,7 @@ type GetValidArrowNumberConfig = {
 
 function getValidArrowNumber(
   value: string,
-  { min, max, step }: GetValidArrowNumberConfig
+  { min, max, step }: GetValidArrowNumberConfig,
 ) {
   let numericValue = parseInt(value, 10);
   if (!Number.isNaN(numericValue)) {
@@ -142,7 +142,7 @@ function setDateByType(
   date: Date,
   value: string,
   type: TimePickerType,
-  period?: Period
+  period?: Period,
 ) {
   switch (type) {
     case "minutes":
@@ -235,7 +235,7 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn("p-3 relative", className)}
+      className={cn("relative p-3", className)}
       classNames={{
         months: "flex flex-col  sm:space-y-0 justify-center",
         month: "flex flex-col items-center space-y-4 ",
@@ -249,7 +249,7 @@ function Calendar({
         day: "h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20 rounded-1",
         day_button: cn(
           buttonVariants({ variant: "ghost" }),
-          "h-9 w-9 p-0 font-normal aria-selected:opacity-100 rounded-l-md rounded-r-md"
+          "h-9 w-9 p-0 font-normal aria-selected:opacity-100 rounded-l-md rounded-r-md",
         ),
         range_end: "day-range-end ",
         selected:
@@ -284,7 +284,7 @@ const TimePeriodSelect = React.forwardRef<
 >(
   (
     { period, setPeriod, date, onDateChange, onLeftFocus, onRightFocus },
-    ref
+    ref,
   ) => {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
       if (e.key === "ArrowRight") onRightFocus?.();
@@ -306,8 +306,8 @@ const TimePeriodSelect = React.forwardRef<
             tempDate,
             hours.toString(),
             "12hours",
-            period === "AM" ? "PM" : "AM"
-          )
+            period === "AM" ? "PM" : "AM",
+          ),
         );
       }
     };
@@ -320,7 +320,7 @@ const TimePeriodSelect = React.forwardRef<
         >
           <SelectTrigger
             ref={ref}
-            className="focus:bg-accent focus:text-accent-foreground w-[65px]"
+            className="w-[65px] focus:bg-accent focus:text-accent-foreground"
             onKeyDown={handleKeyDown}
           >
             <SelectValue />
@@ -332,7 +332,7 @@ const TimePeriodSelect = React.forwardRef<
         </Select>
       </div>
     );
-  }
+  },
 );
 
 TimePeriodSelect.displayName = "TimePeriodSelect";
@@ -368,7 +368,7 @@ const TimePickerInput = React.forwardRef<
       onRightFocus,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [flag, setFlag] = React.useState<boolean>(false);
     const [prevIntKey, setPrevIntKey] = React.useState<string>("0");
@@ -433,8 +433,8 @@ const TimePickerInput = React.forwardRef<
         id={id || picker}
         name={name || picker}
         className={cn(
-          "focus:bg-accent focus:text-accent-foreground w-[48px] text-center font-mono text-base tabular-nums caret-transparent [&::-webkit-inner-spin-button]:appearance-none",
-          className
+          "w-[48px] text-center font-mono text-base tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none",
+          className,
         )}
         value={value || calculatedValue}
         onChange={(e) => {
@@ -450,7 +450,7 @@ const TimePickerInput = React.forwardRef<
         {...props}
       />
     );
-  }
+  },
 );
 
 TimePickerInput.displayName = "TimePickerInput";
@@ -479,7 +479,7 @@ const TimePicker = React.forwardRef<TimePickerRef, TimePickerProps>(
     const secondRef = React.useRef<HTMLInputElement>(null);
     const periodRef = React.useRef<HTMLButtonElement>(null);
     const [period, setPeriod] = React.useState<Period>(
-      date && date.getHours() >= 12 ? "PM" : "AM"
+      date && date.getHours() >= 12 ? "PM" : "AM",
     );
 
     useImperativeHandle(
@@ -490,7 +490,7 @@ const TimePicker = React.forwardRef<TimePickerRef, TimePickerProps>(
         secondRef: secondRef.current,
         periodRef: periodRef.current,
       }),
-      [minuteRef, hourRef, secondRef]
+      [minuteRef, hourRef, secondRef],
     );
     return (
       <div className="flex items-center justify-center gap-2">
@@ -553,7 +553,7 @@ const TimePicker = React.forwardRef<TimePickerRef, TimePickerProps>(
         )}
       </div>
     );
-  }
+  },
 );
 TimePicker.displayName = "TimePicker";
 
@@ -618,14 +618,14 @@ const DateTimePicker = React.forwardRef<
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [month, setMonth] = React.useState<Date | undefined>(
-      value ?? defaultPopupValue
+      value ?? defaultPopupValue,
     );
     const buttonRef = useRef<HTMLButtonElement>(null);
     const [displayDate, setDisplayDate] = React.useState<Date | undefined>(
-      value ?? undefined
+      value ?? undefined,
     );
     onMonthChange ||= onChange;
 
@@ -655,7 +655,7 @@ const DateTimePicker = React.forwardRef<
         newDay.setHours(
           month?.getHours() ?? 0,
           month?.getMinutes() ?? 0,
-          month?.getSeconds() ?? 0
+          month?.getSeconds() ?? 0,
         );
         // onMonthChange?.(newDay);
         console.log(newDay);
@@ -671,7 +671,7 @@ const DateTimePicker = React.forwardRef<
       newDateFull.setHours(
         month?.getHours() ?? 0,
         month?.getMinutes() ?? 0,
-        month?.getSeconds() ?? 0
+        month?.getSeconds() ?? 0,
       );
       // onMonthChange?.(newDateFull);
       console.log(newDateFull);
@@ -694,7 +694,7 @@ const DateTimePicker = React.forwardRef<
         ...buttonRef.current,
         value: displayDate,
       }),
-      [displayDate]
+      [displayDate],
     );
 
     const dateLabel = displayDate ? (
@@ -719,7 +719,7 @@ const DateTimePicker = React.forwardRef<
             className={cn(
               "w-full justify-start text-left font-normal",
               !displayDate && "text-muted-foreground",
-              className
+              className,
             )}
             ref={buttonRef}
           >
@@ -739,7 +739,7 @@ const DateTimePicker = React.forwardRef<
                 newDate.setHours(
                   month?.getHours() ?? 0,
                   month?.getMinutes() ?? 0,
-                  month?.getSeconds() ?? 0
+                  month?.getSeconds() ?? 0,
                 );
                 onSelect(newDate);
               }
@@ -750,7 +750,7 @@ const DateTimePicker = React.forwardRef<
             {...props}
           />
           {granularity !== "day" && (
-            <div className="border-border border-t p-3">
+            <div className="border-t border-border p-3">
               <TimePicker
                 onChange={(value) => {
                   onChange?.(value);
@@ -768,7 +768,7 @@ const DateTimePicker = React.forwardRef<
         </PopoverContent>
       </Popover>
     );
-  }
+  },
 );
 
 DateTimePicker.displayName = "DateTimePicker";

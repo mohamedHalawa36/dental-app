@@ -28,7 +28,7 @@ export default function patients() {
         <div>
           <FormModal
             title="إضافة مريض"
-            trigger={<AddNew className=" size-10 max-sm:size-8" />}
+            trigger={<AddNew className="size-10 max-sm:size-8" />}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
           >

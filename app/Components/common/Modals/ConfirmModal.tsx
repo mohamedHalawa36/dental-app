@@ -25,23 +25,23 @@ export default function ConfirmModal({
       toggle={toggle}
       trigger={trigger}
       title={title}
-      className=" md:min-w-2/5 lg:min-w-[25.5rem] w-11/12 h-fit overflow-hidden rounded-lg"
+      className="md:min-w-2/5 h-fit w-11/12 overflow-hidden rounded-lg lg:min-w-[25.5rem]"
     >
-      <div className="flex flex-col gap-7 justify-center items-center">
-        <div className="flex flex-col gap-3 justify-center items-center">
+      <div className="flex flex-col items-center justify-center gap-7">
+        <div className="flex flex-col items-center justify-center gap-3">
           {children}
         </div>
         <div className="flex items-center gap-6">
           <button
             disabled={isActionsDisabled}
-            className=" border-secondary font-medium w-20 text-secondary hover:bg-secondary hover:text-white transition rounded-xl h-fit px-5 py-2 border"
+            className="h-fit w-20 rounded-xl border border-secondary px-5 py-2 font-medium text-secondary transition hover:bg-secondary hover:text-white"
             onClick={confirmCallBack}
           >
             نعم
           </button>
           <button
             disabled={isActionsDisabled}
-            className=" border-foreground font-medium w-20 text-foreground hover:bg-foreground hover:text-white transition rounded-xl h-fit px-5 py-2 border"
+            className="h-fit w-20 rounded-xl border border-foreground px-5 py-2 font-medium text-foreground transition hover:bg-foreground hover:text-white"
             onClick={cancelCallBack}
           >
             لا

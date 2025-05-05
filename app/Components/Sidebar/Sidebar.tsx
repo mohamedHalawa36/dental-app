@@ -10,26 +10,26 @@ export default function Sidebar({ className }: { className?: string }) {
   return (
     <aside
       className={cn(
-        " shadow-xl bg-white py-2 flex flex-col transition-all ease-in-out duration-700 lg:duration-300 h-full w-[17rem] overflow-hidden lg:rounded-s-3xl",
-        className
+        "flex h-full w-[17rem] flex-col overflow-hidden bg-white py-2 shadow-xl transition-all duration-700 ease-in-out lg:rounded-s-3xl lg:duration-300",
+        className,
       )}
     >
-      <div className="flex flex-col sm:px-3 gap-3 max-md:gap-0">
-        <div className="flex flex-col gap-2.5 items-center border-gray-200 ">
+      <div className="flex flex-col gap-3 max-md:gap-0 sm:px-3">
+        <div className="flex flex-col items-center gap-2.5 border-gray-200">
           <img src="/images/full-logo.png" alt="Logo" className="w-4/5" />
         </div>
-        <div className="flex hover:bg-slate-50 rounded-sm items-center sm:px-2 justify-between transition border-b border-gray-200 ">
-          <div className="flex flex-col w-full px-1 items-center py-5 text-foreground text-sm">
+        <div className="flex items-center justify-between rounded-sm border-b border-gray-200 transition hover:bg-slate-50 sm:px-2">
+          <div className="flex w-full flex-col items-center px-1 py-5 text-sm text-foreground">
             <span className="max-sm:text-[0.65rem]">{dayName}</span>
-            <span className="lg:text-lg font-semibold">
+            <span className="font-semibold lg:text-lg">
               {dayDate} {month}
             </span>
             <span className="max-sm:text-xs">{year}</span>
           </div>
         </div>
       </div>
-      <div style={{ direction: "ltr" }} className="overflow-auto flex-1">
-        <div className="flex flex-col gap-3 py-5 " style={{ direction: "rtl" }}>
+      <div style={{ direction: "ltr" }} className="flex-1 overflow-auto">
+        <div className="flex flex-col gap-3 py-5" style={{ direction: "rtl" }}>
           {links.map((link) => (
             <SideLink key={link.href} {...link} />
           ))}

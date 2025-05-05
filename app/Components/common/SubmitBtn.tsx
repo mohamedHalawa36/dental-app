@@ -9,7 +9,7 @@ export default function SubmitBtn({
     <button
       disabled={disabled}
       type="submit"
-      className="p-3 bg-primary max-sm:w-full w-24 hover:opacity-80 transition rounded-xl mt-3 text-muted font-semibold disabled:bg-gray-400"
+      className="mt-3 w-24 rounded-xl bg-primary p-3 font-semibold text-muted transition hover:opacity-80 disabled:bg-gray-400 max-sm:w-full"
     >
       {label}
     </button>

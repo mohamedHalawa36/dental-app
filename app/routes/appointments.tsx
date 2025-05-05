@@ -38,19 +38,19 @@ export default function appointments() {
           title="حجز موعد"
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          trigger={<AddNew className=" size-12 max-sm:size-8" />}
+          trigger={<AddNew className="size-12 max-sm:size-8" />}
         >
           <AppointmentForm {...{ setIsOpen }} />
         </FormModal>
       }
     >
-      <div className="h-full flex flex-col gap-1">
+      <div className="flex h-full flex-col gap-1">
         <div className="w-fit">
           <DateTimePicker
             granularity="day"
             value={date}
             onChange={setDate}
-            className=" border-none p-0 text-lg font-medium ms-3"
+            className="ms-3 border-none p-0 text-lg font-medium"
           />
         </div>
 

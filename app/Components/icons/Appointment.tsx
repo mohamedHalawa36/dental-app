@@ -4,7 +4,7 @@ import type { IconProps } from "~/types/icons";
 export default function Appointment({ className }: IconProps) {
   return (
     <svg
-      className={cn("fill-text-gray group-hover:fill-text-active ", className)}
+      className={cn("fill-text-gray group-hover:fill-text-active", className)}
       width="25px"
       height="25px"
       version="1.1"

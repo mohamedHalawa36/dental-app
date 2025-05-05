@@ -10,8 +10,8 @@ export default function AddNew({ className }: IconProps) {
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       className={cn(
-        " max-sm:stroke-zinc-100 stroke-foreground fill-transparent stroke-2",
-        className
+        "fill-transparent stroke-foreground stroke-2 max-sm:stroke-zinc-100",
+        className,
       )}
     >
       <path

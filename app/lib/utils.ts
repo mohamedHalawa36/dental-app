@@ -21,7 +21,7 @@ export function formatTime(timeString: string | null) {
   const period = hours >= 12 ? "PM" : "AM";
   const formattedHours = hours % 12 || 12; // Convert 0 to 12 for 12-hour format
   const time = `${String(formattedHours).padStart(2, "0")}:${String(
-    minutes
+    minutes,
   ).padStart(2, "0")}`;
   return `${time} ${period}`;
 }

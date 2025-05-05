@@ -14,8 +14,8 @@ export default function FormModal({
     <Modal
       title={title}
       className={cn(
-        "max-w-none lg:w-3/4 xl:w-1/2 w-10/12 md:h-fit overflow-hidden rounded-lg",
-        className
+        "w-10/12 max-w-none overflow-hidden rounded-lg md:h-fit lg:w-3/4 xl:w-1/2",
+        className,
       )}
       isOpen={isOpen}
       toggle={(isOpen) => setIsOpen(isOpen ?? false)}

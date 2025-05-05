@@ -9,7 +9,7 @@ export type SuccessCallbackType = (data: any) => void;
 export type ErrorCallbackType = (
   error: any,
   errResponse?: any,
-  statusCode?: number
+  statusCode?: number,
 ) => void;
 
 export interface BaseApiArgs {

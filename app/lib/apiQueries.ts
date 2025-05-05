@@ -9,7 +9,7 @@ export const apiQuery = (args: ApiQueryProps) => () => {
     {
       headers: {},
       signal: args.signal,
-    }
+    },
   )
     .then((res) => res.json())
     .then((data) => {

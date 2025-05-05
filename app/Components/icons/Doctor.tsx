@@ -4,7 +4,7 @@ import type { IconProps } from "~/types/icons";
 export default function Doctor({ className }: IconProps) {
   return (
     <svg
-      className={cn("fill-text-gray group-hover:fill-text-active ", className)}
+      className={cn("fill-text-gray group-hover:fill-text-active", className)}
       version="1.1"
       id="_x32_"
       xmlns="http://www.w3.org/2000/svg"

@@ -11,8 +11,8 @@ export default function MainFormLayout({
   return (
     <div
       className={cn(
-        "grid grid-cols-2 gap-8 max-md:grid-cols-1 max-md:gap-8 overflow-auto ",
-        className
+        "grid grid-cols-2 gap-8 overflow-auto max-md:grid-cols-1 max-md:gap-8",
+        className,
       )}
     >
       {children}

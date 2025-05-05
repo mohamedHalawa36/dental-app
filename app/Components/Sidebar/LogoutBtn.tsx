@@ -16,7 +16,7 @@ export default function LogoutBtn() {
     <>
       <button
         onClick={() => mutate()}
-        className="text-secondary font-bold flex gap-2.5 hover:bg-secondary/5 p-4 transition-all mt-auto mb-3"
+        className="mb-3 mt-auto flex gap-2.5 p-4 font-bold text-secondary transition-all hover:bg-secondary/5"
       >
         الخروج
         <Logout />

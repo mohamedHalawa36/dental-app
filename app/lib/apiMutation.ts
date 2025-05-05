@@ -44,5 +44,5 @@ export const apiMutationFn = (args: ApiMutationArgs) =>
       },
       method: args.method || REQUEST_METHODS.POST,
       body: JSON.stringify(args.body),
-    }
+    },
   );

@@ -2,12 +2,12 @@ import LoginForm from "~/Components/Forms/LoginForm/LoginForm";
 
 export default function login() {
   return (
-    <div className=" bg-[linear-gradient(45deg,rgb(var(--secondary)),rgb(var(--primary)))] h-full w-full flex justify-center items-center">
-      <div className="flex flex-col gap-5 w-[25rem] bg-white max-sm:max-w-[90%] max-h-[90%] min-h-[28rem] max-sm:rounded-3xl rounded-[50px] pb-8 pt-3  ">
+    <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(45deg,rgb(var(--secondary)),rgb(var(--primary)))]">
+      <div className="flex max-h-[90%] min-h-[28rem] w-[25rem] flex-col gap-5 rounded-[50px] bg-white pb-8 pt-3 max-sm:max-w-[90%] max-sm:rounded-3xl">
         <img
           src="/images/full-logo.png"
           alt="logo"
-          className="object-contain w-48 mx-auto max-sm:w-40"
+          className="mx-auto w-48 object-contain max-sm:w-40"
         />
         <LoginForm />
       </div>

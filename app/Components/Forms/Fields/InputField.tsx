@@ -24,7 +24,7 @@ export default function InputField({
             {...field}
             error={meta.touched ? meta.error : undefined}
             className={cn(
-              "rounded-xl bg-transparent focus-visible:outline-none focus-visible:ring-0 border-none focus-visible:border-none focus-visible:ring-offset-transparent focus-visible:ring-transparent px-1 w-full flex-1 "
+              "w-full flex-1 rounded-xl border-none bg-transparent px-1 focus-visible:border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-transparent",
             )}
           />
         </FieldLayout>

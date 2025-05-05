@@ -18,11 +18,11 @@ export default function SideLink({
     <Link
       to={href}
       className={cn(
-        "flex items-center p-4 gap-2 transition hover:bg-slate-50 group hover:shadow-slate-200 hover:shadow-md duration-200 ",
+        "group flex items-center gap-2 p-4 transition duration-200 hover:bg-slate-50 hover:shadow-md hover:shadow-slate-200",
         {
-          "text-primary border-e-4 border-primary shadow bg-slate-50 ":
+          "border-e-4 border-primary bg-slate-50 text-primary shadow":
             isActiveLink,
-        }
+        },
       )}
     >
       <Icon
@@ -32,7 +32,7 @@ export default function SideLink({
         })}
       />
       <span
-        className={cn("text-sm font-bold text-foreground ", {
+        className={cn("text-sm font-bold text-foreground", {
           "text-primary": isActiveLink,
           "group-hover:text-secondary": !isActiveLink,
         })}

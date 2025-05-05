@@ -23,7 +23,7 @@ export const getAllAppointments = async (
     search: string;
     date: string | undefined;
   },
-  signal: AbortSignal
+  signal: AbortSignal,
 ) => {
   let query = supabase.from("Appointments").select("*, patient:Patients(*)");
 
@@ -67,7 +67,7 @@ export const addAppointment = async (values: BookApointmentApiData) => {
 };
 
 export const updateAppointment = async (
-  appointment: UpdateApointmentApiData
+  appointment: UpdateApointmentApiData,
 ) => {
   const { patient, ...restAppointmentData } = appointment;
   const { error } = await supabase

@@ -20,13 +20,13 @@ export default function Button({
       disabled={disabled}
       type={type}
       className={cn(
-        "p-3 max-sm:w-full hover:opacity-80 transition font-semibold disabled:bg-gray-400 border border-transparent",
+        "border border-transparent p-3 font-semibold transition hover:opacity-80 disabled:bg-gray-400 max-sm:w-full",
         {
-          "bg-primary rounded-xl text-muted": variant === "primary",
-          "border-foreground text-foreground bg-transparent":
+          "rounded-xl bg-primary text-muted": variant === "primary",
+          "border-foreground bg-transparent text-foreground":
             variant === "secondary",
         },
-        className
+        className,
       )}
     >
       {label}

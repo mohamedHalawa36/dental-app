@@ -7,7 +7,7 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_API_KEY ?? "";
 
 const interceptor = async (
   url: string | URL | globalThis.Request,
-  options: RequestInit | undefined
+  options: RequestInit | undefined,
 ) => {
   handleConnectionStatus();
 
@@ -30,7 +30,7 @@ export class ApiError {
   constructor(
     message: AuthError["message"],
     statusCode: AuthError["status"],
-    code: AuthError["code"]
+    code: AuthError["code"],
   ) {
     this.message = message;
     this.statusCode = statusCode;

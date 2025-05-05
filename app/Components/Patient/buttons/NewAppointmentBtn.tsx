@@ -11,8 +11,8 @@ export default function NewAppointmentBtn({
     <button
       onClick={onClick}
       className={cn(
-        "text-sm text-primary hover:text-secondary transition font-semibold hover:underline hover:underline-offset-4",
-        className
+        "text-sm font-semibold text-primary transition hover:text-secondary hover:underline hover:underline-offset-4",
+        className,
       )}
     >
       موعد جديد

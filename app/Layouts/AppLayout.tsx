@@ -24,7 +24,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <div className="w-screen h-screen overflow-hidden">{children}</div>
+        <div className="h-screen w-screen overflow-hidden">{children}</div>
         <Toaster
           richColors={true}
           position="top-left"

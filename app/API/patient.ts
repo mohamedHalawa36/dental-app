@@ -13,7 +13,7 @@ const { conflict: conflictMsg } = messages.error.patient;
 
 export const getAllPatients = async (
   search: string = "",
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) => {
   let query = supabase.from("Patients").select("*");
   if (search.trim().length > 0) query = query.ilike("name", `%${search}%`);

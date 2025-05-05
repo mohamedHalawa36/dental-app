@@ -18,23 +18,23 @@ export default function PatientCard(props: PatientCardProps) {
   const isPatientVariant = variant === PATIENT_CARD_TYPES.PATIENT;
 
   return (
-    <div className="bg-white h-fit group w-full py-4 px-3 rounded-xl flex flex-col gap-5 max-sm:gap-5 hover:shadow-md transition duration-200 ">
-      <div className="flex gap-2 max-lg:gap-2 items-start justify-between max-lg:justify-center">
+    <div className="group flex h-fit w-full flex-col gap-5 rounded-xl bg-white px-3 py-4 transition duration-200 hover:shadow-md max-sm:gap-5">
+      <div className="flex items-start justify-between gap-2 max-lg:justify-center max-lg:gap-2">
         <div className="flex flex-1 flex-col gap-1 text-foreground group-hover:text-primary">
-          <h4 className="font-bold text-sm lg:text-base  h-10 lg:h-12">
+          <h4 className="h-10 text-sm font-bold lg:h-12 lg:text-base">
             {name}
           </h4>
         </div>
         {!isPatientVariant && (
           <div className="flex flex-col">
-            <div className="flex items-center gap-1 -mb-1">
+            <div className="-mb-1 flex items-center gap-1">
               <span
                 style={{ direction: "ltr" }}
-                className="font-semibold text-sm text-foreground"
+                className="text-sm font-semibold text-foreground"
               >
                 {!isPatientVariant && props.time ? props.time : "--:--"}
               </span>
-              <Clock className="size-6 -me-0.5" />
+              <Clock className="-me-0.5 size-6" />
             </div>
             {!isBeforeToday(new Date(props.date)) && (
               <FormModal
@@ -42,7 +42,7 @@ export default function PatientCard(props: PatientCardProps) {
                 isOpen={isBookingAppointment}
                 setIsOpen={setIsBookingAppointment}
                 trigger={
-                  <span className="w-full inline-flex text-primary hover:text-secondary transition-all hover:underline text-sm self-start font-semibold max-sm:text-xs">
+                  <span className="inline-flex w-full self-start text-sm font-semibold text-primary transition-all hover:text-secondary hover:underline max-sm:text-xs">
                     تغيير
                   </span>
                 }
@@ -60,8 +60,8 @@ export default function PatientCard(props: PatientCardProps) {
 
         {isPatientVariant && <PatientOptions patient={patient} />}
       </div>
-      <div className="flex items-end max-lg:gap-2 justify-between">
-        <div className="flex flex-col gap-4 ">
+      <div className="flex items-end justify-between max-lg:gap-2">
+        <div className="flex flex-col gap-4">
           <PhoneOptions phone={phone1} hasWhatsapp={phone1_has_whatsapp} />
           <PhoneOptions phone={phone2} hasWhatsapp={!!phone2_has_whatsapp} />
         </div>

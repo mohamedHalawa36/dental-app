@@ -55,7 +55,7 @@ const Select: FC<SelectProps> = ({
 }) => {
   return (
     <div className="flex flex-col gap-1" dir="auto">
-      <div className="font-medium text-text-black px-1">
+      <div className="text-text-black px-1 font-medium">
         {label}
         {isRequired && <span className="text-feedback-error ms-1">*</span>}
       </div>
@@ -67,12 +67,12 @@ const Select: FC<SelectProps> = ({
       >
         <SelectTrigger
           className={cn(
-            " border-border h-11 border bg-white rounded-xl px-3 py-0.5 text-base data-[placeholder]:!text-gray-400 text-text-black focus:outline-none focus:ring-0 focus:ring-transparent",
+            "text-text-black h-11 rounded-xl border border-border bg-white px-3 py-0.5 text-base focus:outline-none focus:ring-0 focus:ring-transparent data-[placeholder]:!text-gray-400",
             {
               "border-red-600": error,
               "border-gray-200": !error,
             },
-            className
+            className,
           )}
         >
           <SelectValue placeholder={placeholder} />
@@ -81,7 +81,7 @@ const Select: FC<SelectProps> = ({
           {"options" in options[0]
             ? (options as GroupedOption[]).map((option) => (
                 <div key={option.label}>
-                  <div className="font-semibold px-2">{option.label}</div>
+                  <div className="px-2 font-semibold">{option.label}</div>
                   {option.options.map((subOption) => (
                     <SelectItem
                       value={subOption.value}
@@ -103,7 +103,7 @@ const Select: FC<SelectProps> = ({
         </SelectContent>
       </SelectComponent>
       {error && error?.length > 0 && (
-        <div className="font-medium text-feedback-error px-1 text-xs text-red-700">
+        <div className="text-feedback-error px-1 text-xs font-medium text-red-700">
           {error}
         </div>
       )}

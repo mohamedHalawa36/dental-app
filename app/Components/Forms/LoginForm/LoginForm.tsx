@@ -41,15 +41,15 @@ export default function LoginForm() {
       onSubmit={(userData) => mutate(userData)}
     >
       <Form className="flex-1">
-        <div className="px-7 flex-1 overflow-auto flex flex-col gap-3">
+        <div className="flex flex-1 flex-col gap-3 overflow-auto px-7">
           <InputField
-            className=" [&>div]:border-primary/50 [&>div]:transition"
+            className="[&>div]:border-primary/50 [&>div]:transition"
             name="email"
             label="البريد الإلكتروني"
             disabled={isPending}
           />
           <InputField
-            className=" [&>div]:border-primary/50 [&>div]:transition"
+            className="[&>div]:border-primary/50 [&>div]:transition"
             name="password"
             label="كلمة السر"
             disabled={isPending}

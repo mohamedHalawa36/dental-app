@@ -8,18 +8,18 @@ export default function Input(props: IInputProps) {
   return (
     <div
       className={cn(
-        "flex items-center gap-2 h-10 bg-white rounded-xl px-2 ring-offset-background data-[placeholder]:!text-grey-grey1 text-text-black focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border border-transparent",
+        "data-[placeholder]:!text-grey-grey1 text-text-black flex h-10 items-center gap-2 rounded-xl border border-transparent bg-white px-2 ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+        className,
         {
           "!border-red-500": !!error,
         },
-        className
       )}
     >
       {icon && icon}
       <UiInput
         {...restProps}
         className={cn(
-          "rounded-xl bg-transparent focus-visible:outline-none focus-visible:ring-0 border-none focus-visible:border-none focus-visible:ring-transparent px-1 w-full flex-1 "
+          "w-full flex-1 rounded-xl border-none bg-transparent px-1 focus-visible:border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent",
         )}
       />
     </div>

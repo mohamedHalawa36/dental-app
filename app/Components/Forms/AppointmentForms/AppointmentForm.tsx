@@ -76,7 +76,7 @@ export default function AppointmentForm({
         validationSchema={bookApointmentSchema}
         onSubmit={(values) => mutate(values)}
       >
-        <Form className="flex flex-col justify-between h-full">
+        <Form className="flex h-full flex-col justify-between">
           <MainFormLayout>
             <InputField
               label="اسم المريض"
