@@ -10,7 +10,7 @@ import AppointmentForm from "~/Components/Forms/AppointmentForms/AppointmentForm
 import AddNew from "~/Components/icons/AddNew";
 import PatientCard from "~/Components/Patient/PatientCard";
 import { SearchContext } from "~/Contexts/SearchContext";
-import PageLayout from "~/Layouts/PageLayout";
+import PageLayout from "~/Layouts/PageLayout/PageLayout";
 import { formatTime } from "~/lib/utils";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 

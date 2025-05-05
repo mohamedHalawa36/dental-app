@@ -8,7 +8,7 @@ import PatientForm from "~/Components/Forms/PatientForms/PatientForm";
 import AddNew from "~/Components/icons/AddNew";
 import PatientCard from "~/Components/Patient/PatientCard";
 import { SearchContext } from "~/Contexts/SearchContext";
-import PageLayout from "~/Layouts/PageLayout";
+import PageLayout from "~/Layouts/PageLayout/PageLayout";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
 export default function patients() {
