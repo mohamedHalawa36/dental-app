@@ -5,8 +5,15 @@ import type {
   SetStateAction,
 } from "react";
 
+export type IFieldProps = {
+  id: string;
+  label: string;
+  error?: string;
+  className?: string;
+  children: ReactNode;
+};
+
 export type IInputProps = ComponentProps<"input"> & {
-  label?: string;
   icon?: ReactNode;
   error?: string;
 };

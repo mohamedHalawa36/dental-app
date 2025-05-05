@@ -1,15 +1,34 @@
-import { Field } from "formik";
+import { Field, type FieldProps } from "formik";
+import { cn } from "~/lib/utils";
+import type { IFieldProps, IInputProps } from "~/types/components";
+import FieldLayout from "./FieldLayout";
 import Input from "~/Components/common/Input";
-import type { IInputProps } from "~/types/components";
 
-export default function InputField(props: IInputProps) {
+export default function InputField({
+  id,
+  label,
+  className,
+  ...restProps
+}: IInputProps & IFieldProps) {
   return (
-    <Field name={props.name}>
-      {({
-        field, // { name, value, onChange, onBlur }
-        form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-        meta,
-      }) => <Input error={meta.touched && meta.error} {...props} {...field} />}
+    <Field name={restProps.name}>
+      {({ field, meta }: FieldProps) => (
+        <FieldLayout
+          id={id}
+          label={label as string}
+          error={meta.touched ? meta.error : undefined}
+          className={className}
+        >
+          <Input
+            {...restProps}
+            {...field}
+            error={meta.touched ? meta.error : undefined}
+            className={cn(
+              "rounded-xl bg-transparent focus-visible:outline-none focus-visible:ring-0 border-none focus-visible:border-none focus-visible:ring-offset-transparent focus-visible:ring-transparent px-1 w-full flex-1 "
+            )}
+          />
+        </FieldLayout>
+      )}
     </Field>
   );
 }
