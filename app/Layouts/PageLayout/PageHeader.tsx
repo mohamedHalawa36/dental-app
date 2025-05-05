@@ -40,7 +40,7 @@ export default function PageHeader({ title, addBtn }: HeaderProps) {
       </div>
       <Input
         icon={<Search />}
-        className="text-sm max-sm:mx-auto max-sm:px-5 sm:w-80 max-sm:[&>div>input]:text-sm max-sm:[&>div>input]:placeholder:text-sm"
+        className="text-sm max-sm:mx-auto max-sm:h-9 max-sm:w-11/12 max-sm:px-5 sm:w-80 max-sm:[&>div>input]:text-sm max-sm:[&>div>input]:placeholder:text-sm"
         placeholder="بحث"
         value={search}
         onChange={(e) => {
