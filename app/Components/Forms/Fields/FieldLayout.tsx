@@ -1,5 +1,5 @@
 import { cn } from "~/lib/utils";
-import type { IFieldProps } from "~/types/components";
+import type { FieldProps } from "~/types/components";
 
 export default function FieldLayout({
   id,
@@ -7,10 +7,14 @@ export default function FieldLayout({
   error,
   className,
   children,
-}: IFieldProps) {
+}: FieldProps) {
   return (
-    <div className={cn("flex flex-col gap-1", className)}>
-      {label && <label htmlFor={id}>{label}</label>}
+    <div className={cn("flex flex-col gap-1.5", className)}>
+      {label && (
+        <label htmlFor={id} className="text-[0.95rem]">
+          {label}
+        </label>
+      )}
 
       {children}
       <span className="h-4 text-xs text-red-600">{error}</span>

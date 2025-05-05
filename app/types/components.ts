@@ -5,13 +5,14 @@ import type {
   SetStateAction,
 } from "react";
 
-export type IFieldProps = {
-  id: string;
+export type FieldProps = {
+  id?: string;
   label: string;
   error?: string;
   className?: string;
   children: ReactNode;
 };
+export type IFieldProps = Omit<FieldProps, "children">;
 
 export type IInputProps = ComponentProps<"input"> & {
   icon?: ReactNode;
