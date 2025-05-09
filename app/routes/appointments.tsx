@@ -4,10 +4,7 @@ import { getAllAppointments } from "~/API/appointments";
 import CardsList from "~/Components/common/CardsList";
 import { DateTimePicker } from "~/Components/common/DatePicker";
 import PageLoader from "~/Components/common/Loaders/PageLoader";
-import FormModal from "~/Components/common/Modals/FormModal";
 import NoResultsFound from "~/Components/common/NoResultsFound";
-import AppointmentForm from "~/Components/Forms/AppointmentForms/AppointmentForm";
-import AddNew from "~/Components/icons/AddNew";
 import PatientCard from "~/Components/Patient/PatientCard";
 import { SearchContext } from "~/Contexts/SearchContext";
 import PageLayout from "~/Layouts/PageLayout/PageLayout";
@@ -33,16 +30,16 @@ export default function appointments() {
 
   return (
     <PageLayout
-      addBtn={
-        <FormModal
-          title="حجز موعد"
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          trigger={<AddNew className="size-12 max-sm:size-8" />}
-        >
-          <AppointmentForm {...{ setIsOpen }} />
-        </FormModal>
-      }
+    // addBtn={
+    //   <FormModal
+    //     title="حجز موعد"
+    //     isOpen={isOpen}
+    //     setIsOpen={setIsOpen}
+    //     trigger={<AddNew className="size-12 max-sm:size-8" />}
+    //   >
+    //     <AppointmentForm {...{ setIsOpen }} />
+    //   </FormModal>
+    // }
     >
       <div className="flex h-full flex-col gap-1">
         <div className="w-fit">
