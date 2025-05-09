@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { getAllPatients } from "~/API/patient";
 import CardsList from "~/Components/common/CardsList";
+import PageLoader from "~/Components/common/Loaders/PageLoader";
 import NoResultsFound from "~/Components/common/NoResultsFound";
 import PatientCard from "~/Components/Patient/PatientCard";
 import { SearchContext } from "~/Contexts/SearchContext";
@@ -18,8 +19,10 @@ export default function patients() {
   const patients = data?.data;
   console.log(search);
 
+  if (isFetching) return <PageLoader />;
+
   return (
-        <>
+    <>
       {patients?.length ? (
         <CardsList className="h-full">
           {patients?.map((patient) => (
@@ -33,7 +36,6 @@ export default function patients() {
       ) : (
         <NoResultsFound />
       )}
-        </>
-
+    </>
   );
 }
