@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Form, Formik } from "formik";
+import { Formik } from "formik";
 import type { Dispatch, SetStateAction } from "react";
 import {
   addAppointment,
@@ -7,12 +7,12 @@ import {
   updateAppointment,
 } from "~/API/appointments";
 import { getAllPatients } from "~/API/patient";
+import SectionLoader from "~/Components/common/Loaders/SectionLoader";
 import SubmitBtn from "~/Components/common/SubmitBtn";
 import MainFormLayout from "~/Layouts/MainFormLayout";
+import type { PatientApiData } from "~/types/apiData";
 import InputField from "../Fields/InputField";
 import { bookApointmentSchema, initialAppointmentValues } from "./schemas";
-import type { PatientApiData } from "~/types/apiData";
-import SectionLoader from "~/Components/common/Loaders/SectionLoader";
 
 type AppointmentFormProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -70,32 +70,31 @@ export default function AppointmentForm({
     : { ...initialAppointmentValues, patient_id: patientId };
 
   return (
-    <div className="h-full overflow-auto px-2">
-      <Formik
-        initialValues={initialValues}
-        validationSchema={bookApointmentSchema}
-        onSubmit={(values) => mutate(values)}
-      >
-        <Form className="flex h-full flex-col justify-between">
-          <MainFormLayout>
-            <InputField
-              label="اسم المريض"
-              name="patientId"
-              value={patientName}
-              defaultValue={patientName}
-              disabled={true}
-              className="[&>div>input]:!opacity-100"
-            />
-
-            <InputField label="التاريخ" name="date" type="date" />
-            <InputField label="الوقت" name="time" type="time" />
-          </MainFormLayout>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={bookApointmentSchema}
+      onSubmit={(values) => mutate(values)}
+    >
+      <MainFormLayout
+        submitBtn={
           <SubmitBtn
             label={appointmentId ? "تعديل" : "حجز"}
             disabled={isPending}
           />
-        </Form>
-      </Formik>
-    </div>
+        }
+      >
+        <InputField
+          label="اسم المريض"
+          name="patientId"
+          value={patientName}
+          defaultValue={patientName}
+          disabled={true}
+          className="[&>div>input]:!opacity-100"
+        />
+
+        <InputField label="التاريخ" name="date" type="date" />
+        <InputField label="الوقت" name="time" type="time" />
+      </MainFormLayout>
+    </Formik>
   );
 }

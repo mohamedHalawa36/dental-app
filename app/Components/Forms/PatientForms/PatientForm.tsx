@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Form, Formik } from "formik";
+import { Formik } from "formik";
 import { somethingWentWrongMsg } from "~/API/messages";
 import { addPatient, getPatient, updatePatient } from "~/API/patient";
 import SectionLoader from "~/Components/common/Loaders/SectionLoader";
@@ -42,59 +42,60 @@ export default function PatientForm({
   const patient = data?.data?.[0];
 
   return (
-    <div className="h-full overflow-auto px-2">
-      <Formik
-        initialValues={patientId ? patient! : initialPatientValue}
-        validationSchema={addPatientSchema}
-        onSubmit={(values) => mutate(values)}
-        validateOnChange={true}
-      >
-        {({ values, errors }) => {
-          const isTypingPhone2 = !!values.phone2;
-          const phone2HasErr = errors.phone2 ?? false;
-          const phone2HasWhatsappDisabled = isTypingPhone2
-            ? !!phone2HasErr
-            : true;
+    <Formik
+      initialValues={patientId ? patient! : initialPatientValue}
+      validationSchema={addPatientSchema}
+      onSubmit={(values) => mutate(values)}
+      validateOnChange={true}
+    >
+      {({ values, errors }) => {
+        const isTypingPhone2 = !!values.phone2;
+        const phone2HasErr = errors.phone2 ?? false;
+        const phone2HasWhatsappDisabled = isTypingPhone2
+          ? !!phone2HasErr
+          : true;
 
-          const isTypingPhone1 = !!values.phone1;
-          const phone1HasErr = errors.phone1 ?? false;
-          const phone1HasWhatsappDisabled = isTypingPhone1
-            ? !!phone1HasErr
-            : true;
+        const isTypingPhone1 = !!values.phone1;
+        const phone1HasErr = errors.phone1 ?? false;
+        const phone1HasWhatsappDisabled = isTypingPhone1
+          ? !!phone1HasErr
+          : true;
 
-          return (
-            <Form>
-              <MainFormLayout>
-                <InputField label="الاسم" name="name" />
-                <InputField
-                  onKeyDown={numberOnly}
-                  label="العمر"
-                  name="age"
-                  inputMode="numeric"
+        return (
+          <>
+            <MainFormLayout
+              submitBtn={
+                <SubmitBtn
+                  label={patientId ? "تعديل" : "إضافة"}
+                  disabled={isPending}
                 />
-                <PatientPhone
-                  label="رقم الهاتف"
-                  name="phone1"
-                  onChange={() => {}}
-                  hasWhatsappDisabled={phone1HasWhatsappDisabled}
-                />
-                <PatientPhone
-                  label="رقم هاتف آخر (اختياري)"
-                  name="phone2"
-                  onChange={() => {}}
-                  hasWhatsappDisabled={phone2HasWhatsappDisabled}
-                />
-                <InputField label="العنوان (اختياري)" name="address" />
-              </MainFormLayout>
-              <SubmitBtn
-                label={patientId ? "تعديل" : "إضافة"}
-                disabled={isPending}
+              }
+            >
+              <InputField label="الاسم" name="name" />
+              <InputField
+                onKeyDown={numberOnly}
+                label="العمر"
+                name="age"
+                inputMode="numeric"
               />
-            </Form>
-          );
-        }}
-      </Formik>
-    </div>
+              <PatientPhone
+                label="رقم الهاتف"
+                name="phone1"
+                onChange={() => {}}
+                hasWhatsappDisabled={phone1HasWhatsappDisabled}
+              />
+              <PatientPhone
+                label="رقم هاتف آخر (اختياري)"
+                name="phone2"
+                onChange={() => {}}
+                hasWhatsappDisabled={phone2HasWhatsappDisabled}
+              />
+              <InputField label="العنوان (اختياري)" name="address" />
+            </MainFormLayout>
+          </>
+        );
+      }}
+    </Formik>
   );
 }
 
