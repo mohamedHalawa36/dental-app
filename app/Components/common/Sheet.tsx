@@ -1,7 +1,6 @@
-import type { ReactNode } from "react";
+import { type Dispatch, type ReactNode, type SetStateAction } from "react";
 import {
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -9,19 +8,25 @@ import {
 } from "~/Components/ui/sheet";
 import { cn } from "~/lib/utils";
 
+type ISheetProps = {
+  trigger: ReactNode;
+  title: string;
+  children: ReactNode;
+  className?: string;
+  isOpen?: boolean;
+  setIsOpen?: Dispatch<SetStateAction<boolean>>;
+};
+
 export default function Sheet({
   trigger,
   title,
   children,
   className,
-}: {
-  trigger: ReactNode;
-  title: string;
-  children: ReactNode;
-  className?: string;
-}) {
+  isOpen,
+  setIsOpen,
+}: ISheetProps) {
   return (
-    <UISheet>
+    <UISheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger>{trigger}</SheetTrigger>
       <SheetContent className="!max-w-[17rem] border-transparent bg-transparent p-0">
         <SheetHeader>
