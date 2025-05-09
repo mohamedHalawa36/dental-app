@@ -15,7 +15,7 @@ export default function MainFormLayout({
     <Form className="flex h-full flex-col gap-2">
       <div
         className={cn(
-          "grid h-full grid-cols-2 gap-8 overflow-auto px-1.5 focus-within:overflow-hidden max-md:grid-cols-1 max-md:gap-8",
+          "grid h-full grid-cols-2 gap-8 overflow-auto px-1.5 focus-within:overflow-hidden max-md:grid-cols-1 max-md:gap-3.5",
           className,
         )}
       >
