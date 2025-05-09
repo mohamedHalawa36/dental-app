@@ -11,7 +11,7 @@ export default function CardsList({
   return (
     <div
       className={cn(
-        "grid auto-rows-max grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] gap-5 overflow-auto p-2 max-sm:py-0",
+        "grid auto-rows-max grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] gap-5 overflow-auto pe-2 max-sm:px-2",
         className,
       )}
     >

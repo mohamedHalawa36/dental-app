@@ -30,15 +30,14 @@ export default function PageLayout({
             <Sidebar />
           </div>
           <main className="max-h-full flex-1 rounded-e-2xl bg-gradient-to-b from-cyan-200/30 to-fuchsia-200/30 to-70% shadow-xl">
-          <SearchProvider>
-
-            <div className="flex h-full w-full flex-col sm:px-5 sm:py-6">
-              <PageHeader title={pageTitle as string} addBtn={addBtn} />
-              <div className="flex-1 overflow-auto py-1 pe-1 pt-2">
-                {isFetching ? <PageLoader /> : <Outlet/>}
+            <SearchProvider>
+              <div className="flex h-full w-full flex-col sm:gap-3 sm:px-5 sm:py-6">
+                <PageHeader title={pageTitle as string} addBtn={addBtn} />
+                <div className="flex-1 overflow-auto py-1 pe-1">
+                  {isFetching ? <PageLoader /> : <Outlet />}
+                </div>
               </div>
-            </div>
-          </SearchProvider>
+            </SearchProvider>
           </main>
         </div>
       </div>
