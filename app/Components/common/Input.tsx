@@ -1,12 +1,20 @@
 import { cn } from "~/lib/utils";
 import type { IInputProps } from "~/types/components";
 import { Input as UiInput } from "../ui/input";
+import { useEffect, useRef } from "react";
 
 export default function Input(props: IInputProps) {
   const { icon, error, className, ...restProps } = props;
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus({ preventScroll: true });
+  }, [inputRef]);
+
   return (
     <div
+      ref={inputRef}
       className={cn(
         "flex h-10 items-center gap-1 rounded-xl border border-transparent bg-white px-2 transition-all focus-within:ring-1 focus-within:ring-primary",
         className,
