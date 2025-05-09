@@ -1,4 +1,5 @@
-import { useContext, type ReactNode } from "react";
+import { useContext, useEffect, useState, type ReactNode } from "react";
+import { useLocation } from "react-router";
 import Input from "~/Components/common/Input";
 import Sheet from "~/Components/common/Sheet";
 import Search from "~/Components/icons/Search";
@@ -12,6 +13,12 @@ type HeaderProps = {
 
 export default function PageHeader({ title, addBtn }: HeaderProps) {
   const { search, setSearch } = useContext(SearchContext);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+
+  const pathName = useLocation().pathname;
+  useEffect(() => {
+    setIsMobileSidebarOpen(false);
+  }, [pathName]);
 
   return (
     <div className="flex justify-between from-primary from-20% to-secondary max-sm:flex-col max-sm:gap-2.5 max-sm:rounded-b-[2rem] max-sm:bg-gradient-to-l max-sm:px-2 max-sm:py-4 sm:items-start">
@@ -26,6 +33,8 @@ export default function PageHeader({ title, addBtn }: HeaderProps) {
               />
             }
             title=""
+            isOpen={isMobileSidebarOpen}
+            setIsOpen={setIsMobileSidebarOpen}
           >
             <Sidebar className="h-full w-full max-sm:rounded-e-2xl" />
           </Sheet>
