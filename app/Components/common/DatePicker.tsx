@@ -1,4 +1,8 @@
-import { Button, buttonVariants } from "~/Components/ui/button";
+import { add, isToday, isTomorrow, isYesterday } from "date-fns";
+import { enUS } from "date-fns/locale";
+import * as React from "react";
+import { useImperativeHandle, useRef } from "react";
+import { buttonVariants } from "~/Components/ui/button";
 import { Input } from "~/Components/ui/input";
 import {
   Popover,
@@ -6,11 +10,8 @@ import {
   PopoverTrigger,
 } from "~/Components/ui/popover";
 import { cn } from "~/lib/utils";
-import { add, isToday, isTomorrow, isYesterday } from "date-fns";
-import { enUS } from "date-fns/locale";
-import * as React from "react";
-import { useImperativeHandle, useRef } from "react";
 
+import { DayPicker, type DayPickerProps } from "react-day-picker";
 import {
   Select,
   SelectContent,
@@ -18,7 +19,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/Components/ui/select";
-import { DayPicker, type DayPickerProps } from "react-day-picker";
 import CalendarIcon from "../icons/Calendar";
 
 // ---------- utils start ----------
@@ -714,10 +714,9 @@ const DateTimePicker = React.forwardRef<
     return (
       <Popover open={isOpen} onOpenChange={setIsOpen}>
         <PopoverTrigger asChild disabled={disabled}>
-          <Button
-            variant="outline"
+          <button
             className={cn(
-              "w-full justify-start text-left font-normal",
+              "flex w-full justify-start gap-1 bg-transparent text-left font-normal",
               !displayDate && "text-muted-foreground",
               className,
             )}
@@ -725,7 +724,7 @@ const DateTimePicker = React.forwardRef<
           >
             <CalendarIcon className="!size-6" />
             {dateLabel}
-          </Button>
+          </button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
           <Calendar
@@ -773,5 +772,5 @@ const DateTimePicker = React.forwardRef<
 
 DateTimePicker.displayName = "DateTimePicker";
 
-export { DateTimePicker, TimePickerInput, TimePicker };
-export type { TimePickerType, DateTimePickerProps, DateTimePickerRef };
+export { DateTimePicker, TimePicker, TimePickerInput };
+export type { DateTimePickerProps, DateTimePickerRef, TimePickerType };

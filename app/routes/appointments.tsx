@@ -41,7 +41,7 @@ export default function appointments() {
     //   </FormModal>
     // }
     >
-      <div className="flex h-full flex-col gap-1">
+      <div className="flex h-full flex-col gap-1 py-5">
         <div className="w-fit">
           <DateTimePicker
             granularity="day"
