@@ -47,12 +47,15 @@ export default function LoginForm() {
             name="email"
             label="البريد الإلكتروني"
             disabled={isPending}
+            autoComplete="on"
           />
           <InputField
             className="[&>div]:border-primary/50 [&>div]:transition"
             name="password"
             label="كلمة السر"
             disabled={isPending}
+            type="password"
+            autoComplete="on"
           />
           {serverErr && <ServerErr>{serverErr}</ServerErr>}
           <Button
