@@ -1,9 +1,9 @@
 import { Field, type FieldProps } from "formik";
+import { useState } from "react";
+import Input from "~/Components/common/Input";
 import { cn } from "~/lib/utils";
 import type { IFieldProps, IInputProps } from "~/types/components";
 import FieldLayout from "./FieldLayout";
-import Input from "~/Components/common/Input";
-import { useState } from "react";
 import ShowPasswordBtn from "./ShowPasswordBtn";
 
 export default function InputField({
@@ -38,7 +38,6 @@ export default function InputField({
                 <ShowPasswordBtn
                   isShown={inputType === "text"}
                   handleClick={handleTogglePassword}
-                  disabled={!field.value}
                 />
               ) : (
                 icon
