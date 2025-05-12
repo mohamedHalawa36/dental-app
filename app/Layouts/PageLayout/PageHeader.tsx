@@ -1,18 +1,19 @@
-import { useContext, useEffect, useState, type ReactNode } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import Input from "~/Components/common/Input";
 import Sheet from "~/Components/common/Sheet";
+import AddNew from "~/Components/icons/AddNew";
 import Search from "~/Components/icons/Search";
 import Sidebar from "~/Components/Sidebar/Sidebar";
-import { SearchContext } from "~/Contexts/SearchContext";
+import { PageContext } from "~/Contexts/PageContext";
 
 type HeaderProps = {
   title: string;
-  addBtn?: ReactNode;
+  addBtn?: boolean;
 };
 
 export default function PageHeader({ title, addBtn }: HeaderProps) {
-  const { search, setSearch } = useContext(SearchContext);
+  const { search, setSearch, setAddNewOpen } = useContext(PageContext);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   const pathName = useLocation().pathname;
@@ -44,7 +45,11 @@ export default function PageHeader({ title, addBtn }: HeaderProps) {
             {title}
           </h4>
 
-          {!!addBtn && addBtn}
+          {!!addBtn && (
+            <button type="button" onClick={() => setAddNewOpen(true)}>
+              <AddNew className="size-10 max-sm:size-8" />
+            </button>
+          )}
         </div>
       </div>
       <Input

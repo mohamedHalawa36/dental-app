@@ -7,12 +7,12 @@ import NoResultsFound from "~/Components/common/NoResultsFound";
 import PatientForm from "~/Components/Forms/PatientForms/PatientForm";
 import AddNew from "~/Components/icons/AddNew";
 import PatientCard from "~/Components/Patient/PatientCard";
-import { SearchContext } from "~/Contexts/SearchContext";
+import { PageContext } from "~/Contexts/PageContext";
 import PageLayout from "~/Layouts/PageLayout/PageLayout";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
 export default function patients() {
-  const { search } = useContext(SearchContext);
+  const { search } = useContext(PageContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const { isFetching, data, refetch } = useQuery({

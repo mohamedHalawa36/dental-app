@@ -9,23 +9,27 @@ export const links = [
     Icon: Home,
     label: "الرئيسية",
     href: "/",
+    addNew: false,
   },
   {
     id: "patients",
     Icon: Patient,
     label: "المرضى",
     href: "/patients",
+    addNew: true,
   },
   {
     id: "appointments",
     Icon: Appointment,
     label: "المواعيد",
     href: "/appointments",
+    addNew: false,
   },
   // {
   //   id: "doctors",
   //   Icon: Doctor,
   //   label: "الأطباء",
   //   href: "/doctors",
+  // addNew:false
   // },
 ];

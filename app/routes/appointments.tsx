@@ -6,7 +6,7 @@ import { DateTimePicker } from "~/Components/common/DatePicker";
 import PageLoader from "~/Components/common/Loaders/PageLoader";
 import NoResultsFound from "~/Components/common/NoResultsFound";
 import PatientCard from "~/Components/Patient/PatientCard";
-import { SearchContext } from "~/Contexts/SearchContext";
+import { PageContext } from "~/Contexts/PageContext";
 import PageLayout from "~/Layouts/PageLayout/PageLayout";
 import { formatTime } from "~/lib/utils";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
@@ -14,7 +14,7 @@ import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 export default function appointments() {
   const [isOpen, setIsOpen] = useState(false);
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const { search } = useContext(SearchContext);
+  const { search } = useContext(PageContext);
 
   const { isFetching, data } = useQuery({
     queryKey: ["appointments", search, date],
