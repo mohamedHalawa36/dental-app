@@ -8,7 +8,7 @@ export const PageContext = createContext<PageContextArgs>({
   setAddNewOpen: () => {},
 });
 
-export default function SearchProvider({ children }: { children: ReactNode }) {
+export default function PageProvider({ children }: { children: ReactNode }) {
   const [search, setSearch] = useState("");
   const [addNewOpen, setAddNewOpen] = useState(false);
 
