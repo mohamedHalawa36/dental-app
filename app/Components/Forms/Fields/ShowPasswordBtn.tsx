@@ -11,8 +11,10 @@ type ShowPassBtnProps = {
 const ShowPasswordBtn = ({
   isShown,
   handleClick,
-  disabled,
+  disabled = false,
 }: ShowPassBtnProps) => {
+  const Icon = isShown ? EyeClose : EyeOpen;
+
   return (
     <button
       type="button"
@@ -20,19 +22,11 @@ const ShowPasswordBtn = ({
       onClick={handleClick}
       disabled={disabled}
     >
-      {isShown ? (
-        <EyeClose
-          className={cn("h-5 w-6", {
-            "stroke-gray-300": disabled,
-          })}
-        />
-      ) : (
-        <EyeOpen
-          className={cn("h-5 w-6", {
-            "stroke-gray-300": disabled,
-          })}
-        />
-      )}
+      <Icon
+        className={cn("h-5 w-6", {
+          "stroke-gray-400": disabled,
+        })}
+      />
     </button>
   );
 };
