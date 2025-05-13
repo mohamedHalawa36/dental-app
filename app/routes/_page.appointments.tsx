@@ -10,7 +10,6 @@ import { formatTime } from "~/lib/utils";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
 export default function appointments() {
-  const [isOpen, setIsOpen] = useState(false);
   const [date, setDate] = useState<Date | undefined>(new Date());
   const { search } = useContext(PageContext);
 
