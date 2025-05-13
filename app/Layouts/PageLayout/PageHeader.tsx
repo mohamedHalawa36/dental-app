@@ -40,13 +40,17 @@ export default function PageHeader({ title, addBtn }: HeaderProps) {
             <Sidebar className="h-full w-full max-sm:rounded-e-2xl" />
           </Sheet>
         </div>
-        <div className="relative flex gap-3 max-sm:flex-1">
+        <div className="relative flex gap-1.5 max-sm:flex-1">
           <h4 className="text-2xl font-semibold max-sm:text-zinc-100 sm:text-3xl">
             {title}
           </h4>
 
           {!!addBtn && (
-            <button type="button" onClick={() => setAddNewOpen(true)}>
+            <button
+              type="button"
+              onClick={() => setAddNewOpen(true)}
+              className="self-start"
+            >
               <AddNew className="size-10 max-sm:size-8" />
             </button>
           )}
