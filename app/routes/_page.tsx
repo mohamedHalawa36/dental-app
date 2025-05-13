@@ -1,21 +1,11 @@
-import { type ReactNode } from "react";
 import { Outlet, useLocation } from "react-router";
-import PageLoader from "~/Components/common/Loaders/PageLoader";
 import { links } from "~/Components/Sidebar/links";
 import Sidebar from "~/Components/Sidebar/Sidebar";
 import SearchProvider from "~/Contexts/PageContext";
 import AuthGuard from "~/Guards/AuthGuard";
 import PageHeader from "~/Layouts/PageLayout/PageHeader";
 
-export default function PageLayout({
-  children,
-  isFetching,
-  addBtn,
-}: {
-  children: ReactNode;
-  isFetching?: boolean;
-  addBtn?: ReactNode;
-}) {
+export default function PageLayout() {
   const { pathname } = useLocation();
 
   const activeLink = links.find((link) => link.href === pathname);
@@ -35,7 +25,7 @@ export default function PageLayout({
               <div className="flex h-full w-full flex-col sm:gap-3 sm:px-5 sm:py-6">
                 <PageHeader title={pageTitle as string} addBtn={hasNew} />
                 <div className="flex-1 overflow-auto py-1 pe-1">
-                  {isFetching ? <PageLoader /> : <Outlet />}
+                  <Outlet />
                 </div>
               </div>
             </SearchProvider>

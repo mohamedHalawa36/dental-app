@@ -3,8 +3,7 @@ import { useContext, useState } from "react";
 import { getAllAppointments } from "~/API/appointments";
 import CardsList from "~/Components/common/CardsList";
 import { DateTimePicker } from "~/Components/common/DatePicker";
-import PageLoader from "~/Components/common/Loaders/PageLoader";
-import NoResultsFound from "~/Components/common/NoResultsFound";
+import RenderData from "~/Components/common/RenderData";
 import PatientCard from "~/Components/Patient/PatientCard";
 import { PageContext } from "~/Contexts/PageContext";
 import { formatTime } from "~/lib/utils";
@@ -27,6 +26,8 @@ export default function appointments() {
     ? appointments?.filter((appointment) => !!appointment.patient)
     : appointments;
 
+  const isEmpty = filteredAppointments?.length === 0;
+
   return (
     <>
       <div className="flex h-full flex-col gap-1 py-5">
@@ -39,26 +40,21 @@ export default function appointments() {
           />
         </div>
 
-        {isFetching ? (
-          <PageLoader />
-        ) : (
-          <>
-            {filteredAppointments?.length ? (
-              <CardsList className="flex-1">
-                {filteredAppointments?.map(({ id, patient, time, date }) => (
+        <RenderData {...{ isEmpty, isFetching }}>
+          <CardsList className="flex-1">
+            {filteredAppointments?.map(
+              ({ id, patient, time, date }) =>
+                patient && (
                   <PatientCard
                     key={id}
                     patient={patient}
                     variant={PATIENT_CARD_TYPES.APPOINTMENT}
                     {...{ time: formatTime(time), date, appointmentId: id }}
                   />
-                ))}
-              </CardsList>
-            ) : (
-              <NoResultsFound />
+                ),
             )}
-          </>
-        )}
+          </CardsList>
+        </RenderData>
       </div>
     </>
   );

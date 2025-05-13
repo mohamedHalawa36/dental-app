@@ -4,7 +4,7 @@ import { getAllPatients } from "~/API/patient";
 import CardsList from "~/Components/common/CardsList";
 import PageLoader from "~/Components/common/Loaders/PageLoader";
 import FormModal from "~/Components/common/Modals/FormModal";
-import NoResultsFound from "~/Components/common/NoResultsFound";
+import RenderData from "~/Components/common/RenderData";
 import PatientForm from "~/Components/Forms/PatientForms/PatientForm";
 import PatientCard from "~/Components/Patient/PatientCard";
 import { PageContext } from "~/Contexts/PageContext";
@@ -17,13 +17,15 @@ export default function patients() {
     queryKey: ["patients", search],
     queryFn: ({ signal }) => getAllPatients(search, signal),
   });
-  const patients = data?.data;
 
   if (isFetching) return <PageLoader />;
 
+  const patients = data?.data;
+  const isEmpty = patients?.length === 0;
+
   return (
     <>
-      {patients?.length ? (
+      <RenderData {...{ isEmpty, isFetching }}>
         <CardsList className="h-full">
           {patients?.map((patient) => (
             <PatientCard
@@ -33,9 +35,7 @@ export default function patients() {
             />
           ))}
         </CardsList>
-      ) : (
-        <NoResultsFound />
-      )}
+      </RenderData>
 
       <FormModal
         title="إضافة مريض"
