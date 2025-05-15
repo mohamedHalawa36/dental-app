@@ -19,7 +19,7 @@ export default function Input(props: IInputProps) {
       <UiInput
         {...restProps}
         className={cn(
-          "w-full flex-1 rounded-none border-none bg-transparent px-1 py-0 text-base focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 max-md:text-sm",
+          "w-full flex-1 rounded-none border-none bg-transparent px-1 py-0 text-base focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-slate-500 max-md:text-sm",
         )}
       />
     </div>
