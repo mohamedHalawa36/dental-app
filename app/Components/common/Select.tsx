@@ -35,7 +35,7 @@ export type SelectProps = {
   onValueChange: (value: string) => void;
   defaultValue?: string | undefined;
   className?: string;
-  label: string;
+  label?: string;
   isRequired?: boolean;
   error?: string;
   isDisabled?: boolean;
@@ -55,10 +55,12 @@ const Select: FC<SelectProps> = ({
 }) => {
   return (
     <div className="flex flex-col gap-1" dir="auto">
-      <div className="text-text-black px-1 font-medium">
-        {label}
-        {isRequired && <span className="text-feedback-error ms-1">*</span>}
-      </div>
+      {label && (
+        <div className="text-text-black px-1 font-medium">
+          {label}
+          {isRequired && <span className="text-feedback-error ms-1">*</span>}
+        </div>
+      )}
       <SelectComponent
         name={name}
         onValueChange={onValueChange}
@@ -67,7 +69,7 @@ const Select: FC<SelectProps> = ({
       >
         <SelectTrigger
           className={cn(
-            "text-text-black h-11 rounded-xl border border-border bg-white px-3 py-0.5 text-base focus:outline-none focus:ring-0 focus:ring-transparent data-[placeholder]:!text-gray-400",
+            "text-text-black h-10 flex-row-reverse rounded-xl border border-border bg-white px-3 py-0.5 text-base focus:outline-none focus:ring-0 focus:ring-transparent data-[placeholder]:text-sm data-[placeholder]:!text-gray-400",
             {
               "border-red-600": error,
               "border-gray-200": !error,
@@ -77,36 +79,41 @@ const Select: FC<SelectProps> = ({
         >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
-        <SelectContent>
-          {"options" in options[0]
-            ? (options as GroupedOption[]).map((option) => (
-                <div key={option.label}>
-                  <div className="px-2 font-semibold">{option.label}</div>
-                  {option.options.map((subOption) => (
-                    <SelectItem
-                      value={subOption.value}
-                      key={`${subOption.value}-${subOption.label}`}
-                    >
-                      {subOption.label}
-                    </SelectItem>
-                  ))}
+        <SelectContent className="rounded-xl">
+          {!options.length ? (
+            <p className="p-2 text-center text-xs text-slate-400">
+              لاتوجد خيارات
+            </p>
+          ) : "options" in options[0] ? (
+            (options as GroupedOption[]).map((option) => (
+              <div key={option.label}>
+                <div className="px-2 text-start font-semibold">
+                  {option.label}
                 </div>
-              ))
-            : (options as SimpleOption[]).map((option) => (
-                <SelectItem
-                  value={option?.value}
-                  key={`${option?.value}-${option?.label}`}
-                >
-                  {option?.label}
-                </SelectItem>
-              ))}
+                {option.options.map((subOption) => (
+                  <SelectItem
+                    className="rounded-xl hover:bg-background"
+                    value={subOption.value}
+                    key={`${subOption.value}-${subOption.label}`}
+                  >
+                    {subOption.label}
+                  </SelectItem>
+                ))}
+              </div>
+            ))
+          ) : (
+            (options as SimpleOption[]).map((option) => (
+              <SelectItem
+                className="rounded-xl hover:bg-background"
+                value={option?.value}
+                key={`${option?.value}-${option?.label}`}
+              >
+                {option?.label}
+              </SelectItem>
+            ))
+          )}
         </SelectContent>
       </SelectComponent>
-      {error && error?.length > 0 && (
-        <div className="text-feedback-error px-1 text-xs font-medium text-red-700">
-          {error}
-        </div>
-      )}
     </div>
   );
 };

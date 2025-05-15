@@ -1,27 +1,35 @@
-import { useField } from "formik";
-import { useEffect } from "react";
+import { Field, type FieldProps } from "formik";
 import Select, { type SelectProps } from "~/Components/common/Select";
+import type { IFieldProps } from "~/types/components";
+import FieldLayout from "./FieldLayout";
 
-export default function SelectField(props: SelectProps) {
-  const [field, meta, actions] = useField({
-    ...props,
-  });
-
-  const setValue = actions.setValue;
-  useEffect(() => {
-    const defaultVal = props.defaultValue;
-    if (defaultVal) setValue(defaultVal);
-  }, []);
-
+export default function SelectField({
+  id,
+  name,
+  label,
+  className,
+  ...restProps
+}: SelectProps & IFieldProps) {
   return (
-    <Select
-      error={meta.touched ? (meta.error ? meta.error : undefined) : undefined}
-      {...props}
-      {...field}
-      onValueChange={(value) => {
-        props.onValueChange(value);
-        setValue(value);
-      }}
-    />
+    <Field name={name}>
+      {({ field, meta }: FieldProps) => (
+        <FieldLayout
+          id={id}
+          label={label as string}
+          error={meta.touched ? meta.error : undefined}
+          className={className}
+        >
+          <Select
+            className="w-full rounded-xl border-primary/70 bg-transparent px-2 text-sm focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-transparent"
+            error={
+              meta.touched ? (meta.error ? meta.error : undefined) : undefined
+            }
+            {...restProps}
+            {...field}
+            onValueChange={field.onChange}
+          />
+        </FieldLayout>
+      )}
+    </Field>
   );
 }
