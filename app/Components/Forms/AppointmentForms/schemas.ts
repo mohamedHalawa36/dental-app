@@ -3,6 +3,7 @@ import { requiredMsg } from "~/API/messages";
 
 export const bookApointmentSchema = Yup.object({
   patient_id: Yup.string().required(requiredMsg),
+  doctor_id: Yup.string().required(requiredMsg),
   date: Yup.date().required(requiredMsg),
   time: Yup.string().nullable(),
 });
@@ -10,5 +11,6 @@ export const bookApointmentSchema = Yup.object({
 export const initialAppointmentValues = {
   patient_id: "",
   date: "",
+  doctor_id: "",
   time: null,
 };
