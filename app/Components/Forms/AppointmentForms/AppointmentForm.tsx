@@ -6,12 +6,13 @@ import {
   getAppointment,
   updateAppointment,
 } from "~/API/appointments";
-import { getAllPatients } from "~/API/patient";
+import { getAllDoctors } from "~/API/doctors";
 import SectionLoader from "~/Components/common/Loaders/SectionLoader";
 import SubmitBtn from "~/Components/common/SubmitBtn";
 import MainFormLayout from "~/Layouts/MainFormLayout";
 import type { PatientApiData } from "~/types/apiData";
 import InputField from "../Fields/InputField";
+import SelectField from "../Fields/SelectField";
 import { bookApointmentSchema, initialAppointmentValues } from "./schemas";
 
 type AppointmentFormProps = {
@@ -25,9 +26,9 @@ export default function AppointmentForm({
   patientData,
   appointmentId,
 }: AppointmentFormProps) {
-  const { isFetching: isPatientsFetching, data: patients } = useQuery({
+  const { isFetching: isDoctorsFetching, data: doctors } = useQuery({
     queryKey: ["patients-select"],
-    queryFn: () => getAllPatients(),
+    queryFn: () => getAllDoctors(),
     enabled: !appointmentId,
     select: (data) => data.data,
   });
@@ -43,10 +44,10 @@ export default function AppointmentForm({
 
   const tempOptions = [{ value: "test", label: "test" }];
 
-  const patientsOptions =
-    patients?.map((patient) => ({
-      label: patient.name,
-      value: `${patient.id}`,
+  const doctorsOptions =
+    doctors?.map((doctor) => ({
+      label: doctor.name,
+      value: `${doctor.id}`,
     })) ?? tempOptions;
 
   const queryClient = useQueryClient();
@@ -75,26 +76,37 @@ export default function AppointmentForm({
       validationSchema={bookApointmentSchema}
       onSubmit={(values) => mutate(values)}
     >
-      <MainFormLayout
-        submitBtn={
-          <SubmitBtn
-            label={appointmentId ? "تعديل" : "حجز"}
-            disabled={isPending}
+      {({ handleChange }) => (
+        <MainFormLayout
+          submitBtn={
+            <SubmitBtn
+              label={appointmentId ? "تعديل" : "حجز"}
+              disabled={isPending}
+            />
+          }
+        >
+          <InputField
+            label="اسم المريض"
+            name="patientId"
+            value={patientName}
+            defaultValue={patientName}
+            disabled={true}
+            className="[&>div>input]:!opacity-100"
           />
-        }
-      >
-        <InputField
-          label="اسم المريض"
-          name="patientId"
-          value={patientName}
-          defaultValue={patientName}
-          disabled={true}
-          className="[&>div>input]:!opacity-100"
-        />
 
-        <InputField label="التاريخ" name="date" type="date" />
-        <InputField label="الوقت" name="time" type="time" />
-      </MainFormLayout>
+          <SelectField
+            options={doctorsOptions}
+            label="الطبيب"
+            name="doctor_id"
+            placeholder="اختر طبيب"
+            isDisabled={isDoctorsFetching}
+            onValueChange={handleChange}
+          />
+
+          <InputField label="التاريخ" name="date" type="date" />
+          <InputField label="الوقت" name="time" type="time" />
+        </MainFormLayout>
+      )}
     </Formik>
   );
 }
