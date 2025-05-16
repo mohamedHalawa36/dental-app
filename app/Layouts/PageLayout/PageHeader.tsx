@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useLocation } from "react-router";
 import Input from "~/Components/common/Input";
 import Sheet from "~/Components/common/Sheet";
@@ -6,6 +6,7 @@ import AddNew from "~/Components/icons/AddNew";
 import Search from "~/Components/icons/Search";
 import Sidebar from "~/Components/Sidebar/Sidebar";
 import { PageContext } from "~/Contexts/PageContext";
+import useAttachBackBtn from "~/hooks/useAttachBackBtn";
 
 type HeaderProps = {
   title: string;
@@ -13,8 +14,15 @@ type HeaderProps = {
 };
 
 export default function PageHeader({ title, addBtn }: HeaderProps) {
-  const { search, setSearch, setAddNewOpen } = useContext(PageContext);
-  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const {
+    search,
+    setSearch,
+    setAddNewOpen,
+    setIsMobileSidebarOpen,
+    isMobileSidebarOpen,
+  } = useContext(PageContext);
+
+  useAttachBackBtn();
 
   const pathName = useLocation().pathname;
   useEffect(() => {
