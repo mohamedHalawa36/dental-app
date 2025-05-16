@@ -69,9 +69,9 @@ const Select: FC<SelectProps> = ({
       >
         <SelectTrigger
           className={cn(
-            "text-text-black h-10 flex-row-reverse rounded-xl border border-border bg-white px-3 py-0.5 text-base focus:outline-none focus:ring-0 focus:ring-transparent data-[placeholder]:text-sm data-[placeholder]:!text-gray-400",
+            "text-text-black h-10 flex-row-reverse rounded-xl border border-border bg-white px-3 py-0.5 text-base transition-all focus:outline-none focus:ring-1 focus:ring-primary data-[placeholder]:text-sm data-[placeholder]:!text-gray-400",
             {
-              "border-red-600": error,
+              "!border-red-500 focus:ring-red-500": !!error,
               "border-gray-200": !error,
             },
             className,

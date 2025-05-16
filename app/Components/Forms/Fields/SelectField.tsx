@@ -20,7 +20,7 @@ export default function SelectField({
           className={className}
         >
           <Select
-            className="w-full rounded-xl border-primary/70 bg-transparent px-2 text-sm focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-transparent"
+            className="w-full rounded-xl border-primary/70 bg-transparent px-2 text-sm"
             error={
               meta.touched ? (meta.error ? meta.error : undefined) : undefined
             }
