@@ -5,4 +5,6 @@ export type PageContextArgs = {
   setSearch: Dispatch<SetStateAction<string>>;
   addNewOpen: boolean;
   setAddNewOpen: Dispatch<SetStateAction<boolean>>;
+  isMobileSidebarOpen: boolean;
+  setIsMobileSidebarOpen: Dispatch<SetStateAction<boolean>>;
 };
