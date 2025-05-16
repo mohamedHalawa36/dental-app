@@ -1,0 +1,6 @@
+1- npm run build
+2- move your web assets to android/app/src/main/assets/www
+3- npx cap sync android
+4-npx cap build android
+5- move to android folder
+6- run ./gradlew assembleDebug to generate an apk

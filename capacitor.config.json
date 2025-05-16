@@ -1,0 +1,21 @@
+{
+  "appId": "com.example.app",
+  "appName": "Al-Yacout",
+  "server": {
+    "url": " https://d6a9-197-48-183-150.ngrok-free.app"
+  },
+  "bundledWebRuntime": false,
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": true,
+      "showSpinner": false,
+      "backgroundColor": "#ffffff"
+    },
+    "LiveUpdate": {
+      "appId": "com.example.app",
+      "channel": "production",
+      "url": "https://mohamedhalawa36.github.io/dental-app-deploys",
+      "autoUpdate": true
+    }
+  }
+}
