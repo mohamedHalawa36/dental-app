@@ -36,9 +36,10 @@ export const Modal = ({
         onInteractOutside={(e) => e.preventDefault()}
       >
         <div className="flex flex-col overflow-hidden">
-          <DialogHeader className="mb-7">
+          <DialogHeader className="[&+button>svg]:max-sm:size-6">
             {title && <DialogTitle className="text-xl">{title}</DialogTitle>}
           </DialogHeader>
+          <hr className="my-3 bg-slate-300" />
           <div className="flex-1 overflow-hidden">{children}</div>
           {actions && <DialogFooter>{actions}</DialogFooter>}
         </div>
