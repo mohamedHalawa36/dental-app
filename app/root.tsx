@@ -10,6 +10,7 @@ import {
 import { useEffect } from "react";
 import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
+import useAttachBackBtn from "./hooks/useAttachBackBtn";
 import AppLayout from "./Layouts/AppLayout";
 
 export const links: Route.LinksFunction = () => [
@@ -60,6 +61,8 @@ export default function App() {
     return () =>
       document.removeEventListener("DOMContentLoaded", hideSplashLoader);
   }, []);
+
+  useAttachBackBtn();
 
   return (
     <AppLayout>

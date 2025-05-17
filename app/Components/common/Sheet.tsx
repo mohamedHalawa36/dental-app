@@ -32,7 +32,7 @@ export default function Sheet({
   setIsOpen,
 }: ISheetProps) {
   useEffect(() => {
-    const attachListenere = async () => {
+    const attachListener = async () => {
       const listener = await CapacitorApp.addListener("backButton", () => {
         if (isOpen) setIsOpen?.(false);
       });
@@ -42,7 +42,7 @@ export default function Sheet({
       };
     };
 
-    const cleanUp = attachListenere();
+    const cleanUp = attachListener();
 
     return () => {
       cleanUp.then((removeListener) => removeListener && removeListener());
