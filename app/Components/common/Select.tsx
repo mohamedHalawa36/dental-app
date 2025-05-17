@@ -45,8 +45,6 @@ const Select: FC<SelectProps> = ({
   isDisabled,
   name,
 }) => {
-  console.log(options);
-  console.log(defaultValue);
   return (
     <div className="flex flex-col gap-1" dir="auto">
       {label && (
