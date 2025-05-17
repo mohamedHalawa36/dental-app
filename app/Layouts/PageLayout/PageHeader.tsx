@@ -22,7 +22,7 @@ export default function PageHeader({ title, addBtn }: HeaderProps) {
     isMobileSidebarOpen,
   } = useContext(PageContext);
 
-  useAttachBackBtn();
+  // useAttachBackBtn();
 
   const pathName = useLocation().pathname;
   useEffect(() => {

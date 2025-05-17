@@ -1,3 +1,5 @@
+import { App as CapacitorApp } from "@capacitor/app";
+import { useEffect } from "react";
 import { cn } from "~/lib/utils";
 import type { ModalProps } from "~/types/components";
 import {
@@ -26,6 +28,24 @@ export const Modal = ({
       onClose?.();
     }
   };
+
+  useEffect(() => {
+    const attachListenere = async () => {
+      const listener = await CapacitorApp.addListener("backButton", () => {
+        if (isOpen) toggle?.();
+      });
+
+      return () => {
+        listener.remove();
+      };
+    };
+
+    const cleanUp = attachListenere();
+
+    return () => {
+      cleanUp.then((removeListener) => removeListener && removeListener());
+    };
+  }, [isOpen]);
 
   return (
     <Dialog open={isOpen} modal={forceModal} onOpenChange={handleOpenChange}>

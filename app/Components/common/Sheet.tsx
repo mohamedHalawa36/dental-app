@@ -1,4 +1,10 @@
-import { type Dispatch, type ReactNode, type SetStateAction } from "react";
+import { App as CapacitorApp } from "@capacitor/app";
+import {
+  useEffect,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+} from "react";
 import {
   SheetContent,
   SheetHeader,
@@ -13,8 +19,8 @@ type ISheetProps = {
   title: string;
   children: ReactNode;
   className?: string;
-  isOpen?: boolean;
-  setIsOpen?: Dispatch<SetStateAction<boolean>>;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function Sheet({
@@ -25,6 +31,24 @@ export default function Sheet({
   isOpen,
   setIsOpen,
 }: ISheetProps) {
+  useEffect(() => {
+    const attachListenere = async () => {
+      const listener = await CapacitorApp.addListener("backButton", () => {
+        if (isOpen) setIsOpen?.(false);
+      });
+
+      return () => {
+        listener.remove();
+      };
+    };
+
+    const cleanUp = attachListenere();
+
+    return () => {
+      cleanUp.then((removeListener) => removeListener && removeListener());
+    };
+  }, [isOpen]);
+
   return (
     <UISheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger>{trigger}</SheetTrigger>
