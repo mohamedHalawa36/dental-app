@@ -1,4 +1,9 @@
+import { App as CapacitorApp } from "@capacitor/app";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { deletePatient as deletePatientFunction } from "~/API/patient";
+import type { PatientApiData } from "~/types/apiData";
+import ConfirmModal from "../common/Modals/ConfirmModal";
 import FormModal from "../common/Modals/FormModal";
 import PatientForm from "../Forms/PatientForms/PatientForm";
 import Delete from "../icons/Delete";
@@ -6,10 +11,6 @@ import Details from "../icons/Details";
 import Pencil from "../icons/Pencil";
 import ThreeDots from "../icons/ThreeDots";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import ConfirmModal from "../common/Modals/ConfirmModal";
-import type { PatientApiData } from "~/types/apiData";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deletePatient as deletePatientFunction } from "~/API/patient";
 
 export default function PatientOptions({
   patient,
@@ -55,6 +56,24 @@ export default function PatientOptions({
       document.removeEventListener("touchmove", closeOptions);
     };
   }, [triggerRef.current]);
+
+  useEffect(() => {
+    const attachListener = async () => {
+      const listener = await CapacitorApp.addListener("backButton", () => {
+        if (isOpen) setIsOpen?.(false);
+      });
+
+      return () => {
+        listener.remove();
+      };
+    };
+
+    const cleanUp = attachListener();
+
+    return () => {
+      cleanUp.then((removeListener) => removeListener && removeListener());
+    };
+  }, [isOpen]);
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
