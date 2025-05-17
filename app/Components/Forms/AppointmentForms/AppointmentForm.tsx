@@ -29,7 +29,6 @@ export default function AppointmentForm({
   const { isFetching: isDoctorsFetching, data: doctors } = useQuery({
     queryKey: ["patients-select"],
     queryFn: () => getAllDoctors(),
-    enabled: !appointmentId,
     select: (data) => data.data,
   });
 
@@ -42,13 +41,11 @@ export default function AppointmentForm({
 
   const appointmentPatient = appointmentId ? appointment?.patient : patientData;
 
-  const tempOptions = [{ value: "test", label: "test" }];
-
   const doctorsOptions =
     doctors?.map((doctor) => ({
       label: doctor.name,
       value: `${doctor.id}`,
-    })) ?? tempOptions;
+    })) ?? [];
 
   const queryClient = useQueryClient();
 
@@ -76,37 +73,34 @@ export default function AppointmentForm({
       validationSchema={bookApointmentSchema}
       onSubmit={(values) => mutate(values)}
     >
-      {({ handleChange }) => (
-        <MainFormLayout
-          submitBtn={
-            <SubmitBtn
-              label={appointmentId ? "تعديل" : "حجز"}
-              disabled={isPending}
-            />
-          }
-        >
-          <InputField
-            label="اسم المريض"
-            name="patientId"
-            value={patientName}
-            defaultValue={patientName}
-            disabled={true}
-            className="[&>div>input]:!opacity-100"
+      <MainFormLayout
+        submitBtn={
+          <SubmitBtn
+            label={appointmentId ? "تعديل" : "حجز"}
+            disabled={isPending}
           />
+        }
+      >
+        <InputField
+          label="اسم المريض"
+          name="patientId"
+          value={patientName}
+          defaultValue={patientName}
+          disabled={true}
+          className="[&>div>input]:!opacity-100"
+        />
 
-          <SelectField
-            options={doctorsOptions}
-            label="الطبيب"
-            name="doctor_id"
-            placeholder="اختر طبيب"
-            isDisabled={isDoctorsFetching}
-            onValueChange={handleChange}
-          />
+        <SelectField
+          options={doctorsOptions}
+          label="الطبيب"
+          name="doctor_id"
+          placeholder="اختر طبيب"
+          isDisabled={isDoctorsFetching}
+        />
 
-          <InputField label="التاريخ" name="date" type="date" />
-          <InputField label="الوقت" name="time" type="time" />
-        </MainFormLayout>
-      )}
+        <InputField label="التاريخ" name="date" type="date" />
+        <InputField label="الوقت" name="time" type="time" />
+      </MainFormLayout>
     </Formik>
   );
 }

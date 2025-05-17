@@ -3,13 +3,15 @@ import Select, { type SelectProps } from "~/Components/common/Select";
 import type { IFieldProps } from "~/types/components";
 import FieldLayout from "./FieldLayout";
 
+type SelectFieldProps = Omit<SelectProps, "onValueChange">;
+
 export default function SelectField({
   id,
   name,
   label,
   className,
   ...restProps
-}: SelectProps & IFieldProps) {
+}: SelectFieldProps & IFieldProps) {
   return (
     <Field name={name}>
       {({ field, meta, form }: FieldProps) => (
@@ -26,6 +28,7 @@ export default function SelectField({
             }
             {...restProps}
             {...field}
+            defaultValue={field.value}
             onValueChange={(value) => form.setFieldValue(name, value)}
           />
         </FieldLayout>

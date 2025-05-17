@@ -1,11 +1,3 @@
-// import {
-//     Select,
-//     SelectContent,
-//     SelectItem,
-//     SelectTrigger,
-//     SelectValue,
-//   } from "@/components/select/ui/select";
-
 import type { FC } from "react";
 import { cn } from "~/lib/utils";
 import {
@@ -53,6 +45,8 @@ const Select: FC<SelectProps> = ({
   isDisabled,
   name,
 }) => {
+  console.log(options);
+  console.log(defaultValue);
   return (
     <div className="flex flex-col gap-1" dir="auto">
       {label && (
