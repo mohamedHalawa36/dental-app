@@ -12,7 +12,7 @@ export default function SelectField({
 }: SelectProps & IFieldProps) {
   return (
     <Field name={name}>
-      {({ field, meta }: FieldProps) => (
+      {({ field, meta, form }: FieldProps) => (
         <FieldLayout
           id={id}
           label={label as string}
@@ -26,7 +26,7 @@ export default function SelectField({
             }
             {...restProps}
             {...field}
-            onValueChange={field.onChange}
+            onValueChange={(value) => form.setFieldValue(name, value)}
           />
         </FieldLayout>
       )}
