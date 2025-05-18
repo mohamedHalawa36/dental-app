@@ -5,8 +5,10 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useNavigate,
 } from "react-router";
 
+import { App as CapacitorApp } from "@capacitor/app";
 import { useEffect } from "react";
 import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
@@ -62,7 +64,21 @@ export default function App() {
       document.removeEventListener("DOMContentLoaded", hideSplashLoader);
   }, []);
 
-  useAttachBackBtn();
+  const navigate = useNavigate();
+
+  useAttachBackBtn(({ canGoBack }) => {
+    const body = document.body;
+
+    const isPopoverOpen =
+      !!body.querySelector("span[data-radix-focus-guard]") ||
+      body.getAttribute("data-scroll-locked") === "1";
+
+    if (isPopoverOpen) return;
+    if (canGoBack) navigate(-1);
+    else {
+      CapacitorApp.minimizeApp();
+    }
+  }, []);
 
   return (
     <AppLayout>
