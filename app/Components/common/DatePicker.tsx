@@ -11,7 +11,6 @@ import {
 } from "~/Components/ui/popover";
 import { cn } from "~/lib/utils";
 
-import { App as CapacitorApp } from "@capacitor/app";
 import { DayPicker, type DayPickerProps } from "react-day-picker";
 import {
   Select,
@@ -20,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/Components/ui/select";
+import useAttachBackBtn from "~/hooks/useAttachBackBtn";
 import CalendarIcon from "../icons/Calendar";
 
 // ---------- utils start ----------
@@ -712,22 +712,8 @@ const DateTimePicker = React.forwardRef<
       <span>{placeholder}</span>
     );
 
-    React.useEffect(() => {
-      const attachListener = async () => {
-        const listener = await CapacitorApp.addListener("backButton", () => {
-          if (isOpen) setIsOpen?.(false);
-        });
-
-        return () => {
-          listener.remove();
-        };
-      };
-
-      const cleanUp = attachListener();
-
-      return () => {
-        cleanUp.then((removeListener) => removeListener && removeListener());
-      };
+    useAttachBackBtn(() => {
+      if (isOpen) setIsOpen?.(false);
     }, [isOpen]);
 
     return (

@@ -1,10 +1,4 @@
-import { App as CapacitorApp } from "@capacitor/app";
-import {
-  useEffect,
-  type Dispatch,
-  type ReactNode,
-  type SetStateAction,
-} from "react";
+import { type Dispatch, type ReactNode, type SetStateAction } from "react";
 import {
   SheetContent,
   SheetHeader,
@@ -12,6 +6,7 @@ import {
   SheetTrigger,
   Sheet as UISheet,
 } from "~/Components/ui/sheet";
+import useAttachBackBtn from "~/hooks/useAttachBackBtn";
 import { cn } from "~/lib/utils";
 
 type ISheetProps = {
@@ -31,22 +26,8 @@ export default function Sheet({
   isOpen,
   setIsOpen,
 }: ISheetProps) {
-  useEffect(() => {
-    const attachListener = async () => {
-      const listener = await CapacitorApp.addListener("backButton", () => {
-        if (isOpen) setIsOpen?.(false);
-      });
-
-      return () => {
-        listener.remove();
-      };
-    };
-
-    const cleanUp = attachListener();
-
-    return () => {
-      cleanUp.then((removeListener) => removeListener && removeListener());
-    };
+  useAttachBackBtn(() => {
+    if (isOpen) setIsOpen?.(false);
   }, [isOpen]);
 
   return (

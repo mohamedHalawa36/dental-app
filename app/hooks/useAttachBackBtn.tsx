@@ -1,27 +1,15 @@
 import { App as CapacitorApp } from "@capacitor/app";
-import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useEffect, type DependencyList } from "react";
 
-export default function useAttachBackBtn() {
-  const navigate = useNavigate();
-
+export default function useAttachBackBtn(
+  attachCallback: ({ canGoBack }: { canGoBack: boolean }) => void,
+  deps: DependencyList,
+) {
   useEffect(() => {
-    const attachListenere = async () => {
+    const attachListener = async () => {
       const listener = await CapacitorApp.addListener(
         "backButton",
-        ({ canGoBack }) => {
-          const body = document.body;
-
-          const isPopoverOpen =
-            !!body.querySelector("span[data-radix-focus-guard]") ||
-            body.getAttribute("data-scroll-locked") === "1";
-
-          if (isPopoverOpen) return;
-          if (canGoBack) navigate(-1);
-          else {
-            CapacitorApp.exitApp();
-          }
-        },
+        attachCallback,
       );
 
       return () => {
@@ -29,10 +17,10 @@ export default function useAttachBackBtn() {
       };
     };
 
-    const cleanUp = attachListenere();
+    const cleanUp = attachListener();
 
     return () => {
       cleanUp.then((removeListener) => removeListener && removeListener());
     };
-  }, []);
+  }, deps);
 }

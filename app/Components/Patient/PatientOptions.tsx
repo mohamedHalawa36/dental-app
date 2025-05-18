@@ -1,7 +1,7 @@
-import { App as CapacitorApp } from "@capacitor/app";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { deletePatient as deletePatientFunction } from "~/API/patient";
+import useAttachBackBtn from "~/hooks/useAttachBackBtn";
 import type { PatientApiData } from "~/types/apiData";
 import ConfirmModal from "../common/Modals/ConfirmModal";
 import FormModal from "../common/Modals/FormModal";
@@ -57,22 +57,8 @@ export default function PatientOptions({
     };
   }, [triggerRef.current]);
 
-  useEffect(() => {
-    const attachListener = async () => {
-      const listener = await CapacitorApp.addListener("backButton", () => {
-        if (isOpen) setIsOpen?.(false);
-      });
-
-      return () => {
-        listener.remove();
-      };
-    };
-
-    const cleanUp = attachListener();
-
-    return () => {
-      cleanUp.then((removeListener) => removeListener && removeListener());
-    };
+  useAttachBackBtn(() => {
+    if (isOpen) setIsOpen?.(false);
   }, [isOpen]);
 
   return (

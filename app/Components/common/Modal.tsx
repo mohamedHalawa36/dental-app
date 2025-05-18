@@ -1,5 +1,4 @@
-import { App as CapacitorApp } from "@capacitor/app";
-import { useEffect } from "react";
+import useAttachBackBtn from "~/hooks/useAttachBackBtn";
 import { cn } from "~/lib/utils";
 import type { ModalProps } from "~/types/components";
 import {
@@ -29,22 +28,8 @@ export const Modal = ({
     }
   };
 
-  useEffect(() => {
-    const attachListenere = async () => {
-      const listener = await CapacitorApp.addListener("backButton", () => {
-        if (isOpen) toggle?.();
-      });
-
-      return () => {
-        listener.remove();
-      };
-    };
-
-    const cleanUp = attachListenere();
-
-    return () => {
-      cleanUp.then((removeListener) => removeListener && removeListener());
-    };
+  useAttachBackBtn(() => {
+    if (isOpen) toggle?.(false);
   }, [isOpen]);
 
   return (
