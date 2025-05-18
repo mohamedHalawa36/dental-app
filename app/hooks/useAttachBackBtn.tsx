@@ -11,9 +11,11 @@ export default function useAttachBackBtn() {
         "backButton",
         ({ canGoBack }) => {
           const body = document.body;
-          const isPopoverOpen = !!body.querySelector(
-            "span[data-radix-focus-guard]",
-          );
+
+          const isPopoverOpen =
+            !!body.querySelector("span[data-radix-focus-guard]") ||
+            body.getAttribute("data-scroll-locked") === "1";
+
           if (isPopoverOpen) return;
           if (canGoBack) navigate(-1);
           else {
