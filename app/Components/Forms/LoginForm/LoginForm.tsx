@@ -41,7 +41,7 @@ export default function LoginForm() {
       onSubmit={(userData) => mutate(userData)}
     >
       <Form className="flex-1">
-        <div className="flex flex-1 flex-col gap-3 overflow-auto px-7">
+        <div className="flex flex-1 flex-col gap-3 overflow-auto px-7 max-sm:px-5">
           <InputField
             className="[&>div]:border-primary/50 [&>div]:transition"
             name="email"
