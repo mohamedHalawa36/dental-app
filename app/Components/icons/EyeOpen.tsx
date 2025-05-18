@@ -9,10 +9,7 @@ export default function EyeOpen({ className }: IconProps) {
       viewBox="0 0 24 24"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn(
-        "fill-transparent stroke-foreground stroke-2 max-sm:stroke-zinc-100",
-        className,
-      )}
+      className={cn("fill-transparent stroke-foreground stroke-2", className)}
     >
       <path
         d="M12 5C5.63636 5 2 12 2 12C2 12 5.63636 19 12 19C18.3636 19 22 12 22 12C22 12 18.3636 5 12 5Z"
