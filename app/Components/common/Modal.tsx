@@ -52,7 +52,7 @@ export const Modal = ({
       {trigger && <DialogTrigger>{trigger}</DialogTrigger>}
       <DialogContent
         forceMount
-        className={cn("max-md:max-h-[90%]", className)}
+        className={cn("h-auto max-md:max-h-[90%]", className)}
         onInteractOutside={(e) => e.preventDefault()}
       >
         <div className="flex flex-col overflow-hidden">
