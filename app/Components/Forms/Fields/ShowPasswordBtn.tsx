@@ -22,7 +22,7 @@ const ShowPasswordBtn = ({
       onClick={handleClick}
       disabled={disabled}
     >
-      <Icon className={cn("h-5 w-6")} />
+      <Icon className={cn("h-5 w-6 stroke-primary")} />
     </button>
   );
 };
