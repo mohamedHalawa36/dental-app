@@ -9,17 +9,22 @@ import type { ApiError } from "~/API/supabase";
 import Button from "~/Components/common/Button";
 import ServerErr from "~/Components/common/ServerErr";
 import InputField from "~/Components/Forms/Fields/InputField";
+import { useAuth } from "~/Contexts/AuthContext";
 import { loginSchema } from "./schema";
 
 export default function LoginForm() {
   const [serverErr, setserverErr] = useState<string | null>(null);
 
   const navigate = useNavigate();
-
+  const { setUser } = useAuth();
   const { mutate, isPending } = useMutation({
     mutationFn: signInUser,
     onMutate: () => setserverErr(null),
-    onSuccess: () => navigate("/"),
+    onSuccess: (data) => {
+      const user = data.user;
+      setUser(user);
+      navigate("/");
+    },
     onError: (data: ApiError) => {
       const { code, statusCode } = data;
       if (statusCode === 400 && code === "invalid_credentials") {
