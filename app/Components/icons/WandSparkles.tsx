@@ -11,8 +11,8 @@ export default function WandSparkles({ className }: IconProps) {
       fill="none"
       stroke="currentColor"
       stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className={cn(
         "lucide lucide-wand-sparkles-icon lucide-wand-sparkles",
         className,
