@@ -24,7 +24,6 @@ export default function Sidebar({ className }: { className?: string }) {
             <span className="font-semibold lg:text-lg">
               {dayDate} {month}
             </span>
-            {/* <span className="max-sm:text-xs">{year}</span> */}
           </div>
         </div>
       </div>
