@@ -658,9 +658,6 @@ const DateTimePicker = React.forwardRef<
           month?.getMinutes() ?? 0,
           month?.getSeconds() ?? 0,
         );
-        // onMonthChange?.(newDay);
-        console.log(newDay);
-
         setMonth(newDay);
         return;
       }
@@ -674,9 +671,6 @@ const DateTimePicker = React.forwardRef<
         month?.getMinutes() ?? 0,
         month?.getSeconds() ?? 0,
       );
-      // onMonthChange?.(newDateFull);
-      console.log(newDateFull);
-
       setMonth(newDateFull);
     };
 
