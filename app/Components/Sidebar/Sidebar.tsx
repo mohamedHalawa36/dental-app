@@ -19,12 +19,12 @@ export default function Sidebar({ className }: { className?: string }) {
           <img src="/images/full-logo.png" alt="Logo" className="w-4/5" />
         </div>
         <div className="flex items-center justify-between rounded-sm border-b border-gray-200 transition hover:bg-slate-50 sm:px-2">
-          <div className="flex w-full flex-col items-center px-1 py-5 text-sm text-foreground">
+          <div className="flex w-full flex-col items-center p-2 text-sm text-foreground">
             <span className="max-sm:text-[0.65rem]">{dayName}</span>
             <span className="font-semibold lg:text-lg">
               {dayDate} {month}
             </span>
-            <span className="max-sm:text-xs">{year}</span>
+            {/* <span className="max-sm:text-xs">{year}</span> */}
           </div>
         </div>
       </div>
