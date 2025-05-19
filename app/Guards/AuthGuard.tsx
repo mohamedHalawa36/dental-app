@@ -33,7 +33,7 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
   if (isChecking) return <PageLoader />;
 
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return isLoginPage ? children : <Navigate to="/login" replace />;
   }
 
   if (isLoginPage) return <Navigate to="/" replace />;
