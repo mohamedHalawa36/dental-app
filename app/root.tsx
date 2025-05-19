@@ -5,14 +5,10 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useNavigate,
 } from "react-router";
 
-import { App as CapacitorApp } from "@capacitor/app";
-import { useEffect } from "react";
 import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
-import useAttachBackBtn from "./hooks/useAttachBackBtn";
 import AppLayout from "./Layouts/AppLayout";
 
 export const links: Route.LinksFunction = () => [
