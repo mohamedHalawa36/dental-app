@@ -1,27 +1,42 @@
-import type { User } from "@supabase/supabase-js";
-import { useEffect, useState, type ReactNode } from "react";
-import { Navigate } from "react-router";
+import { useEffect, type ReactNode } from "react";
+import { Navigate, useLocation } from "react-router";
 import supabase from "~/API/supabase";
 import PageLoader from "~/Components/common/Loaders/PageLoader";
+import { useAuth } from "~/Contexts/AuthContext";
 
 export default function AuthGuard({ children }: { children: ReactNode }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState<User | null>(null);
+  const { isChecking, setIsChecking, user, setUser } = useAuth();
 
   useEffect(() => {
-    supabase.auth
-      .getUser()
-      .then(({ data, error }) => {
-        setUser(data.user);
-      })
-      .finally(() => setIsLoading(false));
+    const fetchSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      const user = data?.session?.user;
+      setUser(user || null);
+      setIsChecking(false);
+    };
+
+    fetchSession();
+
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        const user = session?.user;
+        setUser(user || null);
+      },
+    );
+
+    return () => listener.subscription.unsubscribe();
   }, []);
 
-  if (isLoading) return <PageLoader />;
+  const { pathname } = useLocation();
+  const isLoginPage = pathname === "/login";
+
+  if (isChecking) return <PageLoader />;
 
   if (!user) {
     return <Navigate to="/login" replace />;
   }
+
+  if (isLoginPage) return <Navigate to="/" replace />;
 
   return children;
 }
