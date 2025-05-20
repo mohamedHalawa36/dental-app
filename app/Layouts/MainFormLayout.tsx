@@ -12,10 +12,10 @@ export default function MainFormLayout({
   submitBtn: ReactNode;
 }) {
   return (
-    <Form className="flex h-full flex-col gap-2">
+    <Form className="flex h-full flex-col gap-2 px-0.5">
       <div
         className={cn(
-          "grid h-full grid-cols-2 gap-8 overflow-auto px-1.5 focus-within:overflow-hidden max-md:grid-cols-1 max-md:gap-2.5",
+          "grid h-full flex-1 grid-cols-2 gap-8 overflow-auto px-1 max-md:grid-cols-1 max-md:gap-2.5",
           className,
         )}
       >
