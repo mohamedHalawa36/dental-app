@@ -14,7 +14,7 @@ export default function FormModal({
     <Modal
       title={title}
       className={cn(
-        "w-10/12 max-w-none overflow-hidden rounded-lg md:h-fit lg:w-3/4 xl:w-1/2",
+        "w-10/12 max-w-none overflow-hidden rounded-lg pt-3 md:h-fit lg:w-3/4 xl:w-1/2",
         className,
       )}
       isOpen={isOpen}

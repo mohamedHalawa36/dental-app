@@ -43,14 +43,14 @@ export const Modal = ({
         )}
         onInteractOutside={(e) => e.preventDefault()}
       >
-        {/* <div className="flex h-full flex-1 flex-col overflow-hidden"> */}
         <DialogHeader className="[&+button>svg]:max-sm:size-6">
           {title && <DialogTitle className="text-xl">{title}</DialogTitle>}
         </DialogHeader>
         <hr className="my-3 bg-slate-300" />
-        <div className="flex-1 overflow-auto py-1">{children}</div>
+        <div className="flex-1 overflow-auto py-1 focus-within:overflow-hidden">
+          {children}
+        </div>
         {actions && <DialogFooter>{actions}</DialogFooter>}
-        {/* </div> */}
       </DialogContent>
     </Dialog>
   );
