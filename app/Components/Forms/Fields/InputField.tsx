@@ -58,6 +58,11 @@ export default function InputField({
         >
           <Input
             ref={inputRef}
+            onFocus={(e) => {
+              e.preventDefault();
+              const input = e.target;
+              input.focus({ preventScroll: true });
+            }}
             {...restProps}
             {...field}
             icon={
