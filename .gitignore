@@ -8,4 +8,4 @@ generate-manifest.js
 /android/
 
 #git
-mergeDev.sh
+mergeDev.ps1
