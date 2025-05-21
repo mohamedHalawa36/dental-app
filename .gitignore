@@ -6,3 +6,6 @@
 /build/
 generate-manifest.js
 /android/
+
+#git
+mergeDev.ps1
