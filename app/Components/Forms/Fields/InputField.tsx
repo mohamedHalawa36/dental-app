@@ -34,19 +34,6 @@ export default function InputField({
     };
   }, []);
 
-  useEffect(() => {
-    const preventScrollToInput = () => {
-      inputRef.current?.focus({ preventScroll: true });
-    };
-
-    document.addEventListener("wheel", preventScrollToInput);
-    document.addEventListener("touchmove", preventScrollToInput);
-    return () => {
-      document.removeEventListener("wheel", preventScrollToInput);
-      document.removeEventListener("touchmove", preventScrollToInput);
-    };
-  }, []);
-
   return (
     <Field name={restProps.name}>
       {({ field, meta }: FieldProps) => (
