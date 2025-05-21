@@ -47,9 +47,7 @@ export const Modal = ({
           {title && <DialogTitle className="text-xl">{title}</DialogTitle>}
         </DialogHeader>
         <hr className="my-3 bg-slate-300" />
-        <div className="flex-1 overflow-auto py-1 focus-within:overflow-hidden">
-          {children}
-        </div>
+        <div className="flex-1 overflow-auto py-1">{children}</div>
         {actions && <DialogFooter>{actions}</DialogFooter>}
       </DialogContent>
     </Dialog>
