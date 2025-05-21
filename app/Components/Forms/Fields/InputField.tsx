@@ -1,5 +1,6 @@
+import { Keyboard, KeyboardResize } from "@capacitor/keyboard";
 import { Field, type FieldProps } from "formik";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Input from "~/Components/common/Input";
 import { cn } from "~/lib/utils";
 import type { IFieldProps, IInputProps } from "~/types/components";
@@ -21,6 +22,31 @@ export default function InputField({
     else setinputType("password");
   };
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    Keyboard.addListener("keyboardDidShow", (info) => {
+      Keyboard.setResizeMode({ mode: KeyboardResize.None });
+    });
+
+    return () => {
+      Keyboard.removeAllListeners();
+    };
+  }, []);
+
+  useEffect(() => {
+    const preventScrollToInput = () => {
+      inputRef.current?.focus({ preventScroll: true });
+    };
+
+    document.addEventListener("wheel", preventScrollToInput);
+    document.addEventListener("touchmove", preventScrollToInput);
+    return () => {
+      document.removeEventListener("wheel", preventScrollToInput);
+      document.removeEventListener("touchmove", preventScrollToInput);
+    };
+  }, []);
+
   return (
     <Field name={restProps.name}>
       {({ field, meta }: FieldProps) => (
@@ -31,6 +57,7 @@ export default function InputField({
           className={className}
         >
           <Input
+            ref={inputRef}
             {...restProps}
             {...field}
             icon={
