@@ -3,7 +3,7 @@ import type {
   BookApointmentApiData,
   UpdateApointmentApiData,
 } from "~/types/apiData";
-import { messages, somethingWentWrongMsg } from "./messages";
+import { messages } from "./messages";
 import supabase from "./supabase";
 
 const {
@@ -61,7 +61,6 @@ export const addAppointment = async (values: BookApointmentApiData) => {
   if (!error) toast.success(addSuccessMsg);
   else {
     if (status === 409) toast.error(conflictMsg);
-    else toast.error(somethingWentWrongMsg);
   }
 };
 
@@ -76,7 +75,6 @@ export const updateAppointment = async (
     .select("*");
 
   if (!error) toast.success(updateSuccessMsg);
-  else toast.error(somethingWentWrongMsg);
 };
 
 export const deleteAppointment = async (id: string) => {
@@ -87,5 +85,4 @@ export const deleteAppointment = async (id: string) => {
     .select("*");
 
   if (!error) toast.success(deleteSuccessMsg);
-  else toast.error(somethingWentWrongMsg);
 };

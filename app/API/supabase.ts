@@ -1,6 +1,7 @@
 import { AuthError, createClient } from "@supabase/supabase-js";
+import { toast } from "sonner";
 import type { Database } from "~/types/database.types";
-import { handleConnectionStatus } from "~/utils/connectivity";
+import { messages } from "./messages";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ?? "";
 const supabaseKey = import.meta.env.VITE_SUPABASE_API_KEY ?? "";
@@ -9,15 +10,27 @@ const interceptor = async (
   url: string | URL | globalThis.Request,
   options: RequestInit | undefined,
 ) => {
-  handleConnectionStatus();
-
   const response = await fetch(url, options);
+  const { status } = response;
+
+  const {
+    auth: { unAuth },
+    somethingWentWrong,
+  } = messages.error;
+
+  if (status === 403) {
+    toast.error(unAuth);
+    throw new Error("Not Authorized");
+  } else if (status === 500) {
+    toast.error(somethingWentWrong);
+    throw new Error("Something went wrong");
+  }
 
   return response;
 };
 
 const supabase = createClient<Database>(supabaseUrl, supabaseKey, {
-  // global: { fetch: interceptor },
+  global: { fetch: interceptor },
 });
 
 export default supabase;
