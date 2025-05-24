@@ -1,22 +1,22 @@
 import type { Database } from "./database.types";
 
-export type PatientApiData = Database["public"]["Tables"]["Patients"]["Row"];
+export type PatientApiData = Database["public"]["Tables"]["patients"]["Row"];
 export type AddPatientApiData =
-  Database["public"]["Tables"]["Patients"]["Insert"];
+  Database["public"]["Tables"]["patients"]["Insert"];
 
 export type UpdatePatientApiData =
-  Database["public"]["Tables"]["Patients"]["Update"];
+  Database["public"]["Tables"]["patients"]["Update"];
 
 export type AppointmentApiData =
-  Database["public"]["Tables"]["Appointments"]["Row"] & {
+  Database["public"]["Tables"]["appointments"]["Row"] & {
     patient: PatientApiData;
   };
 
 export type BookApointmentApiData =
-  Database["public"]["Tables"]["Appointments"]["Insert"];
+  Database["public"]["Tables"]["appointments"]["Insert"];
 
 export type UpdateApointmentApiData =
-  Database["public"]["Tables"]["Appointments"]["Update"] & {
+  Database["public"]["Tables"]["appointments"]["Update"] & {
     patient: PatientApiData;
   };
 

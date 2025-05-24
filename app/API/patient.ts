@@ -1,7 +1,7 @@
 import { toast } from "sonner";
+import type { AddPatientApiData, UpdatePatientApiData } from "~/types/apiData";
 import { messages, somethingWentWrongMsg } from "./messages";
 import supabase from "./supabase";
-import type { AddPatientApiData, UpdatePatientApiData } from "~/types/apiData";
 
 const {
   add: addSuccessMsg,
@@ -15,7 +15,7 @@ export const getAllPatients = async (
   search: string = "",
   signal?: AbortSignal,
 ) => {
-  let query = supabase.from("Patients").select("*");
+  let query = supabase.from("patients").select("*");
   if (search.trim().length > 0) query = query.ilike("name", `%${search}%`);
 
   if (signal) return await query.abortSignal(signal);
@@ -24,12 +24,12 @@ export const getAllPatients = async (
 };
 
 export const getPatient = async (id: string) => {
-  return supabase.from("Patients").select("*").eq("id", id);
+  return supabase.from("patients").select("*").eq("id", id);
 };
 
 export const addPatient = async (values: AddPatientApiData) => {
   const { error } = await supabase
-    .from("Patients")
+    .from("patients")
     .insert([values])
     .select("*");
 
@@ -39,7 +39,7 @@ export const addPatient = async (values: AddPatientApiData) => {
 
 export const updatePatient = async (patient: UpdatePatientApiData) => {
   const { error } = await supabase
-    .from("Patients")
+    .from("patients")
     .update(patient)
     .eq("id", patient.id)
     .select("*");
@@ -50,7 +50,7 @@ export const updatePatient = async (patient: UpdatePatientApiData) => {
 
 export const deletePatient = async (id: string) => {
   const { error, status } = await supabase
-    .from("Patients")
+    .from("patients")
     .delete()
     .eq("id", id)
     .select("*");
