@@ -22,6 +22,7 @@ export const messages = {
     auth: {
       invalidCredentials: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
       invalidEmail: "بريد إلكتروني غير صحيح",
+      unAuth: "غير مصرح لك بهذه العملية، برجاء مراجعة المسؤول",
     },
   },
 };

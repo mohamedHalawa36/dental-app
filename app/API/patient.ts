@@ -1,6 +1,6 @@
 import { toast } from "sonner";
 import type { AddPatientApiData, UpdatePatientApiData } from "~/types/apiData";
-import { messages, somethingWentWrongMsg } from "./messages";
+import { messages } from "./messages";
 import supabase from "./supabase";
 
 const {
@@ -34,7 +34,6 @@ export const addPatient = async (values: AddPatientApiData) => {
     .select("*");
 
   if (!error) toast.success(addSuccessMsg);
-  else toast.error(somethingWentWrongMsg);
 };
 
 export const updatePatient = async (patient: UpdatePatientApiData) => {
@@ -45,7 +44,6 @@ export const updatePatient = async (patient: UpdatePatientApiData) => {
     .select("*");
 
   if (!error) toast.success(updateSuccessMsg);
-  else toast.error(somethingWentWrongMsg);
 };
 
 export const deletePatient = async (id: string) => {
@@ -61,6 +59,5 @@ export const deletePatient = async (id: string) => {
       toast.error(conflictMsg, {
         duration: Infinity,
       });
-    else toast.error(somethingWentWrongMsg);
   }
 };
