@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <RenderData {...{ isEmpty, isFetching }}>
-      <CardsList>
+      <CardsList className="h-full">
         {appointments?.map(
           ({ id, patient, time, date }) =>
             patient && (

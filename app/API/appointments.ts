@@ -1,11 +1,10 @@
 import { toast } from "sonner";
-import type { Database } from "~/types/database.types";
-import { messages, somethingWentWrongMsg } from "./messages";
-import supabase from "./supabase";
 import type {
   BookApointmentApiData,
   UpdateApointmentApiData,
 } from "~/types/apiData";
+import { messages, somethingWentWrongMsg } from "./messages";
+import supabase from "./supabase";
 
 const {
   add: addSuccessMsg,
@@ -25,11 +24,11 @@ export const getAllAppointments = async (
   },
   signal: AbortSignal,
 ) => {
-  let query = supabase.from("Appointments").select("*, patient:Patients(*)");
+  let query = supabase.from("appointments").select("*, patient:patients(*)");
 
   if (date) query = query.eq("date", date);
   if (search.trim().length > 0)
-    query = query.ilike("Patients.name", `%${search}%`);
+    query = query.ilike("patients.name", `%${search}%`);
 
   if (signal) return await query.abortSignal(signal);
 
@@ -38,8 +37,8 @@ export const getAllAppointments = async (
 
 export const getAppointment = async (appointmentIid: string) => {
   return await supabase
-    .from("Appointments")
-    .select("*, patient:Patients(*)")
+    .from("appointments")
+    .select("*, patient:patients(*)")
     .eq("id", appointmentIid);
 };
 
@@ -48,14 +47,14 @@ export const getTodayAppointments = async () => {
   const date = today.toLocaleDateString("en-CA");
 
   return await supabase
-    .from("Appointments")
-    .select("*, patient:Patients(*)")
+    .from("appointments")
+    .select("*, patient:patients(*)")
     .eq("date", date);
 };
 
 export const addAppointment = async (values: BookApointmentApiData) => {
   const { status, error } = await supabase
-    .from("Appointments")
+    .from("appointments")
     .insert([values])
     .select("*");
 
@@ -71,7 +70,7 @@ export const updateAppointment = async (
 ) => {
   const { patient, ...restAppointmentData } = appointment;
   const { error } = await supabase
-    .from("Appointments")
+    .from("appointments")
     .update(restAppointmentData)
     .eq("id", appointment.id)
     .select("*");
@@ -82,7 +81,7 @@ export const updateAppointment = async (
 
 export const deleteAppointment = async (id: string) => {
   const { error } = await supabase
-    .from("Appointments")
+    .from("appointments")
     .delete()
     .eq("id", id)
     .select("*");
