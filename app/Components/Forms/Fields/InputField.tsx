@@ -1,6 +1,5 @@
-import { Keyboard, KeyboardResize } from "@capacitor/keyboard";
 import { Field, type FieldProps } from "formik";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Input from "~/Components/common/Input";
 import { cn } from "~/lib/utils";
 import type { IFieldProps, IInputProps } from "~/types/components";
@@ -23,17 +22,6 @@ export default function InputField({
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    Keyboard.addListener("keyboardDidShow", (info) => {
-      Keyboard.setResizeMode({ mode: KeyboardResize.None });
-    });
-
-    return () => {
-      Keyboard.removeAllListeners();
-    };
-  }, []);
-
   return (
     <Field name={restProps.name}>
       {({ field, meta }: FieldProps) => (
