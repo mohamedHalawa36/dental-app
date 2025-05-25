@@ -5,12 +5,10 @@ const useAuth = () => {
   const authContext = useContext(AuthContext);
   const { user } = authContext;
 
-  const { role, is_admin, name } = user!;
-
-  const isDoctor = role === "doctor";
-  const isNurse = role === "nurse";
-  const isAdmin = is_admin;
-  const userName = name;
+  const isDoctor = user?.role === "doctor";
+  const isNurse = user?.role === "nurse";
+  const isAdmin = user?.is_admin;
+  const userName = user?.name;
 
   return { ...authContext, isAdmin, isDoctor, isNurse, userName };
 };
