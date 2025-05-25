@@ -3,13 +3,16 @@ import { cn, formatUserName } from "~/lib/utils";
 import { getTodayInfo } from "~/utils/time";
 import Calendar from "../icons/Calendar";
 import Doctor from "../icons/Doctor";
+import User from "../icons/User";
 import { links } from "./links";
 import LogoutBtn from "./LogoutBtn";
 import SideLink from "./SideLink";
 
 export default function Sidebar({ className }: { className?: string }) {
   const { dayDate, month } = getTodayInfo();
-  const { userName } = useAuth();
+  const { userName, isDoctor } = useAuth();
+
+  const UserIcon = isDoctor ? Doctor : User;
 
   return (
     <aside
@@ -22,14 +25,20 @@ export default function Sidebar({ className }: { className?: string }) {
         <div className="flex flex-col items-center gap-2.5 border-gray-200">
           <img src="/images/full-logo.png" alt="Logo" className="w-4/5" />
         </div>
-        <div className="flex items-center justify-between rounded-sm border-b border-gray-200 px-2 py-1 transition hover:bg-slate-50">
-          <div className="flex items-center gap-2">
-            <Doctor />
-            <h4 className="text-sm font-semibold text-foreground">
+        <div className="flex flex-wrap items-center justify-between rounded-sm border-b border-gray-200 px-2 py-1 text-xs transition hover:bg-slate-50">
+          <div className="flex items-center gap-1">
+            <UserIcon />
+            <h4 className="font-semibold text-foreground">
+              {isDoctor && (
+                <>
+                  <span>د.</span>
+                  &nbsp;
+                </>
+              )}
               {formatUserName(userName!)}
             </h4>
           </div>
-          <div className="flex items-center gap-2 p-2 text-sm font-semibold text-foreground">
+          <div className="flex items-center gap-1 py-2 font-semibold text-foreground">
             <Calendar className="size-5" />
             <span className="">
               {dayDate} {month}
