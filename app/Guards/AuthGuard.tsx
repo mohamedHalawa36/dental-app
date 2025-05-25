@@ -8,7 +8,6 @@ import useAuthChange from "~/hooks/useAuthChange";
 
 export default function AuthGuard({ children }: { children: ReactNode }) {
   const { isChecking, setIsChecking, user, setUser } = useAuth();
-  console.log(user);
 
   useEffect(() => {
     const fetchSession = async () => {
