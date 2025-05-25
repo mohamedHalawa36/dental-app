@@ -35,7 +35,7 @@ export default function appointments() {
             granularity="day"
             value={date}
             onChange={setDate}
-            className="border-none p-0 text-lg font-medium"
+            className="border-none p-0 text-lg font-medium max-sm:ms-2"
           />
         </div>
 
