@@ -38,3 +38,9 @@ export const formatUserName = (name: string) => {
   const lastName = splittedName[splittedName.length - 1];
   return `${firstName} ${lastName}`;
 };
+
+export const todaysDate = () => {
+  const today = new Date();
+  const formatted = today.toISOString().split("T")[0];
+  return formatted;
+};
