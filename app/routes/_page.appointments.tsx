@@ -29,13 +29,13 @@ export default function appointments() {
 
   return (
     <>
-      <div className="flex h-full flex-col gap-1 py-5">
+      <div className="flex h-full flex-col gap-2 py-5">
         <div className="w-fit">
           <DateTimePicker
             granularity="day"
             value={date}
             onChange={setDate}
-            className="ms-3 border-none p-0 text-lg font-medium"
+            className="border-none p-0 text-lg font-medium"
           />
         </div>
 
