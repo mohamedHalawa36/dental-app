@@ -1,0 +1,90 @@
+@font-face {
+  font-family: "Alexandria";
+  font-weight: 100;
+  font-style: normal;
+  src: url("./Alexandria-Thin.eot");
+  src:
+    url("./Alexandria-Thin.eot?#iefix") format("embedded-opentype"),
+    url("./Alexandria-Thin.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alexandria";
+  font-weight: 200;
+  font-style: normal;
+  src: url("./Alexandria-ExtraLight.eot");
+  src:
+    url("./Alexandria-ExtraLight.eot?#iefix") format("embedded-opentype"),
+    url("./Alexandria-ExtraLight.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alexandria";
+  font-weight: 300;
+  font-style: normal;
+  src: url("./Alexandria-Light.eot");
+  src:
+    url("./Alexandria-Light.eot?#iefix") format("embedded-opentype"),
+    url("./Alexandria-Light.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alexandria";
+  font-weight: 400;
+  font-style: normal;
+  src: url("./Alexandria-Regular.eot");
+  src:
+    url("./Alexandria-Regular.eot?#iefix") format("embedded-opentype"),
+    url("./Alexandria-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alexandria";
+  font-weight: 500;
+  font-style: normal;
+  src: url("./Alexandria-Medium.eot");
+  src:
+    url("./Alexandria-Medium.eot?#iefix") format("embedded-opentype"),
+    url("./Alexandria-Medium.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alexandria";
+  font-weight: 600;
+  font-style: normal;
+  src: url("./Alexandria-SemiBold.eot");
+  src:
+    url("./Alexandria-SemiBold.eot?#iefix") format("embedded-opentype"),
+    url("./Alexandria-SemiBold.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alexandria";
+  font-weight: 700;
+  font-style: normal;
+  src: url("./Alexandria-Bold.eot");
+  src:
+    url("./Alexandria-Bold.eot?#iefix") format("embedded-opentype"),
+    url("./Alexandria-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alexandria";
+  font-weight: 800;
+  font-style: normal;
+  src: url("./Alexandria-ExtraBold.eot");
+  src:
+    url("./Alexandria-ExtraBold.eot?#iefix") format("embedded-opentype"),
+    url("./Alexandria-ExtraBold.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alexandria";
+  font-weight: 900;
+  font-style: normal;
+  src: url("./Alexandria-Black.eot");
+  src:
+    url("./Alexandria-Black.eot?#iefix") format("embedded-opentype"),
+    url("./Alexandria-Black.ttf") format("truetype");
+  font-display: swap;
+}
