@@ -10,6 +10,7 @@ import { getAllDoctors } from "~/API/doctors";
 import SectionLoader from "~/Components/common/Loaders/SectionLoader";
 import SubmitBtn from "~/Components/common/SubmitBtn";
 import MainFormLayout from "~/Layouts/MainFormLayout";
+import { todaysDate } from "~/lib/utils";
 import type { PatientApiData } from "~/types/apiData";
 import InputField from "../Fields/InputField";
 import SelectField from "../Fields/SelectField";
@@ -98,7 +99,12 @@ export default function AppointmentForm({
           isDisabled={isDoctorsFetching}
         />
 
-        <InputField label="التاريخ" name="date" type="date" />
+        <InputField
+          label="التاريخ"
+          name="date"
+          type="date"
+          min={todaysDate()}
+        />
         <InputField label="الوقت" name="time" type="time" />
       </MainFormLayout>
     </Formik>
