@@ -1,9 +1,9 @@
-import type { User } from "@supabase/supabase-js";
 import { createContext, useContext, useState, type ReactNode } from "react";
+import type { UserProfile } from "~/types/apiData";
 
 type AuthContextArgs = {
-  user: User | null;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  user: UserProfile | null;
+  setUser: React.Dispatch<React.SetStateAction<UserProfile | null>>;
   isChecking: boolean;
   setIsChecking: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -16,7 +16,7 @@ export const AuthContext = createContext<AuthContextArgs>({
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserProfile | null>(null);
   const [isChecking, setIsChecking] = useState(true);
 
   return (
@@ -25,5 +25,3 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     </AuthContext.Provider>
   );
 };
-
-export const useAuth = () => useContext(AuthContext);

@@ -9,8 +9,8 @@ import type { ApiError } from "~/API/supabase";
 import Button from "~/Components/common/Button";
 import ServerErr from "~/Components/common/ServerErr";
 import InputField from "~/Components/Forms/Fields/InputField";
-import { useAuth } from "~/Contexts/AuthContext";
 import { loginSchema } from "./schema";
+import useAuth from "~/hooks/useAuth";
 
 export default function LoginForm() {
   const [serverErr, setserverErr] = useState<string | null>(null);
@@ -21,8 +21,7 @@ export default function LoginForm() {
     mutationFn: signInUser,
     onMutate: () => setserverErr(null),
     onSuccess: (data) => {
-      const user = data.user;
-      setUser(user);
+      setUser(data);
       navigate("/");
     },
     onError: (data: ApiError) => {
