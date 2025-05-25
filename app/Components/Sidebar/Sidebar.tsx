@@ -1,11 +1,13 @@
-import { cn } from "~/lib/utils";
+import useAuth from "~/hooks/useAuth";
+import { cn, formatUserName } from "~/lib/utils";
 import { getTodayInfo } from "~/utils/time";
 import { links } from "./links";
 import LogoutBtn from "./LogoutBtn";
 import SideLink from "./SideLink";
 
 export default function Sidebar({ className }: { className?: string }) {
-  const { dayName, dayDate, month, year } = getTodayInfo();
+  const { dayName, dayDate, month } = getTodayInfo();
+  const { userName } = useAuth();
 
   return (
     <aside
@@ -19,7 +21,10 @@ export default function Sidebar({ className }: { className?: string }) {
           <img src="/images/full-logo.png" alt="Logo" className="w-4/5" />
         </div>
         <div className="flex items-center justify-between rounded-sm border-b border-gray-200 transition hover:bg-slate-50 sm:px-2">
-          <div className="flex w-full flex-col items-center p-2 text-sm text-foreground">
+          <h4 className="text-sm font-semibold text-foreground">
+            {formatUserName(userName!)}
+          </h4>
+          <div className="flex flex-col items-center p-2 text-sm text-foreground">
             <span className="max-sm:text-[0.65rem]">{dayName}</span>
             <span className="font-semibold lg:text-lg">
               {dayDate} {month}

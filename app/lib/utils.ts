@@ -30,3 +30,11 @@ export const isBeforeToday = (date: Date) => {
   const today = startOfToday();
   return isBefore(date, today);
 };
+
+export const formatUserName = (name: string) => {
+  const splittedName = name.split(" ");
+  if (splittedName.length <= 2) return name;
+  const firstName = splittedName[0];
+  const lastName = splittedName[splittedName.length - 1];
+  return `${firstName} ${lastName}`;
+};
