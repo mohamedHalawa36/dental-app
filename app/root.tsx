@@ -10,6 +10,7 @@ import {
 import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
 import AppLayout from "./Layouts/AppLayout";
+import AlexandriaFont from "/fonts/Alexandria/Alexandria.css?url";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -20,7 +21,7 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap",
+    href: AlexandriaFont,
   },
   { rel: "stylesheet", href: stylesheet },
 ];
