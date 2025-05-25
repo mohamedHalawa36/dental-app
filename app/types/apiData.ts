@@ -24,3 +24,5 @@ export type SignInUserData = {
   email: string;
   password: string;
 };
+
+export type UserProfile = Database["public"]["Tables"]["profiles"]["Row"];
