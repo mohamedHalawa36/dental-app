@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { deletePatient as deletePatientFunction } from "~/API/patient";
 import useAttachBackBtn from "~/hooks/useAttachBackBtn";
+import useAuth from "~/hooks/useAuth";
 import type { PatientApiData } from "~/types/apiData";
 import ConfirmModal from "../common/Modals/ConfirmModal";
 import FormModal from "../common/Modals/FormModal";
@@ -20,6 +21,8 @@ export default function PatientOptions({
   const [isOpen, setIsOpen] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const { user, isDoctor, isNurse, isAdmin } = useAuth();
 
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -61,6 +64,11 @@ export default function PatientOptions({
     if (isOpen) setIsOpen?.(false);
   }, [isOpen]);
 
+  const userId = user?.id;
+
+  const showMutationOptions =
+    isAdmin || isNurse || (isDoctor && userId === patient.user_id);
+
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <div className="relative -m-1.5">
@@ -78,33 +86,38 @@ export default function PatientOptions({
             label="تفاصيل"
             icon={<Details className="size-[22.5px]" />}
           />
-          <button onClick={() => setIsUpdating(true)}>
-            <OptionBtn
-              label="تعديل"
-              icon={<Pencil className="-me-1 -ms-1 h-7 w-8" />}
-            />
-          </button>
 
-          <ConfirmModal
-            isOpen={isDeleting}
-            toggle={() => setIsDeleting((open) => !open)}
-            title="حذف مريض"
-            trigger={
-              <OptionBtn
-                label="حذف"
-                icon={<Delete className="size-[22.5px] fill-red-600" />}
-              />
-            }
-            confirmCallBack={() => deletePatient(patientId)}
-            cancelCallBack={() => setIsDeleting(false)}
-            isActionsDisabled={isDeletingPatient}
-          >
-            <p className="text-lg font-semibold">
-              هل تريد حذف ملف &nbsp;
-              <span className="text-primary">{patientName}</span>
-              &nbsp; ؟
-            </p>
-          </ConfirmModal>
+          {showMutationOptions && (
+            <>
+              <button onClick={() => setIsUpdating(true)}>
+                <OptionBtn
+                  label="تعديل"
+                  icon={<Pencil className="-me-1 -ms-1 h-7 w-8" />}
+                />
+              </button>
+
+              <ConfirmModal
+                isOpen={isDeleting}
+                toggle={() => setIsDeleting((open) => !open)}
+                title="حذف مريض"
+                trigger={
+                  <OptionBtn
+                    label="حذف"
+                    icon={<Delete className="size-[22.5px] fill-red-600" />}
+                  />
+                }
+                confirmCallBack={() => deletePatient(patientId)}
+                cancelCallBack={() => setIsDeleting(false)}
+                isActionsDisabled={isDeletingPatient}
+              >
+                <p className="text-lg font-semibold">
+                  هل تريد حذف ملف &nbsp;
+                  <span className="text-primary">{patientName}</span>
+                  &nbsp; ؟
+                </p>
+              </ConfirmModal>
+            </>
+          )}
         </PopoverContent>
       </div>
       <FormModal
