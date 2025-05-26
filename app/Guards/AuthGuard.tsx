@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Navigate, useLocation } from "react-router";
 import { getUserProfile } from "~/API/auth";
 import supabase from "~/API/supabase";
@@ -7,7 +7,9 @@ import useAuth from "~/hooks/useAuth";
 import useAuthChange from "~/hooks/useAuthChange";
 
 export default function AuthGuard({ children }: { children: ReactNode }) {
-  const { isChecking, setIsChecking, user, setUser } = useAuth();
+  const [isChecking, setIsChecking] = useState(true);
+
+  const { user, setUser } = useAuth();
 
   useEffect(() => {
     const fetchSession = async () => {
