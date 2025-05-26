@@ -10,18 +10,15 @@ import Button from "~/Components/common/Button";
 import ServerErr from "~/Components/common/ServerErr";
 import InputField from "~/Components/Forms/Fields/InputField";
 import { loginSchema } from "./schema";
-import useAuth from "~/hooks/useAuth";
 
 export default function LoginForm() {
   const [serverErr, setserverErr] = useState<string | null>(null);
 
   const navigate = useNavigate();
-  const { setUser } = useAuth();
   const { mutate, isPending } = useMutation({
     mutationFn: signInUser,
     onMutate: () => setserverErr(null),
-    onSuccess: (data) => {
-      setUser(data);
+    onSuccess: () => {
       navigate("/");
     },
     onError: (data: ApiError) => {

@@ -14,8 +14,10 @@ export default function useAuthChange() {
         const supabaseUser = session?.user;
         if (!supabaseUser) return;
         if (supabaseUser.id === user?.id) return;
-        const userProfile = await getUserProfile(supabaseUser.id);
-        setUser(userProfile);
+        const { data: userProfile, error } = await getUserProfile(
+          supabaseUser.id,
+        );
+        if (!error) setUser(userProfile);
       },
     );
 
