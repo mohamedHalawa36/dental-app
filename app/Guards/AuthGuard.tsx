@@ -7,7 +7,7 @@ import useAuth from "~/hooks/useAuth";
 import useAuthChange from "~/hooks/useAuthChange";
 
 export default function AuthGuard({ children }: { children: ReactNode }) {
-  const [isChecking, setIsChecking] = useState(true);
+  const [isChecking, setIsChecking] = useState(false);
 
   const { user, setUser } = useAuth();
 
@@ -15,6 +15,8 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const fetchSession = async () => {
+      setIsChecking(true);
+
       const { data } = await supabase.auth.getSession();
       const supabaseUser = data?.session?.user;
       const isTheSameUser = supabaseUser?.id === user?.id;
