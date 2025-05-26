@@ -11,6 +11,8 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
 
   const { user, setUser } = useAuth();
 
+  const { pathname } = useLocation();
+
   useEffect(() => {
     const fetchSession = async () => {
       const { data } = await supabase.auth.getSession();
@@ -28,11 +30,10 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
     };
 
     fetchSession();
-  }, []);
+  }, [pathname]);
 
   useAuthChange();
 
-  const { pathname } = useLocation();
   const isLoginPage = pathname === "/login";
 
   if (isChecking) return <PageLoader />;
