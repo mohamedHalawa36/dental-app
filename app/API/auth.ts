@@ -4,17 +4,13 @@ import { somethingWentWrongMsg } from "./messages";
 import supabase, { ApiError } from "./supabase";
 
 export const getUserProfile = async (userId: string) => {
-  const { data, error } = await supabase
+  const res = await supabase
     .from("profiles")
     .select()
     .eq("id", userId)
     .single();
 
-  if (!error) {
-    return data;
-  } else {
-    throw new ApiError(error.message, undefined, error.code);
-  }
+  return res;
 };
 
 export const signInUser = async (userData: SignInUserData) => {

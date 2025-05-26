@@ -22,15 +22,17 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
         setUser(null);
       } else {
         if (!isTheSameUser) {
-          const userProfile = await getUserProfile(supabaseUser.id);
-          setUser(userProfile);
+          const { data: userProfile, error } = await getUserProfile(
+            supabaseUser.id,
+          );
+          if (!error) setUser(userProfile);
         }
       }
       setIsChecking(false);
     };
 
     fetchSession();
-  }, [pathname]);
+  }, []);
 
   useAuthChange();
 
