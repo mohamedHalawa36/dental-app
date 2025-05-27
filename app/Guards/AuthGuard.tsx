@@ -4,9 +4,10 @@ import { getUserProfile } from "~/API/auth";
 import supabase from "~/API/supabase";
 import PageLoader from "~/Components/common/Loaders/PageLoader";
 import useAuth from "~/hooks/useAuth";
+import useAuthChange from "~/hooks/useAuthChange";
 
 export default function AuthGuard({ children }: { children: ReactNode }) {
-  const [isChecking, setIsChecking] = useState(false);
+  const [isChecking, setIsChecking] = useState(true);
 
   const { user, setUser } = useAuth();
 
@@ -14,8 +15,6 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const fetchSession = async () => {
-      setIsChecking(true);
-
       const { data } = await supabase.auth.getSession();
       const supabaseUser = data?.session?.user;
       const isTheSameUser = supabaseUser?.id === user?.id;
@@ -34,6 +33,8 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
 
     fetchSession();
   }, []);
+
+  useAuthChange();
 
   const isLoginPage = pathname === "/login";
 
