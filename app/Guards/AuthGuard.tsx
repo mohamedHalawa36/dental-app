@@ -18,7 +18,7 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
       const { data, error } = await getUserSession();
 
       //if it couldn't find user session go to login page to get a new one
-      if (error && error.status === 403) {
+      if (error) {
         setUser(null);
         setIsChecking(false);
         toast.error("لم نستطع العثور على معلومات المستخدم، برجاء تسجيل الدخول");
