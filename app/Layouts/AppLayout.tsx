@@ -1,7 +1,5 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, type ReactNode } from "react";
 import { useNavigate } from "react-router";
-import { Toaster } from "sonner";
 import { AuthProvider } from "~/Contexts/AuthContext";
 import AuthGuard from "~/Guards/AuthGuard";
 import { handleConnectionStatus } from "~/utils/connectivity";
@@ -11,14 +9,6 @@ import { SplashScreen } from "@capacitor/splash-screen";
 import useAttachBackBtn from "~/hooks/useAttachBackBtn";
 
 export default function AppLayout({ children }: { children: ReactNode }) {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false,
-      },
-    },
-  });
-
   useEffect(() => {
     window.addEventListener("online", handleConnectionStatus);
     window.addEventListener("offline", handleConnectionStatus);
@@ -57,15 +47,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
   return (
     <AuthProvider>
       <AuthGuard>
-        <QueryClientProvider client={queryClient}>
-          <div className="h-screen w-screen overflow-hidden">{children}</div>
-          <Toaster
-            richColors={true}
-            position="top-left"
-            theme="light"
-            closeButton
-          />
-        </QueryClientProvider>
+        <div className="h-screen w-screen overflow-hidden">{children}</div>
       </AuthGuard>
     </AuthProvider>
   );
