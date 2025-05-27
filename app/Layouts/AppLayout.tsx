@@ -9,6 +9,7 @@ import { handleConnectionStatus } from "~/utils/connectivity";
 import { App as CapacitorApp } from "@capacitor/app";
 import { SplashScreen } from "@capacitor/splash-screen";
 import useAttachBackBtn from "~/hooks/useAttachBackBtn";
+import useAuthChange from "~/hooks/useAuthChange";
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient({
@@ -53,6 +54,8 @@ export default function AppLayout({ children }: { children: ReactNode }) {
       CapacitorApp.minimizeApp();
     }
   }, []);
+
+  useAuthChange();
 
   return (
     <AuthProvider>
