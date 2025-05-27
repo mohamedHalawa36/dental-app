@@ -23,7 +23,7 @@ export default function Sidebar({ className }: { className?: string }) {
     >
       <div className="flex flex-col gap-4 sm:px-3">
         <div className="flex flex-col items-center gap-2.5 border-gray-200">
-          <img src="/images/full-logo.png" alt="Logo" className="w-4/5" />
+          <img src="/images/full-logo.webp" alt="Logo" className="w-4/5" />
         </div>
         <div className="flex flex-wrap items-center justify-between rounded-sm border-b border-gray-200 px-2 py-1 text-xs transition hover:bg-slate-50">
           <div className="flex items-center gap-1">

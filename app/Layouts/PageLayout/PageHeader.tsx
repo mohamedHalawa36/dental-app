@@ -6,7 +6,6 @@ import AddNew from "~/Components/icons/AddNew";
 import Search from "~/Components/icons/Search";
 import Sidebar from "~/Components/Sidebar/Sidebar";
 import { PageContext } from "~/Contexts/PageContext";
-import useAttachBackBtn from "~/hooks/useAttachBackBtn";
 
 type HeaderProps = {
   title: string;
@@ -36,7 +35,7 @@ export default function PageHeader({ title, addBtn }: HeaderProps) {
           <Sheet
             trigger={
               <img
-                src="/images/logo.png"
+                src="/images/logo.webp"
                 alt="logo"
                 className="h-9 drop-shadow-2xl"
               />
