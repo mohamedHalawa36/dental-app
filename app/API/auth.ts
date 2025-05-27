@@ -32,3 +32,13 @@ export const logoutUser = async () => {
 
   if (error) toast.error(somethingWentWrongMsg);
 };
+
+export const getUserSession = async () => {
+  console.log("start session");
+  const response = await supabase.auth.getSession();
+  const { error } = response;
+  console.log("end session");
+  if (!error) return response;
+
+  return await supabase.auth.getSession();
+};
