@@ -9,6 +9,7 @@ export default function useAuthChange() {
   useEffect(() => {
     const { data: listener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        if (event === "INITIAL_SESSION") return;
         if (event === "SIGNED_OUT") return setUser(null);
 
         const supabaseUser = session?.user;

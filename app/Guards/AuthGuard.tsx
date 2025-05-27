@@ -4,7 +4,6 @@ import { getUserProfile } from "~/API/auth";
 import supabase from "~/API/supabase";
 import PageLoader from "~/Components/common/Loaders/PageLoader";
 import useAuth from "~/hooks/useAuth";
-import useAuthChange from "~/hooks/useAuthChange";
 
 export default function AuthGuard({ children }: { children: ReactNode }) {
   const [isChecking, setIsChecking] = useState(false);
@@ -35,8 +34,6 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
 
     fetchSession();
   }, []);
-
-  useAuthChange();
 
   const isLoginPage = pathname === "/login";
 
