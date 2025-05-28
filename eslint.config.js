@@ -1,4 +1,5 @@
 import pluginJs from "@eslint/js";
+import reactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -11,5 +12,5 @@ export default [
       "@typescript-eslint/no-unused-vars": "warn",
     },
   },
-  // pluginReactConfig,
+  reactHooks.configs["recommended-latest"],
 ];
