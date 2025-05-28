@@ -9,6 +9,7 @@ import {
 
 import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
+import { iconsTags } from "./iconsStartupLinks";
 import AppLayout from "./Layouts/AppLayout";
 import Providers from "./Layouts/Providers";
 
@@ -24,6 +25,8 @@ export const links: Route.LinksFunction = () => [
     href: "https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap",
   },
   { rel: "stylesheet", href: stylesheet },
+  { rel: "manifest", href: "/manifest.webmanifest" },
+  ...iconsTags,
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
