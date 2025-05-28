@@ -23,5 +23,5 @@ export default function useAuthChange() {
     );
 
     return () => listener.subscription.unsubscribe();
-  }, []);
+  }, [user]);
 }
