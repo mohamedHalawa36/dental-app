@@ -58,7 +58,7 @@ export default function PatientOptions({
       document.removeEventListener("wheel", closeOptions);
       document.removeEventListener("touchmove", closeOptions);
     };
-  }, [triggerRef.current]);
+  }, []);
 
   useAttachBackBtn(() => {
     if (isOpen) setIsOpen?.(false);

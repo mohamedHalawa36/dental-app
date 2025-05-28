@@ -26,7 +26,7 @@ export default function PageHeader({ title, addBtn }: HeaderProps) {
   const pathName = useLocation().pathname;
   useEffect(() => {
     setIsMobileSidebarOpen(false);
-  }, [pathName]);
+  }, [pathName, setIsMobileSidebarOpen]);
 
   return (
     <div className="flex justify-between from-primary from-20% to-secondary max-sm:flex-col max-sm:gap-2.5 max-sm:rounded-b-[2rem] max-sm:bg-gradient-to-l max-sm:px-2 max-sm:py-4 sm:items-start">
