@@ -1,6 +1,5 @@
 export const iconsTags = [
   { rel: "apple-touch-icon", href: "icons/apple-icon-180.png" },
-  { name: "apple-mobile-web-app-capable", content: "yes" },
   {
     rel: "apple-touch-startup-image",
     href: "icons/apple-splash-2048-2732.jpg",
