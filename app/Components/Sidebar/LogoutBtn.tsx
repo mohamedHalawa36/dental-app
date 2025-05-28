@@ -1,15 +1,20 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { logoutUser } from "~/API/auth";
+import useAuth from "~/hooks/useAuth";
 import LoadingOverlay from "../common/LoadingOverlay";
 import Logout from "../icons/Logout";
 
 export default function LogoutBtn() {
   const navigate = useNavigate();
+  const { setUser } = useAuth();
 
   const { mutate, isPending } = useMutation({
     mutationFn: logoutUser,
-    onSuccess: () => navigate("/login"),
+    onSuccess: () => {
+      setUser(null);
+      navigate("/login");
+    },
   });
 
   return (

@@ -43,7 +43,7 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
     fetchSession();
   }, [setUser, user?.id]);
 
-  useAuthChange();
+  // useAuthChange();
 
   const isLoginPage = pathname === "/login";
 
