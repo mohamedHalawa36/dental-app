@@ -10,7 +10,7 @@ import PatientCard from "~/Components/Patient/PatientCard";
 import { PageContext } from "~/Contexts/PageContext";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
-export default function patients() {
+export default function Patients() {
   const { search, addNewOpen, setAddNewOpen } = useContext(PageContext);
 
   const { isFetching, data, refetch } = useQuery({
