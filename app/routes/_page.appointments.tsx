@@ -39,8 +39,6 @@ export default function Appointments() {
           />
         </div>
 
-        <div>{formatApiDate(date)}</div>
-
         <RenderData {...{ isEmpty, isFetching }}>
           <CardsList className="flex-1">
             {filteredAppointments?.map(
