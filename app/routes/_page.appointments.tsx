@@ -6,7 +6,7 @@ import { DateTimePicker } from "~/Components/common/DatePicker";
 import RenderData from "~/Components/common/RenderData";
 import PatientCard from "~/Components/Patient/PatientCard";
 import { PageContext } from "~/Contexts/PageContext";
-import { formatTime } from "~/lib/utils";
+import { formatApiDate, formatTime } from "~/lib/utils";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
 export default function Appointments() {
@@ -16,7 +16,7 @@ export default function Appointments() {
   const { isFetching, data } = useQuery({
     queryKey: ["appointments", search, date],
     queryFn: ({ signal }) =>
-      getAllAppointments({ search, date: date?.toLocaleDateString() }, signal),
+      getAllAppointments({ search, date: formatApiDate(date) }, signal),
   });
 
   const appointments = data?.data ?? [];
@@ -38,6 +38,8 @@ export default function Appointments() {
             className="border-none p-0 text-lg font-medium max-sm:ms-2"
           />
         </div>
+
+        <div>{formatApiDate(date)}</div>
 
         <RenderData {...{ isEmpty, isFetching }}>
           <CardsList className="flex-1">

@@ -44,3 +44,12 @@ export const todaysDate = () => {
   const formatted = today.toISOString().split("T")[0];
   return formatted;
 };
+
+export const formatApiDate = (date: Date | undefined) => {
+  if (!date) return "";
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const dd = String(date.getDate()).padStart(2, "0");
+
+  return `${yyyy}-${mm}-${dd}`;
+};
