@@ -19,13 +19,13 @@ export default function Appointments() {
       getAllAppointments({ search, date: date?.toLocaleDateString() }, signal),
   });
 
-  const appointments = data?.data;
+  const appointments = data?.data ?? [];
 
   const filteredAppointments = search
     ? appointments?.filter((appointment) => !!appointment.patient)
     : appointments;
 
-  const isEmpty = filteredAppointments?.length === 0;
+  const isEmpty = filteredAppointments.length === 0;
 
   return (
     <>
