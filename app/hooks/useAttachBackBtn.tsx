@@ -1,26 +1,23 @@
-import { App as CapacitorApp } from "@capacitor/app";
 import { useEffect, type DependencyList } from "react";
+import { useNavigate } from "react-router";
 
 export default function useAttachBackBtn(
   attachCallback: ({ canGoBack }: { canGoBack: boolean }) => void,
   deps: DependencyList,
 ) {
-  useEffect(() => {
-    const attachListener = async () => {
-      const listener = await CapacitorApp.addListener(
-        "backButton",
-        attachCallback,
-      );
+  const navigate = useNavigate();
 
-      return () => {
-        listener.remove();
-      };
+  useEffect(() => {
+    const handlePopState = (e: PopStateEvent) => {
+      e.preventDefault();
+      const canGoBack = window.history.length > 0;
+      attachCallback({ canGoBack });
     };
 
-    const cleanUp = attachListener();
+    window.addEventListener("popstate", handlePopState);
 
     return () => {
-      cleanUp.then((removeListener) => removeListener && removeListener());
+      window.removeEventListener("popstate", handlePopState);
     };
-  }, deps);
+  }, [attachCallback, navigate, ...deps]);
 }
