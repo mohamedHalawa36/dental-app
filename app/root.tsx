@@ -25,7 +25,7 @@ export const links: Route.LinksFunction = () => [
     href: "https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap",
   },
   { rel: "stylesheet", href: stylesheet },
-  { rel: "manifest", href: "/manifest.webmanifest" },
+  { rel: "manifest", href: "/manifest.webmanifest?v=2" },
   ...iconsTags,
 ];
 
