@@ -4,15 +4,17 @@ import { getTodayInfo } from "~/utils/time";
 import Calendar from "../icons/Calendar";
 import Doctor from "../icons/Doctor";
 import User from "../icons/User";
-import { links } from "./links";
 import LogoutBtn from "./LogoutBtn";
 import SideLink from "./SideLink";
+import { doctorsLinks, nurseLinks } from "./links";
 
 export default function Sidebar({ className }: { className?: string }) {
   const { dayDate, month } = getTodayInfo();
   const { userName, isDoctor } = useAuth();
 
   const UserIcon = isDoctor ? Doctor : User;
+
+  const links = isDoctor ? doctorsLinks : nurseLinks;
 
   return (
     <aside

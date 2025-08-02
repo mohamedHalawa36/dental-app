@@ -1,11 +1,14 @@
 import { Outlet, useLocation } from "react-router";
-import { links } from "~/Components/Sidebar/links";
+import { doctorsLinks, nurseLinks } from "~/Components/Sidebar/links";
 import Sidebar from "~/Components/Sidebar/Sidebar";
 import PageProvider from "~/Contexts/PageContext";
+import useAuth from "~/hooks/useAuth";
 import PageHeader from "~/Layouts/PageLayout/PageHeader";
 
 export default function PageLayout() {
   const { pathname } = useLocation();
+  const { isDoctor } = useAuth();
+  const links = isDoctor ? doctorsLinks : nurseLinks;
 
   const activeLink = links.find((link) => link.href === pathname);
   const pageTitle =
