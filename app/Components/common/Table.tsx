@@ -8,23 +8,24 @@ import {
   TableRow,
 } from "../ui/table";
 
-type TableProps<T extends Record<string, string>> = {
-  caption: string;
+type TableProps<T extends Record<string, string | number>> = {
+  caption?: string;
   data: T[];
+  columnHead: string[];
 };
 
 export default function Table({
   caption,
   data,
-}: TableProps<Record<string, string>>) {
-  const columnHead = Object.keys(data);
+  columnHead,
+}: TableProps<Record<string, string | number>>) {
   return (
     <TableComponent>
       <TableCaption>{caption}</TableCaption>
       <TableHeader>
         <TableRow>
           {columnHead.map((column) => (
-            <TableHead>{column}</TableHead>
+            <TableHead className="text-start text-black">{column}</TableHead>
           ))}
         </TableRow>
       </TableHeader>
