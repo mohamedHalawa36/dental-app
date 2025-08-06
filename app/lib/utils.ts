@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
-import { isBefore, startOfToday } from "date-fns";
+import { format, isBefore, parse, startOfToday } from "date-fns";
+import { ar } from "date-fns/locale";
 import type { KeyboardEvent } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -52,4 +53,20 @@ export const formatApiDate = (date: Date | undefined) => {
   const dd = String(date.getDate()).padStart(2, "0");
 
   return `${yyyy}-${mm}-${dd}`;
+};
+
+export const getArabicDayName = (day: number) => {
+  const baseDate = new Date(2024, 0, 7); // Sunday
+  const targetDate = new Date(baseDate);
+  targetDate.setDate(baseDate.getDate() + day); // shift to correct weekday
+
+  return format(targetDate, "EEEE", { locale: ar });
+};
+
+export const getFormattedTime = (timeString: string) => {
+  const time = parse(timeString, "HH:mm:ss", new Date());
+
+  // Format to AM/PM
+  const formatted = format(time, "hh:mm a");
+  return formatted;
 };
