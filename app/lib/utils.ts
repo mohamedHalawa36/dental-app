@@ -55,10 +55,10 @@ export const formatApiDate = (date: Date | undefined) => {
   return `${yyyy}-${mm}-${dd}`;
 };
 
-export const getArabicDayName = (day: number) => {
+export const getArabicDayName = (day: string) => {
   const baseDate = new Date(2024, 0, 7); // Sunday
   const targetDate = new Date(baseDate);
-  targetDate.setDate(baseDate.getDate() + day); // shift to correct weekday
+  targetDate.setDate(baseDate.getDate() + Number(day)); // shift to correct weekday
 
   return format(targetDate, "EEEE", { locale: ar });
 };

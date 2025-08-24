@@ -33,6 +33,6 @@ export const doctorsLinks = [
     Icon: Appointment,
     label: "مواعيدك المتاحة",
     href: "/availability",
-    addNew: false,
+    addNew: true,
   },
 ];
