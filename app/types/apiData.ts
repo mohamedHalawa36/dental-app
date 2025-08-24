@@ -26,3 +26,9 @@ export type SignInUserData = {
 };
 
 export type UserProfile = Database["public"]["Tables"]["profiles"]["Row"];
+
+export type AddAvailabilityData =
+  Database["public"]["Tables"]["doctor_availability"]["Insert"];
+
+export type updateAvailabilityData =
+  Database["public"]["Tables"]["doctor_availability"]["Update"];

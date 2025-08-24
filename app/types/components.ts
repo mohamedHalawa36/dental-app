@@ -7,7 +7,7 @@ import type {
 
 export type FieldProps = {
   id?: string;
-  label: string;
+  label?: string;
   error?: string;
   className?: string;
   children: ReactNode;
