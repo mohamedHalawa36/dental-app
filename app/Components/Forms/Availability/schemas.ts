@@ -1,12 +1,19 @@
 import * as Yup from "yup";
 import { requiredMsg } from "~/API/messages";
+import type { AvailabilityData } from "~/types/apiData";
 
-export const addAvailabilitySchema = Yup.object({
-  day: Yup.string().required(requiredMsg),
-  start_time: Yup.string().required(requiredMsg),
-  end_time: Yup.string().required(requiredMsg),
-  doctor_id: Yup.string().required(requiredMsg),
-});
+export const addAvailabilitySchema = (currAvailabilities: AvailabilityData[]) =>
+  Yup.object({
+    day: Yup.string()
+      .required(requiredMsg)
+      .test({
+        test: (day) => !currAvailabilities.some((av) => av.day === day),
+        message: "يوجد موعد في هذا اليوم بالفعل",
+      }),
+    start_time: Yup.string().required(requiredMsg),
+    end_time: Yup.string().required(requiredMsg),
+    doctor_id: Yup.string().required(requiredMsg),
+  });
 
 export const AddAvailabilityInitialValue = {
   doctor_id: "",
