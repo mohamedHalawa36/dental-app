@@ -16,7 +16,7 @@ export default function UpdateAvailabilityModal({
 
   return (
     <FormModal
-      title="إضافة مواعد"
+      title="تعديل مواعد"
       isOpen={isOpen}
       setIsOpen={setIsOpen}
       trigger={<Pencil className="stroke-primary" />}

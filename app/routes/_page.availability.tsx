@@ -74,7 +74,7 @@ export default function AvailabilityPage() {
         <Table data={availabilities ?? []} columns={columns} />
       </RenderData>
       <FormModal
-        title="إضافة مواعد"
+        title="إضافة موعد"
         isOpen={addNewOpen}
         setIsOpen={setAddNewOpen}
       >
