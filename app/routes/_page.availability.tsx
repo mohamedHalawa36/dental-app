@@ -15,7 +15,6 @@ import type { AvailabilityData } from "~/types/apiData";
 
 export default function AvailabilityPage() {
   const { addNewOpen, setAddNewOpen } = useContext(PageContext);
-  console.log(addNewOpen);
 
   const { userId } = useAuth();
 
