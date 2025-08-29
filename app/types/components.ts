@@ -1,3 +1,4 @@
+import type { ColumnDef } from "@tanstack/react-table";
 import type {
   ComponentProps,
   Dispatch,
@@ -47,3 +48,21 @@ export type FormModalProps = {
   children: React.ReactNode;
   className?: string;
 };
+
+export interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
+  footer?: ReactNode;
+  tableClassName?: string;
+  headerClassName?: string;
+  bodyClassName?: string;
+  footerClassName?: string;
+  noResultsLabel?: string;
+  paginated?: boolean;
+  /**
+   * Number of rows per page.
+   *
+   * **Note:** This setting only works when `paginated` is `true`.
+   */
+  pageSize?: number;
+}
