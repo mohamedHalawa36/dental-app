@@ -590,6 +590,7 @@ type DateTimePickerProps = {
    * Show the default month and time when popup the calendar. Default is the current Date().
    **/
   defaultPopupValue?: Date;
+  iconClassName?: string;
 } & Pick<
   DayPickerProps,
   "locale" | "weekStartsOn" | "showWeekNumber" | "showOutsideDays"
@@ -615,8 +616,9 @@ const DateTimePicker = React.forwardRef<
       disabled = false,
       displayFormat,
       granularity = "second",
-      placeholder = "Pick a date",
+      placeholder = "اختر تاريخ",
       className,
+      iconClassName,
       ...props
     },
     ref,
@@ -703,7 +705,7 @@ const DateTimePicker = React.forwardRef<
         displayDate.toLocaleDateString("en-GB")
       )
     ) : (
-      <span>{placeholder}</span>
+      <span className="text-gray-400">{placeholder}</span>
     );
 
     useAttachBackBtn(() => {
@@ -711,7 +713,7 @@ const DateTimePicker = React.forwardRef<
     }, [isOpen]);
 
     return (
-      <Popover open={isOpen} onOpenChange={setIsOpen}>
+      <Popover modal={true} open={isOpen} onOpenChange={setIsOpen}>
         <PopoverTrigger asChild disabled={disabled}>
           <button
             className={cn(
@@ -721,7 +723,7 @@ const DateTimePicker = React.forwardRef<
             )}
             ref={buttonRef}
           >
-            <CalendarIcon className="!size-6" />
+            <CalendarIcon className={cn("!size-6", iconClassName)} />
             {dateLabel}
           </button>
         </PopoverTrigger>
