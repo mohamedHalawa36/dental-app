@@ -3,6 +3,7 @@ import {
   AddAvailabilityInitialValue,
   addAvailabilitySchema,
   daysOptions,
+  updateAvailabilitySchema,
 } from "./schemas";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -62,7 +63,11 @@ export default function AvailabilityForm({
         ...(!recordId ? AddAvailabilityInitialValue : recordData!),
         doctor_id: userId!,
       }}
-      validationSchema={addAvailabilitySchema(currAvailabilities)}
+      validationSchema={
+        !recordId
+          ? addAvailabilitySchema(currAvailabilities)
+          : updateAvailabilitySchema
+      }
       onSubmit={(values: AddAvailabilityData | updateAvailabilityData) =>
         mutate(values)
       }

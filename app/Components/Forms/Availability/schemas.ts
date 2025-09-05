@@ -15,6 +15,14 @@ export const addAvailabilitySchema = (currAvailabilities: AvailabilityData[]) =>
     doctor_id: Yup.string().required(requiredMsg),
   });
 
+export const updateAvailabilitySchema = () =>
+  Yup.object({
+    day: Yup.string().required(requiredMsg),
+    start_time: Yup.string().required(requiredMsg),
+    end_time: Yup.string().required(requiredMsg),
+    doctor_id: Yup.string().required(requiredMsg),
+  });
+
 export const AddAvailabilityInitialValue = {
   doctor_id: "",
   start_time: "",
