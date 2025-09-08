@@ -61,7 +61,7 @@ export default function AppointmentForm({
         const { availableDays, ...submitValues } = values;
         mutate(submitValues);
       }}
-      validateOnChange={true}
+      validateOnChange
       enableReinitialize
     >
       <MainFormLayout
