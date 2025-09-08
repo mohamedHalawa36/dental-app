@@ -13,7 +13,7 @@ export default function SelectField({
   ...restProps
 }: SelectFieldProps & IFieldProps) {
   const { validateOnChange } = useFormikContext();
-  console.log(validateOnChange);
+
   return (
     <Field name={name}>
       {({ field, meta, form }: FieldProps) => (
