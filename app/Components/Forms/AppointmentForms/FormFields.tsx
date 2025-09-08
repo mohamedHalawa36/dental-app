@@ -46,23 +46,11 @@ export default function FormFields({ patientName }: { patientName: string }) {
   );
 
   useEffect(() => {
-    if (isFetchingAvailabilities) return;
-  }, [availableDays, isFetchingAvailabilities, availableDays]);
-
-  useEffect(() => {
     setFieldValue("availableDays", availableDays);
 
-    if (doctorId && availableDays?.length === 0) {
-      setFieldError("date", undefined);
-      setFieldError("time", undefined);
-    }
-  }, [
-    availableDays,
-    doctorId,
-    isFetchingAvailabilities,
-    setFieldError,
-    setFieldValue,
-  ]);
+    setFieldError("date", undefined);
+    setFieldError("time", undefined);
+  }, [availableDays, setFieldError, setFieldValue]);
 
   const isDateTimeDisabled = !!doctorId && availableDays?.length === 0;
   const selectedDate = values.date;
