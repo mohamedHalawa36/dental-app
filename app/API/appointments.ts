@@ -12,7 +12,8 @@ const {
   delete: deleteSuccessMsg,
 } = messages.success.appointment;
 
-const { conflict: conflictMsg } = messages.error.appointment;
+const { dayConflict: dayConflictMsg, timeConflict: timeConflictMsg } =
+  messages.error.appointment;
 
 export const getAllAppointments = async (
   {
@@ -60,7 +61,11 @@ export const addAppointment = async (values: BookApointmentApiData) => {
 
   if (!error) toast.success(addSuccessMsg);
   else {
-    if (status === 409) toast.error(conflictMsg);
+    if (status === 409) {
+      const isTimeConflict = error.message.includes("unique_day_time");
+      if (isTimeConflict) toast.error(timeConflictMsg);
+      else toast.error(dayConflictMsg);
+    }
   }
 };
 
