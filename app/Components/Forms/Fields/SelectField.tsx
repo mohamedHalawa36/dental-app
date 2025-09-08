@@ -29,7 +29,10 @@ export default function SelectField({
             {...restProps}
             {...field}
             defaultValue={field.value}
-            onValueChange={(value) => form.setFieldValue(name, value)}
+            onValueChange={(value) => {
+              form.setFieldValue(name, value);
+              form.setFieldTouched(name, true);
+            }}
           />
         </FieldLayout>
       )}
