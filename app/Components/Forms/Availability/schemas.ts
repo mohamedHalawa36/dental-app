@@ -15,9 +15,19 @@ export const addAvailabilitySchema = (currAvailabilities: AvailabilityData[]) =>
     doctor_id: Yup.string().required(requiredMsg),
   });
 
-export const updateAvailabilitySchema = () =>
+export const updateAvailabilitySchema = (
+  currAvailabilities: AvailabilityData[],
+) =>
   Yup.object({
-    day: Yup.string().required(requiredMsg),
+    day: Yup.string()
+      .required(requiredMsg)
+      .test({
+        test: (day) =>
+          !currAvailabilities
+            .filter((av) => av.day !== day)
+            .some((av) => av.day === day),
+        message: "يوجد موعد في هذا اليوم بالفعل",
+      }),
     start_time: Yup.string().required(requiredMsg),
     end_time: Yup.string().required(requiredMsg),
     doctor_id: Yup.string().required(requiredMsg),
