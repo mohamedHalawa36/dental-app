@@ -26,3 +26,13 @@ export const getTodayInfo = () => {
 
   return { dayName, dayDate, month, year };
 };
+
+export const formatDate = (date: Date) => {
+  date.setHours(0, 0, 0);
+  const formatNum = (num: number) => (num <= 9 ? `0${num}` : num.toString());
+  const newDate = new Date(date);
+  const year = newDate.getFullYear();
+  const month = newDate.getMonth() + 1;
+  const day = newDate.getDate();
+  return `${year}-${formatNum(month)}-${formatNum(day)}`;
+};
