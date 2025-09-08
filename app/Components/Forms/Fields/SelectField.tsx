@@ -1,4 +1,4 @@
-import { Field, type FieldProps } from "formik";
+import { Field, useFormikContext, type FieldProps } from "formik";
 import Select, { type SelectProps } from "~/Components/common/Select";
 import type { IFieldProps } from "~/types/components";
 import FieldLayout from "./FieldLayout";
@@ -12,6 +12,8 @@ export default function SelectField({
   className,
   ...restProps
 }: SelectFieldProps & IFieldProps) {
+  const { validateOnChange } = useFormikContext();
+  console.log(validateOnChange);
   return (
     <Field name={name}>
       {({ field, meta, form }: FieldProps) => (
@@ -26,13 +28,14 @@ export default function SelectField({
             error={
               meta.touched ? (meta.error ? meta.error : undefined) : undefined
             }
-            {...restProps}
-            {...field}
             defaultValue={field.value}
             onValueChange={(value) => {
               form.setFieldValue(name, value);
-              form.setFieldTouched(name, true);
+              if (validateOnChange) form.setFieldTouched(name, true);
             }}
+            {...restProps}
+            name={field.name}
+            // {...field}
           />
         </FieldLayout>
       )}
