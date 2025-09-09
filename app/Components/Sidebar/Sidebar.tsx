@@ -15,7 +15,6 @@ export default function Sidebar({ className }: { className?: string }) {
   const UserIcon = isDoctor ? Doctor : User;
 
   const links = useUserLinks();
-  console.log(links);
 
   return (
     <aside
