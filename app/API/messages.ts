@@ -10,6 +10,11 @@ export const messages = {
       update: "تم تعديل الموعد بنجاح",
       delete: "تم إلغاء الموعد",
     },
+    availability: {
+      add: "تم إضافة الموعد بنجاح",
+      update: "تم تعديل الموعد بنجاح",
+      delete: "تم حذف الموعد بنجاح",
+    },
   },
   error: {
     somethingWentWrong: "حدث خطأ ما، برجاء المحاولة مجددا",
@@ -24,6 +29,9 @@ export const messages = {
       invalidCredentials: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
       invalidEmail: "بريد إلكتروني غير صحيح",
       unAuth: "غير مصرح لك بهذه العملية، برجاء مراجعة المسؤول",
+    },
+    availability: {
+      conflict: "لديك موعد في هذا اليوم بالفعل",
     },
   },
 };

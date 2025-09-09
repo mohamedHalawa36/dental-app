@@ -6,10 +6,13 @@ import supabase from "./supabase";
 import { messages } from "./messages";
 import { toast } from "sonner";
 
-const { update: updateSuccessMsg, delete: deleteSuccessMsg } =
-  messages.success.appointment;
+const {
+  add: addSuccessMsg,
+  update: updateSuccessMsg,
+  delete: deleteSuccessMsg,
+} = messages.success.availability;
 
-const { conflict: conflictMsg } = messages.error.appointment;
+const { conflict: conflictMsg } = messages.error.availability;
 
 export const getDoctorAvailabilty = async (doctorId: string) => {
   return await supabase
@@ -29,7 +32,7 @@ export const addDoctorAvailabilty = async (
 
   const { error, status } = response;
 
-  if (!error) toast.success("تم إضافة الموعد بنجاح");
+  if (!error) toast.success(addSuccessMsg);
   else {
     if (status === 409) toast.error(conflictMsg);
     throw new Error(error.message, { cause: response });
