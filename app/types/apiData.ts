@@ -35,3 +35,5 @@ export type AddAvailabilityData =
 
 export type updateAvailabilityData =
   Database["public"]["Tables"]["doctor_availability"]["Update"];
+
+export type UserData = Database["public"]["Tables"]["profiles"]["Row"];
