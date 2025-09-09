@@ -6,6 +6,7 @@ import { useFormikContext } from "formik";
 import type { BookAppointmentFormValues } from "./schemas";
 import { getDoctorAvailabilty } from "~/API/doctors_availability";
 import { useEffect, useMemo } from "react";
+import { formatDate } from "~/utils/time";
 
 export default function FormFields({ patientName }: { patientName: string }) {
   const { isFetching: isDoctorsFetching, data: doctors } = useQuery({
@@ -83,6 +84,7 @@ export default function FormFields({ patientName }: { patientName: string }) {
         value={selectedDate}
         placeholder="اختر تاريخ"
         disabled={isFetchingAvailabilities || isDateTimeDisabled}
+        min={formatDate(new Date())}
       />
       <InputField
         label="الوقت"

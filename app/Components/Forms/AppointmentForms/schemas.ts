@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import { requiredMsg } from "~/API/messages";
-import { getArabicDayName } from "~/lib/utils";
+import { getArabicDayName, isBeforeToday } from "~/lib/utils";
 
 export const bookApointmentSchema = Yup.object({
   patient_id: Yup.string().required(requiredMsg),
@@ -36,7 +36,15 @@ export const bookApointmentSchema = Yup.object({
           },
         });
       },
-    ),
+    )
+    .test({
+      name: "not-before-today",
+      test: (value) => {
+        const date = new Date(value);
+        return !isBeforeToday(date);
+      },
+      message: "لا يمكن حجز موعد بتاريخ قديم",
+    }),
   time: Yup.string().nullable(),
   availableDays: Yup.array(),
 });
