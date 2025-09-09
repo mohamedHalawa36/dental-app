@@ -66,7 +66,7 @@ export default function AvailabilityForm({
       validationSchema={
         !recordId
           ? addAvailabilitySchema(currAvailabilities)
-          : updateAvailabilitySchema(currAvailabilities)
+          : updateAvailabilitySchema(currAvailabilities, recordId)
       }
       onSubmit={(values: AddAvailabilityData | updateAvailabilityData) =>
         mutate(values)

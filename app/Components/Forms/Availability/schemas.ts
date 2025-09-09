@@ -17,17 +17,25 @@ export const addAvailabilitySchema = (currAvailabilities: AvailabilityData[]) =>
 
 export const updateAvailabilitySchema = (
   currAvailabilities: AvailabilityData[],
+  availabilityId: number,
 ) =>
   Yup.object({
     day: Yup.string()
-      .required(requiredMsg)
       .test({
-        test: (day) =>
-          !currAvailabilities
-            .filter((av) => av.day !== day)
-            .some((av) => av.day === day),
+        test: (day) => {
+          const updatingRecord = currAvailabilities.find(
+            (av) => av.id === availabilityId,
+          );
+          const avDay = updatingRecord?.day;
+          console.log(avDay);
+          return !currAvailabilities
+            .filter((av) => av.day !== avDay)
+            .some((av) => av.day === day);
+        },
         message: "يوجد موعد في هذا اليوم بالفعل",
-      }),
+      })
+      .required(requiredMsg),
+
     start_time: Yup.string().required(requiredMsg),
     end_time: Yup.string().required(requiredMsg),
     doctor_id: Yup.string().required(requiredMsg),
