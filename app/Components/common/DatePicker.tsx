@@ -243,7 +243,10 @@ function Calendar({
         caption_label: "text-sm font-medium",
         nav: "flex-row-reverse flex items-center px-3 w-full justify-between absolute top-3 start-0",
         month_grid: "w-full border-collapse space-y-1",
-        weekdays: cn("flex", props.showWeekNumber && "justify-end"),
+        weekdays: cn(
+          "flex w-full justify-between",
+          props.showWeekNumber && "justify-end",
+        ),
         weekday:
           "text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]",
         week: "flex gap-1 w-full mt-2",
