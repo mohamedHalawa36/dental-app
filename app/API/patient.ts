@@ -59,10 +59,7 @@ export const deletePatient = async (id: string) => {
 
   if (!error) toast.success(deleteSuccessMsg);
   else {
-    if (status === 409)
-      toast.error(conflictMsg, {
-        duration: Infinity,
-      });
+    if (status === 409) toast.error(conflictMsg);
     throw new Error(error.message, { cause: response });
   }
 };
