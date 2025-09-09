@@ -6,7 +6,7 @@ import Doctor from "../icons/Doctor";
 import User from "../icons/User";
 import LogoutBtn from "./LogoutBtn";
 import SideLink from "./SideLink";
-import { doctorsLinks, nurseLinks } from "./links";
+import useUserLinks from "~/hooks/useUserLinks";
 
 export default function Sidebar({ className }: { className?: string }) {
   const { dayDate, month } = getTodayInfo();
@@ -14,7 +14,8 @@ export default function Sidebar({ className }: { className?: string }) {
 
   const UserIcon = isDoctor ? Doctor : User;
 
-  const links = isDoctor ? doctorsLinks : nurseLinks;
+  const links = useUserLinks();
+  console.log(links);
 
   return (
     <aside

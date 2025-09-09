@@ -36,3 +36,13 @@ export const doctorsLinks = [
     addNew: true,
   },
 ];
+
+export const adminLinks = [
+  {
+    id: "users",
+    Icon: Appointment,
+    label: "المستخدمين",
+    href: "/users",
+    addNew: true,
+  },
+];
