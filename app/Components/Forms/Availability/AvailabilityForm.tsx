@@ -71,7 +71,6 @@ export default function AvailabilityForm({
       onSubmit={(values: AddAvailabilityData | updateAvailabilityData) =>
         mutate(values)
       }
-      validateOnChange={false}
     >
       {() => {
         return (
