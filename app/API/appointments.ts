@@ -54,10 +54,12 @@ export const getTodayAppointments = async () => {
 };
 
 export const addAppointment = async (values: BookApointmentApiData) => {
-  const { status, error } = await supabase
+  const response = await supabase
     .from("appointments")
     .insert([values])
     .select("*");
+
+  const { status, error } = response;
 
   if (!error) toast.success(addSuccessMsg);
   else {
@@ -66,6 +68,7 @@ export const addAppointment = async (values: BookApointmentApiData) => {
       if (isTimeConflict) toast.error(timeConflictMsg);
       else toast.error(dayConflictMsg);
     }
+    throw new Error(error.message, { cause: response });
   }
 };
 
@@ -73,21 +76,27 @@ export const updateAppointment = async (
   appointment: UpdateApointmentApiData,
 ) => {
   const { patient, ...restAppointmentData } = appointment;
-  const { error } = await supabase
+  const response = await supabase
     .from("appointments")
     .update(restAppointmentData)
     .eq("id", appointment.id)
     .select("*");
 
+  const { error } = response;
+
   if (!error) toast.success(updateSuccessMsg);
+  else throw new Error(error.message, { cause: response });
 };
 
 export const deleteAppointment = async (id: string) => {
-  const { error } = await supabase
+  const response = await supabase
     .from("appointments")
     .delete()
     .eq("id", id)
     .select("*");
 
+  const { error } = response;
+
   if (!error) toast.success(deleteSuccessMsg);
+  else throw new Error(error.message, { cause: response });
 };

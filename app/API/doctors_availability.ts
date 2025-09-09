@@ -22,37 +22,46 @@ export const getDoctorAvailabilty = async (doctorId: string) => {
 export const addDoctorAvailabilty = async (
   availabilityData: AddAvailabilityData,
 ) => {
-  const { error, status } = await supabase
+  const response = await supabase
     .from("doctor_availability")
     .insert([availabilityData])
     .select();
 
+  const { error, status } = response;
+
   if (!error) toast.success("تم إضافة الموعد بنجاح");
   else {
     if (status === 409) toast.error(conflictMsg);
+    throw new Error(error.message, { cause: response });
   }
 };
 
 export const updateDoctorAvailabilty = async (
   availabilityData: updateAvailabilityData,
 ) => {
-  const { error } = await supabase
+  const response = await supabase
     .from("doctor_availability")
     .update(availabilityData)
     .eq("id", availabilityData.id)
     .select();
 
+  const { error } = response;
+
   if (!error) toast.success(updateSuccessMsg);
+  else throw new Error(error.message, { cause: response });
 };
 
 export const deleteAvailabilty = async (id: number) => {
-  const { error } = await supabase
+  const response = await supabase
     .from("doctor_availability")
     .delete()
     .eq("id", id)
     .select();
 
+  const { error } = response;
+
   if (!error) toast.success(deleteSuccessMsg);
+  else throw new Error(error.message, { cause: response });
 };
 
 export const getOneAvailability = async (

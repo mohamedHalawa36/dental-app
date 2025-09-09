@@ -28,30 +28,34 @@ export const getPatient = async (id: string) => {
 };
 
 export const addPatient = async (values: AddPatientApiData) => {
-  const { error } = await supabase
-    .from("patients")
-    .insert([values])
-    .select("*");
+  const response = await supabase.from("patients").insert([values]).select("*");
+  const { error } = response;
 
   if (!error) toast.success(addSuccessMsg);
+  else throw new Error(error.message, { cause: response });
 };
 
 export const updatePatient = async (patient: UpdatePatientApiData) => {
-  const { error } = await supabase
+  const response = await supabase
     .from("patients")
     .update(patient)
     .eq("id", patient.id)
     .select("*");
 
+  const { error } = response;
+
   if (!error) toast.success(updateSuccessMsg);
+  else throw new Error(error.message, { cause: response });
 };
 
 export const deletePatient = async (id: string) => {
-  const { error, status } = await supabase
+  const response = await supabase
     .from("patients")
     .delete()
     .eq("id", id)
     .select("*");
+
+  const { error, status } = response;
 
   if (!error) toast.success(deleteSuccessMsg);
   else {
@@ -59,5 +63,6 @@ export const deletePatient = async (id: string) => {
       toast.error(conflictMsg, {
         duration: Infinity,
       });
+    throw new Error(error.message, { cause: response });
   }
 };
