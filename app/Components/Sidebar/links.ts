@@ -1,6 +1,8 @@
 import Appointment from "~/Components/icons/Appointment";
 import Home from "~/Components/icons/Home";
 import Patient from "~/Components/icons/Patient";
+import Person from "../icons/Person";
+import { Users } from "../icons/Users";
 
 export const nurseLinks = [
   {
@@ -40,7 +42,7 @@ export const doctorsLinks = [
 export const adminLinks = [
   {
     id: "users",
-    Icon: Appointment,
+    Icon: Users,
     label: "المستخدمين",
     href: "/users",
     addNew: true,
