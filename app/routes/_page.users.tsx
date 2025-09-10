@@ -6,6 +6,7 @@ import RenderData from "~/Components/common/RenderData";
 import Table from "~/Components/common/Table/Table";
 import Check from "~/Components/icons/Check";
 import X from "~/Components/icons/X";
+import DeleteUserModal from "~/Components/Users/DeleteUserModal";
 import { PageContext } from "~/Contexts/PageContext";
 import useAuth from "~/hooks/useAuth";
 import type { UserData } from "~/types/apiData";
@@ -49,22 +50,23 @@ export default function UsersPage() {
         );
       },
     },
-    // {
-    //   header: "تعديل",
-    //   cell: ({ row }) => {
-    //     const recordId = row.original.id;
+    {
+      header: "تعديل",
+      cell: ({ row }) => {
+        const recordId = row.original.id;
+        const isAdmin = row.original.is_admin;
 
-    //     return (
-    //       <div className="flex items-center gap-1">
-    //         <UpdateAvailabilityModal
-    //           recordId={recordId}
-    //           currAvailabilities={availabilities}
-    //         />
-    //         <DeleteAvailabilityModal availabilityId={recordId} />
-    //       </div>
-    //     );
-    //   },
-    // },
+        return (
+          <div className="flex items-center gap-1">
+            {/* <UpdateAvailabilityModal
+              recordId={recordId}
+              currAvailabilities={availabilities}
+            /> */}
+            {!isAdmin && <DeleteUserModal userId={recordId} />}
+          </div>
+        );
+      },
+    },
   ];
 
   return (
