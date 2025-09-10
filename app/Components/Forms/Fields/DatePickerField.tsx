@@ -33,7 +33,6 @@ export default function DatePickerField({
             <DateTimePicker
               value={value ? new Date(value) : undefined}
               onChange={(date) => {
-                console.log(date);
                 const newDate = date ? new Date(date) : undefined;
                 setFieldValue(name, date ? formatDate(newDate!) : undefined);
                 setFieldTouched(name, true);

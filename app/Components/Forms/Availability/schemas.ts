@@ -27,7 +27,6 @@ export const updateAvailabilitySchema = (
             (av) => av.id === availabilityId,
           );
           const avDay = updatingRecord?.day;
-          console.log(avDay);
           return !currAvailabilities
             .filter((av) => av.day !== avDay)
             .some((av) => av.day === day);
