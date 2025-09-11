@@ -9,7 +9,6 @@ import CancelAppointmentBtn from "./buttons/CancelAppointmentBtn";
 import PatientOptions from "./PatientOptions";
 import PhoneOptions from "./PhoneOptions";
 import useAuth from "~/hooks/useAuth";
-import { Link } from "react-router";
 
 export default function PatientCard(props: PatientCardProps) {
   const [isBookingAppointment, setIsBookingAppointment] = useState(false);
@@ -18,7 +17,7 @@ export default function PatientCard(props: PatientCardProps) {
     patient;
 
   const isPatientVariant = variant === PATIENT_CARD_TYPES.PATIENT;
-  const { isDoctor, isAdmin, isNurse } = useAuth();
+  const { isAdmin, isNurse } = useAuth();
   const canUpdatePatient = isNurse || isAdmin;
   const showPatientControls = isPatientVariant && canUpdatePatient;
 
@@ -81,28 +80,30 @@ export default function PatientCard(props: PatientCardProps) {
             )}
           </>
         )}
-        {showPatientControls ? (
-          <FormModal
-            title="حجز موعد"
-            isOpen={isBookingAppointment}
-            setIsOpen={setIsBookingAppointment}
-            trigger={<BookAppointmentBtn onClick={() => {}} />}
-          >
-            <AppointmentForm
-              {...{
-                setIsOpen: setIsBookingAppointment,
-                patientData: patient,
-              }}
-            />
-          </FormModal>
-        ) : (
-          <Link
-            to={`/patients/${patient.id}`}
-            className="text-sm font-semibold text-primary transition-all hover:underline hover:underline-offset-4"
-          >
-            تفاصيل
-          </Link>
-        )}
+        {isPatientVariant ? (
+          canUpdatePatient ? (
+            <FormModal
+              title="حجز موعد"
+              isOpen={isBookingAppointment}
+              setIsOpen={setIsBookingAppointment}
+              trigger={<BookAppointmentBtn onClick={() => {}} />}
+            >
+              <AppointmentForm
+                {...{
+                  setIsOpen: setIsBookingAppointment,
+                  patientData: patient,
+                }}
+              />
+            </FormModal>
+          ) : (
+            <button
+              type="button"
+              className="text-sm font-semibold text-primary transition-all hover:underline hover:underline-offset-4"
+            >
+              تفاصيل
+            </button>
+          )
+        ) : null}
       </div>
     </div>
   );
