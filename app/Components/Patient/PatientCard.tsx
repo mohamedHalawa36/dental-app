@@ -8,6 +8,8 @@ import BookAppointmentBtn from "./buttons/BookAppointmentBtn";
 import CancelAppointmentBtn from "./buttons/CancelAppointmentBtn";
 import PatientOptions from "./PatientOptions";
 import PhoneOptions from "./PhoneOptions";
+import useAuth from "~/hooks/useAuth";
+import { Link } from "react-router";
 
 export default function PatientCard(props: PatientCardProps) {
   const [isBookingAppointment, setIsBookingAppointment] = useState(false);
@@ -16,6 +18,9 @@ export default function PatientCard(props: PatientCardProps) {
     patient;
 
   const isPatientVariant = variant === PATIENT_CARD_TYPES.PATIENT;
+  const { isDoctor, isAdmin, isNurse } = useAuth();
+  const canUpdatePatient = isNurse || isAdmin;
+  const showPatientControls = isPatientVariant && canUpdatePatient;
 
   return (
     <div className="group flex h-fit w-full flex-col gap-5 rounded-xl bg-white px-3 py-4 transition duration-200 hover:shadow-md max-sm:gap-5">
@@ -58,7 +63,7 @@ export default function PatientCard(props: PatientCardProps) {
           </div>
         )}
 
-        {isPatientVariant && <PatientOptions patient={patient} />}
+        {showPatientControls && <PatientOptions patient={patient} />}
       </div>
       <div className="flex items-end justify-between max-lg:gap-2">
         <div className="flex flex-col gap-4">
@@ -76,7 +81,7 @@ export default function PatientCard(props: PatientCardProps) {
             )}
           </>
         )}
-        {isPatientVariant && (
+        {showPatientControls ? (
           <FormModal
             title="حجز موعد"
             isOpen={isBookingAppointment}
@@ -90,6 +95,13 @@ export default function PatientCard(props: PatientCardProps) {
               }}
             />
           </FormModal>
+        ) : (
+          <Link
+            to={`/patients/${patient.id}`}
+            className="text-sm font-semibold text-primary transition-all hover:underline hover:underline-offset-4"
+          >
+            تفاصيل
+          </Link>
         )}
       </div>
     </div>
