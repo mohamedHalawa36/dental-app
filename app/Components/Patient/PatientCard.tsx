@@ -9,6 +9,7 @@ import CancelAppointmentBtn from "./buttons/CancelAppointmentBtn";
 import PatientOptions from "./PatientOptions";
 import PhoneOptions from "./PhoneOptions";
 import useAuth from "~/hooks/useAuth";
+import PatientDetailsLink from "./PatientDetailsLink";
 
 export default function PatientCard(props: PatientCardProps) {
   const [isBookingAppointment, setIsBookingAppointment] = useState(false);
@@ -40,25 +41,27 @@ export default function PatientCard(props: PatientCardProps) {
               </span>
               <Clock className="-me-0.5 size-6" />
             </div>
-            {!isBeforeToday(new Date(props.date)) && (
-              <FormModal
-                title="تعديل موعد"
-                isOpen={isBookingAppointment}
-                setIsOpen={setIsBookingAppointment}
-                trigger={
-                  <span className="inline-flex w-full self-start text-sm font-semibold text-primary transition-all hover:text-secondary hover:underline max-sm:text-xs">
-                    تغيير
-                  </span>
-                }
-              >
-                <AppointmentForm
-                  {...{
-                    setIsOpen: setIsBookingAppointment,
-                    appointmentId: props.appointmentId,
-                  }}
-                />
-              </FormModal>
-            )}
+            {canUpdatePatient ? (
+              !isBeforeToday(new Date(props.date)) ? (
+                <FormModal
+                  title="تعديل موعد"
+                  isOpen={isBookingAppointment}
+                  setIsOpen={setIsBookingAppointment}
+                  trigger={
+                    <span className="inline-flex w-full self-start text-sm font-semibold text-primary transition-all hover:text-secondary hover:underline max-sm:text-xs">
+                      تغيير
+                    </span>
+                  }
+                >
+                  <AppointmentForm
+                    {...{
+                      setIsOpen: setIsBookingAppointment,
+                      appointmentId: props.appointmentId,
+                    }}
+                  />
+                </FormModal>
+              ) : null
+            ) : null}
           </div>
         )}
 
@@ -70,15 +73,15 @@ export default function PatientCard(props: PatientCardProps) {
           <PhoneOptions phone={phone2} hasWhatsapp={!!phone2_has_whatsapp} />
         </div>
 
-        {!isPatientVariant && (
-          <>
-            {!isBeforeToday(new Date(props.date)) && (
-              <CancelAppointmentBtn
-                appointmentId={props.appointmentId}
-                patientName={patient.name}
-              />
-            )}
-          </>
+        {!isPatientVariant && canUpdatePatient ? (
+          !isBeforeToday(new Date(props.date)) ? (
+            <CancelAppointmentBtn
+              appointmentId={props.appointmentId}
+              patientName={patient.name}
+            />
+          ) : null
+        ) : (
+          <PatientDetailsLink PatientId={patient.id} />
         )}
         {isPatientVariant ? (
           canUpdatePatient ? (
@@ -96,12 +99,7 @@ export default function PatientCard(props: PatientCardProps) {
               />
             </FormModal>
           ) : (
-            <button
-              type="button"
-              className="text-sm font-semibold text-primary transition-all hover:underline hover:underline-offset-4"
-            >
-              تفاصيل
-            </button>
+            <PatientDetailsLink PatientId={patient.id} />
           )
         ) : null}
       </div>
