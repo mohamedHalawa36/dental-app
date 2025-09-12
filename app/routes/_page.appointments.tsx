@@ -1,22 +1,30 @@
 import { useQuery } from "@tanstack/react-query";
 import { useContext, useState } from "react";
-import { getAllAppointments } from "~/API/appointments";
+import { getAllAppointments, getDoctorAppointments } from "~/API/appointments";
 import CardsList from "~/Components/common/CardsList";
 import { DateTimePicker } from "~/Components/common/DatePicker";
 import RenderData from "~/Components/common/RenderData";
 import PatientCard from "~/Components/Patient/PatientCard";
 import { PageContext } from "~/Contexts/PageContext";
+import useAuth from "~/hooks/useAuth";
 import { formatApiDate, formatTime } from "~/lib/utils";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
 export default function Appointments() {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const { search } = useContext(PageContext);
+  const { isDoctor, isAdmin, userId } = useAuth();
+  const isRegularDoctor = isDoctor && !isAdmin;
 
   const { isFetching, data } = useQuery({
     queryKey: ["appointments", search, date],
     queryFn: ({ signal }) =>
-      getAllAppointments({ search, date: formatApiDate(date) }, signal),
+      isRegularDoctor
+        ? getDoctorAppointments(
+            { search, date: formatApiDate(date), doctorId: userId! },
+            signal,
+          )
+        : getAllAppointments({ search, date: formatApiDate(date) }, signal),
   });
 
   const appointments = data?.data ?? [];

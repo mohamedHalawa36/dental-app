@@ -36,6 +36,32 @@ export const getAllAppointments = async (
   return await query;
 };
 
+export const getDoctorAppointments = async (
+  {
+    search,
+    date,
+    doctorId,
+  }: {
+    search: string;
+    date: string | undefined;
+    doctorId: string;
+  },
+  signal: AbortSignal,
+) => {
+  let query = supabase
+    .from("appointments")
+    .select("*, patient:patients(*)")
+    .eq("doctor_id", doctorId);
+
+  if (date) query = query.eq("date", date);
+  if (search.trim().length > 0)
+    query = query.ilike("patients.name", `%${search}%`);
+
+  if (signal) return await query.abortSignal(signal);
+
+  return await query;
+};
+
 export const getAppointment = async (appointmentIid: string) => {
   return await supabase
     .from("appointments")
