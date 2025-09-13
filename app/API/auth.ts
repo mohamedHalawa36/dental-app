@@ -17,11 +17,7 @@ export const signInUser = async (userData: SignInUserData) => {
   const { data, error } = await supabase.auth.signInWithPassword(userData);
 
   if (!error) {
-    const {
-      user: { id },
-    } = data;
-
-    return await getUserProfile(id);
+    return data;
   } else {
     throw new ApiError(error.message, error.status, error.code);
   }

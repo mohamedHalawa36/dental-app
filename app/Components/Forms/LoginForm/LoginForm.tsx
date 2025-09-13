@@ -22,10 +22,10 @@ export default function LoginForm() {
     mutationFn: signInUser,
     onMutate: () => setserverErr(null),
     onSuccess: async (data) => {
-      const user = data.data;
+      const user = data.user;
       const { data: userProfile, error } = await getUserProfile(user?.id ?? "");
       if (!error) {
-        setUser(userProfile);
+        setUser({ ...userProfile, ...data });
         navigate("/");
       } else {
         toast.error("حدث خطأ أثناء تسجيل الدخول، حاول مرة أخرى");
