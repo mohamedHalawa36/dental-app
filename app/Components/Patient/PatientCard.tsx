@@ -73,16 +73,18 @@ export default function PatientCard(props: PatientCardProps) {
           <PhoneOptions phone={phone2} hasWhatsapp={!!phone2_has_whatsapp} />
         </div>
 
-        {!isPatientVariant && canUpdatePatient ? (
-          !isBeforeToday(new Date(props.date)) ? (
-            <CancelAppointmentBtn
-              appointmentId={props.appointmentId}
-              patientName={patient.name}
-            />
-          ) : null
-        ) : (
-          <PatientDetailsLink PatientId={patient.id} />
-        )}
+        {!isPatientVariant ? (
+          canUpdatePatient ? (
+            !isBeforeToday(new Date(props.date)) ? (
+              <CancelAppointmentBtn
+                appointmentId={props.appointmentId}
+                patientName={patient.name}
+              />
+            ) : null
+          ) : (
+            <PatientDetailsLink PatientId={patient.id} />
+          )
+        ) : null}
         {isPatientVariant ? (
           canUpdatePatient ? (
             <FormModal
