@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { getUserProfile, getUserSession } from "~/API/auth";
 import PageLoader from "~/Components/common/Loaders/PageLoader";
 import useAuth from "~/hooks/useAuth";
+import { shouldGoToRoute } from "~/utils/routes";
 
 export default function AuthGuard({ children }: { children: ReactNode }) {
   const [isChecking, setIsChecking] = useState(true);
@@ -59,5 +60,6 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
 
   if (isLoginPage) return <Navigate to="/" replace />;
 
-  return children;
+  if (shouldGoToRoute(pathname, user.role, user.is_admin)) return children;
+  else return <Navigate to="/" replace />;
 }
