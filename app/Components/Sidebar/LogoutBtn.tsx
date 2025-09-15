@@ -7,12 +7,12 @@ import Logout from "../icons/Logout";
 
 export default function LogoutBtn() {
   const navigate = useNavigate();
-  const { setUser } = useAuth();
+  const { setAuthData } = useAuth();
 
   const { mutate, isPending } = useMutation({
     mutationFn: logoutUser,
     onSuccess: () => {
-      setUser(null);
+      setAuthData(null);
       navigate("/login");
     },
   });

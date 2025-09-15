@@ -4,13 +4,13 @@ import { toast } from "sonner";
 import { getUserProfile, getUserSession } from "~/API/auth";
 import PageLoader from "~/Components/common/Loaders/PageLoader";
 import useAuth from "~/hooks/useAuth";
-import useAuthChange from "~/hooks/useAuthChange";
 
 export default function AuthGuard({ children }: { children: ReactNode }) {
   const [isChecking, setIsChecking] = useState(true);
 
-  const { user, setUser } = useAuth();
+  const { authData, setAuthData } = useAuth();
 
+  const user = authData?.user;
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
 
       //if it couldn't find user session go to login page to get a new one
       if (error) {
-        setUser(null);
+        setAuthData(null);
         setIsChecking(false);
         toast.error("لم نستطع العثور على معلومات المستخدم، برجاء تسجيل الدخول");
         return;
@@ -28,20 +28,24 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
       const supabaseUser = data?.session?.user;
       const isTheSameUser = supabaseUser?.id === user?.id;
       if (!supabaseUser) {
-        setUser(null);
+        setAuthData(null);
       } else {
         if (!isTheSameUser) {
           const { data: userProfile, error } = await getUserProfile(
             supabaseUser.id,
           );
-          if (!error) setUser(userProfile);
+          if (!error)
+            setAuthData({
+              user: { ...supabaseUser, ...userProfile },
+              session: data.session,
+            });
         }
       }
       setIsChecking(false);
     };
 
     fetchSession();
-  }, [setUser, user?.id]);
+  }, [setAuthData, user?.id]);
 
   // useAuthChange();
 

@@ -3,7 +3,8 @@ import { AuthContext } from "~/Contexts/AuthContext";
 
 const useAuth = () => {
   const authContext = useContext(AuthContext);
-  const { user } = authContext;
+  const { authData } = authContext;
+  const user = authData?.user;
 
   const isDoctor = user?.role === "doctor";
   const isNurse = user?.role === "nurse";

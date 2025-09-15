@@ -22,7 +22,7 @@ export default function PatientOptions({
   const [isUpdating, setIsUpdating] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const { user, isDoctor, isNurse, isAdmin } = useAuth();
+  const { userId, isDoctor, isNurse, isAdmin } = useAuth();
 
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -63,8 +63,6 @@ export default function PatientOptions({
   useAttachBackBtn(() => {
     if (isOpen) setIsOpen?.(false);
   }, [isOpen]);
-
-  const userId = user?.id;
 
   const showMutationOptions =
     isAdmin || isNurse || (isDoctor && userId === patient.user_id);

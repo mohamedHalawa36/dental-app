@@ -15,7 +15,7 @@ import { loginSchema } from "./schema";
 export default function LoginForm() {
   const [serverErr, setserverErr] = useState<string | null>(null);
 
-  const { setUser } = useAuth();
+  const { setAuthData } = useAuth();
 
   const navigate = useNavigate();
   const { mutate, isPending } = useMutation({
@@ -25,7 +25,10 @@ export default function LoginForm() {
       const user = data.user;
       const { data: userProfile, error } = await getUserProfile(user?.id ?? "");
       if (!error) {
-        setUser({ ...userProfile, ...data });
+        setAuthData(() => ({
+          user: { ...data.user, ...userProfile },
+          session: data.session,
+        }));
         navigate("/");
       } else {
         toast.error("حدث خطأ أثناء تسجيل الدخول، حاول مرة أخرى");
