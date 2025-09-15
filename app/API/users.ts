@@ -12,15 +12,24 @@ export const getAllUsers = async () => {
   return response;
 };
 
-export const deleteUser = async (id: string) => {
-  const response = await supabase
-    .from("profiles")
-    .delete()
-    .eq("id", id)
-    .select();
+export const deleteUser = async (targetUserId: string, accessToken: string) => {
+  const resp = await fetch(
+    `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/delete-auth-user`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`, // user's JWT
+      },
+      body: JSON.stringify({ user_id: targetUserId }),
+    },
+  );
 
-  const { error } = response;
+  const payload = await resp.json();
+  if (!resp.ok) {
+    throw new Error(payload?.error || "Failed to delete user");
+  }
 
-  if (!error) toast.success(deleteMsg);
-  else throw new Error(error.message, { cause: response });
+  toast.success(deleteMsg);
+  return payload;
 };
