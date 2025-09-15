@@ -1,6 +1,6 @@
 import { toast } from "sonner";
 import supabase from "./supabase";
-import { messages } from "./messages";
+import { messages, somethingWentWrongMsg } from "./messages";
 
 const {
   success: {
@@ -27,6 +27,7 @@ export const deleteUser = async (targetUserId: string, accessToken: string) => {
 
   const payload = await resp.json();
   if (!resp.ok) {
+    toast.error(somethingWentWrongMsg);
     throw new Error(payload?.error || "Failed to delete user");
   }
 
