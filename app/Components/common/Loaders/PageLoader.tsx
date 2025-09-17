@@ -1,6 +1,13 @@
-export default function PageLoader() {
+import { cn } from "~/lib/utils";
+
+export default function PageLoader({ className }: { className?: string }) {
   return (
-    <div className="flex h-full items-center justify-center space-x-5">
+    <div
+      className={cn(
+        "mt-5 flex items-center justify-center space-x-5",
+        className,
+      )}
+    >
       <span className="sr-only">Loading...</span>
       <div className="size-6 animate-bounce rounded-full bg-primary [animation-delay:-0.3s] max-sm:size-5"></div>
       <div className="size-6 animate-bounce rounded-full bg-primary [animation-delay:-0.15s] max-sm:size-5"></div>

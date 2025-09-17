@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { getAllPatients } from "~/API/patient";
 import CardsList from "~/Components/common/CardsList";
-import PageLoader from "~/Components/common/Loaders/PageLoader";
 import FormModal from "~/Components/common/Modals/FormModal";
 import RenderData from "~/Components/common/RenderData";
 import PatientForm from "~/Components/Forms/PatientForms/PatientForm";
@@ -17,8 +16,6 @@ export default function Patients() {
     queryKey: ["patients", search],
     queryFn: ({ signal }) => getAllPatients(search, signal),
   });
-
-  if (isFetching) return <PageLoader />;
 
   const patients = data?.data;
   const isEmpty = patients?.length === 0;

@@ -52,7 +52,7 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
 
   const isLoginPage = pathname === "/login";
 
-  if (isChecking) return <PageLoader />;
+  if (isChecking) return <PageLoader className="h-full" />;
 
   if (!user) {
     return isLoginPage ? children : <Navigate to="/login" replace />;

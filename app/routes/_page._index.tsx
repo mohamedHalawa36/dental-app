@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getTodayAppointments } from "~/API/appointments";
 import CardsList from "~/Components/common/CardsList";
-import PageLoader from "~/Components/common/Loaders/PageLoader";
 import RenderData from "~/Components/common/RenderData";
 import PatientCard from "~/Components/Patient/PatientCard";
 import { formatTime } from "~/lib/utils";
@@ -12,8 +11,6 @@ export default function Home() {
     queryKey: ["appointments"],
     queryFn: getTodayAppointments,
   });
-
-  if (isFetching) return <PageLoader />;
 
   const appointments = data?.data;
   const isEmpty = appointments?.length === 0;
