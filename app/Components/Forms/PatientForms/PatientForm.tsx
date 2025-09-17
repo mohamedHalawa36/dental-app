@@ -50,17 +50,9 @@ export default function PatientForm({
       validateOnChange={true}
     >
       {({ values, errors }) => {
-        const isTypingPhone2 = !!values.phone2;
-        const phone2HasErr = errors.phone2 ?? false;
-        const phone2HasWhatsappDisabled = isTypingPhone2
-          ? !!phone2HasErr
-          : true;
-
-        const isTypingPhone1 = !!values.phone1;
-        const phone1HasErr = errors.phone1 ?? false;
-        const phone1HasWhatsappDisabled = isTypingPhone1
-          ? !!phone1HasErr
-          : true;
+        const isTypingPhone = !!values.phone;
+        const phoneHasErr = errors.phone ?? false;
+        const phoneHasWhatsappDisabled = isTypingPhone ? !!phoneHasErr : true;
 
         return (
           <>
@@ -81,15 +73,9 @@ export default function PatientForm({
               />
               <PatientPhone
                 label="رقم الهاتف"
-                name="phone1"
+                name="phone"
                 onChange={() => {}}
-                hasWhatsappDisabled={phone1HasWhatsappDisabled}
-              />
-              <PatientPhone
-                label="رقم هاتف آخر (اختياري)"
-                name="phone2"
-                onChange={() => {}}
-                hasWhatsappDisabled={phone2HasWhatsappDisabled}
+                hasWhatsappDisabled={phoneHasWhatsappDisabled}
               />
               <InputField label="العنوان (اختياري)" name="address" />
             </MainFormLayout>
