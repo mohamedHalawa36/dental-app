@@ -77,7 +77,7 @@ export default function PatientForm({
                 onChange={() => {}}
                 hasWhatsappDisabled={phoneHasWhatsappDisabled}
               />
-              <InputField label="العنوان (اختياري)" name="address" />
+              <InputField label="العنوان" name="address" optional />
             </MainFormLayout>
           </>
         );

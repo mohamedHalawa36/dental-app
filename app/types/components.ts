@@ -12,6 +12,7 @@ export type FieldProps = {
   error?: string;
   className?: string;
   children: ReactNode;
+  optional?: boolean;
 };
 export type IFieldProps = Omit<FieldProps, "children">;
 

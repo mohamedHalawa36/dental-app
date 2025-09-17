@@ -11,6 +11,7 @@ export default function InputField({
   label,
   className,
   type,
+  optional,
   icon,
   ...restProps
 }: IInputProps & IFieldProps) {
@@ -30,6 +31,7 @@ export default function InputField({
           label={label as string}
           error={meta.touched ? meta.error : undefined}
           className={className}
+          optional={optional}
         >
           <Input
             ref={inputRef}

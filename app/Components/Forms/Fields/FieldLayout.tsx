@@ -7,13 +7,19 @@ export default function FieldLayout({
   error,
   className,
   children,
+  optional,
 }: FieldProps) {
   return (
     <div className={cn("flex flex-col gap-1", className)}>
       {label && (
-        <label htmlFor={id} className="text-[0.95rem]">
-          {label}
-        </label>
+        <div className="flex items-center gap-1">
+          <label htmlFor={id} className="text-[0.95rem]">
+            {label}
+          </label>
+          {optional && (
+            <span className="text-xs text-slate-500">{`( اختياري )`}</span>
+          )}
+        </div>
       )}
 
       {children}
