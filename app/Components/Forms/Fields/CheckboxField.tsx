@@ -14,6 +14,7 @@ export default function CheckboxField(props: {
 
   return (
     <Checkbox
+      id={props.name}
       checked={checked}
       onCheckedChange={(checked) => {
         setValue(checked);

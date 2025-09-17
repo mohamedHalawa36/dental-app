@@ -11,6 +11,7 @@ import WhatsApp from "../../icons/WhatsApp";
 import CheckboxField from "../Fields/CheckboxField";
 import InputField from "../Fields/InputField";
 import { addPatientSchema, initialPatientValue } from "./schemas";
+import { Label } from "~/Components/ui/label";
 
 export default function PatientForm({
   setIsOpen,
@@ -118,14 +119,17 @@ export function PatientPhone({
         name={name}
         className="w-full flex-1"
       />
-      <div className="mt-2 flex items-center gap-1.5">
+      <Label
+        htmlFor={`${name}_has_whatsapp`}
+        className="mt-2 flex items-center gap-1.5"
+      >
         <WhatsApp className="max-sm:size-5" />
         <CheckboxField
           className="max-sm:size-4"
           name={`${name}_has_whatsapp`}
           disabled={hasWhatsappDisabled}
         />
-      </div>
+      </Label>
     </div>
   );
 }
