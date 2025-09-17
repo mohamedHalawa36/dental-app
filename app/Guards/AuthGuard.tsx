@@ -2,9 +2,12 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Navigate, useLocation } from "react-router";
 import { toast } from "sonner";
 import { getUserProfile, getUserSession } from "~/API/auth";
+import { messages } from "~/API/messages";
 import PageLoader from "~/Components/common/Loaders/PageLoader";
 import useAuth from "~/hooks/useAuth";
 import { shouldGoToRoute } from "~/utils/routes";
+
+const { userNotFound } = messages.error.auth;
 
 export default function AuthGuard({ children }: { children: ReactNode }) {
   const [isChecking, setIsChecking] = useState(true);
@@ -22,7 +25,7 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
       if (error) {
         setAuthData(null);
         setIsChecking(false);
-        toast.error("لم نستطع العثور على معلومات المستخدم، برجاء تسجيل الدخول");
+        toast.error(userNotFound);
         return;
       }
 

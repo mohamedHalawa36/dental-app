@@ -12,6 +12,8 @@ import InputField from "~/Components/Forms/Fields/InputField";
 import useAuth from "~/hooks/useAuth";
 import { loginSchema } from "./schema";
 
+const { login: loginErrorMsg } = messages.error.auth;
+
 export default function LoginForm() {
   const [serverErr, setserverErr] = useState<string | null>(null);
 
@@ -31,7 +33,7 @@ export default function LoginForm() {
         }));
         navigate("/");
       } else {
-        toast.error("حدث خطأ أثناء تسجيل الدخول، حاول مرة أخرى");
+        toast.error(loginErrorMsg);
       }
     },
     onError: (data: ApiError) => {
