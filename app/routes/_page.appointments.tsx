@@ -16,7 +16,7 @@ export default function Appointments() {
   const { isDoctor, isAdmin, userId } = useAuth();
   const isRegularDoctor = isDoctor && !isAdmin;
 
-  const { isFetching, data } = useQuery({
+  const { isFetching, data, isError } = useQuery({
     queryKey: ["appointments", search, date],
     queryFn: ({ signal }) =>
       isRegularDoctor
@@ -47,7 +47,7 @@ export default function Appointments() {
           />
         </div>
 
-        <RenderData {...{ isEmpty, isFetching }}>
+        <RenderData {...{ isEmpty, isFetching, isError }}>
           <CardsList className="flex-1">
             {filteredAppointments?.map(
               ({ id, patient, time, date }) =>

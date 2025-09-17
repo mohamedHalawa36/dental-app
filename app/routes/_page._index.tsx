@@ -8,7 +8,7 @@ import { formatTime } from "~/lib/utils";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
 export default function Home() {
-  const { isFetching, data } = useQuery({
+  const { isFetching, data, isError } = useQuery({
     queryKey: ["appointments"],
     queryFn: getTodayAppointments,
   });
@@ -19,7 +19,7 @@ export default function Home() {
   const isEmpty = appointments?.length === 0;
 
   return (
-    <RenderData {...{ isEmpty, isFetching }}>
+    <RenderData {...{ isEmpty, isFetching, isError }}>
       <CardsList className="h-full">
         {appointments?.map(
           ({ id, patient, time, date }) =>

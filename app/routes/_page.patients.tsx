@@ -13,7 +13,7 @@ import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 export default function Patients() {
   const { search, addNewOpen, setAddNewOpen } = useContext(PageContext);
 
-  const { isFetching, data, refetch } = useQuery({
+  const { isFetching, data, refetch, isError } = useQuery({
     queryKey: ["patients", search],
     queryFn: ({ signal }) => getAllPatients(search, signal),
   });
@@ -25,7 +25,7 @@ export default function Patients() {
 
   return (
     <>
-      <RenderData {...{ isEmpty, isFetching }}>
+      <RenderData {...{ isEmpty, isFetching, isError }}>
         <CardsList className="h-full">
           {patients?.map((patient) => (
             <PatientCard

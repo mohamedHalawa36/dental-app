@@ -18,7 +18,7 @@ export default function AvailabilityPage() {
 
   const { userId } = useAuth();
 
-  const { data, isFetching } = useQuery({
+  const { data, isFetching, isError } = useQuery({
     queryKey: ["doctor_availability", "5a6cc0f9-cd61-4929-811f-0364fc66074c"],
     queryFn: () => getDoctorAvailabilty(userId!),
   });
@@ -70,7 +70,7 @@ export default function AvailabilityPage() {
 
   return (
     <>
-      <RenderData {...{ isEmpty, isFetching }}>
+      <RenderData {...{ isEmpty, isFetching, isError }}>
         <Table data={availabilities ?? []} columns={columns} />
       </RenderData>
       <FormModal

@@ -16,7 +16,7 @@ export default function UsersPage() {
 
   const { userId } = useAuth();
 
-  const { data, isFetching } = useQuery({
+  const { data, isFetching, isError } = useQuery({
     queryKey: ["users"],
     queryFn: getAllUsers,
   });
@@ -71,7 +71,7 @@ export default function UsersPage() {
 
   return (
     <>
-      <RenderData {...{ isEmpty, isFetching }}>
+      <RenderData {...{ isEmpty, isFetching, isError }}>
         <Table data={users ?? []} columns={columns} />
       </RenderData>
       {/* <FormModal
