@@ -16,7 +16,7 @@ export default function RenderData({
   isFetching,
   isError,
 }: RenderDataProps) {
-  if (isFetching) return <PageLoader />;
+  if (isFetching) return <PageLoader className="lg:m-0 lg:h-full" />;
   if (isEmpty) return <NoResultsFound />;
   if (isError) return <LoadingError className="mt-10" />;
 
