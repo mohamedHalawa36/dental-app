@@ -1,7 +1,7 @@
 import { AuthError, createClient } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import type { Database } from "~/types/database.types";
-import { messages } from "./messages";
+import { messages, somethingWentWrongToastId } from "./messages";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ?? "";
 const supabaseKey = import.meta.env.VITE_SUPABASE_API_KEY ?? "";
@@ -18,12 +18,15 @@ const interceptor = async (
     somethingWentWrong,
   } = messages.error;
 
-  if (status === 403) {
-    toast.error(unAuth);
-    throw new Error("Not Authorized");
-  } else if (status === 500) {
-    toast.error(somethingWentWrong);
-    throw new Error("Something went wrong");
+  if (!response.ok) {
+    if (status === 403) {
+      toast.error(unAuth);
+      throw new Error("Not Authorized");
+    } else {
+      toast.error(somethingWentWrong, {
+        id: somethingWentWrongToastId,
+      });
+    }
   }
 
   return response;

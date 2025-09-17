@@ -3,7 +3,7 @@ import type {
   BookApointmentApiData,
   UpdateApointmentApiData,
 } from "~/types/apiData";
-import { messages } from "./messages";
+import { messages, somethingWentWrongToastId } from "./messages";
 import supabase from "./supabase";
 
 const {
@@ -90,6 +90,7 @@ export const addAppointment = async (values: BookApointmentApiData) => {
   if (!error) toast.success(addSuccessMsg);
   else {
     if (status === 409) {
+      toast.dismiss(somethingWentWrongToastId);
       const isTimeConflict = error.message.includes("unique_day_time");
       if (isTimeConflict) toast.error(timeConflictMsg);
       else toast.error(dayConflictMsg);

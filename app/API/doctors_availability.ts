@@ -3,7 +3,7 @@ import type {
   updateAvailabilityData,
 } from "~/types/apiData";
 import supabase from "./supabase";
-import { messages } from "./messages";
+import { messages, somethingWentWrongToastId } from "./messages";
 import { toast } from "sonner";
 
 const {
@@ -34,6 +34,8 @@ export const addDoctorAvailabilty = async (
 
   if (!error) toast.success(addSuccessMsg);
   else {
+    toast.dismiss(somethingWentWrongToastId);
+
     if (status === 409) toast.error(conflictMsg);
     throw new Error(error.message, { cause: response });
   }

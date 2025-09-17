@@ -47,3 +47,4 @@ export const messages = {
 
 export const somethingWentWrongMsg = messages.error.somethingWentWrong;
 export const requiredMsg = "مطلوب";
+export const somethingWentWrongToastId = "api-error";

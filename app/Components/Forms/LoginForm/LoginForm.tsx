@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { getUserProfile, signInUser } from "~/API/auth";
-import { messages, somethingWentWrongMsg } from "~/API/messages";
+import { messages, somethingWentWrongToastId } from "~/API/messages";
 import type { ApiError } from "~/API/supabase";
 import Button from "~/Components/common/Button";
 import ServerErr from "~/Components/common/ServerErr";
@@ -33,6 +33,7 @@ export default function LoginForm() {
         }));
         navigate("/");
       } else {
+        toast.dismiss(somethingWentWrongToastId);
         toast.error(loginErrorMsg);
       }
     },
@@ -41,8 +42,6 @@ export default function LoginForm() {
       if (statusCode === 400 && code === "invalid_credentials") {
         const { invalidCredentials } = messages.error.auth;
         setserverErr(invalidCredentials);
-      } else {
-        toast.error(somethingWentWrongMsg);
       }
     },
   });
