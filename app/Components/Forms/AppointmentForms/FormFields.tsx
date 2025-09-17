@@ -38,7 +38,7 @@ export default function FormFields({ patientName }: { patientName: string }) {
   });
 
   useEffect(() => {
-    refetchAvailability();
+    if (doctorId) refetchAvailability();
   }, [refetchAvailability, doctorId]);
 
   const availableDays = useMemo(
