@@ -12,13 +12,14 @@ const interceptor = async (
 ) => {
   const response = await fetch(url, options);
   const { status } = response;
+  const isGetRequest = options?.method === "GET";
 
   const {
     auth: { unAuth },
     somethingWentWrong,
   } = messages.error;
 
-  if (!response.ok) {
+  if (!response.ok && !isGetRequest) {
     if (status === 403) {
       toast.error(unAuth);
       throw new Error("Not Authorized");
