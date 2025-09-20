@@ -11,6 +11,7 @@ export default function SelectField({
   name,
   label,
   className,
+  placeholder,
   ...restProps
 }: SelectFieldProps & IFieldProps) {
   const { validateForm } = useFormikContext();
@@ -38,6 +39,7 @@ export default function SelectField({
           form.setTouched(true);
         }}
         {...restProps}
+        placeholder={placeholder || label || ""}
         name={field.name}
         // {...field}
       />

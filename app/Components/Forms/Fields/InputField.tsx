@@ -13,6 +13,7 @@ export default function InputField({
   type,
   optional,
   icon,
+  placeholder,
   ...restProps
 }: IInputProps & IFieldProps) {
   const [inputType, setinputType] = useState(type);
@@ -57,6 +58,7 @@ export default function InputField({
             className={cn(
               "w-full rounded-xl border-primary/70 bg-transparent px-1 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-transparent",
             )}
+            placeholder={placeholder || label || ""}
           />
         </FieldLayout>
       )}
