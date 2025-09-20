@@ -81,11 +81,11 @@ export default function UsersPage() {
         <Table data={users ?? []} columns={columns} />
       </RenderData>
       <FormModal
-        title="إضافة موعد"
+        title="إضافة مستخدم"
         isOpen={addNewOpen}
         setIsOpen={setAddNewOpen}
       >
-        <UserForm />
+        <UserForm setIsOpen={setAddNewOpen} />
       </FormModal>
     </>
   );

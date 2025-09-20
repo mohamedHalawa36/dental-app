@@ -1,9 +1,10 @@
 import * as Yup from "yup";
 import { requiredMsg } from "~/API/messages";
 import type { SimpleOption } from "~/Components/common/Select";
+import type { UserRole } from "~/types/apiData";
 
-export const addPatientSchema = Yup.object({
-  email: Yup.string().email().required(requiredMsg),
+export const createUsertSchema = Yup.object({
+  email: Yup.string().email("البريد الإلكتروني غير صحيح").required(requiredMsg),
   password: Yup.string()
     .min(8, "يجب أن لا تقل كلمة السر عن 8 حروف")
     .required(requiredMsg),
@@ -14,12 +15,12 @@ export const addPatientSchema = Yup.object({
     .oneOf(["nurse", "doctor"], "وظيفة غير متاحة"),
 });
 
-export const initialPatientValue = {
+export const initialUserValue = {
   email: "",
   password: "",
   name: "",
   is_admin: false,
-  role: "",
+  role: "" as UserRole,
 };
 
 export const roleOptions: SimpleOption[] = [

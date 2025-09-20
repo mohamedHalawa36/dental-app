@@ -42,3 +42,5 @@ export type CreateUserData =
   Database["public"]["Tables"]["profiles"]["Insert"] & {
     password: string;
   };
+
+export type UserRole = Database["public"]["Enums"]["user_role"];

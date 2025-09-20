@@ -5,7 +5,7 @@ import type { CreateUserData } from "~/types/apiData";
 
 const {
   success: {
-    user: { delete: deleteMsg },
+    user: { delete: deleteMsg, add: createMsg },
   },
 } = messages;
 export const getAllUsers = async () => {
@@ -41,12 +41,12 @@ export const createUser = async (
   accessToken: string,
 ) => {
   const resp = await fetch(
-    `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/delete-auth-user`,
+    `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-auth-user`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`, // user's JWT
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify(userData),
     },
@@ -55,9 +55,9 @@ export const createUser = async (
   const payload = await resp.json();
   if (!resp.ok) {
     toast.error(somethingWentWrongMsg);
-    throw new Error(payload?.error || "Failed to delete user");
+    throw new Error(payload?.error || "Failed to create user");
   }
 
-  toast.success(deleteMsg);
+  toast.success(createMsg);
   return payload;
 };
