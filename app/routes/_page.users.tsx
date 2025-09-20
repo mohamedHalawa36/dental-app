@@ -2,8 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useContext } from "react";
 import { getAllUsers } from "~/API/users";
+import FormModal from "~/Components/common/Modals/FormModal";
 import RenderData from "~/Components/common/RenderData";
 import Table from "~/Components/common/Table/Table";
+import UserForm from "~/Components/Forms/User/UserForm";
 import Check from "~/Components/icons/Check";
 import X from "~/Components/icons/X";
 import DeleteUserModal from "~/Components/Users/DeleteUserModal";
@@ -78,16 +80,13 @@ export default function UsersPage() {
       <RenderData {...{ isEmpty, isFetching, isError }}>
         <Table data={users ?? []} columns={columns} />
       </RenderData>
-      {/* <FormModal
+      <FormModal
         title="إضافة موعد"
         isOpen={addNewOpen}
         setIsOpen={setAddNewOpen}
       >
-        <AvailabilityForm
-          setIsOpen={setAddNewOpen}
-          currAvailabilities={availabilities}
-        />
-      </FormModal> */}
+        <UserForm />
+      </FormModal>
     </>
   );
 }

@@ -37,3 +37,8 @@ export type updateAvailabilityData =
   Database["public"]["Tables"]["doctor_availability"]["Update"];
 
 export type UserData = Database["public"]["Tables"]["profiles"]["Row"];
+
+export type CreateUserData =
+  Database["public"]["Tables"]["profiles"]["Insert"] & {
+    password: string;
+  };
