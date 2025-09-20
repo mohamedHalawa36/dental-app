@@ -25,6 +25,10 @@ export default function UsersPage() {
   const isEmpty = users?.length === 0;
   const columns: ColumnDef<UserData>[] = [
     {
+      accessorKey: "email",
+      header: "البريد الإلكتروني",
+    },
+    {
       accessorKey: "name",
       header: "الاسم",
     },
