@@ -42,7 +42,7 @@ function Table<TData, TValue>({
   table.setPageIndex = setPageIndex;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex max-w-[100dvw] flex-col gap-2">
       <div
         className={cn(
           "overflow-hidden rounded-md border border-border",
