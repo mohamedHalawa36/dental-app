@@ -13,7 +13,6 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
   const [isChecking, setIsChecking] = useState(true);
 
   const { authData, setAuthData } = useAuth();
-
   const user = authData?.user;
   const { pathname } = useLocation();
 
@@ -51,8 +50,6 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
     fetchSession();
   }, [setAuthData, user?.id]);
 
-  // useAuthChange();
-
   const isLoginPage = pathname === "/login";
 
   if (isChecking) return <PageLoader className="h-full" />;
@@ -62,6 +59,19 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
   }
 
   if (isLoginPage) return <Navigate to="/" replace />;
+
+  const isResetPasswordPage = pathname === "/reset-password";
+  const hasResettedPassword = authData.user?.has_reseted_password;
+
+  if (!hasResettedPassword) {
+    return isResetPasswordPage ? (
+      children
+    ) : (
+      <Navigate to="/reset-password" replace />
+    );
+  }
+
+  if (isResetPasswordPage) return <Navigate to="/" replace />;
 
   if (shouldGoToRoute(pathname, user.role, user.is_admin)) return children;
   else return <Navigate to="/" replace />;
