@@ -14,7 +14,7 @@ export default function SubmitBtn({
       disabled={disabled}
       type="submit"
       className={cn(
-        "w-24 rounded-xl bg-primary p-3 font-semibold text-muted transition hover:opacity-80 disabled:bg-gray-400 max-sm:w-full max-sm:p-2",
+        "w-24 rounded-xl bg-primary p-3 font-semibold text-muted transition hover:opacity-80 disabled:cursor-not-allowed disabled:bg-gray-400 max-sm:w-full max-sm:p-2",
         className,
       )}
     >
