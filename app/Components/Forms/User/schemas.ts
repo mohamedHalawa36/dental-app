@@ -6,7 +6,7 @@ import type { UserRole } from "~/types/apiData";
 export const createUsertSchema = Yup.object({
   email: Yup.string().email("البريد الإلكتروني غير صحيح").required(requiredMsg),
   password: Yup.string()
-    .min(8, "يجب أن لا تقل كلمة السر عن 8 حروف")
+    .min(4, "يجب أن لا تقل كلمة السر عن 4 حروف")
     .required(requiredMsg),
   name: Yup.string().required(requiredMsg),
   is_admin: Yup.boolean().required(requiredMsg),

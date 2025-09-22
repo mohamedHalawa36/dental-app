@@ -3,7 +3,7 @@ import { requiredMsg } from "~/API/messages";
 
 export const resetPasswordSchema = Yup.object({
   password: Yup.string()
-    .min(8, "يجب أن لا تقل كلمة السر عن 8 حروف")
+    .min(4, "يجب أن لا تقل كلمة السر عن 4 حروف")
     .required(requiredMsg),
 
   confirm_password: Yup.string()
