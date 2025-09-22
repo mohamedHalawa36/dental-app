@@ -1,18 +1,22 @@
 import { Form, useFormikContext } from "formik";
 import type { ReactNode } from "react";
 import PageLoader from "~/Components/common/Loaders/PageLoader";
+import SubmitBtn from "~/Components/common/SubmitBtn";
 import { cn } from "~/lib/utils";
+
+type MainFormLayoutProps = {
+  children: ReactNode;
+  className?: string;
+  isSubmitting: boolean;
+  submitBtnLabel: string;
+};
 
 export default function MainFormLayout({
   children,
   className,
-  submitBtn,
-}: {
-  children: ReactNode;
-  className?: string;
-  submitBtn: ReactNode;
-}) {
-  const { isSubmitting } = useFormikContext();
+  submitBtnLabel,
+  isSubmitting,
+}: MainFormLayoutProps) {
   return (
     <Form className="flex h-full flex-col gap-2 px-0.5">
       <div
@@ -26,7 +30,7 @@ export default function MainFormLayout({
         )}
         {children}
       </div>
-      {submitBtn}
+      <SubmitBtn label={submitBtnLabel} disabled={isSubmitting} />
     </Form>
   );
 }

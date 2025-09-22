@@ -37,7 +37,8 @@ export default function UserForm({ setIsOpen }: UserFormProps) {
     >
       <MainFormLayout
         className="gap-4"
-        submitBtn={<SubmitBtn label="إضافة" disabled={isPending} />}
+        submitBtnLabel={"إضافة"}
+        isSubmitting={isPending}
       >
         <InputField label="الاسم" name="name" />
         <SelectField

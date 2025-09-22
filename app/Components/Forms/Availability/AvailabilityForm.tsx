@@ -75,12 +75,8 @@ export default function AvailabilityForm({
       {() => {
         return (
           <MainFormLayout
-            submitBtn={
-              <SubmitBtn
-                label={!recordId ? "إضافة" : "تعديل"}
-                disabled={isPending}
-              />
-            }
+            isSubmitting={isPending}
+            submitBtnLabel={!recordId ? "إضافة" : "تعديل"}
           >
             <SelectField
               options={daysOptions}

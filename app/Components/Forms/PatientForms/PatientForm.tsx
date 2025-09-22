@@ -57,12 +57,8 @@ export default function PatientForm({
         return (
           <>
             <MainFormLayout
-              submitBtn={
-                <SubmitBtn
-                  label={patientId ? "تعديل" : "إضافة"}
-                  disabled={isPending}
-                />
-              }
+              isSubmitting={isPending}
+              submitBtnLabel={patientId ? "تعديل" : "إضافة"}
             >
               <InputField label="الاسم" name="name" />
               <InputField

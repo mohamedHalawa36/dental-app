@@ -64,12 +64,8 @@ export default function AppointmentForm({
       enableReinitialize
     >
       <MainFormLayout
-        submitBtn={
-          <SubmitBtn
-            label={appointmentId ? "تعديل" : "حجز"}
-            disabled={isPending}
-          />
-        }
+        submitBtnLabel={appointmentId ? "تعديل" : "حجز"}
+        isSubmitting={isPending}
       >
         <FormFields patientName={patientName!} />
       </MainFormLayout>
