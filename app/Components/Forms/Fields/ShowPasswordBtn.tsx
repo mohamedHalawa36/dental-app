@@ -21,6 +21,7 @@ const ShowPasswordBtn = ({
       className="show-pass-btn order-2"
       onClick={handleClick}
       disabled={disabled}
+      tabIndex={-1}
     >
       <Icon className={cn("h-5 w-6 stroke-primary")} />
     </button>
