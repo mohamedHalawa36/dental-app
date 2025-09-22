@@ -69,16 +69,6 @@ export const getAppointment = async (appointmentIid: string) => {
     .eq("id", appointmentIid);
 };
 
-export const getTodayAppointments = async () => {
-  const today = new Date();
-  const date = today.toLocaleDateString("en-CA");
-
-  return await supabase
-    .from("appointments")
-    .select("*, patient:patients(*)")
-    .eq("date", date);
-};
-
 export const addAppointment = async (values: BookApointmentApiData) => {
   const response = await supabase
     .from("appointments")
