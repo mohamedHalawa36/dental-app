@@ -7,7 +7,6 @@ import {
   updateAppointment,
 } from "~/API/appointments";
 import SectionLoader from "~/Components/common/Loaders/SectionLoader";
-import SubmitBtn from "~/Components/common/SubmitBtn";
 import MainFormLayout from "~/Layouts/MainFormLayout";
 import type { PatientApiData } from "~/types/apiData";
 import { bookApointmentSchema, initialAppointmentValues } from "./schemas";

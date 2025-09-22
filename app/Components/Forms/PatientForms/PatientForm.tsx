@@ -6,7 +6,6 @@ import SectionLoader from "~/Components/common/Loaders/SectionLoader";
 import MainFormLayout from "~/Layouts/MainFormLayout";
 import { numberOnly } from "~/lib/utils";
 import type { AddPatientFormProps } from "~/types/patients";
-import SubmitBtn from "../../common/SubmitBtn";
 import WhatsApp from "../../icons/WhatsApp";
 import CheckboxField from "../Fields/CheckboxField";
 import InputField from "../Fields/InputField";
