@@ -5,7 +5,12 @@ import type { CreateUserData } from "~/types/apiData";
 
 const {
   success: {
-    user: { delete: deleteMsg, add: createMsg },
+    user: {
+      delete: deleteMsg,
+      add: createMsg,
+      activate: activateMsg,
+      deActivate: deActivateMsg,
+    },
   },
 } = messages;
 export const getAllUsers = async () => {
@@ -60,4 +65,16 @@ export const createUser = async (
 
   toast.success(createMsg);
   return payload;
+};
+
+export const setIsUserActive = async (active: boolean, userId: string) => {
+  const { error } = await supabase
+    .from("profiles")
+    .update({
+      is_active: active,
+    })
+    .eq("id", userId)
+    .select("");
+
+  if (!error) toast.success(active ? activateMsg : deActivateMsg);
 };

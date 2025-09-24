@@ -14,7 +14,7 @@ export default function ConfirmModal({
   confirmLabel,
 }: ModalProps & {
   title: string;
-  trigger: ReactNode;
+  trigger?: ReactNode;
   confirmCallBack: () => void;
   cancelCallBack: () => void;
   isActionsDisabled?: boolean;

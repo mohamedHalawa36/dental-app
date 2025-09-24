@@ -8,6 +8,8 @@ import Table from "~/Components/common/Table/Table";
 import UserForm from "~/Components/Forms/User/UserForm";
 import Check from "~/Components/icons/Check";
 import X from "~/Components/icons/X";
+import { Switch } from "~/Components/ui/switch";
+import ActivateUserModal from "~/Components/Users/ActivateUserModal";
 import DeleteUserModal from "~/Components/Users/DeleteUserModal";
 import { PageContext } from "~/Contexts/PageContext";
 import useAuth from "~/hooks/useAuth";
@@ -45,7 +47,7 @@ export default function UsersPage() {
     },
     {
       accessorKey: "is_admin",
-      header: "Admin",
+      header: "مسؤول",
       cell: ({ row }) => {
         const isAdmin = row.getValue("is_admin") as string;
 
@@ -53,6 +55,23 @@ export default function UsersPage() {
           <Check className="stroke-green-600" />
         ) : (
           <X className="fill-red-600" />
+        );
+      },
+    },
+    {
+      accessorKey: "is_active",
+      header: "تفعيل",
+      cell: ({ row }) => {
+        const isAdmin = row.getValue("is_admin") as boolean;
+        const isActive = row.getValue("is_active") as boolean;
+        const userId = row.original.id;
+
+        return (
+          <ActivateUserModal
+            disabled={isAdmin}
+            active={isActive}
+            userId={userId}
+          />
         );
       },
     },
