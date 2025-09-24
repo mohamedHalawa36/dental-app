@@ -33,8 +33,15 @@ export default function DeleteUserModal({ userId }: DeleteUserModalProps) {
       trigger={<Delete className="size-6 fill-red-600" />}
       confirmCallBack={() => mutate()}
       cancelCallBack={() => setIsOpen(false)}
+      confirmLabel="حذف"
     >
-      <p>هل أنت متأكد من حذف هذا المستخدم</p>
+      <p>هل أنت متأكد؟</p>
+      <p className="text-sm text-red-500">
+        سيتم حذف كل السجلات المرتبطة بهذا المستخدم &nbsp;
+      </p>
+      <p className="font-medium text-primary">
+        اذا كنت تريد الاحتفاظ بالسجلات يمكنك إلغاء تفعيل الحساب فقط
+      </p>
     </ConfirmModal>
   );
 }

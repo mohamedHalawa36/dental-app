@@ -11,6 +11,7 @@ export default function ConfirmModal({
   children,
   isOpen,
   toggle,
+  confirmLabel,
 }: ModalProps & {
   title: string;
   trigger: ReactNode;
@@ -18,6 +19,7 @@ export default function ConfirmModal({
   cancelCallBack: () => void;
   isActionsDisabled?: boolean;
   children: ReactNode;
+  confirmLabel?: string;
 }) {
   return (
     <Modal
@@ -37,7 +39,7 @@ export default function ConfirmModal({
             className="h-fit w-20 rounded-xl border border-secondary px-5 py-2 font-medium text-secondary transition hover:bg-secondary hover:text-white"
             onClick={confirmCallBack}
           >
-            نعم
+            {confirmLabel ?? "نعم"}
           </button>
           <button
             disabled={isActionsDisabled}
