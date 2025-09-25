@@ -3,7 +3,7 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
-import { getUserProfile, signInUser } from "~/API/auth";
+import { signInUser } from "~/API/auth";
 import { messages, somethingWentWrongToastId } from "~/API/messages";
 import type { ApiError } from "~/API/supabase";
 import Button from "~/Components/common/Button";
@@ -24,24 +24,24 @@ export default function LoginForm() {
     mutationFn: signInUser,
     onMutate: () => setserverErr(null),
     onSuccess: async (data) => {
-      const user = data.user;
-      const { data: userProfile, error } = await getUserProfile(user?.id ?? "");
-      if (!error) {
-        setAuthData(() => ({
-          user: { ...data.user, ...userProfile },
-          session: data.session,
-        }));
-        navigate("/");
-      } else {
-        toast.dismiss(somethingWentWrongToastId);
-        toast.error(loginErrorMsg);
-      }
+      setAuthData(() => ({
+        user: { ...data.user, ...data.userProfile },
+        session: data.session,
+      }));
+      navigate("/");
     },
     onError: (data: ApiError) => {
       const { code, statusCode } = data;
-      if (statusCode === 400 && code === "invalid_credentials") {
+      const isInvalidCredintials =
+        (statusCode === 400 && code === "invalid_credentials") ||
+        (statusCode === 406 && code === "PGRST116");
+
+      if (isInvalidCredintials) {
         const { invalidCredentials } = messages.error.auth;
         setserverErr(invalidCredentials);
+      } else {
+        toast.dismiss(somethingWentWrongToastId);
+        toast.error(loginErrorMsg);
       }
     },
   });

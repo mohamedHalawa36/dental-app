@@ -2,6 +2,7 @@ import { toast } from "sonner";
 import type { SignInUserData } from "~/types/apiData";
 import { somethingWentWrongMsg, somethingWentWrongToastId } from "./messages";
 import supabase, { ApiError } from "./supabase";
+import { throwInvalidCredentialsError } from "~/utils/auth";
 
 export const getUserProfile = async (userId: string) => {
   const res = await supabase
@@ -13,11 +14,32 @@ export const getUserProfile = async (userId: string) => {
   return res;
 };
 
+export const getUserByEmail = async (email: string) => {
+  const res = await supabase
+    .from("profiles")
+    .select()
+    .eq("email", email)
+    .single();
+
+  return res;
+};
+
 export const signInUser = async (userData: SignInUserData) => {
+  const {
+    data: userProfile,
+    error: profileError,
+    status: profileStatus,
+  } = await getUserByEmail(userData.email);
+
+  if (profileError)
+    throw new ApiError(profileError.message, profileStatus, profileError.code);
+
+  if (!userProfile || !userProfile.is_active) throwInvalidCredentialsError();
+
   const { data, error } = await supabase.auth.signInWithPassword(userData);
 
   if (!error) {
-    return data;
+    return { ...data, userProfile };
   } else {
     throw new ApiError(error.message, error.status, error.code);
   }

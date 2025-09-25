@@ -37,7 +37,7 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
           const { data: userProfile, error } = await getUserProfile(
             supabaseUser.id,
           );
-          if (!error)
+          if (!error && userProfile.is_active)
             setAuthData({
               user: { ...supabaseUser, ...userProfile },
               session: data.session,
@@ -48,7 +48,7 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
     };
 
     fetchSession();
-  }, [setAuthData, user?.id]);
+  }, [setAuthData, user?.id, pathname]);
 
   const isLoginPage = pathname === "/login";
 
