@@ -1,12 +1,12 @@
 import { useEffect, type ReactNode } from "react";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 import { AuthProvider } from "~/Contexts/AuthContext";
 import AuthGuard from "~/Guards/AuthGuard";
 import { handleConnectionStatus } from "~/utils/connectivity";
 
-import { App as CapacitorApp } from "@capacitor/app";
-import { SplashScreen } from "@capacitor/splash-screen";
-import useAttachBackBtn from "~/hooks/useAttachBackBtn";
+// import { App as CapacitorApp } from "@capacitor/app";
+// import { SplashScreen } from "@capacitor/splash-screen";
+// import useAttachBackBtn from "~/hooks/useAttachBackBtn";
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   useEffect(() => {
@@ -18,31 +18,31 @@ export default function AppLayout({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  useEffect(() => {
-    const hideSplashLoader = () => {
-      SplashScreen.hide();
-    };
-    hideSplashLoader();
-    document.addEventListener("DOMContentLoaded", hideSplashLoader);
-    return () =>
-      document.removeEventListener("DOMContentLoaded", hideSplashLoader);
-  }, []);
+  // useEffect(() => {
+  //   const hideSplashLoader = () => {
+  //     SplashScreen.hide();
+  //   };
+  //   hideSplashLoader();
+  //   document.addEventListener("DOMContentLoaded", hideSplashLoader);
+  //   return () =>
+  //     document.removeEventListener("DOMContentLoaded", hideSplashLoader);
+  // }, []);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useAttachBackBtn(({ canGoBack }) => {
-    const body = document.body;
+  // useAttachBackBtn(({ canGoBack }) => {
+  //   const body = document.body;
 
-    const isPopoverOpen =
-      !!body.querySelector("span[data-radix-focus-guard]") ||
-      body.getAttribute("data-scroll-locked") === "1";
+  //   const isPopoverOpen =
+  //     !!body.querySelector("span[data-radix-focus-guard]") ||
+  //     body.getAttribute("data-scroll-locked") === "1";
 
-    if (isPopoverOpen) return;
-    if (canGoBack) navigate(-1);
-    else {
-      CapacitorApp.minimizeApp();
-    }
-  }, []);
+  //   if (isPopoverOpen) return;
+  //   if (canGoBack) navigate(-1);
+  //   else {
+  //     CapacitorApp.minimizeApp();
+  //   }
+  // }, []);
 
   return (
     <AuthProvider>
