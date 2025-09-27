@@ -43,7 +43,11 @@ export const Modal = ({
         )}
         onInteractOutside={(e) => e.preventDefault()}
       >
-        <DialogHeader className="[&+button>svg]:max-sm:size-6">
+        <DialogHeader
+          className={cn("[&+button>svg]:max-sm:size-6", {
+            "[&+button>svg]:hidden": onClose === undefined,
+          })}
+        >
           {title && <DialogTitle className="text-xl">{title}</DialogTitle>}
         </DialogHeader>
         <hr className="my-3 bg-slate-300" />

@@ -20,6 +20,7 @@ export default function FormModal({
       isOpen={isOpen}
       toggle={(isOpen) => setIsOpen(isOpen ?? false)}
       trigger={trigger}
+      onClose={() => setIsOpen(false)}
     >
       {children}
     </Modal>
