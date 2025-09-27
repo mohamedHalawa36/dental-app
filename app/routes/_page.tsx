@@ -14,7 +14,7 @@ export default function PageLayout() {
   const hasNew = activeLink?.addNew;
 
   return (
-    <div className="flex h-full w-full flex-col lg:p-4">
+    <div className="flex h-full w-full flex-col lg:p-4 xl:p-8">
       <div className="flex h-full">
         <div className="max-lg:hidden">
           <Sidebar />
