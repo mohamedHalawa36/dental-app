@@ -25,7 +25,10 @@ export const getAllAppointments = async (
   },
   signal: AbortSignal,
 ) => {
-  let query = supabase.from("appointments").select("*, patient:patients(*)");
+  let query = supabase
+    .from("appointments")
+    .select("*, patient:patients(*)")
+    .order("time", { ascending: true });
 
   if (date) query = query.eq("date", date);
   if (search.trim().length > 0)
@@ -51,7 +54,8 @@ export const getDoctorAppointments = async (
   let query = supabase
     .from("appointments")
     .select("*, patient:patients(*)")
-    .eq("doctor_id", doctorId);
+    .eq("doctor_id", doctorId)
+    .order("time", { ascending: true });
 
   if (date) query = query.eq("date", date);
   if (search.trim().length > 0)
@@ -66,7 +70,8 @@ export const getAppointment = async (appointmentIid: string) => {
   return await supabase
     .from("appointments")
     .select("*, patient:patients(*)")
-    .eq("id", appointmentIid);
+    .eq("id", appointmentIid)
+    .order("time", { ascending: true });
 };
 
 export const addAppointment = async (values: BookApointmentApiData) => {
