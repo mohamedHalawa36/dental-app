@@ -57,7 +57,7 @@ export default function AppointmentForm({
       initialValues={initialValues}
       validationSchema={bookApointmentSchema}
       onSubmit={(values) => {
-        const { availableDays, ...submitValues } = values;
+        const { availableDays, doctor, ...submitValues } = values;
         mutate(submitValues);
       }}
       enableReinitialize
