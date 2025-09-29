@@ -30,7 +30,7 @@ export default function CancelAppointmentBtn({
       isOpen={isOpen}
       toggle={(isOpen) => setIsOpen(isOpen ?? false)}
       trigger={
-        <div className="h-fit rounded-xl border border-secondary px-5 py-2 text-sm font-medium text-secondary transition hover:bg-secondary hover:text-white">
+        <div className="h-fit rounded-xl border border-secondary px-4 py-1.5 text-sm font-medium text-secondary transition hover:bg-secondary hover:text-white">
           إلغاء
         </div>
       }
