@@ -10,6 +10,7 @@ import PatientOptions from "./PatientOptions";
 import PhoneOptions from "./PhoneOptions";
 import useAuth from "~/hooks/useAuth";
 import PatientDetailsLink from "./PatientDetailsLink";
+import Doctor from "../icons/Doctor";
 
 export default function PatientCard(props: PatientCardProps) {
   const [isBookingAppointment, setIsBookingAppointment] = useState(false);
@@ -30,37 +31,43 @@ export default function PatientCard(props: PatientCardProps) {
           </h4>
         </div>
         {!isPatientVariant && (
-          <div className="flex flex-col">
-            <div className="-mb-1 flex items-center gap-1">
-              <span
-                style={{ direction: "ltr" }}
-                className="text-sm font-semibold text-foreground"
-              >
-                {!isPatientVariant && props.time ? props.time : "--:--"}
-              </span>
-              <Clock className="-me-0.5 size-6" />
+          <div className="flex flex-col items-end gap-0.5">
+            <div className="flex items-center gap-0.5 text-xs font-semibold">
+              {props.doctor.name}
+              <Doctor className="size-5" />
             </div>
-            {canUpdatePatient ? (
-              !isBeforeToday(new Date(props.date)) ? (
-                <FormModal
-                  title="تعديل موعد"
-                  isOpen={isBookingAppointment}
-                  setIsOpen={setIsBookingAppointment}
-                  trigger={
-                    <span className="inline-flex w-full self-start text-sm font-semibold text-primary transition-all hover:text-secondary hover:underline max-sm:text-xs">
-                      تغيير
-                    </span>
-                  }
+            <div className="flex items-center gap-1.5">
+              {canUpdatePatient ? (
+                !isBeforeToday(new Date(props.date)) ? (
+                  <FormModal
+                    title="تعديل موعد"
+                    isOpen={isBookingAppointment}
+                    setIsOpen={setIsBookingAppointment}
+                    trigger={
+                      <span className="inline-flex w-full self-start text-xs font-semibold text-primary transition-all hover:text-secondary hover:underline max-sm:text-xs">
+                        تغيير
+                      </span>
+                    }
+                  >
+                    <AppointmentForm
+                      {...{
+                        setIsOpen: setIsBookingAppointment,
+                        appointmentId: props.appointmentId,
+                      }}
+                    />
+                  </FormModal>
+                ) : null
+              ) : null}
+              <div className="-mb-1 flex items-center gap-1">
+                <span
+                  style={{ direction: "ltr" }}
+                  className="text-sm font-medium text-foreground"
                 >
-                  <AppointmentForm
-                    {...{
-                      setIsOpen: setIsBookingAppointment,
-                      appointmentId: props.appointmentId,
-                    }}
-                  />
-                </FormModal>
-              ) : null
-            ) : null}
+                  {!isPatientVariant && props.time ? props.time : "--:--"}
+                </span>
+                <Clock className="-me-0.5 size-5" />
+              </div>
+            </div>
           </div>
         )}
 

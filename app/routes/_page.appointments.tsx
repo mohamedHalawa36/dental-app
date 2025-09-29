@@ -50,11 +50,12 @@ export default function Appointments() {
         <RenderData {...{ isEmpty, isFetching, isError }}>
           <CardsList className="flex-1">
             {filteredAppointments?.map(
-              ({ id, patient, time, date }) =>
+              ({ id, patient, time, date, doctor }) =>
                 patient && (
                   <PatientCard
                     key={id}
                     patient={patient}
+                    doctor={doctor}
                     variant={PATIENT_CARD_TYPES.APPOINTMENT}
                     {...{ time: formatTime(time), date, appointmentId: id }}
                   />

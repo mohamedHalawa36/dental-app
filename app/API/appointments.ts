@@ -27,7 +27,13 @@ export const getAllAppointments = async (
 ) => {
   let query = supabase
     .from("appointments")
-    .select("*, patient:patients(*)")
+    .select(
+      `
+      *,
+      patient:patients(*),
+      doctor:profiles(id,name)
+    `,
+    )
     .order("time", { ascending: true });
 
   if (date) query = query.eq("date", date);
@@ -53,7 +59,13 @@ export const getDoctorAppointments = async (
 ) => {
   let query = supabase
     .from("appointments")
-    .select("*, patient:patients(*)")
+    .select(
+      `
+      *,
+      patient:patients(*),
+      doctor:profiles(id,name)
+    `,
+    )
     .eq("doctor_id", doctorId)
     .order("time", { ascending: true });
 
@@ -69,7 +81,13 @@ export const getDoctorAppointments = async (
 export const getAppointment = async (appointmentIid: string) => {
   return await supabase
     .from("appointments")
-    .select("*, patient:patients(*)")
+    .select(
+      `
+      *,
+      patient:patients(*),
+      doctor:profiles(id,name)
+    `,
+    )
     .eq("id", appointmentIid)
     .order("time", { ascending: true });
 };

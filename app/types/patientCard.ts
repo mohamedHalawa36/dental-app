@@ -14,6 +14,10 @@ interface AppointmentPatientCardProps extends BasePatientCardProps {
   time: string | null;
   date: string;
   appointmentId: string;
+  doctor: {
+    id: string;
+    name: string;
+  };
 }
 
 interface PatientTypeCardProps extends BasePatientCardProps {
