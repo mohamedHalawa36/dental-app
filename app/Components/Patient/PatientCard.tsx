@@ -10,7 +10,6 @@ import PatientOptions from "./PatientOptions";
 import PhoneOptions from "./PhoneOptions";
 import useAuth from "~/hooks/useAuth";
 import PatientDetailsLink from "./PatientDetailsLink";
-import Doctor from "../icons/Doctor";
 
 export default function PatientCard(props: PatientCardProps) {
   const [isBookingAppointment, setIsBookingAppointment] = useState(false);

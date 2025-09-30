@@ -1,7 +1,6 @@
 import Appointment from "~/Components/icons/Appointment";
 import Home from "~/Components/icons/Home";
 import Patient from "~/Components/icons/Patient";
-import Person from "../icons/Person";
 import { Users } from "../icons/Users";
 
 export const nurseLinks = [
