@@ -15,7 +15,7 @@ export default function BookAppointmentBtn({
         className,
       )}
     >
-      موعد جديد
+      حجز موعد
     </span>
   );
 }

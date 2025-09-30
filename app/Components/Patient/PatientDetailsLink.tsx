@@ -6,11 +6,13 @@ export default function PatientDetailsLink({
   PatientId: string;
 }) {
   return (
-    <Link
-      to={`/patients/${PatientId}`}
-      className="text-sm font-semibold text-primary transition-all hover:underline hover:underline-offset-4"
-    >
-      تفاصيل
-    </Link>
+    <></>
+    // Disable patient page link until it's implemented
+    // <Link
+    //   to={`/patients/${PatientId}`}
+    //   className="text-sm font-semibold text-primary transition-all hover:underline hover:underline-offset-4"
+    // >
+    //   تفاصيل
+    // </Link>
   );
 }

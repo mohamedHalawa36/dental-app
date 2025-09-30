@@ -42,6 +42,7 @@ export default function ResetPasswordForm() {
             type="password"
             disabled={isPending}
             autoComplete="otp"
+            autoFocus
           />
           <InputField
             className="[&>div]:border-primary/50 [&>div]:transition"

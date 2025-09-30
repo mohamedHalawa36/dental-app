@@ -80,10 +80,11 @@ export default function PatientOptions({
           align="end"
           className="-mt-1 flex h-fit w-40 !animate-none flex-col overflow-hidden rounded-lg bg-white p-0 drop-shadow-md !duration-0"
         >
-          <OptionBtn
+          {/* Disable patient page link until it's implemented */}
+          {/* <OptionBtn
             label="تفاصيل"
             icon={<Details className="size-[22.5px]" />}
-          />
+          /> */}
 
           {showMutationOptions && (
             <>
