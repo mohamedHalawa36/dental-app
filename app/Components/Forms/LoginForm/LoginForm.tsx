@@ -63,6 +63,7 @@ export default function LoginForm() {
             label="البريد الإلكتروني"
             disabled={isPending}
             autoComplete="on"
+            autoFocus
           />
           <InputField
             className="[&>div]:border-primary/50 [&>div]:transition"
