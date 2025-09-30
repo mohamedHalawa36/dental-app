@@ -59,7 +59,7 @@ export default function PatientForm({
               isSubmitting={isPending}
               submitBtnLabel={patientId ? "تعديل" : "إضافة"}
             >
-              <InputField label="الاسم" name="name" />
+              <InputField label="الاسم" name="name" autoFocus />
               <InputField
                 onKeyDown={numberOnly}
                 label="العمر"

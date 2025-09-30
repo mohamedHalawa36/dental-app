@@ -39,7 +39,7 @@ export default function UserForm({ setIsOpen }: UserFormProps) {
         submitBtnLabel={"إضافة"}
         isSubmitting={isPending}
       >
-        <InputField label="الاسم" name="name" />
+        <InputField label="الاسم" name="name" autoFocus />
         <SelectField
           label="الوظيفة"
           name="role"
