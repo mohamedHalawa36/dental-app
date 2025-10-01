@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Navigate, useLocation } from "react-router";
 import { toast } from "sonner";
-import { getUserProfile, getUserSession } from "~/API/auth";
+import { getUserProfile, getUserSession, logoutUser } from "~/API/auth";
 import { messages } from "~/API/messages";
 import PageLoader from "~/Components/common/Loaders/PageLoader";
 import useAuth from "~/hooks/useAuth";
@@ -37,11 +37,14 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
           const { data: userProfile, error } = await getUserProfile(
             supabaseUser.id,
           );
-          if (!error && userProfile.is_active)
+          if (!error && userProfile.is_active) {
             setAuthData({
               user: { ...supabaseUser, ...userProfile },
               session: data.session,
             });
+          } else {
+            logoutUser();
+          }
         }
       }
       setIsChecking(false);
