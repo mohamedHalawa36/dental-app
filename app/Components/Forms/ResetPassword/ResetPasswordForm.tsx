@@ -55,11 +55,12 @@ export default function ResetPasswordForm() {
 
           <Button
             variant="primary"
-            label="تغيير كلمة السر"
             className="mt-5 w-full lg:w-fit"
             disabled={isPending}
             type="submit"
-          />
+          >
+            تغيير كلمة السر
+          </Button>
         </div>
       </Form>
     </Formik>

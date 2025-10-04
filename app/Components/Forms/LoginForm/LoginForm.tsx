@@ -76,11 +76,12 @@ export default function LoginForm() {
           {serverErr && <ServerErr>{serverErr}</ServerErr>}
           <Button
             variant="primary"
-            label="تسجيل الدخول"
             className="w-full"
             disabled={isPending}
             type="submit"
-          />
+          >
+            تسجيل الدخول
+          </Button>
         </div>
       </Form>
     </Formik>
