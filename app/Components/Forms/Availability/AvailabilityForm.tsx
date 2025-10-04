@@ -83,6 +83,7 @@ export default function AvailabilityForm({
               label="اليوم"
               placeholder="اختر اليوم"
             />
+            <div />
             <InputField label="من" name="start_time" type="time" />
             <InputField label="إلى" name="end_time" type="time" />
           </MainFormLayout>
