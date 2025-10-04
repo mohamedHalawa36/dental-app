@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import type { ColumnDef } from "@tanstack/react-table";
-import { useContext } from "react";
 import { getAllUsers } from "~/API/users";
 import FormModal from "~/Components/common/Modals/FormModal";
 import RenderData from "~/Components/common/RenderData";
@@ -8,17 +7,13 @@ import Table from "~/Components/common/Table/Table";
 import UserForm from "~/Components/Forms/User/UserForm";
 import Check from "~/Components/icons/Check";
 import X from "~/Components/icons/X";
-import { Switch } from "~/Components/ui/switch";
 import ActivateUserModal from "~/Components/Users/ActivateUserModal";
 import DeleteUserModal from "~/Components/Users/DeleteUserModal";
-import { PageContext } from "~/Contexts/PageContext";
-import useAuth from "~/hooks/useAuth";
+import usePageContext from "~/hooks/usePageContext";
 import type { UserData } from "~/types/apiData";
 
 export default function UsersPage() {
-  const { addNewOpen, setAddNewOpen } = useContext(PageContext);
-
-  const { userId } = useAuth();
+  const { addNewOpen, setAddNewOpen } = usePageContext();
 
   const { data, isFetching, isError } = useQuery({
     queryKey: ["users"],

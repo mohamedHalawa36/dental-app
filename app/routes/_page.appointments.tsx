@@ -6,14 +6,14 @@ import { DateTimePicker } from "~/Components/common/DatePicker";
 import RenderData from "~/Components/common/RenderData";
 import Doctor from "~/Components/icons/Doctor";
 import PatientCard from "~/Components/Patient/PatientCard";
-import { PageContext } from "~/Contexts/PageContext";
 import useAuth from "~/hooks/useAuth";
+import usePageContext from "~/hooks/usePageContext";
 import { formatApiDate, formatTime } from "~/lib/utils";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
 export default function Appointments() {
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const { search } = useContext(PageContext);
+  const { search } = usePageContext();
   const { isDoctor, isAdmin, userId } = useAuth();
   const isRegularDoctor = isDoctor && !isAdmin;
 

@@ -1,11 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router";
 import Input from "~/Components/common/Input";
 import Sheet from "~/Components/common/Sheet";
 import AddNew from "~/Components/icons/AddNew";
 import Search from "~/Components/icons/Search";
 import Sidebar from "~/Components/Sidebar/Sidebar";
-import { PageContext } from "~/Contexts/PageContext";
+import usePageContext from "~/hooks/usePageContext";
 
 type HeaderProps = {
   title: string;
@@ -19,7 +19,7 @@ export default function PageHeader({ title, addBtn }: HeaderProps) {
     setAddNewOpen,
     setIsMobileSidebarOpen,
     isMobileSidebarOpen,
-  } = useContext(PageContext);
+  } = usePageContext();
 
   // useAttachBackBtn();
 

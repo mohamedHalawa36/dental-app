@@ -8,13 +8,13 @@ import FormModal from "~/Components/common/Modals/FormModal";
 import RenderData from "~/Components/common/RenderData";
 import Table from "~/Components/common/Table/Table";
 import AvailabilityForm from "~/Components/Forms/Availability/AvailabilityForm";
-import { PageContext } from "~/Contexts/PageContext";
 import useAuth from "~/hooks/useAuth";
+import usePageContext from "~/hooks/usePageContext";
 import { getArabicDayName, getFormattedTime } from "~/lib/utils";
 import type { AvailabilityData } from "~/types/apiData";
 
 export default function AvailabilityPage() {
-  const { addNewOpen, setAddNewOpen } = useContext(PageContext);
+  const { addNewOpen, setAddNewOpen } = usePageContext();
 
   const { userId } = useAuth();
 

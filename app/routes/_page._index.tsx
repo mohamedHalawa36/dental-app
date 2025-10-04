@@ -1,15 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
 import { getAllAppointments } from "~/API/appointments";
 import CardsList from "~/Components/common/CardsList";
 import RenderData from "~/Components/common/RenderData";
 import PatientCard from "~/Components/Patient/PatientCard";
-import { PageContext } from "~/Contexts/PageContext";
+import usePageContext from "~/hooks/usePageContext";
 import { formatApiDate, formatTime } from "~/lib/utils";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
 export default function Home() {
-  const { search } = useContext(PageContext);
+  const { search } = usePageContext();
 
   const todayDate = new Date();
   const { isFetching, data, isError } = useQuery({
@@ -30,9 +29,10 @@ export default function Home() {
     <RenderData {...{ isEmpty, isFetching, isError }}>
       <CardsList className="h-full">
         {appointments?.map(
-          ({ id, patient, time, date }) =>
+          ({ id, patient, time, date, doctor }) =>
             patient && (
               <PatientCard
+                doctor={doctor}
                 key={id}
                 patient={patient}
                 variant={PATIENT_CARD_TYPES.APPOINTMENT}
