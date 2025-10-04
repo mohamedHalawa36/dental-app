@@ -1,3 +1,4 @@
+import type { PostgrestSingleResponse } from "@supabase/supabase-js";
 import type { Database } from "./database.types";
 
 export type PatientApiData = Database["public"]["Tables"]["patients"]["Row"];
@@ -44,3 +45,16 @@ export type CreateUserData =
   };
 
 export type UserRole = Database["public"]["Enums"]["user_role"];
+
+export type SelectPatientsResponse = PostgrestSingleResponse<
+  {
+    address: string;
+    age: number;
+    created_at: string;
+    id: string;
+    name: string;
+    phone: string;
+    phone_has_whatsapp: boolean;
+    user_id: string;
+  }[]
+>;

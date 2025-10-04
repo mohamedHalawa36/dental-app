@@ -1,37 +1,64 @@
-import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
-import { getAllPatients } from "~/API/patient";
+import Button from "~/Components/common/Button";
 import CardsList from "~/Components/common/CardsList";
 import FormModal from "~/Components/common/Modals/FormModal";
 import RenderData from "~/Components/common/RenderData";
+import Spinner from "~/Components/common/Spinner";
 import PatientForm from "~/Components/Forms/PatientForms/PatientForm";
 import PatientCard from "~/Components/Patient/PatientCard";
-import { PageContext } from "~/Contexts/PageContext";
+import useInfinitePatients from "~/hooks/useInfinitePatients";
+import usePageContext from "~/hooks/usePageContext";
 import { PATIENT_CARD_TYPES } from "~/types/patientCard";
 
 export default function Patients() {
-  const { search, addNewOpen, setAddNewOpen } = useContext(PageContext);
+  const { addNewOpen, setAddNewOpen } = usePageContext();
 
-  const { isFetching, data, refetch, isError } = useQuery({
-    queryKey: ["patients", search],
-    queryFn: ({ signal }) => getAllPatients(search, signal),
+  const {
+    isPending,
+    data,
+    refetch,
+    isError,
+    hasNextPage,
+    fetchNextPage,
+    setPage,
+    isFetchingNextPage,
+  } = useInfinitePatients({
+    pageSize: 15,
   });
 
-  const patients = data?.data;
+  const patients = data?.pages.flatMap((page) => page.data);
   const isEmpty = patients?.length === 0;
 
   return (
     <>
-      <RenderData {...{ isEmpty, isFetching, isError }}>
-        <CardsList className="h-full">
-          {patients?.map((patient) => (
-            <PatientCard
-              key={patient.id}
-              variant={PATIENT_CARD_TYPES.PATIENT}
-              patient={patient}
-            />
-          ))}
-        </CardsList>
+      <RenderData {...{ isEmpty, isFetching: isPending, isError }}>
+        <div className="flex h-full flex-col gap-3 overflow-auto">
+          <CardsList className="flex-1">
+            {patients?.map((patient) => (
+              <PatientCard
+                key={patient?.id}
+                variant={PATIENT_CARD_TYPES.PATIENT}
+                patient={patient!}
+              />
+            ))}
+            {hasNextPage && (
+              <Button
+                variant="secondary"
+                className="col-span-full mx-auto my-1 flex w-full items-center justify-center rounded-lg p-1.5 text-sm disabled:bg-background disabled:hover:bg-transparent sm:w-1/3"
+                onClick={() => {
+                  setPage((page) => page + 1);
+                  fetchNextPage();
+                }}
+                disabled={!hasNextPage || isFetchingNextPage}
+              >
+                {isFetchingNextPage ? (
+                  <Spinner className="size-6" />
+                ) : (
+                  "تحميل المزيد"
+                )}
+              </Button>
+            )}
+          </CardsList>
+        </div>
       </RenderData>
 
       <FormModal

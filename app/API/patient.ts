@@ -13,14 +13,25 @@ const { conflict: conflictMsg } = messages.error.patient;
 
 export const getAllPatients = async (
   search: string = "",
+  page: number,
+  pageSize: number,
   signal?: AbortSignal,
 ) => {
-  let query = supabase.from("patients").select("*");
+  const to = page * pageSize;
+  const from = to - pageSize;
+
+  let query = supabase
+    .from("patients")
+    .select("*", { count: "exact" })
+    .order("created_at", { ascending: false })
+    .range(from, to);
+
   if (search.trim().length > 0) query = query.ilike("name", `%${search}%`);
 
   if (signal) return await query.abortSignal(signal);
 
-  return await query;
+  const res = await query;
+  return res;
 };
 
 export const getPatient = async (id: string) => {
