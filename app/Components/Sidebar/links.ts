@@ -28,7 +28,6 @@ export const nurseLinks = [
 ];
 
 export const doctorsLinks = [
-  ...nurseLinks,
   {
     id: "availability",
     Icon: Appointment,
