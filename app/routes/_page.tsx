@@ -23,7 +23,7 @@ export default function PageLayout() {
           <PageProvider>
             <div className="flex h-full w-full flex-col sm:gap-3 sm:px-5 sm:pb-3 sm:pt-4">
               <PageHeader title={pageTitle as string} addBtn={hasNew} />
-              <div className="flex-1 overflow-auto py-1 pe-1">
+              <div className="flex-1 overflow-auto py-1">
                 <Outlet />
               </div>
             </div>

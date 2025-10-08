@@ -13,7 +13,7 @@ export default function useUserLinks() {
     ...doctorsLinks,
   ];
 
-  const adminDoctorLinks = [...nurseLinks, ...doctorsLinks];
+  const adminDoctorLinks = [...nurseLinks, ...doctorsLinks, ...adminLinks];
 
   if (isDoctor) {
     if (isAdmin) return adminDoctorLinks;
