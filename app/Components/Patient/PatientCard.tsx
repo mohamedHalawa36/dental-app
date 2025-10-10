@@ -14,7 +14,10 @@ import PatientDetailsLink from "./PatientDetailsLink";
 export default function PatientCard(props: PatientCardProps) {
   const [isBookingAppointment, setIsBookingAppointment] = useState(false);
   const { patient, variant } = props;
-  const { name, phone, phone_has_whatsapp } = patient;
+
+  const patientName = patient?.name ?? "";
+  const patientPhone = patient?.phone ?? "";
+  const patientPhoneHasWhats = patient?.phone_has_whatsapp ?? false;
 
   const isPatientVariant = variant === PATIENT_CARD_TYPES.PATIENT;
   const { isAdmin, isNurse } = useAuth();
@@ -26,7 +29,7 @@ export default function PatientCard(props: PatientCardProps) {
       <div className="flex items-start justify-between gap-2 max-lg:justify-center max-lg:gap-2">
         <div className="flex flex-1 flex-col gap-1 text-foreground group-hover:text-primary">
           <h4 className="h-10 text-sm font-bold lg:h-12 lg:text-base">
-            {name}
+            {patientName}
           </h4>
         </div>
         {!isPatientVariant && (
@@ -67,7 +70,7 @@ export default function PatientCard(props: PatientCardProps) {
         {showPatientControls && <PatientOptions patient={patient} />}
       </div>
       <div className="flex items-end justify-between max-lg:gap-2">
-        <PhoneOptions phone={phone} hasWhatsapp={phone_has_whatsapp} />
+        <PhoneOptions phone={patientPhone} hasWhatsapp={patientPhoneHasWhats} />
 
         {!isPatientVariant ? (
           canUpdatePatient ? (
