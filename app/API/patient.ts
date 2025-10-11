@@ -20,13 +20,16 @@ export const getAllPatients = async (
   const to = page * pageSize;
   const from = to - pageSize;
 
+  const isSearchingForPhone = search.length > 0 && !isNaN(Number(search));
+
   let query = supabase
     .from("patients")
     .select("*", { count: "exact" })
     .order("created_at", { ascending: false })
     .range(from, to);
 
-  if (search.trim().length > 0) query = query.ilike("name", `%${search}%`);
+  if (search.trim().length > 0)
+    query = query.ilike(isSearchingForPhone ? "phone" : "name", `%${search}%`);
 
   if (signal) return await query.abortSignal(signal);
 
