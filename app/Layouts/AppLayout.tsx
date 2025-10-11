@@ -19,32 +19,6 @@ export default function AppLayout({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const hideSplashLoader = () => {
-  //     SplashScreen.hide();
-  //   };
-  //   hideSplashLoader();
-  //   document.addEventListener("DOMContentLoaded", hideSplashLoader);
-  //   return () =>
-  //     document.removeEventListener("DOMContentLoaded", hideSplashLoader);
-  // }, []);
-
-  // const navigate = useNavigate();
-
-  // useAttachBackBtn(({ canGoBack }) => {
-  //   const body = document.body;
-
-  //   const isPopoverOpen =
-  //     !!body.querySelector("span[data-radix-focus-guard]") ||
-  //     body.getAttribute("data-scroll-locked") === "1";
-
-  //   if (isPopoverOpen) return;
-  //   if (canGoBack) navigate(-1);
-  //   else {
-  //     CapacitorApp.minimizeApp();
-  //   }
-  // }, []);
-
   return (
     <AuthProvider>
       <AuthGuard>
