@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import supabase from "./supabase";
+import supabase, { ApiError } from "./supabase";
 import { messages, somethingWentWrongMsg } from "./messages";
 import type { CreateUserData } from "~/types/apiData";
 
@@ -60,7 +60,7 @@ export const createUser = async (
   const payload = await resp.json();
   if (!resp.ok) {
     toast.error(somethingWentWrongMsg);
-    throw new Error(payload?.error || "Failed to create user");
+    throw new ApiError(payload?.error, resp.status, payload.code);
   }
 
   toast.success(createMsg);

@@ -13,9 +13,10 @@ import SelectField from "../Fields/SelectField";
 
 type UserFormProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  usersEmails: string[];
 };
 
-export default function UserForm({ setIsOpen }: UserFormProps) {
+export default function UserForm({ setIsOpen, usersEmails }: UserFormProps) {
   const queryClient = useQueryClient();
   const accessToken = useAuth().authData?.session?.access_token;
 
@@ -30,7 +31,7 @@ export default function UserForm({ setIsOpen }: UserFormProps) {
   return (
     <Formik
       initialValues={initialUserValue}
-      validationSchema={createUsertSchema}
+      validationSchema={createUsertSchema(usersEmails)}
       onSubmit={(values) => mutate(values)}
       validateOnChange={true}
     >

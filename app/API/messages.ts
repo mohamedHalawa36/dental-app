@@ -43,6 +43,9 @@ export const messages = {
     availability: {
       conflict: "لديك موعد في هذا اليوم بالفعل",
     },
+    user: {
+      emailExists: "البريد الإلكتروني مستخدم بالفعل",
+    },
     connection: "لايوجد اتصال بالإنترنت",
   },
 };

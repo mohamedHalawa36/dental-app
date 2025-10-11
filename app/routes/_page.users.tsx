@@ -89,6 +89,8 @@ export default function UsersPage() {
     },
   ];
 
+  const usersEmails = users.map((user) => user.email);
+
   return (
     <>
       <RenderData {...{ isEmpty, isFetching, isError }}>
@@ -99,7 +101,7 @@ export default function UsersPage() {
         isOpen={addNewOpen}
         setIsOpen={setAddNewOpen}
       >
-        <UserForm setIsOpen={setAddNewOpen} />
+        <UserForm usersEmails={usersEmails} setIsOpen={setAddNewOpen} />
       </FormModal>
     </>
   );
