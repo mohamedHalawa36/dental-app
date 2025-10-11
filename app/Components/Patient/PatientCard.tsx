@@ -77,11 +77,11 @@ export default function PatientCard(props: PatientCardProps) {
             !isBeforeToday(new Date(props.date)) ? (
               <CancelAppointmentBtn
                 appointmentId={props.appointmentId}
-                patientName={patient.name}
+                patientName={patient?.name ?? ""}
               />
             ) : null
           ) : (
-            <PatientDetailsLink PatientId={patient.id} />
+            <PatientDetailsLink PatientId={patient?.id ?? ""} />
           )
         ) : null}
         {isPatientVariant ? (
@@ -95,12 +95,12 @@ export default function PatientCard(props: PatientCardProps) {
               <AppointmentForm
                 {...{
                   setIsOpen: setIsBookingAppointment,
-                  patientData: patient,
+                  patientData: patient ?? undefined,
                 }}
               />
             </FormModal>
           ) : (
-            <PatientDetailsLink PatientId={patient.id} />
+            <PatientDetailsLink PatientId={patient?.id ?? ""} />
           )
         ) : null}
       </div>

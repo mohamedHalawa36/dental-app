@@ -6,7 +6,7 @@ export enum PATIENT_CARD_TYPES {
 }
 
 interface BasePatientCardProps {
-  patient: PatientApiData;
+  patient: PatientApiData | null;
 }
 
 interface AppointmentPatientCardProps extends BasePatientCardProps {

@@ -8,7 +8,6 @@ import ConfirmModal from "../common/Modals/ConfirmModal";
 import FormModal from "../common/Modals/FormModal";
 import PatientForm from "../Forms/PatientForms/PatientForm";
 import Delete from "../icons/Delete";
-import Details from "../icons/Details";
 import Pencil from "../icons/Pencil";
 import ThreeDots from "../icons/ThreeDots";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -16,7 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 export default function PatientOptions({
   patient,
 }: {
-  patient: PatientApiData;
+  patient: PatientApiData | null;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -26,8 +25,8 @@ export default function PatientOptions({
 
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  const patientId = patient.id;
-  const patientName = patient.name;
+  const patientId = patient?.id;
+  const patientName = patient?.name;
 
   const queryClient = useQueryClient();
   const { mutate: deletePatient, isPending: isDeletingPatient } = useMutation<
@@ -65,7 +64,7 @@ export default function PatientOptions({
   }, [isOpen]);
 
   const showMutationOptions =
-    isAdmin || isNurse || (isDoctor && userId === patient.user_id);
+    isAdmin || isNurse || (isDoctor && userId === patient?.user_id);
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
@@ -105,7 +104,7 @@ export default function PatientOptions({
                     icon={<Delete className="size-[22.5px] fill-red-600" />}
                   />
                 }
-                confirmCallBack={() => deletePatient(patientId)}
+                confirmCallBack={() => deletePatient(patientId ?? "")}
                 cancelCallBack={() => setIsDeleting(false)}
                 isActionsDisabled={isDeletingPatient}
               >
