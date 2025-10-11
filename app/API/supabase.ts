@@ -3,7 +3,6 @@ import { toast } from "sonner";
 import type { Database } from "~/types/database.types";
 import { messages, somethingWentWrongToastId } from "./messages";
 import { logoutUser } from "./auth";
-import { redirect } from "react-router";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ?? "";
 const supabaseKey = import.meta.env.VITE_SUPABASE_API_KEY ?? "";
@@ -27,7 +26,7 @@ const interceptor = async (
       throw new Error("Not Authorized");
     } else if (status === 401) {
       await logoutUser();
-      redirect("/login");
+      window.location.href = "/login";
       throw new Error("Not Authintecated");
     } else {
       toast.error(somethingWentWrong, {
