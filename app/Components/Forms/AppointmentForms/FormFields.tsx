@@ -92,6 +92,7 @@ export default function FormFields({ patientName }: { patientName: string }) {
         type="time"
         step={900}
         disabled={isFetchingAvailabilities || isDateTimeDisabled}
+        optional
       />
     </>
   );
