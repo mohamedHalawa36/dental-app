@@ -11,6 +11,7 @@ import MainFormLayout from "~/Layouts/MainFormLayout";
 import type { PatientApiData } from "~/types/apiData";
 import { bookApointmentSchema, initialAppointmentValues } from "./schemas";
 import FormFields from "./FormFields";
+import LoadingError from "~/Components/common/LoadingError";
 
 type AppointmentFormProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -23,7 +24,11 @@ export default function AppointmentForm({
   patientData,
   appointmentId,
 }: AppointmentFormProps) {
-  const { isFetching: isAppointmentFetching, data: appointment } = useQuery({
+  const {
+    isFetching: isAppointmentFetching,
+    data: appointment,
+    isError,
+  } = useQuery({
     queryKey: ["appointment", appointmentId],
     queryFn: () => getAppointment(appointmentId ?? ""),
     enabled: !!appointmentId,
@@ -45,6 +50,8 @@ export default function AppointmentForm({
   });
 
   if (isAppointmentFetching) return <SectionLoader />;
+
+  if (isError) return <LoadingError />;
 
   const patientName = appointmentPatient?.name;
   const patientId = appointmentPatient?.id;

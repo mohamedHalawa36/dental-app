@@ -22,6 +22,7 @@ import PageLoader from "~/Components/common/Loaders/PageLoader";
 import MainFormLayout from "~/Layouts/MainFormLayout";
 import SelectField from "../Fields/SelectField";
 import InputField from "../Fields/InputField";
+import LoadingError from "~/Components/common/LoadingError";
 
 type AvailabilityFormProps = {
   recordId?: number;
@@ -38,7 +39,11 @@ export default function AvailabilityForm({
 
   const { userId } = useAuth();
 
-  const { data, isLoading: isDataLoading } = useQuery({
+  const {
+    data,
+    isLoading: isDataLoading,
+    isError,
+  } = useQuery({
     enabled: !!recordId,
     queryKey: ["availability", recordId],
     queryFn: () => getOneAvailability(userId!, recordId!),
@@ -55,6 +60,7 @@ export default function AvailabilityForm({
   });
 
   if (isDataLoading) return <PageLoader />;
+  if (isError) return <LoadingError />;
 
   return (
     <Formik

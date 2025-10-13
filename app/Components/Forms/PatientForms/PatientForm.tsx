@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Formik } from "formik";
-import { somethingWentWrongMsg } from "~/API/messages";
 import { addPatient, getPatient, updatePatient } from "~/API/patient";
 import SectionLoader from "~/Components/common/Loaders/SectionLoader";
 import MainFormLayout from "~/Layouts/MainFormLayout";
@@ -11,6 +10,7 @@ import CheckboxField from "../Fields/CheckboxField";
 import InputField from "../Fields/InputField";
 import { addPatientSchema, initialPatientValue } from "./schemas";
 import { Label } from "~/Components/ui/label";
+import LoadingError from "~/Components/common/LoadingError";
 
 export default function PatientForm({
   setIsOpen,
@@ -34,10 +34,7 @@ export default function PatientForm({
 
   if (isFetching) return <SectionLoader />;
 
-  if (isError)
-    return (
-      <p className="font-semibold text-red-500">{somethingWentWrongMsg}</p>
-    );
+  if (isError) return <LoadingError />;
 
   const patient = data?.data?.[0];
 
