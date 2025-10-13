@@ -36,11 +36,8 @@ export default function DeleteUserModal({ userId }: DeleteUserModalProps) {
       confirmLabel="حذف"
     >
       <p>هل أنت متأكد؟</p>
-      <p className="text-sm text-red-500">
-        سيتم حذف كل السجلات المرتبطة بهذا المستخدم &nbsp;
-      </p>
       <p className="font-medium text-primary">
-        اذا كنت تريد الاحتفاظ بالسجلات يمكنك إلغاء تفعيل الحساب فقط
+        اذا كنت تريد إيقاف الحساب مؤقتا يمكنك إلغاء تفعيل الحساب فقط
       </p>
     </ConfirmModal>
   );
