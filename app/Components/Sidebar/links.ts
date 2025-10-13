@@ -10,6 +10,7 @@ export const nurseLinks = [
     label: "الرئيسية",
     href: "/",
     addNew: false,
+    hasSearch: true,
   },
   {
     id: "patients",
@@ -17,6 +18,7 @@ export const nurseLinks = [
     label: "المرضى",
     href: "/patients",
     addNew: true,
+    hasSearch: true,
   },
   {
     id: "appointments",
@@ -24,6 +26,7 @@ export const nurseLinks = [
     label: "المواعيد",
     href: "/appointments",
     addNew: false,
+    hasSearch: true,
   },
 ];
 
@@ -34,6 +37,7 @@ export const doctorsLinks = [
     label: "مواعيدك المتاحة",
     href: "/availability",
     addNew: true,
+    hasSearch: false,
   },
 ];
 
@@ -44,5 +48,6 @@ export const adminLinks = [
     label: "المستخدمين",
     href: "/users",
     addNew: true,
+    hasSearch: false,
   },
 ];
