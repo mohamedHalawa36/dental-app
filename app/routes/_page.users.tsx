@@ -13,11 +13,11 @@ import usePageContext from "~/hooks/usePageContext";
 import type { UserData } from "~/types/apiData";
 
 export default function UsersPage() {
-  const { addNewOpen, setAddNewOpen } = usePageContext();
+  const { addNewOpen, setAddNewOpen, search } = usePageContext();
 
   const { data, isFetching, isError } = useQuery({
-    queryKey: ["users"],
-    queryFn: getAllUsers,
+    queryKey: ["users", search],
+    queryFn: async ({ signal }) => getAllUsers({ search, signal }),
   });
 
   const users = data?.data ?? [];

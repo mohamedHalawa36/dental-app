@@ -48,6 +48,6 @@ export const adminLinks = [
     label: "المستخدمين",
     href: "/users",
     addNew: true,
-    hasSearch: false,
+    hasSearch: true,
   },
 ];

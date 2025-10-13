@@ -13,9 +13,23 @@ const {
     },
   },
 } = messages;
-export const getAllUsers = async () => {
-  const response = await supabase.from("profiles").select("*");
-  return response;
+export const getAllUsers = async ({
+  search,
+  signal,
+}: {
+  search: string;
+  signal: AbortSignal;
+}) => {
+  let query = supabase.from("profiles").select("*");
+
+  if (search.trim().length > 0) {
+    query = query.ilike("name", `%${search}%`);
+  }
+
+  // Support abort signal
+  if (signal) query = query.abortSignal(signal);
+
+  return await query;
 };
 
 export const deleteUser = async (targetUserId: string, accessToken: string) => {
