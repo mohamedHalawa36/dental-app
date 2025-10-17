@@ -7,6 +7,11 @@ import { logoutUser } from "./auth";
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ?? "";
 const supabaseKey = import.meta.env.VITE_SUPABASE_API_KEY ?? "";
 
+const {
+  auth: { unAuth },
+  somethingWentWrong,
+} = messages.error;
+
 const interceptor = async (
   url: string | URL | globalThis.Request,
   options: RequestInit | undefined,
@@ -14,11 +19,12 @@ const interceptor = async (
   const response = await fetch(url, options);
   const { status } = response;
   const isGetRequest = options?.method === "GET";
+  const isRefreshToken = url
+    .toString()
+    .toLocaleLowerCase()
+    .includes("grant_type=refresh_token");
 
-  const {
-    auth: { unAuth },
-    somethingWentWrong,
-  } = messages.error;
+  if (!response.ok && isRefreshToken) throw new Error("Please Login");
 
   if (!response.ok && !isGetRequest) {
     if (status === 403) {
