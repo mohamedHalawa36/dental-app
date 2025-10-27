@@ -36,7 +36,7 @@ export default function PatientForm({
 
   if (isError) return <LoadingError />;
 
-  const patient = data?.data?.[0];
+  const patient = data?.data;
 
   return (
     <Formik

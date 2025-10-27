@@ -1,0 +1,90 @@
+import { useState } from "react";
+import PlusCircle from "../../icons/PlusCircle";
+import { Form, Formik } from "formik";
+import Doctor from "../../icons/Doctor";
+import useAuth from "~/hooks/useAuth";
+import { DateTimePicker } from "../../common/DatePicker";
+import Button from "../../common/Button";
+import { addNoteSchema } from "./schema";
+import { useMutation } from "@tanstack/react-query";
+import PageLoader from "~/Components/common/Loaders/PageLoader";
+
+type AddNoteFormProps = {
+  patientId: string;
+};
+
+export default function AddNoteForm({ patientId }: AddNoteFormProps) {
+  const [isAdding, setIsAdding] = useState(false);
+  const { userName, userId } = useAuth();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: () => {},
+  });
+
+  if (!isAdding)
+    return (
+      <button
+        onClick={() => setIsAdding(true)}
+        className="flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80"
+      >
+        <PlusCircle className="size-5" />
+        أضف ملاحظة
+      </button>
+    );
+
+  return (
+    <Formik
+      initialValues={{
+        doctor_id: userId,
+        patient_id: patientId,
+        date: new Date(),
+        note: "",
+      }}
+      validationSchema={addNoteSchema}
+      onSubmit={() => mutate()}
+    >
+      {({ values, setFieldValue }) => {
+        const { date } = values;
+
+        return (
+          <Form className="relative flex w-full flex-col gap-3">
+            {isPending && (
+              <PageLoader className="absolute inset-0 m-0 size-full bg-slate-100/50" />
+            )}
+
+            <div className="flex w-full flex-col gap-4 rounded-xl border border-gray-300 border-primary/40 p-3">
+              <div className="flex items-center justify-between text-gray-500">
+                <div className="flex items-center gap-1">
+                  <Doctor className="size-5" />
+                  <span className="text-sm">د/ {userName}</span>
+                </div>
+                <DateTimePicker
+                  value={date}
+                  onChange={(date) => setFieldValue("date", date)}
+                  className="w-fit text-sm text-primary [&>svg]:!size-5 [&>svg]:stroke-primary"
+                  granularity="day"
+                />
+              </div>
+              <textarea
+                placeholder="اكتب ملاحظاتك هنا"
+                className="rounded-xl border border-gray-300 bg-transparent p-2 text-foreground transition-all placeholder:text-sm focus:outline-primary"
+                name="note"
+                onChange={(e) => setFieldValue("name", e.target.value)}
+              />
+            </div>
+            <div className="ms-1 flex w-fit items-center gap-3">
+              <Button className="w-20 p-2 text-sm">حفظ</Button>
+              <Button
+                variant="secondary"
+                className="w-20 border-secondary p-2 text-sm text-secondary hover:bg-secondary hover:text-white"
+                onClick={() => setIsAdding(false)}
+              >
+                إلغاء
+              </Button>
+            </div>
+          </Form>
+        );
+      }}
+    </Formik>
+  );
+}

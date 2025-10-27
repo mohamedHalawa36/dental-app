@@ -38,7 +38,7 @@ export const getAllPatients = async (
 };
 
 export const getPatient = async (id: string) => {
-  return supabase.from("patients").select("*").eq("id", id);
+  return supabase.from("patients").select("*").eq("id", id).single();
 };
 
 export const addPatient = async (values: AddPatientApiData) => {
