@@ -11,6 +11,8 @@ import Delete from "../icons/Delete";
 import Pencil from "../icons/Pencil";
 import ThreeDots from "../icons/ThreeDots";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import Details from "../icons/Details";
+import { Link } from "react-router";
 
 export default function PatientOptions({
   patient,
@@ -79,11 +81,12 @@ export default function PatientOptions({
           align="end"
           className="-mt-1 flex h-fit w-40 !animate-none flex-col overflow-hidden rounded-lg bg-white p-0 drop-shadow-md !duration-0"
         >
-          {/* Disable patient page link until it's implemented */}
-          {/* <OptionBtn
-            label="تفاصيل"
-            icon={<Details className="size-[22.5px]" />}
-          /> */}
+          <Link to={`/patients/${patientId}`}>
+            <OptionBtn
+              label="تفاصيل"
+              icon={<Details className="size-[22.5px]" />}
+            />
+          </Link>
 
           {showMutationOptions && (
             <>
