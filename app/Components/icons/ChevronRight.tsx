@@ -14,7 +14,7 @@ export default function ChevronRight({ className }: IconProps) {
       <path
         d="M9 19L16 12L9 5"
         stroke="#000000"
-        stroke-width="2"
+        strokeWidth="2"
         stroke-linecap="round"
         stroke-linejoin="round"
       />

@@ -71,8 +71,8 @@
 @layer base {
   /* Apply scrollbar styles to all elements */
   *::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 4px;
+    height: 4px;
   }
 
   *::-webkit-scrollbar-track {
