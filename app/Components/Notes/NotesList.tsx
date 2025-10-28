@@ -7,7 +7,7 @@ type NotesListProps = {
 };
 
 export default function NotesList({ patientId }: NotesListProps) {
-  const { authData } = useAuth();
+  const { authData, isDoctor } = useAuth();
 
   const data = {
     id: "1",
@@ -18,7 +18,7 @@ export default function NotesList({ patientId }: NotesListProps) {
 
   return (
     <div className="flex flex-col items-start gap-4 overflow-auto px-5 py-4 md:overflow-auto">
-      <AddNoteForm {...{ patientId }} />
+      {isDoctor && <AddNoteForm {...{ patientId }} />}
       <NoteCard {...data} />
       <NoteCard {...data} />
       <NoteCard {...data} />
