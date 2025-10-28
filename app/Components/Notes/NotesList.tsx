@@ -14,6 +14,7 @@ export default function NotesList({ patientId }: NotesListProps) {
     doctor: authData?.user!,
     date: "11/12/2025",
     note: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum tempore asperiores ea unde. Iste delectus hic fugit, non eveniet totam accusamus facere maxime cum repudiandae qui vitae, placeat rerum! Neque?",
+    patient: authData?.user!,
   };
 
   return (
