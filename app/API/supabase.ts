@@ -19,12 +19,6 @@ const interceptor = async (
   const response = await fetch(url, options);
   const { status } = response;
   const isGetRequest = options?.method === "GET";
-  const isRefreshToken = url
-    .toString()
-    .toLocaleLowerCase()
-    .includes("grant_type=refresh_token");
-
-  if (!response.ok && isRefreshToken) throw new Error("Please Login");
 
   if (!response.ok && !isGetRequest) {
     if (status === 403) {
