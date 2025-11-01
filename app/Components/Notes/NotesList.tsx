@@ -1,32 +1,32 @@
 import useAuth from "~/hooks/useAuth";
 import NoteCard from "./NoteCard";
 import AddNoteForm from "../Forms/Notes/AddNoteForm";
+import { useQuery } from "@tanstack/react-query";
+import { getPatientNotes } from "~/API/notes";
+import RenderData from "../common/RenderData";
 
 type NotesListProps = {
   patientId: string;
 };
 
 export default function NotesList({ patientId }: NotesListProps) {
-  const { authData, isDoctor } = useAuth();
+  const { isDoctor } = useAuth();
 
-  const data = {
-    id: "1",
-    doctor: authData?.user!,
-    date: "11/12/2025",
-    note: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum tempore asperiores ea unde. Iste delectus hic fugit, non eveniet totam accusamus facere maxime cum repudiandae qui vitae, placeat rerum! Neque?",
-    patient: authData?.user!,
-  };
+  const { isError, isFetching, data } = useQuery({
+    queryKey: ["notes", patientId],
+    queryFn: () => getPatientNotes(patientId),
+  });
+
+  const notes = data?.data;
 
   return (
-    <div className="flex flex-col items-start gap-4 overflow-auto px-5 py-4 md:overflow-auto">
-      {isDoctor && <AddNoteForm {...{ patientId }} />}
-      <NoteCard {...data} />
-      <NoteCard {...data} />
-      <NoteCard {...data} />
-      <NoteCard {...data} />
-      <NoteCard {...data} />
-      <NoteCard {...data} />
-      <NoteCard {...data} />
-    </div>
+    <RenderData {...{ isFetching, isError, isEmpty: false }}>
+      <div className="flex flex-col items-start gap-4 overflow-auto px-5 py-4 md:overflow-auto">
+        {isDoctor && <AddNoteForm {...{ patientId }} />}
+        {notes?.map((note) => (
+          <NoteCard {...note} />
+        ))}
+      </div>
+    </RenderData>
   );
 }

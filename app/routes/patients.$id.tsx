@@ -10,13 +10,6 @@ import PageProvider from "~/Contexts/PageContext";
 export default function PatientDetailsPage() {
   const { id } = useParams();
 
-  const { data, isFetching, isError } = useQuery({
-    queryKey: ["patient", id],
-    queryFn: () => getPatient(id!),
-  });
-
-  const patient = data?.data;
-
   return (
     <div className="flex size-full max-h-full flex-1 flex-col gap-3 bg-gradient-to-b from-cyan-300/40 to-fuchsia-300/40 to-70% p-5 pb-2">
       <Link
@@ -27,16 +20,14 @@ export default function PatientDetailsPage() {
         <ChevronLeft className="size-3 stroke-slate-500" />
       </Link>
 
-      <RenderData {...{ isError, isFetching, isEmpty: patient === null }}>
-        <main className="container mx-auto flex-1 overflow-auto">
-          <PageProvider>
-            <div className="flex size-full flex-1 flex-col divide-y-2 divide-slate-200 rounded-xl border border-primary/20 bg-white/50">
-              <PatientHeader patient={patient!} />
-              <NotesList patientId={id ?? ""} />
-            </div>
-          </PageProvider>
-        </main>
-      </RenderData>
+      <main className="container mx-auto flex-1 overflow-auto">
+        <PageProvider>
+          <div className="flex size-full flex-1 flex-col divide-y-2 divide-slate-200 rounded-xl border border-primary/20 bg-white/50">
+            <PatientHeader patientId={id ?? ""} />
+            <NotesList patientId={id ?? ""} />
+          </div>
+        </PageProvider>
+      </main>
     </div>
   );
 }

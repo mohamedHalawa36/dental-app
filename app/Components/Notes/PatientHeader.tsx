@@ -1,21 +1,37 @@
-import type { PatientApiData } from "~/types/apiData";
 import PhoneOptions from "../Patient/PhoneOptions";
+import { useQuery } from "@tanstack/react-query";
+import { getPatient } from "~/API/patient";
+import RenderData from "../common/RenderData";
 
 type PatientHeaderProps = {
-  patient: PatientApiData;
+  patientId: string;
 };
 
-export function PatientHeader({ patient }: PatientHeaderProps) {
-  const { phone, phone_has_whatsapp, name, address, age } = patient;
+export function PatientHeader({ patientId }: PatientHeaderProps) {
+  const { data, isFetching, isError } = useQuery({
+    queryKey: ["patient", patientId],
+    queryFn: () => getPatient(patientId!),
+  });
+
+  const patient = data?.data;
+  const isEmpty = !patient;
+
   return (
-    <div className="flex flex-col gap-2 rounded-xl p-5">
-      <p className="text-xl font-bold text-slate-700">{name}</p>
-      <span className="font-semibold">
-        {age}
-        &nbsp; سنة
-      </span>
-      <PhoneOptions phone={phone} hasWhatsapp={phone_has_whatsapp} />
-      {address && <p className="text-gray-400">{address}</p>}
-    </div>
+    <RenderData {...{ isFetching, isError, isEmpty }}>
+      <div className="flex flex-col gap-2 rounded-xl p-5">
+        <p className="text-xl font-bold text-slate-700">{patient?.name}</p>
+        <span className="font-semibold">
+          {patient?.age}
+          &nbsp; سنة
+        </span>
+        <PhoneOptions
+          phone={patient?.phone ?? null}
+          hasWhatsapp={patient?.phone_has_whatsapp ?? null}
+        />
+        {patient?.address && (
+          <p className="text-gray-400">{patient?.address}</p>
+        )}
+      </div>
+    </RenderData>
   );
 }

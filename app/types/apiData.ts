@@ -58,3 +58,10 @@ export type SelectPatientsResponse = PostgrestSingleResponse<
     user_id: string;
   }[]
 >;
+
+export type NoteData = Database["public"]["Tables"]["notes"]["Row"];
+export type InsertNote = Database["public"]["Tables"]["notes"]["Insert"];
+
+export type NoteApiData = Database["public"]["Tables"]["notes"]["Row"] & {
+  doctor: { id: string; name: string };
+};
