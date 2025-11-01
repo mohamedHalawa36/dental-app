@@ -24,7 +24,7 @@ export default function NotesList({ patientId }: NotesListProps) {
       <div className="flex flex-col items-start gap-4 overflow-auto px-5 py-4 md:overflow-auto">
         {isDoctor && <AddNoteForm {...{ patientId }} />}
         {notes?.map((note) => (
-          <NoteCard {...note} />
+          <NoteCard {...note} key={note.id} />
         ))}
       </div>
     </RenderData>

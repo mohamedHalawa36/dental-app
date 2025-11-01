@@ -34,3 +34,16 @@ export const updateNote = async (note: UpdateNoteData) => {
   if (!error) toast.success("تم تعديل ملاحظتك");
   else throw new Error(error.message, { cause: response });
 };
+
+export const deleteNote = async (noteId: string) => {
+  const response = await supabase
+    .from("notes")
+    .delete()
+    .eq("id", noteId)
+    .select("*");
+
+  const { error } = response;
+
+  if (!error) toast.success("تم حذف الملاحظة");
+  else throw new Error(error.message, { cause: response });
+};

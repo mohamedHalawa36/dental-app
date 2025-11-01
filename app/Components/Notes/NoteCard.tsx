@@ -11,6 +11,7 @@ import { cn } from "~/lib/utils";
 import useAuth from "~/hooks/useAuth";
 import { updateNote } from "~/API/notes";
 import { formatDate } from "~/utils/time";
+import DeleteNoteModal from "./DeleteNoteModal";
 
 export default function NoteCard({
   id,
@@ -59,7 +60,7 @@ export default function NoteCard({
       onSubmit={(values) => mutate(values)}
     >
       {({ values, setFieldValue, resetForm }) => {
-        const { date, note } = values;
+        const { date, note, id } = values;
         const selectedDate = new Date(date);
 
         return (
@@ -95,7 +96,6 @@ export default function NoteCard({
                 name="note"
                 onChange={(e) => setFieldValue("note", e.target.value)}
                 value={note}
-                defaultValue={note}
                 disabled={!isUpdating}
               />
               {isTheSameDoctor
@@ -107,9 +107,7 @@ export default function NoteCard({
                       >
                         تعديل
                       </button>
-                      <button className="text-secondary transition-all hover:opacity-70">
-                        حذف
-                      </button>
+                      <DeleteNoteModal noteId={id} />
                     </div>
                   )
                 : null}
