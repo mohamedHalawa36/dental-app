@@ -1,7 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router";
-import { getPatient } from "~/API/patient";
-import RenderData from "~/Components/common/RenderData";
 import ChevronLeft from "~/Components/icons/ChevronLeft";
 import NotesList from "~/Components/Notes/NotesList";
 import { PatientHeader } from "~/Components/Notes/PatientHeader";
