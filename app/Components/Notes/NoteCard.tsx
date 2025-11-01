@@ -4,13 +4,16 @@ import { Form, Formik } from "formik";
 import PageLoader from "../common/Loaders/PageLoader";
 import { DateTimePicker } from "../common/DatePicker";
 import Button from "../common/Button";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { addNoteSchema } from "../Forms/Notes/schema";
 import { cn } from "~/lib/utils";
 import useAuth from "~/hooks/useAuth";
+import { updateNote } from "~/API/notes";
+import { formatDate } from "~/utils/time";
 
 export default function NoteCard({
+  id,
   date,
   note,
   doctor,
@@ -21,24 +24,43 @@ export default function NoteCard({
   const isTheSameDoctor = userId === doctor.id;
 
   const { mutate, isPending } = useMutation({
-    mutationFn: () => {},
+    mutationFn: updateNote,
+    onSuccess: () => {
+      setIsUpdating(false);
+    },
   });
 
   const doctorName = doctor.name;
+  const dateString = formatDate(new Date(date));
+
+  const noteRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (!isUpdating) return;
+
+    const textarea = noteRef.current;
+    if (textarea) {
+      textarea.focus();
+      const length = textarea.value.length;
+      textarea.setSelectionRange(length, length);
+    }
+  }, [isUpdating]);
 
   return (
     <Formik
       initialValues={{
+        id,
         doctor_id: doctor.id,
         patient_id: patient_id,
-        date: new Date(date),
+        date: dateString,
         note: note,
       }}
       validationSchema={addNoteSchema}
-      onSubmit={() => mutate()}
+      onSubmit={(values) => mutate(values)}
     >
-      {({ values, setFieldValue }) => {
-        const { date } = values;
+      {({ values, setFieldValue, resetForm }) => {
+        const { date, note } = values;
+        const selectedDate = new Date(date);
 
         return (
           <Form className="relative flex w-full flex-col gap-3">
@@ -53,7 +75,7 @@ export default function NoteCard({
                   <span className="text-sm">د/ {doctorName}</span>
                 </div>
                 <DateTimePicker
-                  value={date}
+                  value={selectedDate}
                   onChange={(date) => setFieldValue("date", date)}
                   className="w-fit text-sm text-primary [&>svg]:!size-5 [&>svg]:stroke-primary"
                   granularity="day"
@@ -61,6 +83,7 @@ export default function NoteCard({
                 />
               </div>
               <textarea
+                ref={noteRef}
                 placeholder="اكتب ملاحظاتك هنا"
                 className={cn(
                   "rounded-xl bg-transparent p-2 text-foreground transition-all placeholder:text-sm focus:outline-primary",
@@ -70,8 +93,9 @@ export default function NoteCard({
                   },
                 )}
                 name="note"
-                onChange={(e) => setFieldValue("name", e.target.value)}
+                onChange={(e) => setFieldValue("note", e.target.value)}
                 value={note}
+                defaultValue={note}
                 disabled={!isUpdating}
               />
               {isTheSameDoctor
@@ -96,7 +120,11 @@ export default function NoteCard({
                 <Button
                   variant="secondary"
                   className="w-20 border-secondary p-2 text-sm text-secondary hover:bg-secondary hover:text-white"
-                  onClick={() => setIsUpdating(false)}
+                  type="button"
+                  onClick={() => {
+                    resetForm();
+                    setIsUpdating(false);
+                  }}
                 >
                   إلغاء
                 </Button>

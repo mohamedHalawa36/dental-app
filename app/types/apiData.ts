@@ -61,6 +61,7 @@ export type SelectPatientsResponse = PostgrestSingleResponse<
 
 export type NoteData = Database["public"]["Tables"]["notes"]["Row"];
 export type InsertNote = Database["public"]["Tables"]["notes"]["Insert"];
+export type UpdateNoteData = Database["public"]["Tables"]["notes"]["Update"];
 
 export type NoteApiData = Database["public"]["Tables"]["notes"]["Row"] & {
   doctor: { id: string; name: string };
