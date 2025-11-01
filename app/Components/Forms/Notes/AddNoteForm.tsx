@@ -6,8 +6,10 @@ import useAuth from "~/hooks/useAuth";
 import { DateTimePicker } from "../../common/DatePicker";
 import Button from "../../common/Button";
 import { addNoteSchema } from "./schema";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import PageLoader from "~/Components/common/Loaders/PageLoader";
+import { addNote } from "~/API/notes";
+import { formatDate } from "~/utils/time";
 
 type AddNoteFormProps = {
   patientId: string;
@@ -17,8 +19,13 @@ export default function AddNoteForm({ patientId }: AddNoteFormProps) {
   const [isAdding, setIsAdding] = useState(false);
   const { userName, userId } = useAuth();
 
+  const queryClient = useQueryClient();
+
   const { mutate, isPending } = useMutation({
-    mutationFn: () => {},
+    mutationFn: addNote,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
+    },
   });
 
   if (!isAdding)
@@ -35,16 +42,18 @@ export default function AddNoteForm({ patientId }: AddNoteFormProps) {
   return (
     <Formik
       initialValues={{
-        doctor_id: userId,
+        doctor_id: userId!,
         patient_id: patientId,
-        date: new Date(),
+        date: formatDate(new Date()),
         note: "",
       }}
       validationSchema={addNoteSchema}
-      onSubmit={() => mutate()}
+      onSubmit={(values) => mutate(values)}
     >
-      {({ values, setFieldValue }) => {
+      {({ values, setFieldValue, isValid, dirty }) => {
         const { date } = values;
+        const selectedDate = new Date(date);
+        const today = new Date();
 
         return (
           <Form className="relative flex w-full flex-col gap-3">
@@ -59,8 +68,10 @@ export default function AddNoteForm({ patientId }: AddNoteFormProps) {
                   <span className="text-sm">د/ {userName}</span>
                 </div>
                 <DateTimePicker
-                  value={date}
-                  onChange={(date) => setFieldValue("date", date)}
+                  value={selectedDate}
+                  onChange={(date) =>
+                    setFieldValue("date", formatDate(date ?? today))
+                  }
                   className="w-fit text-sm text-primary [&>svg]:!size-5 [&>svg]:stroke-primary"
                   granularity="day"
                 />
@@ -69,13 +80,20 @@ export default function AddNoteForm({ patientId }: AddNoteFormProps) {
                 placeholder="اكتب ملاحظاتك هنا"
                 className="rounded-xl border border-gray-300 bg-transparent p-2 text-foreground transition-all placeholder:text-sm focus:outline-primary"
                 name="note"
-                onChange={(e) => setFieldValue("name", e.target.value)}
+                onChange={(e) => setFieldValue("note", e.target.value)}
               />
             </div>
             <div className="ms-1 flex w-fit items-center gap-3">
-              <Button className="w-20 p-2 text-sm">حفظ</Button>
+              <Button
+                className="w-20 p-2 text-sm"
+                type="submit"
+                disabled={!isValid || !dirty}
+              >
+                حفظ
+              </Button>
               <Button
                 variant="secondary"
+                type="button"
                 className="w-20 border-secondary p-2 text-sm text-secondary hover:bg-secondary hover:text-white"
                 onClick={() => setIsAdding(false)}
               >

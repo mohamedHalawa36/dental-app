@@ -1,4 +1,4 @@
-import type { UserProfile } from "~/types/apiData";
+import type { NoteApiData } from "~/types/apiData";
 import Doctor from "../icons/Doctor";
 import { Form, Formik } from "formik";
 import PageLoader from "../common/Loaders/PageLoader";
@@ -10,20 +10,12 @@ import { addNoteSchema } from "../Forms/Notes/schema";
 import { cn } from "~/lib/utils";
 import useAuth from "~/hooks/useAuth";
 
-type NoteCardProps = {
-  id: string;
-  date: string;
-  note: string;
-  doctor: UserProfile;
-  patient: UserProfile;
-};
-
 export default function NoteCard({
   date,
   note,
   doctor,
-  patient,
-}: NoteCardProps) {
+  patient_id,
+}: NoteApiData) {
   const [isUpdating, setIsUpdating] = useState(false);
   const { userId } = useAuth();
   const isTheSameDoctor = userId === doctor.id;
@@ -38,7 +30,7 @@ export default function NoteCard({
     <Formik
       initialValues={{
         doctor_id: doctor.id,
-        patient_id: patient.id,
+        patient_id: patient_id,
         date: new Date(date),
         note: note,
       }}
