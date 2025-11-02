@@ -81,6 +81,7 @@ export default function AddNoteForm({ patientId }: AddNoteFormProps) {
                 className="rounded-xl border border-gray-300 bg-transparent p-2 text-foreground transition-all placeholder:text-sm focus:outline-primary"
                 name="note"
                 onChange={(e) => setFieldValue("note", e.target.value)}
+                rows={isAdding ? 5 : undefined}
               />
             </div>
             <div className="ms-1 flex w-fit items-center gap-3">

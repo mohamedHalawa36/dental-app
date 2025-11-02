@@ -59,7 +59,7 @@ export default function NoteCard({
       validationSchema={addNoteSchema}
       onSubmit={(values) => mutate(values)}
     >
-      {({ values, setFieldValue, resetForm }) => {
+      {({ values, setFieldValue, resetForm, dirty, isValid }) => {
         const { date, note, id } = values;
         const selectedDate = new Date(date);
 
@@ -84,6 +84,7 @@ export default function NoteCard({
                 />
               </div>
               <textarea
+                rows={isUpdating ? 5 : undefined}
                 ref={noteRef}
                 placeholder="اكتب ملاحظاتك هنا"
                 className={cn(
@@ -114,7 +115,12 @@ export default function NoteCard({
             </div>
             {isUpdating && (
               <div className="ms-1 flex w-fit items-center gap-3">
-                <Button className="w-20 p-2 text-sm">حفظ</Button>
+                <Button
+                  className="w-20 p-2 text-sm"
+                  disabled={!isValid || !dirty}
+                >
+                  حفظ
+                </Button>
                 <Button
                   variant="secondary"
                   className="w-20 border-secondary p-2 text-sm text-secondary hover:bg-secondary hover:text-white"
