@@ -11,7 +11,7 @@ export default function LogoutBtn() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: logoutUser,
-    onSuccess: () => {
+    onSettled: () => {
       setAuthData(null);
       navigate("/login");
     },
