@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PlusCircle from "../../icons/PlusCircle";
 import { Form, Formik } from "formik";
 import Doctor from "../../icons/Doctor";
@@ -27,6 +27,19 @@ export default function AddNoteForm({ patientId }: AddNoteFormProps) {
       queryClient.invalidateQueries({ queryKey: ["notes"] });
     },
   });
+
+  const noteRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (!isAdding) return;
+
+    const textarea = noteRef.current;
+    if (textarea) {
+      textarea.focus();
+      const length = textarea.value.length;
+      textarea.setSelectionRange(length, length);
+    }
+  }, [isAdding]);
 
   if (!isAdding)
     return (
@@ -77,8 +90,9 @@ export default function AddNoteForm({ patientId }: AddNoteFormProps) {
                 />
               </div>
               <textarea
+                ref={noteRef}
                 placeholder="اكتب ملاحظاتك هنا"
-                className="rounded-xl border border-gray-300 bg-transparent p-2 text-foreground transition-all placeholder:text-sm focus:outline-primary"
+                className="rounded-xl border border-gray-300 bg-transparent p-2 text-left text-foreground transition-all placeholder:text-sm focus:outline-primary"
                 name="note"
                 onChange={(e) => setFieldValue("note", e.target.value)}
                 rows={isAdding ? 3.5 : undefined}
