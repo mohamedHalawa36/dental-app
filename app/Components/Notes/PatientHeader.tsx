@@ -18,9 +18,11 @@ export function PatientHeader({ patientId }: PatientHeaderProps) {
 
   return (
     <RenderData {...{ isFetching, isError, isEmpty }}>
-      <div className="flex flex-col gap-2 rounded-xl p-5">
-        <p className="text-xl font-bold text-slate-700">{patient?.name}</p>
-        <span className="font-semibold">
+      <div className="max-sm flex flex-col gap-1 rounded-xl px-5 py-3 max-sm:px-3">
+        <p className="text-lg font-bold text-slate-700 max-sm:text-base">
+          {patient?.name}
+        </p>
+        <span className="font-semibold max-sm:text-sm">
           {patient?.age}
           &nbsp; سنة
         </span>

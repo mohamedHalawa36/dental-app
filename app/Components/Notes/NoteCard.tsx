@@ -64,12 +64,12 @@ export default function NoteCard({
         const selectedDate = new Date(date);
 
         return (
-          <Form className="relative flex w-full flex-col gap-3">
+          <Form className="relative flex w-3/4 flex-col gap-3 max-lg:w-full">
             {isPending && (
               <PageLoader className="absolute inset-0 m-0 size-full bg-slate-100/50" />
             )}
 
-            <div className="flex w-full flex-col gap-4 rounded-xl border border-gray-300 border-primary/40 p-3">
+            <div className="flex w-full flex-col gap-4 rounded-xl bg-white p-3 shadow-sm shadow-primary/40 transition-all">
               <div className="flex items-center justify-between text-gray-500">
                 <div className="flex items-center gap-1">
                   <Doctor className="size-5" />
@@ -88,7 +88,7 @@ export default function NoteCard({
                 ref={noteRef}
                 placeholder="اكتب ملاحظاتك هنا"
                 className={cn(
-                  "rounded-xl bg-transparent p-2 text-foreground transition-all placeholder:text-sm focus:outline-primary",
+                  "rounded-xl border border-gray-200 bg-transparent p-2 text-left text-foreground transition-all placeholder:text-sm focus:outline-primary",
                   {
                     "resize-none": !isUpdating,
                     "border border-gray-300": isUpdating,
