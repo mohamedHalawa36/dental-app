@@ -84,7 +84,7 @@ export default function NoteCard({
                 />
               </div>
               <textarea
-                rows={isUpdating ? 5 : undefined}
+                rows={isUpdating ? 3.5 : undefined}
                 ref={noteRef}
                 placeholder="اكتب ملاحظاتك هنا"
                 className={cn(
@@ -116,14 +116,14 @@ export default function NoteCard({
             {isUpdating && (
               <div className="ms-1 flex w-fit items-center gap-3">
                 <Button
-                  className="w-20 p-2 text-sm"
+                  className="w-20 p-2 text-sm max-sm:w-16"
                   disabled={!isValid || !dirty}
                 >
                   حفظ
                 </Button>
                 <Button
                   variant="secondary"
-                  className="w-20 border-secondary p-2 text-sm text-secondary hover:bg-secondary hover:text-white"
+                  className="w-20 border-secondary p-2 text-sm text-secondary hover:bg-secondary hover:text-white max-sm:w-16"
                   type="button"
                   onClick={() => {
                     resetForm();

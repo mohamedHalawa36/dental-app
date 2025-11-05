@@ -61,7 +61,7 @@ export default function AddNoteForm({ patientId }: AddNoteFormProps) {
               <PageLoader className="absolute inset-0 m-0 size-full bg-slate-100/50" />
             )}
 
-            <div className="flex w-full flex-col gap-4 rounded-xl border border-gray-300 border-primary/40 p-3">
+            <div className="flex w-3/4 flex-col gap-4 rounded-xl border border-gray-300 border-primary/40 bg-white p-3 max-lg:w-full">
               <div className="flex items-center justify-between text-gray-500">
                 <div className="flex items-center gap-1">
                   <Doctor className="size-5" />
@@ -81,12 +81,12 @@ export default function AddNoteForm({ patientId }: AddNoteFormProps) {
                 className="rounded-xl border border-gray-300 bg-transparent p-2 text-foreground transition-all placeholder:text-sm focus:outline-primary"
                 name="note"
                 onChange={(e) => setFieldValue("note", e.target.value)}
-                rows={isAdding ? 5 : undefined}
+                rows={isAdding ? 3.5 : undefined}
               />
             </div>
             <div className="ms-1 flex w-fit items-center gap-3">
               <Button
-                className="w-20 p-2 text-sm"
+                className="w-20 p-2 text-sm max-sm:w-16"
                 type="submit"
                 disabled={!isValid || !dirty}
               >
@@ -95,7 +95,7 @@ export default function AddNoteForm({ patientId }: AddNoteFormProps) {
               <Button
                 variant="secondary"
                 type="button"
-                className="w-20 border-secondary p-2 text-sm text-secondary hover:bg-secondary hover:text-white"
+                className="w-20 border-secondary p-2 text-sm text-secondary hover:bg-secondary hover:text-white max-sm:w-16"
                 onClick={() => setIsAdding(false)}
               >
                 إلغاء
