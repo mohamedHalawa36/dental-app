@@ -72,9 +72,7 @@ export default function FormFields({ patientName }: { patientName: string }) {
         label="الطبيب"
         name="doctor_id"
         isDisabled={isDoctorsFetching}
-        placeholder={
-          isFetchingAvailabilities ? ". . . جاري التحميل" : "اختر طبيب"
-        }
+        placeholder={isDoctorsFetching ? ". . . جاري التحميل" : "اختر طبيب"}
       />
 
       <InputField
