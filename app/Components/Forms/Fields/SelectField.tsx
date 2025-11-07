@@ -41,7 +41,6 @@ export default function SelectField({
         {...restProps}
         placeholder={placeholder || label || ""}
         name={field.name}
-        // {...field}
       />
     </FieldLayout>
   );
