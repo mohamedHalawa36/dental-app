@@ -17,7 +17,7 @@ export default function AdditionalPhones() {
       {phone2Enabled && (
         <OptionalPhoneField
           className="w-full"
-          label="رقم هاتف ثان"
+          label="هاتف إضافي"
           name="phone2"
           onChange={() => {}}
           optional
@@ -31,7 +31,7 @@ export default function AdditionalPhones() {
       {phone3Enabled && (
         <OptionalPhoneField
           className="w-full"
-          label="رقم هاتف ثالث"
+          label="هاتف إضافي"
           name="phone3"
           onChange={() => {}}
           optional
@@ -53,12 +53,12 @@ function AddPhoneBtn({ onClick }: { onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      className="flex w-fit items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80"
+      className="mt-2 flex w-fit items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80"
       type="button"
       tabIndex={-1}
     >
       <PlusCircle className="size-5" />
-      هاتف آخر
+      هاتف إضافي
     </button>
   );
 }
