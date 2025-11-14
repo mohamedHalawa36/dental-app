@@ -81,14 +81,12 @@ export default function PatientOptions({
           align="end"
           className="-mt-1 flex h-fit w-40 !animate-none flex-col overflow-hidden rounded-lg bg-white p-0 drop-shadow-md !duration-0"
         >
-          {isDoctor && (
-            <Link to={`/patients/${patientId}`}>
-              <OptionBtn
-                label="تفاصيل"
-                icon={<Details className="size-[22.5px]" />}
-              />
-            </Link>
-          )}
+          <Link to={`/patients/${patientId}`}>
+            <OptionBtn
+              label="تفاصيل"
+              icon={<Details className="size-[22.5px]" />}
+            />
+          </Link>
 
           {showMutationOptions && (
             <>
