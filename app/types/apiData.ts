@@ -46,18 +46,8 @@ export type CreateUserData =
 
 export type UserRole = Database["public"]["Enums"]["user_role"];
 
-export type SelectPatientsResponse = PostgrestSingleResponse<
-  {
-    address: string;
-    age: number;
-    created_at: string;
-    id: string;
-    name: string;
-    phone: string;
-    phone_has_whatsapp: boolean;
-    user_id: string;
-  }[]
->;
+//Change this type to the new type based on database.types
+export type SelectPatientsResponse = PostgrestSingleResponse<PatientApiData[]>;
 
 export type NoteData = Database["public"]["Tables"]["notes"]["Row"];
 export type InsertNote = Database["public"]["Tables"]["notes"]["Insert"];
