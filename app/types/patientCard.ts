@@ -27,8 +27,3 @@ interface PatientTypeCardProps extends BasePatientCardProps {
 export type PatientCardProps =
   | AppointmentPatientCardProps
   | PatientTypeCardProps;
-
-export type PhoneOptionsProps = {
-  phone: string | null;
-  hasWhatsapp: boolean | null;
-};

@@ -1,16 +1,24 @@
-import type { PhoneOptionsProps } from "~/types/patientCard";
 import Phone from "../icons/Phone";
 import WhatsApp from "../icons/WhatsApp";
+
+type PhoneOptionsProps = {
+  phone: string | null;
+  hasWhatsapp: boolean | null;
+  className?: string;
+};
 
 export default function PhoneOptions({
   phone,
   hasWhatsapp,
+  className,
 }: PhoneOptionsProps) {
+  if (!phone) return null;
+
   return (
     <div className="flex items-center gap-2 max-sm:text-sm">
       {phone ? (
         <>
-          <span>{phone}</span>
+          <span className={className}>{phone}</span>
 
           <a href={`tel:${phone}`}>
             <Phone className="size-6 transition hover:stroke-secondary max-sm:size-5" />
