@@ -16,8 +16,8 @@ export default function PatientCard(props: PatientCardProps) {
   const { patient, variant } = props;
 
   const patientName = patient?.name ?? "";
-  const patientPhone = patient?.phone ?? "";
-  const patientPhoneHasWhats = patient?.phone_has_whatsapp ?? false;
+  const patientPhone = patient?.phone1 ?? "";
+  const patientPhoneHasWhats = patient?.phone1_has_whatsapp ?? false;
 
   const isPatientVariant = variant === PATIENT_CARD_TYPES.PATIENT;
   const { isAdmin, isNurse } = useAuth();
