@@ -1,49 +1,85 @@
-import { useState, type ComponentProps } from "react";
+import { useEffect, useState, type ComponentProps } from "react";
 import PlusCircle from "~/Components/icons/PlusCircle";
 import X from "~/Components/icons/X";
 import { useFormikContext } from "formik";
 import PatientPhone from "./PatientPhoneField";
 
 export default function AdditionalPhones() {
-  const [phoneCount, setPhoneCount] = useState(1);
-  const addPhoneEnabled = phoneCount < 3;
-  const phone2Enabled = phoneCount >= 2;
-  const phone3Enabled = phoneCount === 3;
+  const { setFieldValue, getFieldProps } = useFormikContext();
+  const phone2 = getFieldProps("phone2").value;
+  const phone3 = getFieldProps("phone3").value;
+  const phone2HasWhatsapp = getFieldProps("phone2_has_whatsapp").value;
+  const phone3HasWhatsapp = getFieldProps("phone3_has_whatsapp").value;
 
-  const { setFieldValue } = useFormikContext();
+  const [showPhone2, setShowPhone2] = useState(!!phone2);
+  const [showPhone3, setShowPhone3] = useState(!!phone3);
+
+  const addPhoneEnabled = !(showPhone2 && showPhone3);
+
+  useEffect(() => {
+    if (phone2) {
+      if (!phone2HasWhatsapp) setFieldValue("phone2_has_whatsapp", false);
+    } else {
+      setFieldValue("phone2", null);
+      setFieldValue("phone2_has_whatsapp", null);
+    }
+
+    if (phone3) {
+      if (!phone3HasWhatsapp) setFieldValue("phone3_has_whatsapp", false);
+    } else {
+      setFieldValue("phone3", null);
+      setFieldValue("phone3_has_whatsapp", null);
+    }
+  }, [phone2, phone2HasWhatsapp, phone3, phone3HasWhatsapp, setFieldValue]);
 
   return (
     <>
-      {phone2Enabled && (
+      {showPhone2 && (
         <OptionalPhoneField
           className="w-full"
-          label="هاتف إضافي"
+          label="هاتف إضافي 1"
           name="phone2"
           onChange={() => {}}
           optional
           onCancel={() => {
-            setPhoneCount((count) => count - 1);
+            if (phone3) {
+              setFieldValue("phone2", phone3);
+              setFieldValue("phone2_has_whatsapp", phone3HasWhatsapp);
+              setFieldValue("phone3", null);
+              setFieldValue("phone3_has_whatsapp", null);
+              setShowPhone3(false);
+              return;
+            }
+
+            setShowPhone2(false);
             setFieldValue("phone2", null);
+            setFieldValue("phone2_has_whatsapp", null);
           }}
         />
       )}
 
-      {phone3Enabled && (
+      {showPhone3 && (
         <OptionalPhoneField
           className="w-full"
-          label="هاتف إضافي"
+          label="هاتف إضافي 2"
           name="phone3"
           onChange={() => {}}
           optional
           onCancel={() => {
-            setPhoneCount((count) => count - 1);
+            setShowPhone3(false);
             setFieldValue("phone3", null);
+            setFieldValue("phone3_has_whatsapp", null);
           }}
         />
       )}
 
       {addPhoneEnabled && (
-        <AddPhoneBtn onClick={() => setPhoneCount((count) => count + 1)} />
+        <AddPhoneBtn
+          onClick={() => {
+            if (showPhone2) setShowPhone3(true);
+            else setShowPhone2(true);
+          }}
+        />
       )}
     </>
   );
