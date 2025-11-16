@@ -51,9 +51,11 @@ export default function AdditionalPhones() {
               return;
             }
 
-            setShowPhone2(false);
-            setFieldValue("phone2", null);
+            setFieldValue("phone2", "");
             setFieldValue("phone2_has_whatsapp", null);
+
+            if (showPhone3) return setShowPhone3(false);
+            setShowPhone2(false);
           }}
         />
       )}
