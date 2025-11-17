@@ -91,7 +91,7 @@ function AddPhoneBtn({ onClick }: { onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      className="mt-2 flex w-fit items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80"
+      className="flex w-fit items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 max-md:mb-4 max-md:py-1.5 md:mt-2"
       type="button"
       tabIndex={-1}
     >
