@@ -20,7 +20,6 @@ export default function CheckboxField(props: {
         setValue(checked);
       }}
       {...props}
-      // {...field}
     />
   );
 }
