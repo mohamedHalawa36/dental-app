@@ -4,7 +4,7 @@ export default function PageLoader({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "mt-5 flex items-center justify-center space-x-5",
+        "flex items-center justify-center space-x-5 py-8",
         className,
       )}
     >
