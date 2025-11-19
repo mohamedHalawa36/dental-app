@@ -1,5 +1,16 @@
 export const iconsTags = [
   {
+    rel: "preload",
+    href: "/images/full-logo.webp",
+    as: "image",
+  },
+  {
+    rel: "preload",
+    href: "/images/logo.webp",
+    as: "image",
+    media: "(max-width: 1024px)",
+  },
+  {
     rel: "apple-touch-startup-image",
     href: "splash_screens/iPhone_16_Pro_Max_landscape.png",
     media:
