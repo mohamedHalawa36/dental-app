@@ -38,7 +38,7 @@ export const Modal = ({
       <DialogContent
         forceMount
         className={cn(
-          "flex h-fit flex-col gap-0 !overflow-hidden max-md:max-h-[90%]",
+          "flex max-h-[87vh] flex-col gap-0 overflow-hidden",
           className,
         )}
         onInteractOutside={(e) => e.preventDefault()}
