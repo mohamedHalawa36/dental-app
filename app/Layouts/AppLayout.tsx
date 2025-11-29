@@ -18,7 +18,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
     <AuthProvider>
       <AuthGuard>
         <LostConnectModal />
-        <div className="h-screen w-screen overflow-hidden">{children}</div>
+        <div className="size-full overflow-hidden">{children}</div>
       </AuthGuard>
     </AuthProvider>
   );
