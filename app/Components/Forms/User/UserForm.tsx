@@ -47,7 +47,15 @@ export default function UserForm({ setIsOpen, usersEmails }: UserFormProps) {
           options={roleOptions}
           placeholder="اختر الوظيفة"
         />
-        <InputField label="البريد الإلكتروني" name="email" />
+        <InputField
+          label="البريد الإلكتروني"
+          name="email"
+          type="email"
+          inputMode="email"
+          autoComplete="email"
+          autoCapitalize="none"
+          spellCheck={false}
+        />
         <InputField
           name="password"
           label="كلمة السر"

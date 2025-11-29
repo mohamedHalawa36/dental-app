@@ -62,7 +62,11 @@ export default function LoginForm() {
             name="email"
             label="البريد الإلكتروني"
             disabled={isPending}
-            autoComplete="on"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            autoCapitalize="none"
+            spellCheck={false}
             autoFocus
           />
           <InputField
