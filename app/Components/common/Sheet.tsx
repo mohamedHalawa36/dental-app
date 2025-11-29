@@ -36,9 +36,7 @@ export default function Sheet({
       <SheetContent className="!max-w-[17rem] border-transparent bg-transparent p-0 [&>button]:hidden">
         <SheetHeader className="">
           <SheetTitle>{title}</SheetTitle>
-          <div className={cn("!mt-0 h-screen w-full", className)}>
-            {children}
-          </div>
+          <div className={cn("!mt-0 h-dvh w-full", className)}>{children}</div>
         </SheetHeader>
       </SheetContent>
     </UISheet>
