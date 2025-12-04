@@ -10,6 +10,7 @@ import type { CreateUserData } from "~/types/apiData";
 import useAuth from "~/hooks/useAuth";
 import type { Dispatch, SetStateAction } from "react";
 import SelectField from "../Fields/SelectField";
+import { isMobileDevice } from "~/lib/utils";
 
 type UserFormProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -40,7 +41,7 @@ export default function UserForm({ setIsOpen, usersEmails }: UserFormProps) {
         submitBtnLabel={"إضافة"}
         isSubmitting={isPending}
       >
-        <InputField label="الاسم" name="name" autoFocus />
+        <InputField label="الاسم" name="name" autoFocus={!isMobileDevice()} />
         <SelectField
           label="الوظيفة"
           name="role"

@@ -70,3 +70,19 @@ export const getFormattedTime = (timeString: string) => {
   const formatted = format(time, "hh:mm a");
   return formatted;
 };
+
+export const isMobileDevice = ()=> {
+  if (typeof window === "undefined") return false;
+
+  const ua = navigator.userAgent;
+
+  const isMobileUA = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(
+    ua
+  );
+
+  const isSmallScreen =
+    window.matchMedia("(max-width: 768px)").matches &&
+    "ontouchstart" in window;
+
+  return isMobileUA || isSmallScreen;
+}

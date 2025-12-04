@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import { addPatient, getPatient, updatePatient } from "~/API/patient";
 import SectionLoader from "~/Components/common/Loaders/SectionLoader";
 import MainFormLayout from "~/Layouts/MainFormLayout";
-import { numberOnly } from "~/lib/utils";
+import { isMobileDevice, numberOnly } from "~/lib/utils";
 import type { AddPatientFormProps } from "~/types/patients";
 import InputField from "../Fields/InputField";
 import { addPatientSchema, initialPatientValue } from "./schemas";
@@ -49,7 +49,7 @@ export default function PatientForm({
           isSubmitting={isPending}
           submitBtnLabel={patientId ? "تعديل" : "إضافة"}
         >
-          <InputField label="الاسم" name="name" autoFocus />
+          <InputField label="الاسم" name="name" autoFocus={!isMobileDevice()} />
           <InputField
             onKeyDown={numberOnly}
             label="العمر"
