@@ -19,6 +19,10 @@ const interceptor = async (
   const response = await fetch(url, options);
   const { status } = response;
   const isGetRequest = options?.method === "GET";
+  const isRefreshToken = url
+    .toString()
+    .toLocaleLowerCase()
+    .includes("grant_type=refresh_token");
 
   if (!response.ok && !isGetRequest) {
     if (status === 403) {
@@ -28,6 +32,8 @@ const interceptor = async (
       await logoutUser();
       window.location.href = "/login";
       throw new Error("Not Authintecated");
+    } else if (!response.ok && isRefreshToken) {
+      toast.info("الرجاء تسجيل الدخول");
     } else {
       toast.error(somethingWentWrong, {
         id: somethingWentWrongToastId,
