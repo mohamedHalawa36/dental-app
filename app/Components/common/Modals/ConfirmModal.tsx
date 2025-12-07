@@ -30,7 +30,7 @@ export default function ConfirmModal({
       className="md:min-w-2/5 h-fit w-11/12 overflow-hidden rounded-lg lg:min-w-[25.5rem]"
     >
       <div className="flex flex-col items-center justify-center gap-7">
-        <div className="flex flex-col items-center justify-center gap-3">
+        <div className="flex w-full flex-col items-center justify-center gap-3 sm:px-3">
           {children}
         </div>
         <div className="flex items-center gap-6">
@@ -45,6 +45,7 @@ export default function ConfirmModal({
             disabled={isActionsDisabled}
             className="h-fit w-20 rounded-xl border border-foreground px-5 py-2 font-medium text-foreground transition hover:bg-foreground hover:text-white"
             onClick={cancelCallBack}
+            type="button"
           >
             لا
           </button>

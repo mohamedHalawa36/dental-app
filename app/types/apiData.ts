@@ -26,6 +26,12 @@ export type SignInUserData = {
   password: string;
 };
 
+export type ChangePasswordUserData = {
+  email: string;
+  current_password: string;
+  password: string;
+};
+
 export type UserProfile = Database["public"]["Tables"]["profiles"]["Row"];
 
 export type AvailabilityData =

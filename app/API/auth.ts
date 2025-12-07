@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import type { SignInUserData } from "~/types/apiData";
+import type { ChangePasswordUserData, SignInUserData } from "~/types/apiData";
 import { somethingWentWrongMsg, somethingWentWrongToastId } from "./messages";
 import supabase, { ApiError } from "./supabase";
 import { throwInvalidCredentialsError } from "~/utils/auth";
@@ -87,5 +87,24 @@ export const setResetedPassword = async (
     .select()
     .single();
 
+  return res;
+};
+
+export const changeUserPassword = async ({
+  email,
+  current_password,
+  password,
+}: ChangePasswordUserData) => {
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password: current_password,
+  });
+
+  if (error) {
+    toast.dismiss(somethingWentWrongToastId);
+    throw new ApiError(error.message, error.status, error.code);
+  }
+
+  const res = resetPassword(password);
   return res;
 };

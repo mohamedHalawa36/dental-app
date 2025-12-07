@@ -4,6 +4,7 @@ import {
   nurseLinks,
 } from "~/Components/Sidebar/links";
 import useAuth from "./useAuth";
+import Settings from "~/Components/icons/Settings";
 
 export default function useUserLinks() {
   const { isDoctor, isAdmin } = useAuth();
@@ -14,12 +15,25 @@ export default function useUserLinks() {
   ];
 
   const adminDoctorLinks = [...nurseLinks, ...doctorsLinks, ...adminLinks];
+  let links;
 
   if (isDoctor) {
-    if (isAdmin) return adminDoctorLinks;
-    else return regDoctorLinks;
+    if (isAdmin) links = adminDoctorLinks;
+    else links = regDoctorLinks;
   } else {
-    if (isAdmin) return [...nurseLinks, ...adminLinks];
-    else return nurseLinks;
+    if (isAdmin) links = [...nurseLinks, ...adminLinks];
+    else links = nurseLinks;
   }
+
+  return [
+    ...links,
+    {
+      id: "settings",
+      Icon: Settings,
+      label: "الاعدادات",
+      href: "/settings",
+      addNew: false,
+      hasSearch: false,
+    },
+  ];
 }
