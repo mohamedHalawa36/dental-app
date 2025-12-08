@@ -31,7 +31,7 @@ export default function Patients() {
   return (
     <>
       <RenderData {...{ isEmpty, isFetching: isPending, isError }}>
-        <div className="flex h-full flex-col gap-3 overflow-auto">
+        <div className="flex h-full flex-col gap-3 overflow-auto max-sm:pb-2">
           <CardsList className="flex-1">
             {patients?.map((patient) => (
               <PatientCard
