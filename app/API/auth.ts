@@ -48,8 +48,8 @@ export const signInUser = async (userData: SignInUserData) => {
 export const logoutUser = async () => {
   const { error } = await supabase.auth.signOut();
 
-  if (error) toast.error(somethingWentWrongMsg);
   localStorage.clear();
+  if (error) toast.error(somethingWentWrongMsg);
 };
 
 export const getUserSession = async () => {
