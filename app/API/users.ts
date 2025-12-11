@@ -92,3 +92,34 @@ export const setIsUserActive = async (active: boolean, userId: string) => {
 
   if (!error) toast.success(active ? activateMsg : deActivateMsg);
 };
+
+export const resetUserPassword = async ({
+  userId,
+  password,
+  token,
+}: {
+  userId: string;
+  password: string;
+  token: string | undefined;
+}) => {
+  const resp = await fetch(
+    `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/reset-user-password`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ password, userId }),
+    },
+  );
+
+  const payload = await resp.json();
+  if (!resp.ok) {
+    toast.error(somethingWentWrongMsg);
+    throw new ApiError(payload?.error, resp.status, payload.code);
+  }
+
+  toast.success("تم اعادة تعيين كلمة السر");
+  return payload;
+};

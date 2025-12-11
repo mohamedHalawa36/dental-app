@@ -33,25 +33,30 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
       if (!supabaseUser) {
         setAuthData(null);
       } else {
-        if (!isTheSameUser) {
-          const { data: userProfile, error } = await getUserProfile(
-            supabaseUser.id,
-          );
-          if (!error && userProfile.is_active) {
+        const { data: userProfile, error } = await getUserProfile(
+          supabaseUser.id,
+        );
+
+        if (!error && userProfile.is_active) {
+          if (!isTheSameUser) {
             setAuthData({
               user: { ...supabaseUser, ...userProfile },
               session: data.session,
             });
           } else {
-            logoutUser();
+            const isPasswordChanged =
+              user?.has_reseted_password !== userProfile.has_reseted_password;
+            if (isPasswordChanged) logoutUser();
           }
+        } else {
+          logoutUser();
         }
       }
       setIsChecking(false);
     };
 
     fetchSession();
-  }, [setAuthData, user?.id, pathname]);
+  }, [setAuthData, user?.id, pathname, user?.has_reseted_password]);
 
   const isLoginPage = pathname === "/login";
 

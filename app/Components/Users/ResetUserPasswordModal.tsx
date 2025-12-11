@@ -4,26 +4,23 @@ import { useMutation } from "@tanstack/react-query";
 import useAuth from "~/hooks/useAuth";
 import { FormikProvider, useFormik } from "formik";
 import InputField from "~/Components/Forms/Fields/InputField";
-import { changePasswordSchema } from "../Forms/User/schemas";
-import { changeUserPassword, logoutUser } from "~/API/auth";
-import type { ApiError } from "~/API/supabase";
-import { useNavigate } from "react-router";
+import ResetPassword from "../icons/ResetPassword";
+import { resetUserPassword } from "~/API/users";
+import { resetUserPasswordSchema } from "../Forms/User/schemas";
 
-export default function ChangeUserPasswordModal() {
+export default function ResetUserPasswordModal({ userId }: { userId: string }) {
   const { authData } = useAuth();
-  const userEmail = authData?.user?.email;
 
   const [isOpen, setIsOpen] = useState(false);
 
   const formik = useFormik({
     initialValues: {
-      current_password: "",
       password: "",
       confirm_password: "",
     },
-    validationSchema: changePasswordSchema,
-    onSubmit: ({ current_password, password }) =>
-      mutate({ email: userEmail!, current_password, password }),
+    validationSchema: resetUserPasswordSchema,
+    onSubmit: ({ password }) =>
+      mutate({ userId, password, token: authData?.session?.access_token }),
   });
 
   const {
@@ -33,32 +30,15 @@ export default function ChangeUserPasswordModal() {
     submitForm,
     values,
     resetForm,
-    setFieldError,
   } = formik;
 
   useEffect(() => {
     resetForm();
   }, [isOpen, resetForm]);
 
-  const navigate = useNavigate();
-
   const { mutate, isPending } = useMutation({
-    mutationFn: changeUserPassword,
-    onSuccess: async () => {
-      await logoutUser();
-      navigate("/");
-      setIsOpen(false);
-    },
-    onError: (data: ApiError) => {
-      const { code, statusCode } = data;
-      const isInvalidCredintials =
-        (statusCode === 400 && code === "invalid_credentials") ||
-        (statusCode === 406 && code === "PGRST116");
-
-      if (isInvalidCredintials) {
-        setFieldError("current_password", "كلمة المرور الحالية غير صحيحة");
-      }
-    },
+    mutationFn: resetUserPassword,
+    onSuccess: () => setIsOpen(false),
   });
 
   return (
@@ -68,8 +48,8 @@ export default function ChangeUserPasswordModal() {
       isActionsDisabled={isPending}
       title="إعادة تعيين كلمة السر"
       trigger={
-        <span className="text-lg font-semibold text-primary underline-offset-8 hover:underline">
-          تغيير كلمة السر
+        <span title="إعادة تعيين كلمة السر">
+          <ResetPassword />
         </span>
       }
       confirmCallBack={submitForm}
@@ -84,21 +64,8 @@ export default function ChangeUserPasswordModal() {
         >
           <InputField
             className="[&>div]:border-primary/50 [&>div]:transition"
-            name="current_password"
-            label="كلمة السر الحالية"
-            type="password"
-            disabled={isPending}
-            autoComplete="one-time-code"
-            autoFocus
-            value={values.current_password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-
-          <InputField
-            className="[&>div]:border-primary/50 [&>div]:transition"
             name="password"
-            label="كلمة السر الجديدة"
+            label="كلمة السر المؤقتة"
             type="password"
             disabled={isPending}
             autoComplete="one-time-code"
@@ -110,7 +77,7 @@ export default function ChangeUserPasswordModal() {
           <InputField
             className="[&>div]:border-primary/50 [&>div]:transition"
             name="confirm_password"
-            label="تأكيد كلمة السر الجديدة"
+            label="تأكيد كلمة السر المؤقتة"
             type="password"
             disabled={isPending}
             autoComplete="one-time-code"

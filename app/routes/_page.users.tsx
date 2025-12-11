@@ -9,6 +9,8 @@ import Check from "~/Components/icons/Check";
 import X from "~/Components/icons/X";
 import ActivateUserModal from "~/Components/Users/ActivateUserModal";
 import DeleteUserModal from "~/Components/Users/DeleteUserModal";
+import ResetUserPasswordModal from "~/Components/Users/ResetUserPasswordModal";
+import useAuth from "~/hooks/useAuth";
 import usePageContext from "~/hooks/usePageContext";
 import type { UserData } from "~/types/apiData";
 
@@ -19,6 +21,8 @@ export default function UsersPage() {
     queryKey: ["users", search],
     queryFn: async ({ signal }) => getAllUsers({ search, signal }),
   });
+
+  const { userId } = useAuth();
 
   const users = data?.data ?? [];
   const isEmpty = users?.length === 0;
@@ -75,14 +79,17 @@ export default function UsersPage() {
       cell: ({ row }) => {
         const recordId = row.original.id;
         const isAdmin = row.original.is_admin;
+        const rowUserId = row.original.id;
+        const isSameUser = userId === rowUserId;
 
         return (
-          <div className="flex items-center gap-1">
-            {/* <UpdateAvailabilityModal
-              recordId={recordId}
-              currAvailabilities={availabilities}
-            /> */}
-            {!isAdmin && <DeleteUserModal userId={recordId} />}
+          <div className="flex items-center gap-2">
+            {!isAdmin && (
+              <>
+                {!isSameUser && <ResetUserPasswordModal userId={rowUserId} />}
+                <DeleteUserModal userId={recordId} />
+              </>
+            )}
           </div>
         );
       },

@@ -12,6 +12,7 @@ export default function ConfirmModal({
   isOpen,
   toggle,
   confirmLabel,
+  cancelLabel,
 }: ModalProps & {
   title: string;
   trigger?: ReactNode;
@@ -20,6 +21,7 @@ export default function ConfirmModal({
   isActionsDisabled?: boolean;
   children: ReactNode;
   confirmLabel?: string;
+  cancelLabel?: string;
 }) {
   return (
     <Modal
@@ -47,7 +49,7 @@ export default function ConfirmModal({
             onClick={cancelCallBack}
             type="button"
           >
-            لا
+            {cancelLabel ?? "لا"}
           </button>
         </div>
       </div>
