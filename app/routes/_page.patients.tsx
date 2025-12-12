@@ -43,12 +43,13 @@ export default function Patients() {
             {hasNextPage && (
               <Button
                 variant="secondary"
-                className="col-span-full mx-auto my-1 flex w-full items-center justify-center rounded-lg border-slate-300 p-1.5 text-sm text-slate-600 shadow-md hover:text-primary hover:shadow-sm disabled:bg-background disabled:hover:bg-transparent sm:w-1/3"
+                className="col-span-full mx-auto my-1 flex w-full items-center justify-center rounded-lg border-slate-300 p-1.5 text-sm text-slate-600 shadow-md hover:text-primary hover:shadow-sm disabled:bg-background disabled:hover:bg-transparent max-sm:w-11/12 sm:w-1/3"
                 onClick={() => {
                   setPage((page) => page + 1);
                   fetchNextPage();
                 }}
                 disabled={!hasNextPage || isFetchingNextPage}
+                type="button"
               >
                 {isFetchingNextPage ? (
                   <Spinner className="size-6" />
