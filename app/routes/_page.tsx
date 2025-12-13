@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router";
 import Sidebar from "~/Components/Sidebar/Sidebar";
 import PageProvider from "~/Contexts/PageContext";
@@ -12,6 +13,10 @@ export default function PageLayout() {
   const pageTitle =
     activeLink?.id === "home" ? "مواعيد اليوم" : activeLink?.label;
   const hasNew = activeLink?.addNew;
+
+  useEffect(() => {
+    document.title = `عيادة الياقوت | ${pageTitle}`;
+  }, [pageTitle, pathname]);
 
   return (
     <div className="flex h-full w-full flex-col lg:p-4 xl:p-6 2xl:p-7">
