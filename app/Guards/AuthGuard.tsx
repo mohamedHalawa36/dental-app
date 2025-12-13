@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { Navigate, useLocation } from "react-router";
+import { Navigate, useLocation, useNavigate } from "react-router";
 import { toast } from "sonner";
 import { getUserProfile, getUserSession, logoutUser } from "~/API/auth";
 import { messages } from "~/API/messages";
@@ -15,6 +15,7 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
   const { authData, setAuthData } = useAuth();
   const user = authData?.user;
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -46,17 +47,21 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
           } else {
             const isPasswordChanged =
               user?.has_reseted_password !== userProfile.has_reseted_password;
-            if (isPasswordChanged) logoutUser();
+            if (isPasswordChanged) {
+              logoutUser();
+              navigate("/login");
+            }
           }
         } else {
           logoutUser();
+          navigate("/login");
         }
       }
       setIsChecking(false);
     };
 
     fetchSession();
-  }, [setAuthData, user?.id, pathname, user?.has_reseted_password]);
+  }, [setAuthData, user?.id, pathname, user?.has_reseted_password, navigate]);
 
   const isLoginPage = pathname === "/login";
 
