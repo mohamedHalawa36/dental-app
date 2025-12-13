@@ -25,7 +25,12 @@ export default function Sidebar({ className }: { className?: string }) {
     >
       <div className="flex flex-col gap-4 sm:px-3">
         <div className="flex flex-col items-center gap-2.5 border-gray-200">
-          <img src="/images/full-logo.webp" alt="Logo" className="w-4/5" fetchPriority="high" />
+          <img
+            src="/images/full-logo.webp"
+            alt="Logo"
+            className="w-4/5"
+            fetchPriority="high"
+          />
         </div>
         <div className="flex flex-wrap items-center justify-between rounded-sm border-b border-gray-200 px-2 py-1 text-xs transition hover:bg-slate-50">
           <div className="flex items-center gap-1">
@@ -49,7 +54,7 @@ export default function Sidebar({ className }: { className?: string }) {
         </div>
       </div>
       <div style={{ direction: "ltr" }} className="flex-1 overflow-auto">
-        <div className="flex flex-col gap-3 py-3" style={{ direction: "rtl" }}>
+        <div className="flex flex-col gap-3" style={{ direction: "rtl" }}>
           {links.map((link) => (
             <SideLink key={link.href} {...link} />
           ))}
